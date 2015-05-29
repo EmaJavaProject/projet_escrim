@@ -2,51 +2,26 @@ package ihm;
 
 import java.awt.EventQueue;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JTree;
-
-import java.awt.BorderLayout;
-
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-
-import java.awt.GridBagLayout;
-
 import javax.swing.JTabbedPane;
 
-import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JPopupMenu;
 
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JToolBar;
-
-import java.awt.Dimension;
-import java.awt.ComponentOrientation;
-
-import javax.swing.border.CompoundBorder;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JLabel;
 
 public class Main_gui {
 	private boolean clicked = true;
