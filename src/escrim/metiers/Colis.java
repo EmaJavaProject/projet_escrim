@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -27,6 +28,17 @@ public class Colis {
 	private String module;
 	private boolean optionnel;
 	private String secteur;
+	@ManyToOne
+	private TypeColis typeColis;
+	private int numeroColis;
+	private String nomColis;
+	@OneToMany(mappedBy="colis",fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
+	private ArrayList<Materiel> listeMateriel;
+	private float valeur;
+	private String iata;
+	private float projection;
+	private String observation;
+	
 	public int getUid() {
 		return uid;
 	}
@@ -105,14 +117,5 @@ public class Colis {
 	public void setObservation(String observation) {
 		this.observation = observation;
 	}
-	private TypeColis typeColis;
-	private int numeroColis;
-	private String nomColis;
-	@OneToMany(mappedBy="colis",fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
-	private ArrayList<Materiel> listeMateriel;
-	private float valeur;
-	private String iata;
-	private float projection;
-	private String observation;
 
 }
