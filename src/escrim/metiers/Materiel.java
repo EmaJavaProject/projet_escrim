@@ -1,7 +1,12 @@
 package escrim.metiers;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -11,12 +16,17 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Materiel {
 	
 	@Id
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	
+	//uid pour unique ID :)
+	private int uid;
 	private String denomination;
-	private int conteneur;
+	@ManyToOne
+	private Colis colis;
 	private String observations;
 	private int quantite;
 	
@@ -25,20 +35,28 @@ public class Materiel {
 		
 	}
 	
-	Materiel(int id, String denomation, int conteneur, String observations, int quantite) {
-		this.id = id;
+	Materiel(int id, String denomation, Colis colis, String observations, int quantite) {
+		this.uid = id;
 		this.denomination = denomation;
-		this.conteneur = conteneur;
+		this.colis = colis;
 		this.observations = observations;
 		this.quantite = quantite;
 		
 	}
 	
+	public Colis getColis() {
+		return colis;
+	}
+
+	public void setColis(Colis colis) {
+		this.colis = colis;
+	}
+
 	public int getId() {
-		return id;
+		return uid;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.uid = id;
 	}
 	public String getDenomination() {
 		return denomination;
@@ -46,12 +64,7 @@ public class Materiel {
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
 	}
-	public int getConteneur() {
-		return conteneur;
-	}
-	public void setConteneur(int conteneur) {
-		this.conteneur = conteneur;
-	}
+
 	public String getObservations() {
 		return observations;
 	}
