@@ -8,21 +8,28 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-
 import java.awt.Component;
 
 import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.UIManager;
 
 public class Main_gui {
 	// private boolean clicked = true;
 	private JFrame frmEscrim;
+	private JTable tableContenu;
+	private JTextField filtreRecherche;
+	private JTable tableConteneur;
+	private JTable tableLocalisationConteneur;
+	private JTable tableContenuConteneur;
 	private JTable table;
 
 	/**
@@ -104,6 +111,33 @@ public class Main_gui {
 		
 		JPanel contenuStock = new JPanel();
 		stock.addTab("Contenu", null, contenuStock, null);
+		contenuStock.setLayout(null);
+		
+		
+		
+		table = new JTable();
+		table.setBounds(12, 56, 619, 486);
+		contenuStock.add(table);
+		
+		JButton btnAjouterStock = new JButton("+");
+		btnAjouterStock.setBounds(12, 589, 97, 25);
+		contenuStock.add(btnAjouterStock);
+		
+		JButton btnSupprimerStock = new JButton("-");
+		btnSupprimerStock.setBounds(121, 589, 97, 25);
+		contenuStock.add(btnSupprimerStock);
+		
+		JButton btnEditerStock = new JButton("Editer");
+		btnEditerStock.setBounds(230, 589, 97, 25);
+		contenuStock.add(btnEditerStock);
+		
+		JButton btnLocaliserStock = new JButton("Localiser");
+		btnLocaliserStock.setBounds(339, 589, 97, 25);
+		contenuStock.add(btnLocaliserStock);
+		
+		JComboBox<?> comboBox = new JComboBox<Object>();
+		comboBox.setBounds(12, 13, 141, 25);
+		contenuStock.add(comboBox);
 		
 		JPanel conteneurStock = new JPanel();
 		stock.addTab("Conteneur", null, conteneurStock, null);
@@ -119,6 +153,7 @@ public class Main_gui {
 		panelPrincipal.setEnabledAt(1, true);
 
 		JTabbedPane localisation = new JTabbedPane(JTabbedPane.TOP);
+		localisation.setBorder(null);
 		localisation.setAlignmentY(Component.TOP_ALIGNMENT);
 		localisation.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelPrincipal.addTab("Localisation", new ImageIcon(
@@ -129,16 +164,46 @@ public class Main_gui {
 		localisation.addTab("Contenu", null, contenuLocalisation, null);
 		contenuLocalisation.setLayout(null);
 		
-		JComboBox<?> comboBox = new JComboBox<Object>();
-		comboBox.setBounds(12, 13, 87, 22);
-		contenuLocalisation.add(comboBox);
+		JComboBox<?> typeObjets = new JComboBox<Object>();
+		typeObjets.setBounds(121, 13, 136, 22);
+		contenuLocalisation.add(typeObjets);
 		
-		table = new JTable();
-		table.setBounds(52, 82, 706, 223);
-		contenuLocalisation.add(table);
+		tableContenu = new JTable();
+		tableContenu.setBounds(52, 82, 706, 223);
+		contenuLocalisation.add(tableContenu);
+		
+		filtreRecherche = new JTextField();
+		filtreRecherche.setBounds(504, 13, 177, 22);
+		contenuLocalisation.add(filtreRecherche);
+		filtreRecherche.setColumns(10);
+		
+		tableConteneur = new JTable();
+		tableConteneur.setBounds(52, 359, 706, 223);
+		contenuLocalisation.add(tableConteneur);
+		
+		JButton btnModifierContenu = new JButton("Modifier contenu");
+		btnModifierContenu.setBounds(121, 612, 136, 25);
+		contenuLocalisation.add(btnModifierContenu);
 		
 		JPanel conteneurLocalisation = new JPanel();
 		localisation.addTab("Conteneur", null, conteneurLocalisation, null);
+		conteneurLocalisation.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Editer localisation");
+		btnNewButton.setBounds(340, 279, 149, 25);
+		conteneurLocalisation.add(btnNewButton);
+		
+		JComboBox<?> secteur = new JComboBox<Object>();
+		secteur.setBounds(63, 29, 160, 22);
+		conteneurLocalisation.add(secteur);
+		
+		tableLocalisationConteneur = new JTable();
+		tableLocalisationConteneur.setBounds(12, 72, 899, 194);
+		conteneurLocalisation.add(tableLocalisationConteneur);
+		
+		tableContenuConteneur = new JTable();
+		tableContenuConteneur.setBounds(12, 357, 899, 194);
+		conteneurLocalisation.add(tableContenuConteneur);
 
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
@@ -177,4 +242,5 @@ public class Main_gui {
 			}
 		}
 	}
+	
 }
