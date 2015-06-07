@@ -5,6 +5,10 @@
 		<class>escrim.metiers.Medicaments</class>
 		<class>escrim.metiers.Colis</class>
 		<class>escrim.metiers.TypeColis</class>
+		<class>escrim.metiers.Compartiment</class>
+		<class>escrim.metiers.ConfigurationHopital</class>
+		<class>escrim.metiers.Localisation</class>
+		<class>escrim.metiers.Transport</class>
 		<properties>
 
       <!-- EclipseLink should create the database schema automatically -->

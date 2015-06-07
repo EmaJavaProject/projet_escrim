@@ -3,7 +3,7 @@
  */
 package escrim.metiers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,17 +28,20 @@ public class Colis {
 	private String affectation;
 	private String module;
 	private boolean optionnel;
-	private String secteur;
+	@ManyToOne
+	private Localisation localisation;
 	@ManyToOne
 	private TypeColis typeColis;
 	private int numeroColis;
 	private String nomColis;
 	@OneToMany(mappedBy="colis",fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
-	private ArrayList<Materiel> listeMateriel;
+	private List<Materiel> listeMateriel;
 	private float valeur;
 	private String iata;
 	private float projection;
 	private String observation;
+	@ManyToMany
+	private List<ConfigurationHopital> listConfigDuColis;
 	
 	public int getUid() {
 		return uid;
@@ -63,11 +67,11 @@ public class Colis {
 	public void setOptionnel(boolean optionnel) {
 		this.optionnel = optionnel;
 	}
-	public String getSecteur() {
-		return secteur;
+	public Localisation getSecteur() {
+		return localisation;
 	}
-	public void setSecteur(String secteur) {
-		this.secteur = secteur;
+	public void setSecteur(Localisation localisation) {
+		this.localisation = localisation;
 	}
 	public TypeColis getTypeColis() {
 		return typeColis;
@@ -87,10 +91,10 @@ public class Colis {
 	public void setNomColis(String nomColis) {
 		this.nomColis = nomColis;
 	}
-	public ArrayList<Materiel> getListeMateriel() {
+	public List<Materiel> getListeMateriel() {
 		return listeMateriel;
 	}
-	public void setListeMateriel(ArrayList<Materiel> listeMateriel) {
+	public void setListeMateriel(List<Materiel> listeMateriel) {
 		this.listeMateriel = listeMateriel;
 	}
 	public float getValeur() {
@@ -116,6 +120,12 @@ public class Colis {
 	}
 	public void setObservation(String observation) {
 		this.observation = observation;
+	}
+	public List<ConfigurationHopital> getListConfigDuColis() {
+		return listConfigDuColis;
+	}
+	public void setListConfigDuColis(List<ConfigurationHopital> listConfigDuColis) {
+		this.listConfigDuColis = listConfigDuColis;
 	}
 
 }
