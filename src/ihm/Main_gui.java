@@ -8,14 +8,22 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+
 import java.awt.Component;
+
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JPanel;
 
 public class Main_gui {
 	// private boolean clicked = true;
 	private JFrame frmEscrim;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -93,12 +101,12 @@ public class Main_gui {
 						new ImageIcon(
 								"images/icone_stock.jpg"),
 						stock, null);
-
-		JTabbedPane conteneurStock = new JTabbedPane(JTabbedPane.TOP);
-		stock.addTab("Conteneur", null, conteneurStock, null);
-
-		JTabbedPane contenuStock = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPanel contenuStock = new JPanel();
 		stock.addTab("Contenu", null, contenuStock, null);
+		
+		JPanel conteneurStock = new JPanel();
+		stock.addTab("Conteneur", null, conteneurStock, null);
 
 		JTabbedPane avion = new JTabbedPane(JTabbedPane.LEFT);
 		avion.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -116,13 +124,21 @@ public class Main_gui {
 		panelPrincipal.addTab("Localisation", new ImageIcon(
 				"images/icone_localiser.jpg"),
 				localisation, null);
-
-		JTabbedPane conteneurLocalisation = new JTabbedPane(JTabbedPane.TOP);
-		conteneurLocalisation.setAlignmentY(Component.TOP_ALIGNMENT);
-		localisation.addTab("Conteneur", null, conteneurLocalisation, null);
-
-		JTabbedPane contenuLocalisation = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPanel contenuLocalisation = new JPanel();
 		localisation.addTab("Contenu", null, contenuLocalisation, null);
+		contenuLocalisation.setLayout(null);
+		
+		JComboBox<?> comboBox = new JComboBox<Object>();
+		comboBox.setBounds(12, 13, 87, 22);
+		contenuLocalisation.add(comboBox);
+		
+		table = new JTable();
+		table.setBounds(52, 82, 706, 223);
+		contenuLocalisation.add(table);
+		
+		JPanel conteneurLocalisation = new JPanel();
+		localisation.addTab("Conteneur", null, conteneurLocalisation, null);
 
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
@@ -161,5 +177,4 @@ public class Main_gui {
 			}
 		}
 	}
-
 }
