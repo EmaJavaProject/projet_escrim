@@ -8,23 +8,34 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+
 import java.awt.Component;
 
 import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
+
 import java.awt.Dimension;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.SystemColor;
+
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -211,8 +222,122 @@ public class Main_gui {
 						new ImageIcon(
 								"images/icone_avion.jpg"),
 						avion, null);
+		//-------------- THOMAS --------------------------------------------------------------------------		
+				JPanel gestionAvion = new JPanel();
+				avion.add(gestionAvion);
+				avion.setEnabledAt(0, false);
+				gestionAvion.setLayout(null);
+				
+				
+				//Il affiche obligatoirement un onglet avec le JPanel, voir pour l'enlever ?
+				JPanel donneeAvion = new JPanel();
+				donneeAvion.setBounds(10, 11, 177, 143);
+				gestionAvion.add(donneeAvion);
+				donneeAvion.setLayout(new GridLayout(0, 2, 0, 0));
+				
+				JLabel lblDonnee1 = new JLabel("Donn\u00E9e 1 :");
+				lblDonnee1.setHorizontalAlignment(SwingConstants.CENTER);
+				donneeAvion.add(lblDonnee1);
+				
+				JLabel lblValeur1 = new JLabel("Valeur");
+				donneeAvion.add(lblValeur1);
+				
+				JLabel lblDonne2 = new JLabel("Donn\u00E9e 2 :");
+				lblDonne2.setHorizontalAlignment(SwingConstants.CENTER);
+				donneeAvion.add(lblDonne2);
+				
+				JLabel lblValeur2 = new JLabel("Valeur");
+				donneeAvion.add(lblValeur2);
+				
+				JLabel lblTransport = new JLabel("Transport :");
+				lblTransport.setBounds(219, 12, 70, 21);
+				gestionAvion.add(lblTransport);
+				
+				JComboBox comboBoxAvion = new JComboBox();
+				comboBoxAvion.setBounds(299, 12, 124, 21);
+				gestionAvion.add(comboBoxAvion);
+				
+				JLabel lblConfiguration = new JLabel("configuration");
+				lblConfiguration.setBounds(451, 12, 70, 21);
+				gestionAvion.add(lblConfiguration);
+				
+				JComboBox comboBoxConfiguration = new JComboBox();
+				comboBoxConfiguration.setBounds(531, 12, 124, 21);
+				gestionAvion.add(comboBoxConfiguration);
+				
+				JButton btnValidationChargement = new JButton("Valider");
+				btnValidationChargement.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
+				btnValidationChargement.setBounds(688, 11, 89, 23);
+				gestionAvion.add(btnValidationChargement);
+				
+				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.setBounds(10, 178, 177, 484);
+				gestionAvion.add(scrollPane);
+				
+				JPanel listeCaisse = new JPanel();
+				scrollPane.setViewportView(listeCaisse);
+				listeCaisse.setLayout(new GridLayout(0, 1, 0, 0));
+				
+				JPanel caisseObligatoire = new JPanel();
+				listeCaisse.add(caisseObligatoire);
+				caisseObligatoire.setLayout(null);
+				
+				JTable tableCaisseObligatoire = new JTable();
+				tableCaisseObligatoire.setBounds(0, 155, 175, -152);
+				caisseObligatoire.add(tableCaisseObligatoire);
+				
+				JPanel caisseOptionnel = new JPanel();
+				listeCaisse.add(caisseOptionnel);
+				caisseOptionnel.setLayout(null);
+				
+				JTable tableCaisseOptionnelle = new JTable();
+				tableCaisseOptionnelle.setBounds(87, 5, 0, 0);
+				caisseOptionnel.add(tableCaisseOptionnelle);
+				
+				JPanel validation = new JPanel();
+				listeCaisse.add(validation);
+				validation.setLayout(null);
+				
+				JButton btnValidationCaisse = new JButton("Enregistrer");
+				btnValidationCaisse.setBounds(43, 76, 89, 23);
+				validation.add(btnValidationCaisse);
+				
+				JLabel lblNewLabel = new JLabel("Toutes modifications non");
+				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNewLabel.setBounds(10, 11, 155, 23);
+				validation.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel(" valid\u00E9es ne seront pas prises");
+				lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNewLabel_1.setBounds(10, 34, 155, 14);
+				validation.add(lblNewLabel_1);
+				
+				JLabel lblEnCompte = new JLabel(" en compte");
+				lblEnCompte.setHorizontalAlignment(SwingConstants.CENTER);
+				lblEnCompte.setBounds(10, 51, 155, 14);
+				validation.add(lblEnCompte);
+				
+				JButton btnExporter = new JButton("Export");
+				btnExporter.setBounds(570, 602, 120, 31);
+				gestionAvion.add(btnExporter);
+				
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				panel_1.setBounds(219, 58, 533, 484);
+				gestionAvion.add(panel_1);
+				panelPrincipal.setEnabledAt(1, true);
+				
+				
+				
+				//------------------------------------------------------------
+		
+		
 		panelPrincipal.setEnabledAt(1, true);
-
+		
+		
 		JTabbedPane localisation = new JTabbedPane(JTabbedPane.TOP);
 		localisation.setBorder(null);
 		localisation.setAlignmentY(Component.TOP_ALIGNMENT);
