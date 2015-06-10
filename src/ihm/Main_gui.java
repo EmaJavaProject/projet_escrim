@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
+import java.awt.Dimension;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -92,6 +93,7 @@ public class Main_gui {
 		mnFichier.add(mntmExporter);
 
 		JMenuItem mnQuitter = new JMenuItem("Quitter");
+		mnQuitter.setMaximumSize(new Dimension(100, 50));
 		mnQuitter.addActionListener(new QuitterAppli());
 		menu.add(mnQuitter);
 
