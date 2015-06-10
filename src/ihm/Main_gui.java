@@ -22,6 +22,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -112,6 +115,7 @@ public class Main_gui {
 						stock, null);
 		
 		JPanel contenuStock = new JPanel();
+		contenuStock.setMinimumSize(new Dimension(20, 20));
 		stock.addTab("Contenu", null, contenuStock, null);
 		contenuStock.setLayout(null);
 		
@@ -140,6 +144,61 @@ public class Main_gui {
 		JComboBox<?> comboBox = new JComboBox<Object>();
 		comboBox.setBounds(12, 13, 141, 25);
 		contenuStock.add(comboBox);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(655, 56, 141, 353);
+		contenuStock.add(panel);
+		
+		JCheckBox chckbxId = new JCheckBox("Produit");
+		chckbxId.setPreferredSize(new Dimension(129, 23));
+		chckbxId.setMinimumSize(new Dimension(50, 100));
+		chckbxId.setSelected(true);
+		panel.add(chckbxId);
+		
+		JCheckBox chckbxDci = new JCheckBox("DCI");
+		chckbxDci.setPreferredSize(new Dimension(129, 22));
+		chckbxDci.setSize(new Dimension(50, 100));
+		chckbxDci.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		chckbxDci.setBackground(SystemColor.control);
+		chckbxDci.setHorizontalAlignment(SwingConstants.LEFT);
+		chckbxDci.setMaximumSize(new Dimension(100, 50));
+		chckbxDci.setSelected(true);
+		panel.add(chckbxDci);
+		
+		JCheckBox chckbxFormeDosage = new JCheckBox("Forme dosage");
+		chckbxFormeDosage.setPreferredSize(new Dimension(129, 23));
+		chckbxFormeDosage.setSelected(true);
+		panel.add(chckbxFormeDosage);
+		
+		JCheckBox chckbxPoids = new JCheckBox("DLU");
+		chckbxPoids.setPreferredSize(new Dimension(129, 23));
+		chckbxPoids.setSelected(true);
+		panel.add(chckbxPoids);
+		
+		JCheckBox chckbxQuantit = new JCheckBox("Quantitt\u00E9");
+		chckbxQuantit.setPreferredSize(new Dimension(129, 23));
+		chckbxQuantit.setSelected(true);
+		panel.add(chckbxQuantit);
+		
+		JCheckBox chckbxLot = new JCheckBox("Lot");
+		chckbxLot.setPreferredSize(new Dimension(129, 23));
+		panel.add(chckbxLot);
+		
+		JCheckBox chckbxClasseThrapeutique_1 = new JCheckBox("Classe Th\u00E9rapeutique");
+		panel.add(chckbxClasseThrapeutique_1);
+		
+		JCheckBox chckbxClasseThrapeutique = new JCheckBox("N\u00B0 Caisse");
+		chckbxClasseThrapeutique.setPreferredSize(new Dimension(129, 23));
+		panel.add(chckbxClasseThrapeutique);
+		
+		JCheckBox chckbxCaisse = new JCheckBox("Caisse");
+		chckbxCaisse.setPreferredSize(new Dimension(129, 23));
+		panel.add(chckbxCaisse);
+		
+		JCheckBox chckbxDotationU = new JCheckBox("Dotation U7");
+		chckbxDotationU.setPreferredSize(new Dimension(129, 23));
+		chckbxDotationU.setActionCommand("Dotation U7");
+		panel.add(chckbxDotationU);
 		
 		JPanel conteneurStock = new JPanel();
 		stock.addTab("Conteneur", null, conteneurStock, null);
@@ -244,5 +303,4 @@ public class Main_gui {
 			}
 		}
 	}
-	
 }
