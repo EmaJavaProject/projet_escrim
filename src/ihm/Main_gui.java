@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -17,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -115,10 +113,10 @@ public class Main_gui {
 		panelPrincipal.setBounds(0, 0, 1018, 707);
 		frmEscrim.getContentPane().add(panelPrincipal);
 
-		JTabbedPane stock = new JTabbedPane(JTabbedPane.TOP);
-		stock.setAlignmentY(Component.TOP_ALIGNMENT);
-		stock.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelPrincipal.addTab("Stock", null, stock, null);
+		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
+		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
+		ongletStock.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelPrincipal.addTab("Stock", null, ongletStock, null);
 
 		JPanel contenuStock = new JPanel();
 		contenuStock.addFocusListener(new FocusAdapter() {
@@ -127,7 +125,7 @@ public class Main_gui {
 			}
 		});
 		contenuStock.setMinimumSize(new Dimension(20, 20));
-		stock.addTab("Contenu", null, contenuStock, null);
+		ongletStock.addTab("Contenu", null, contenuStock, null);
 		contenuStock.setLayout(null);
 
 		JScrollPane scrollPaneContenu = new JScrollPane();
@@ -200,81 +198,70 @@ public class Main_gui {
 		comboBox.setBounds(12, 13, 141, 25);
 		contenuStock.add(comboBox);
 
-		JPanel panel = new JPanel();
-		panel.setBounds(655, 56, 141, 353);
-		contenuStock.add(panel);
-
-		JCheckBox chckbxId = new JCheckBox("Produit");
-		chckbxId.setPreferredSize(new Dimension(129, 23));
-		chckbxId.setMinimumSize(new Dimension(50, 100));
-		chckbxId.setSelected(true);
-		panel.add(chckbxId);
-
-		JCheckBox chckbxDci = new JCheckBox("DCI");
-		chckbxDci.setPreferredSize(new Dimension(129, 22));
-		chckbxDci.setSize(new Dimension(50, 100));
-		chckbxDci.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		chckbxDci.setBackground(SystemColor.control);
-		chckbxDci.setHorizontalAlignment(SwingConstants.LEFT);
-		chckbxDci.setMaximumSize(new Dimension(100, 50));
-		chckbxDci.setSelected(true);
-		panel.add(chckbxDci);
-
-		JCheckBox chckbxFormeDosage = new JCheckBox("Forme dosage");
-		chckbxFormeDosage.setPreferredSize(new Dimension(129, 23));
-		chckbxFormeDosage.setSelected(true);
-		panel.add(chckbxFormeDosage);
-
-		JCheckBox chckbxPoids = new JCheckBox("DLU");
-		chckbxPoids.setPreferredSize(new Dimension(129, 23));
-		chckbxPoids.setSelected(true);
-		panel.add(chckbxPoids);
-
-		JCheckBox chckbxQuantit = new JCheckBox("Quantitt\u00E9");
-		chckbxQuantit.setPreferredSize(new Dimension(129, 23));
-		chckbxQuantit.setSelected(true);
-		panel.add(chckbxQuantit);
-
-		JCheckBox chckbxLot = new JCheckBox("Lot");
-		chckbxLot.setPreferredSize(new Dimension(129, 23));
-		panel.add(chckbxLot);
-
-		JCheckBox chckbxClasseThrapeutique_1 = new JCheckBox(
-				"Classe Th\u00E9rapeutique");
-		panel.add(chckbxClasseThrapeutique_1);
-
-		JCheckBox chckbxClasseThrapeutique = new JCheckBox("N\u00B0 Caisse");
-		chckbxClasseThrapeutique.setPreferredSize(new Dimension(129, 23));
-		panel.add(chckbxClasseThrapeutique);
-
-		JCheckBox chckbxCaisse = new JCheckBox("Caisse");
-		chckbxCaisse.setPreferredSize(new Dimension(129, 23));
-		panel.add(chckbxCaisse);
-
-		JCheckBox chckbxDotationU = new JCheckBox("Dotation U7");
-		chckbxDotationU.setPreferredSize(new Dimension(129, 23));
-		chckbxDotationU.setActionCommand("Dotation U7");
-		panel.add(chckbxDotationU);
-
 		JPanel conteneurStock = new JPanel();
-		stock.addTab("Conteneur", null, conteneurStock, null);
+		ongletStock.addTab("Conteneur", null, conteneurStock, null);
 
-		JTabbedPane avion = new JTabbedPane(JTabbedPane.LEFT);
-		avion.setAlignmentY(Component.TOP_ALIGNMENT);
-		avion.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelPrincipal.addTab("Avion", null, avion, null);
+		JTabbedPane ongletLocal = new JTabbedPane(JTabbedPane.TOP);
+		ongletLocal.setBorder(null);
+		ongletLocal.setAlignmentY(Component.TOP_ALIGNMENT);
+		ongletLocal.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelPrincipal.addTab("Localisation", null, ongletLocal, null);
+
+		JPanel contenuLocalisation = new JPanel();
+		ongletLocal.addTab("Contenu", null, contenuLocalisation, null);
+		contenuLocalisation.setLayout(null);
+
+		JComboBox<?> typeObjets = new JComboBox<Object>();
+		typeObjets.setBounds(121, 13, 136, 22);
+		contenuLocalisation.add(typeObjets);
+
+		tableLocalContenuTop = new JTable();
+		tableLocalContenuTop.setBounds(52, 82, 706, 223);
+		contenuLocalisation.add(tableLocalContenuTop);
+
+		filtreRecherche = new JTextField();
+		filtreRecherche.setBounds(504, 13, 177, 22);
+		contenuLocalisation.add(filtreRecherche);
+		filtreRecherche.setColumns(10);
+
+		tableLocalContenuBot = new JTable();
+		tableLocalContenuBot.setBounds(52, 359, 706, 223);
+		contenuLocalisation.add(tableLocalContenuBot);
+
+		JButton btnModifierContenu = new JButton("Modifier contenu");
+		btnModifierContenu.setBounds(121, 612, 136, 25);
+		contenuLocalisation.add(btnModifierContenu);
+
+		JPanel conteneurLocalisation = new JPanel();
+		ongletLocal.addTab("Conteneur", null, conteneurLocalisation, null);
+		conteneurLocalisation.setLayout(null);
+
+		JButton btnNewButton = new JButton("Editer localisation");
+		btnNewButton.setBounds(340, 279, 149, 25);
+		conteneurLocalisation.add(btnNewButton);
+
+		JComboBox<?> secteur = new JComboBox<Object>();
+		secteur.setBounds(63, 29, 160, 22);
+		conteneurLocalisation.add(secteur);
+
+		tableLocalConteneurTop = new JTable();
+		tableLocalConteneurTop.setBounds(12, 72, 899, 194);
+		conteneurLocalisation.add(tableLocalConteneurTop);
+
+		tableLocalConteneurBot = new JTable();
+		tableLocalConteneurBot.setBounds(12, 357, 899, 194);
+		conteneurLocalisation.add(tableLocalConteneurBot);
 		// -------------- THOMAS
 		// --------------------------------------------------------------------------
-		JPanel gestionAvion = new JPanel();
-		avion.add(gestionAvion);
-		avion.setEnabledAt(0, false);
-		gestionAvion.setLayout(null);
+		JPanel ongletAvion = new JPanel();
+		panelPrincipal.addTab("Avion", null, ongletAvion, null);
+		ongletAvion.setLayout(null);
 
 		// Il affiche obligatoirement un onglet avec le JPanel, voir pour
 		// l'enlever ?
 		JPanel donneeAvion = new JPanel();
 		donneeAvion.setBounds(10, 11, 177, 143);
-		gestionAvion.add(donneeAvion);
+		ongletAvion.add(donneeAvion);
 		donneeAvion.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel lblDonnee1 = new JLabel("Donn\u00E9e 1 :");
@@ -293,19 +280,19 @@ public class Main_gui {
 
 		JLabel lblTransport = new JLabel("Transport :");
 		lblTransport.setBounds(219, 12, 70, 21);
-		gestionAvion.add(lblTransport);
+		ongletAvion.add(lblTransport);
 
-		JComboBox comboBoxAvion = new JComboBox();
-		comboBoxAvion.setBounds(299, 12, 124, 21);
-		gestionAvion.add(comboBoxAvion);
+		JComboBox comboBoxTransport = new JComboBox();
+		comboBoxTransport.setBounds(299, 12, 124, 21);
+		ongletAvion.add(comboBoxTransport);
 
 		JLabel lblConfiguration = new JLabel("configuration");
 		lblConfiguration.setBounds(451, 12, 70, 21);
-		gestionAvion.add(lblConfiguration);
+		ongletAvion.add(lblConfiguration);
 
 		JComboBox comboBoxConfiguration = new JComboBox();
 		comboBoxConfiguration.setBounds(531, 12, 124, 21);
-		gestionAvion.add(comboBoxConfiguration);
+		ongletAvion.add(comboBoxConfiguration);
 
 		JButton btnValidationChargement = new JButton("Valider");
 		btnValidationChargement.addActionListener(new ActionListener() {
@@ -313,14 +300,14 @@ public class Main_gui {
 			}
 		});
 		btnValidationChargement.setBounds(688, 11, 89, 23);
-		gestionAvion.add(btnValidationChargement);
+		ongletAvion.add(btnValidationChargement);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 178, 177, 484);
-		gestionAvion.add(scrollPane);
+		JScrollPane scrollPaneEditChargement = new JScrollPane();
+		scrollPaneEditChargement.setBounds(10, 178, 177, 484);
+		ongletAvion.add(scrollPaneEditChargement);
 
 		JPanel listeCaisse = new JPanel();
-		scrollPane.setViewportView(listeCaisse);
+		scrollPaneEditChargement.setViewportView(listeCaisse);
 		listeCaisse.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel caisseObligatoire = new JPanel();
@@ -347,10 +334,10 @@ public class Main_gui {
 		btnValidationCaisse.setBounds(43, 76, 89, 23);
 		validation.add(btnValidationCaisse);
 
-		JLabel lblNewLabel = new JLabel("Toutes modifications non");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 155, 23);
-		validation.add(lblNewLabel);
+		JLabel labelValidModif = new JLabel("Toutes modifications non");
+		labelValidModif.setHorizontalAlignment(SwingConstants.CENTER);
+		labelValidModif.setBounds(10, 11, 155, 23);
+		validation.add(labelValidModif);
 
 		JLabel lblNewLabel_1 = new JLabel(" valid\u00E9es ne seront pas prises");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -364,68 +351,12 @@ public class Main_gui {
 
 		JButton btnExporter = new JButton("Export");
 		btnExporter.setBounds(570, 602, 120, 31);
-		gestionAvion.add(btnExporter);
+		ongletAvion.add(btnExporter);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_1.setBounds(219, 58, 533, 484);
-		gestionAvion.add(panel_1);
-		panelPrincipal.setEnabledAt(1, true);
-
-		// ------------------------------------------------------------
-
-		panelPrincipal.setEnabledAt(1, true);
-
-		JTabbedPane localisation = new JTabbedPane(JTabbedPane.TOP);
-		localisation.setBorder(null);
-		localisation.setAlignmentY(Component.TOP_ALIGNMENT);
-		localisation.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelPrincipal.addTab("Localisation", null, localisation, null);
-
-		JPanel contenuLocalisation = new JPanel();
-		localisation.addTab("Contenu", null, contenuLocalisation, null);
-		contenuLocalisation.setLayout(null);
-
-		JComboBox<?> typeObjets = new JComboBox<Object>();
-		typeObjets.setBounds(121, 13, 136, 22);
-		contenuLocalisation.add(typeObjets);
-
-		tableLocalContenuTop = new JTable();
-		tableLocalContenuTop.setBounds(52, 82, 706, 223);
-		contenuLocalisation.add(tableLocalContenuTop);
-
-		filtreRecherche = new JTextField();
-		filtreRecherche.setBounds(504, 13, 177, 22);
-		contenuLocalisation.add(filtreRecherche);
-		filtreRecherche.setColumns(10);
-
-		tableLocalContenuBot = new JTable();
-		tableLocalContenuBot.setBounds(52, 359, 706, 223);
-		contenuLocalisation.add(tableLocalContenuBot);
-
-		JButton btnModifierContenu = new JButton("Modifier contenu");
-		btnModifierContenu.setBounds(121, 612, 136, 25);
-		contenuLocalisation.add(btnModifierContenu);
-
-		JPanel conteneurLocalisation = new JPanel();
-		localisation.addTab("Conteneur", null, conteneurLocalisation, null);
-		conteneurLocalisation.setLayout(null);
-
-		JButton btnNewButton = new JButton("Editer localisation");
-		btnNewButton.setBounds(340, 279, 149, 25);
-		conteneurLocalisation.add(btnNewButton);
-
-		JComboBox<?> secteur = new JComboBox<Object>();
-		secteur.setBounds(63, 29, 160, 22);
-		conteneurLocalisation.add(secteur);
-
-		tableLocalConteneurTop = new JTable();
-		tableLocalConteneurTop.setBounds(12, 72, 899, 194);
-		conteneurLocalisation.add(tableLocalConteneurTop);
-
-		tableLocalConteneurBot = new JTable();
-		tableLocalConteneurBot.setBounds(12, 357, 899, 194);
-		conteneurLocalisation.add(tableLocalConteneurBot);
+		JPanel panelPlanChargement = new JPanel();
+		panelPlanChargement.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panelPlanChargement.setBounds(219, 58, 533, 484);
+		ongletAvion.add(panelPlanChargement);
 
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
