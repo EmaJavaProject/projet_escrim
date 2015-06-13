@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionAvion extends IhmBuilder {
 
-	public static ActionListener CréationJpanelAvion(JFrame pPanelPrincipal){
+	public static ActionListener CréationJpanelAvion(JTabbedPane pPanelPrincipal){
 		
 		
 
@@ -51,7 +51,7 @@ public class GestionAvion extends IhmBuilder {
         				}
         			}
         		}
- 
+        		pPanelPrincipal.removeAll();
         		
         		JPanel jpanelAvion = new JPanel();
         		DefaultTableModel tblModelAvion = new DefaultTableModel();
@@ -61,8 +61,7 @@ public class GestionAvion extends IhmBuilder {
         		JButton boutonModifierAvion = new JButton("Editer");  
         		JScrollPane scrollPanelAvion = new JScrollPane();
         		 
- 
-
+        		
         		tableAvion.setName("Table Avion");
             	
             	tableAvion.setModel(IhmBuilder.BuildTableColumn(
@@ -81,7 +80,7 @@ public class GestionAvion extends IhmBuilder {
 
         		boutonModifierAvion.setBounds(230, 589, 97, 25);
         		jpanelAvion.add(boutonModifierAvion);	
-            	
+
             	scrollPanelAvion.setName("Scroll Avion");
             	scrollPanelAvion.setViewportView(tableAvion);
             	scrollPanelAvion.setBounds(12, 56, 800, 486);
@@ -92,9 +91,13 @@ public class GestionAvion extends IhmBuilder {
             	
             	pPanelPrincipal.add(jpanelAvion);
             	pPanelPrincipal.setMinimumSize(new Dimension(20, 20));
-            	pPanelPrincipal.transferFocus();
+            	pPanelPrincipal.addTab("Gestion Avion", null, jpanelAvion, null);
+            	jpanelAvion.requestFocus();
+            	jpanelAvion.requestFocusInWindow();
             	jpanelAvion.setLayout(null);
             	
+            	
+            
             	
             
             }
