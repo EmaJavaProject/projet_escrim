@@ -31,6 +31,8 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import java.awt.Rectangle;
+
 public class Main_gui {
 	// private boolean clicked = true;
 	private JFrame frmEscrim;
@@ -99,11 +101,20 @@ public class Main_gui {
 
 		JMenuItem mntmExporter = new JMenuItem("Exporter...");
 		mnFichier.add(mntmExporter);
-
+		
+		JMenu menuGestionTransport = new JMenu("Gestion Transport");
+		menu.add(menuGestionTransport);
+		
+		
 		JTabbedPane panelPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		panelPrincipal.setName("");
 		panelPrincipal.setBounds(0, 0, 1018, 707);
 		frmEscrim.getContentPane().add(panelPrincipal);
+		
+		JMenuItem sousMenuGestionAvion = new JMenuItem("Gestion Avion");
+		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(panelPrincipal));
+		menuGestionTransport.add(sousMenuGestionAvion);
+
 
 		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
 		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -258,7 +269,18 @@ public class Main_gui {
 		JLabel lblTransport = new JLabel("Transport :");
 		lblTransport.setBounds(219, 12, 70, 21);
 		ongletAvion.add(lblTransport);
+		JPanel jpanelAvion = new JPanel();
+		DefaultTableModel tblModelAvion = new DefaultTableModel();
+		JTable tableAvion = new JTable(tblModelAvion);
+		JButton boutonAjouterAvion = new JButton("+");
+		JButton boutonSupprimerAvion = new JButton("-");
+		JButton boutonModifierAvion = new JButton("Editer");  
+		JScrollPane scrollPanelAvion = new JScrollPane();
+		 
 
+
+    	
+    	
 		JComboBox comboBoxTransport = new JComboBox();
 		comboBoxTransport.setBounds(299, 12, 124, 21);
 		ongletAvion.add(comboBoxTransport);
@@ -334,7 +356,7 @@ public class Main_gui {
 		panelPlanChargement.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelPlanChargement.setBounds(219, 58, 533, 484);
 		ongletAvion.add(panelPlanChargement);
-
+    	panelPrincipal.setMinimumSize(new Dimension(20, 20));
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
 		// JButton button = new JButton(buttonIcon);

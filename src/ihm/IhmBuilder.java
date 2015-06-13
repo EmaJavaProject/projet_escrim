@@ -26,6 +26,11 @@ public class IhmBuilder {
 			"Désignation", "Nature Colis", "Affectataire", "Module",
 			"Optionnel", "Secteur", "Dimension", "Volume", "Poids", "Valeur",
 			"Iata", "Projection", "Observation" };
+	
+	public static String[] AvionColumnName = { "", "Nom",
+			"Volume", "Nombre de niveau", "Capacité en poids" };
+	
+
 
 	private static final Map<String, String[]> mapTableToColumn = createMap();
 
@@ -34,6 +39,7 @@ public class IhmBuilder {
 		result.put("Materiel", materielColName);
 		result.put("Médicaments", medicColName);
 		result.put("Colis", colisColumnName);
+		result.put("Gestion Avion", AvionColumnName);
 		return Collections.unmodifiableMap(result);
 	}
 
