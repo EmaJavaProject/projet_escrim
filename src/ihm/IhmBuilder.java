@@ -7,8 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author Martin
@@ -16,17 +15,17 @@ import javax.swing.table.TableColumnModel;
  */
 public class IhmBuilder {
 
-	public static String[] materielColName = { "Dénomination", "Observations",
-			"Quantité" };
+	public static String[] materielColName = { "", "Dénomination",
+			"Observations", "Quantité" };
 
-	public static String[] medicColName = { "Dénomination", "Principe Actif",
-			"Dosage", "DLU", "Quantité", "Lot", "Classe Thérapeutique",
-			"Dotation U7" };
+	public static String[] medicColName = { "", "Dénomination",
+			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
+			"Classe Thérapeutique", "Dotation U7" };
 
-	public static String[] colisColumnName = { "Numéro Colis", "Désignation",
-			"Nature Colis", "Affectataire", "Module", "Optionnel", "Secteur",
-			"Dimension", "Volume", "Poids", "Valeur", "Iata", "Projection",
-			"Observation" };
+	public static String[] colisColumnName = { "", "Numéro Colis",
+			"Désignation", "Nature Colis", "Affectataire", "Module",
+			"Optionnel", "Secteur", "Dimension", "Volume", "Poids", "Valeur",
+			"Iata", "Projection", "Observation" };
 
 	private static final Map<String, String[]> mapTableToColumn = createMap();
 
@@ -40,22 +39,26 @@ public class IhmBuilder {
 
 	/**
 	 * 
-	 * @param tableColumnModel
+	 * @param modelTableContenu
 	 *            modèle de colonnes pour la table en question
 	 * @param tableParam
 	 *            nom de la table a initialiser
 	 */
 
-	public static TableColumnModel BuildTableColumn(
-			TableColumnModel tableColumnModel, String tableParam) {
-
-		for (String col : mapTableToColumn.get(tableParam)) {
-			TableColumn tableColumn = new TableColumn();
-			tableColumn.setHeaderValue(col);
-			tableColumnModel.addColumn(tableColumn);
+	public static DefaultTableModel BuildTableColumn(
+			DefaultTableModel modelTableContenu, String tableParam) {
+		while (modelTableContenu.getRowCount() != 0) {
+			modelTableContenu.removeRow(0);
 		}
 
-		return tableColumnModel;
+		for (String col : mapTableToColumn.get(tableParam)) {
+			modelTableContenu.addColumn(col);
+			if (col == "") {
+
+			}
+		}
+
+		return modelTableContenu;
 
 	}
 }

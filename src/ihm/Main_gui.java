@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class Main_gui {
@@ -123,9 +124,10 @@ public class Main_gui {
 		scrollPaneContenu.setBounds(12, 56, 800, 486);
 		contenuStock.add(scrollPaneContenu);
 
-		tableContenu = new JTable();
-		scrollPaneContenu.setViewportView(tableContenu);
+		DefaultTableModel modelTableContenu = new DefaultTableModel();
 		TableColumnModel allTableContenuColumn = new DefaultTableColumnModel();
+		tableContenu = new JTable(modelTableContenu);
+		scrollPaneContenu.setViewportView(tableContenu);
 
 		// JTableHeader headerContenu = new JTableHeader();
 
@@ -133,7 +135,7 @@ public class Main_gui {
 		btnAjouterStock.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// tableContenu.addR
+				modelTableContenu.addRow(new Object[] { "", "", "", "" });
 			}
 		});
 		btnAjouterStock.setBounds(12, 589, 97, 25);
@@ -156,18 +158,16 @@ public class Main_gui {
 		// Mise a jour de la JTable en fonction de la combobox
 		comboSelectContenu.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if (allTableContenuColumn.getColumnCount() != 0) {
-					while (allTableContenuColumn.getColumnCount() != 0) {
-						allTableContenuColumn
-								.removeColumn(allTableContenuColumn
-										.getColumn(0));
-					}
+				if (modelTableContenu.getColumnCount() != 0) {
+					modelTableContenu.setColumnCount(0);
 				}
 
+				tableContenu.setModel(IhmBuilder.BuildTableColumn(
+						modelTableContenu, comboSelectContenu.getSelectedItem()
+								.toString()));
+				tableContenu.getColumn(tableContenu.getColumnName(0))
+						.setMaxWidth(20);
 				;
-				tableContenu.setColumnModel(IhmBuilder.BuildTableColumn(
-						allTableContenuColumn, comboSelectContenu
-								.getSelectedItem().toString()));
 			}
 
 		});
