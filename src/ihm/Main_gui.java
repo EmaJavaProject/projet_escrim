@@ -7,13 +7,10 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,7 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 public class Main_gui {
@@ -119,11 +115,6 @@ public class Main_gui {
 		panelPrincipal.addTab("Stock", null, ongletStock, null);
 
 		JPanel contenuStock = new JPanel();
-		contenuStock.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-			}
-		});
 		contenuStock.setMinimumSize(new Dimension(20, 20));
 		ongletStock.addTab("Contenu", null, contenuStock, null);
 		contenuStock.setLayout(null);
@@ -165,27 +156,18 @@ public class Main_gui {
 		// Mise a jour de la JTable en fonction de la combobox
 		comboSelectContenu.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				while (allTableContenuColumn.getColumnCount() != 0) {
-					allTableContenuColumn.removeColumn(allTableContenuColumn
-							.getColumn(0));
-				}
-				if (comboSelectContenu.getSelectedItem().toString()
-						.equalsIgnoreCase("Materiel")) {
-					for (String col : IhmBuilder.materielColName) {
-						TableColumn tableColumn = new TableColumn();
-						tableColumn.setHeaderValue(col);
-						allTableContenuColumn.addColumn(tableColumn);
+				if (allTableContenuColumn.getColumnCount() != 0) {
+					while (allTableContenuColumn.getColumnCount() != 0) {
+						allTableContenuColumn
+								.removeColumn(allTableContenuColumn
+										.getColumn(0));
 					}
+				}
 
-				} else if (comboSelectContenu.getSelectedItem().toString()
-						.equalsIgnoreCase("Médicaments")) {
-					for (String col : IhmBuilder.medicColName) {
-						TableColumn tableColumn = new TableColumn();
-						tableColumn.setHeaderValue(col);
-						allTableContenuColumn.addColumn(tableColumn);
-					}
-				}
-				tableContenu.setColumnModel(allTableContenuColumn);
+				;
+				tableContenu.setColumnModel(IhmBuilder.BuildTableColumn(
+						allTableContenuColumn, comboSelectContenu
+								.getSelectedItem().toString()));
 			}
 
 		});
@@ -379,14 +361,6 @@ public class Main_gui {
 
 		// button.setContentAreaFilled(false);
 		// panel.add(button);
-
-	}
-
-	public void setColumnVisible(Vector vectorColumn, TableColumn column) {
-
-	}
-
-	public void setColumnHide(TableColumn column) {
 
 	}
 
