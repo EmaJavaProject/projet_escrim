@@ -39,7 +39,7 @@ public class IhmBuilder {
 		result.put("Materiel", materielColName);
 		result.put("Médicaments", medicColName);
 		result.put("Colis", colisColumnName);
-		result.put("Gestion Avion", AvionColumnName);
+		result.put("Table Avion", AvionColumnName);
 		return Collections.unmodifiableMap(result);
 	}
 

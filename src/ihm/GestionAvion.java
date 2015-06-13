@@ -62,7 +62,7 @@ public class GestionAvion extends IhmBuilder {
         		 
  
 
-        		tableAvion.setName("Gestion Avion");
+        		tableAvion.setName("Table Avion");
             	
             	tableAvion.setModel(IhmBuilder.BuildTableColumn(
             			tblModelAvion, tableAvion.getName()));
@@ -81,16 +81,19 @@ public class GestionAvion extends IhmBuilder {
         		boutonModifierAvion.setBounds(230, 589, 97, 25);
         		jpanelAvion.add(boutonModifierAvion);	
             	
-            	scrollPanelAvion.setName("Gestion Avion");
+            	scrollPanelAvion.setName("Scroll Avion");
             	scrollPanelAvion.setViewportView(tableAvion);
             	scrollPanelAvion.setBounds(12, 56, 800, 486);
             	
             	jpanelAvion.add(scrollPanelAvion);
+            	jpanelAvion.setName("Gestion Avion");
             	jpanelAvion.setLayout(null);
             	
             	pPanelPrincipal.add(jpanelAvion);
             	pPanelPrincipal.setMinimumSize(new Dimension(20, 20));
             	pPanelPrincipal.addTab("Gestion Avion", null, jpanelAvion, null);
+            	jpanelAvion.requestFocus();
+            	jpanelAvion.requestFocusInWindow();
             	jpanelAvion.setLayout(null);
             	
             	
