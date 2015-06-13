@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionAvion extends IhmBuilder {
 
-	public static ActionListener CréationJpanelAvion(JTabbedPane pPanelPrincipal){
+	public static ActionListener CréationJpanelAvion(JFrame pPanelPrincipal){
 		
 		
 
@@ -91,9 +92,7 @@ public class GestionAvion extends IhmBuilder {
             	
             	pPanelPrincipal.add(jpanelAvion);
             	pPanelPrincipal.setMinimumSize(new Dimension(20, 20));
-            	pPanelPrincipal.addTab("Gestion Avion", null, jpanelAvion, null);
-            	jpanelAvion.requestFocus();
-            	jpanelAvion.requestFocusInWindow();
+            	pPanelPrincipal.transferFocus();
             	jpanelAvion.setLayout(null);
             	
             	

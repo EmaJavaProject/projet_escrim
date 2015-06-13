@@ -112,7 +112,7 @@ public class Main_gui {
 		frmEscrim.getContentPane().add(panelPrincipal);
 		
 		JMenuItem sousMenuGestionAvion = new JMenuItem("Gestion Avion");
-		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(panelPrincipal));
+		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(frmEscrim));
 		menuGestionTransport.add(sousMenuGestionAvion);
 
 
