@@ -100,11 +100,6 @@ public class Main_gui {
 		JMenuItem mntmExporter = new JMenuItem("Exporter...");
 		mnFichier.add(mntmExporter);
 
-		JMenuItem mnQuitter = new JMenuItem("Quitter");
-		mnQuitter.setMaximumSize(new Dimension(100, 50));
-		mnQuitter.addActionListener(new QuitterAppli());
-		menu.add(mnQuitter);
-
 		JTabbedPane panelPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		panelPrincipal.setName("");
 		panelPrincipal.setBounds(0, 0, 1018, 707);
@@ -362,19 +357,5 @@ public class Main_gui {
 		// button.setContentAreaFilled(false);
 		// panel.add(button);
 
-	}
-
-	static class QuitterAppli implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String ObjButtons[] = { "Oui", "Non" };
-			int PromptResult = JOptionPane.showOptionDialog(null,
-					"Etes vous sûr de vouloir quitter ?",
-					"Quitter l'application", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.WARNING_MESSAGE, null, ObjButtons,
-					ObjButtons[1]);
-			if (PromptResult == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
-		}
 	}
 }
