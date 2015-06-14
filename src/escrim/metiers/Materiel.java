@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Materiel {
+public class Materiel implements Metier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
