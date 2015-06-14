@@ -1,6 +1,5 @@
 package ihm;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -33,8 +32,9 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import java.awt.Rectangle;
-import java.awt.ComponentOrientation;
+import escrim.metiers.Materiel;
+import escrim.metiers.Metier;
+import escrim.utils.GestionPersistance;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -68,7 +68,6 @@ public class Main_gui {
 	public Main_gui() {
 		initialize();
 	}
-	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -104,35 +103,34 @@ public class Main_gui {
 
 		JMenuItem mntmExporter = new JMenuItem("Exporter...");
 		mnFichier.add(mntmExporter);
-		
+
 		JMenu menuGestionTransport = new JMenu("Gestion Transport");
 		menu.add(menuGestionTransport);
-		
+
 		JLayeredPane gestionairePage = new JLayeredPane();
 		gestionairePage.setBounds(0, 0, 1018, 707);
 		frmEscrim.getContentPane().add(gestionairePage);
-		
-		
-		
+
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1018, 718);
 		panelPrincipal.setLayout(null);
 		panelPrincipal.setName("panelPrincipale");
 		panelPrincipal.setOpaque(true);
-		
+
 		gestionairePage.add(panelPrincipal, new Integer(1));
 		gestionairePage.moveToBack(panelPrincipal);
 		gestionairePage.revalidate();
-		
+
 		JTabbedPane tabPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		tabPrincipal.setName("");
 		tabPrincipal.setBounds(0, 0, 1017, 706);
 		panelPrincipal.add(tabPrincipal);
-		
-		JMenuItem sousMenuGestionAvion = new JMenuItem("Gestion Avion");
-		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(gestionairePage));
-		menuGestionTransport.add(sousMenuGestionAvion);
 
+		JMenuItem sousMenuGestionAvion = new JMenuItem("Gestion Avion");
+		sousMenuGestionAvion.addActionListener(GestionAvion
+				.CréationJpanelAvion(gestionairePage));
+
+		menuGestionTransport.add(sousMenuGestionAvion);
 
 		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
 		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -154,28 +152,34 @@ public class Main_gui {
 		scrollPaneContenu.setViewportView(tableContenu);
 
 		// JTableHeader headerContenu = new JTableHeader();
+		JButton btnValiderStockContenu = new JButton("Valider");
+
+		btnValiderStockContenu.setBounds(446, 590, 89, 23);
+		contenuStock.add(btnValiderStockContenu);
+
+		JButton btnAnnulerContenuStock = new JButton("Annuler");
+		btnAnnulerContenuStock.setBounds(545, 590, 89, 23);
+		contenuStock.add(btnAnnulerContenuStock);
+
+		JButton btnSupprimerStockContenu = new JButton("-");
+		btnSupprimerStockContenu.setBounds(121, 589, 97, 25);
+		contenuStock.add(btnSupprimerStockContenu);
+
+		JButton btnEditerStockContenu = new JButton("Editer");
+		btnEditerStockContenu.setBounds(230, 589, 97, 25);
+		contenuStock.add(btnEditerStockContenu);
+
+		JButton btnLocaliserStockContenu = new JButton("Localiser");
+		btnLocaliserStockContenu.setBounds(339, 589, 97, 25);
+		contenuStock.add(btnLocaliserStockContenu);
+
+		btnValiderStockContenu.setEnabled(false);
+		btnAnnulerContenuStock.setEnabled(false);
 
 		JButton btnAjouterStock = new JButton("+");
-		btnAjouterStock.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				modelTableContenu.addRow(new Object[] { "", "", "", "" });
-			}
-		});
+
 		btnAjouterStock.setBounds(12, 589, 97, 25);
 		contenuStock.add(btnAjouterStock);
-
-		JButton btnSupprimerStock = new JButton("-");
-		btnSupprimerStock.setBounds(121, 589, 97, 25);
-		contenuStock.add(btnSupprimerStock);
-
-		JButton btnEditerStock = new JButton("Editer");
-		btnEditerStock.setBounds(230, 589, 97, 25);
-		contenuStock.add(btnEditerStock);
-
-		JButton btnLocaliserStock = new JButton("Localiser");
-		btnLocaliserStock.setBounds(339, 589, 97, 25);
-		contenuStock.add(btnLocaliserStock);
 
 		JComboBox<String> comboSelectContenu = new JComboBox<String>();
 
@@ -203,6 +207,17 @@ public class Main_gui {
 		JComboBox<?> comboBox = new JComboBox<Object>();
 		comboBox.setBounds(12, 13, 141, 25);
 		contenuStock.add(comboBox);
+
+		JButton btnValider = new JButton("Valider");
+		btnValider.setBounds(446, 590, 89, 23);
+		contenuStock.add(btnValider);
+
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setBounds(545, 590, 89, 23);
+		contenuStock.add(btnAnnuler);
+
+		btnValider.setEnabled(false);
+		btnAnnuler.setEnabled(false);
 
 		JPanel conteneurStock = new JPanel();
 		ongletStock.addTab("Conteneur", null, conteneurStock, null);
@@ -287,7 +302,15 @@ public class Main_gui {
 		JLabel lblTransport = new JLabel("Transport :");
 		lblTransport.setBounds(219, 12, 70, 21);
 		ongletAvion.add(lblTransport);
-    		
+
+		JPanel jpanelAvion = new JPanel();
+		DefaultTableModel tblModelAvion = new DefaultTableModel();
+		JTable tableAvion = new JTable(tblModelAvion);
+		JButton boutonAjouterAvion = new JButton("+");
+		JButton boutonSupprimerAvion = new JButton("-");
+		JButton boutonModifierAvion = new JButton("Editer");
+		JScrollPane scrollPanelAvion = new JScrollPane();
+
 		JComboBox comboBoxTransport = new JComboBox();
 		comboBoxTransport.setBounds(299, 12, 124, 21);
 		ongletAvion.add(comboBoxTransport);
@@ -363,8 +386,51 @@ public class Main_gui {
 		panelPlanChargement.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelPlanChargement.setBounds(219, 58, 533, 484);
 		ongletAvion.add(panelPlanChargement);
+
 		tabPrincipal.setMinimumSize(new Dimension(5000, 5000));
 		frmEscrim.setVisible(true);
+
+		panelPrincipal.setMinimumSize(new Dimension(20, 20));
+
+		btnAjouterStock.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// On enable/disable les boutons nécessaire
+				btnValiderStockContenu.setEnabled(true);
+				btnAnnulerContenuStock.setEnabled(true);
+				btnAjouterStock.setEnabled(false);
+				btnSupprimerStockContenu.setEnabled(false);
+				btnLocaliserStockContenu.setEnabled(false);
+				btnEditerStockContenu.setEnabled(false);
+				// on ajoute une ligne avec des champs nulls
+				modelTableContenu
+						.addRow(new Object[] { null, null, null, null });
+			}
+		});
+
+		btnValiderStockContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// On créé notre objet materiel
+				Metier materiel = new Materiel();
+				// On désactive l'édition de cellule pour assurer la
+				// récupération des valeurs
+				tableContenu.getCellEditor().stopCellEditing();
+				// On récupère les données des cellules
+				((Materiel) materiel).setDenomination((String) tableContenu
+						.getModel().getValueAt(0, 1));
+				((Materiel) materiel).setObservations((String) tableContenu
+						.getModel().getValueAt(0, 2));
+				// Par défaut les cell sont des strings, donc on récup les int
+				// insérés
+				((Materiel) materiel).setQuantite(Integer
+						.parseInt((String) tableContenu.getModel().getValueAt(
+								0, 3)));
+				// On rend persistant l'objet
+				GestionPersistance.addObjetToDB(materiel);
+			}
+		});
+
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
 		// JButton button = new JButton(buttonIcon);
