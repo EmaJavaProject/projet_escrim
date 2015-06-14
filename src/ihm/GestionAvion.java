@@ -1,13 +1,18 @@
 package ihm;
 
 
+import java.awt.Button;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -20,10 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionAvion extends IhmBuilder {
 
-	public static ActionListener CréationJpanelAvion(JTabbedPane pPanelPrincipal){
-		
-		
-
+	public static ActionListener CréationJpanelAvion (JLayeredPane pPanelPrincipal) {
 		
 	
 		ActionListener action = new ActionListener()
@@ -51,17 +53,17 @@ public class GestionAvion extends IhmBuilder {
         				}
         			}
         		}
-        		pPanelPrincipal.removeAll();
+        		
         		
         		JPanel jpanelAvion = new JPanel();
         		DefaultTableModel tblModelAvion = new DefaultTableModel();
         		JTable tableAvion = new JTable(tblModelAvion);
         		JButton boutonAjouterAvion = new JButton("+");
+        		JButton boutonQuitter = new JButton("Quitter");
         		JButton boutonSupprimerAvion = new JButton("-");
         		JButton boutonModifierAvion = new JButton("Editer");  
         		JScrollPane scrollPanelAvion = new JScrollPane();
         		 
-        		
         		tableAvion.setName("Table Avion");
             	
             	tableAvion.setModel(IhmBuilder.BuildTableColumn(
@@ -70,7 +72,22 @@ public class GestionAvion extends IhmBuilder {
         				.setMaxWidth(20);
             	tableAvion.setBounds(12, 72, 899, 800);
             	
+            
             	
+            	boutonQuitter.setBounds(800, 13, 97, 25);
+            	boutonQuitter.addMouseListener(new MouseAdapter() {
+        			@Override
+        			public void mouseClicked(MouseEvent arg0) {
+        				for (Component composant : pPanelPrincipal.getComponents()) {
+        					if (composant.getName().equals("Gestion Avion"))
+        					pPanelPrincipal.remove(composant);
+						}
+        				pPanelPrincipal.repaint();
+        				
+        				
+        			}
+        		});
+            	jpanelAvion.add(boutonQuitter);
             	
             	boutonAjouterAvion.setBounds(12, 589, 97, 25);
             	jpanelAvion.add(boutonAjouterAvion);
@@ -84,18 +101,15 @@ public class GestionAvion extends IhmBuilder {
             	scrollPanelAvion.setName("Scroll Avion");
             	scrollPanelAvion.setViewportView(tableAvion);
             	scrollPanelAvion.setBounds(12, 56, 800, 486);
-            	
+            	jpanelAvion.setBounds(0, 0, 1017, 706);
             	jpanelAvion.add(scrollPanelAvion);
             	jpanelAvion.setName("Gestion Avion");
             	jpanelAvion.setLayout(null);
             	
-            	pPanelPrincipal.add(jpanelAvion);
-            	pPanelPrincipal.setMinimumSize(new Dimension(20, 20));
-            	pPanelPrincipal.addTab("Gestion Avion", null, jpanelAvion, null);
-            	jpanelAvion.requestFocus();
-            	jpanelAvion.requestFocusInWindow();
-            	jpanelAvion.setLayout(null);
+            	pPanelPrincipal.add(jpanelAvion, new Integer(2));
+            	pPanelPrincipal.revalidate();
             	
+
             	
             
             	
@@ -107,4 +121,7 @@ public class GestionAvion extends IhmBuilder {
 	
 
 	}
-}
+	
+};
+
+

@@ -1,5 +1,6 @@
 package ihm;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -32,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import java.awt.Rectangle;
+import java.awt.ComponentOrientation;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -65,6 +68,7 @@ public class Main_gui {
 	public Main_gui() {
 		initialize();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -89,7 +93,6 @@ public class Main_gui {
 				}
 			}
 		});
-
 		JMenuBar menu = new JMenuBar();
 		frmEscrim.setJMenuBar(menu);
 
@@ -105,21 +108,36 @@ public class Main_gui {
 		JMenu menuGestionTransport = new JMenu("Gestion Transport");
 		menu.add(menuGestionTransport);
 		
+		JLayeredPane gestionairePage = new JLayeredPane();
+		gestionairePage.setBounds(0, 0, 1018, 707);
+		frmEscrim.getContentPane().add(gestionairePage);
 		
-		JTabbedPane panelPrincipal = new JTabbedPane(JTabbedPane.LEFT);
-		panelPrincipal.setName("");
-		panelPrincipal.setBounds(0, 0, 1018, 707);
-		frmEscrim.getContentPane().add(panelPrincipal);
+		
+		
+		JPanel panelPrincipal = new JPanel();
+		panelPrincipal.setBounds(0, 0, 1018, 718);
+		panelPrincipal.setLayout(null);
+		panelPrincipal.setName("panelPrincipale");
+		panelPrincipal.setOpaque(true);
+		
+		gestionairePage.add(panelPrincipal, new Integer(1));
+		gestionairePage.moveToBack(panelPrincipal);
+		gestionairePage.revalidate();
+		
+		JTabbedPane tabPrincipal = new JTabbedPane(JTabbedPane.LEFT);
+		tabPrincipal.setName("");
+		tabPrincipal.setBounds(0, 0, 1017, 706);
+		panelPrincipal.add(tabPrincipal);
 		
 		JMenuItem sousMenuGestionAvion = new JMenuItem("Gestion Avion");
-		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(panelPrincipal));
+		sousMenuGestionAvion.addActionListener(GestionAvion.CréationJpanelAvion(gestionairePage));
 		menuGestionTransport.add(sousMenuGestionAvion);
 
 
 		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
 		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
 		ongletStock.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelPrincipal.addTab("Stock", null, ongletStock, null);
+		tabPrincipal.addTab("Stock", null, ongletStock, null);
 
 		JPanel contenuStock = new JPanel();
 		contenuStock.setMinimumSize(new Dimension(20, 20));
@@ -193,7 +211,7 @@ public class Main_gui {
 		ongletLocal.setBorder(null);
 		ongletLocal.setAlignmentY(Component.TOP_ALIGNMENT);
 		ongletLocal.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelPrincipal.addTab("Localisation", null, ongletLocal, null);
+		tabPrincipal.addTab("Localisation", null, ongletLocal, null);
 
 		JPanel contenuLocalisation = new JPanel();
 		ongletLocal.addTab("Contenu", null, contenuLocalisation, null);
@@ -242,7 +260,7 @@ public class Main_gui {
 		// -------------- THOMAS
 		// --------------------------------------------------------------------------
 		JPanel ongletAvion = new JPanel();
-		panelPrincipal.addTab("Avion", null, ongletAvion, null);
+		tabPrincipal.addTab("Avion", null, ongletAvion, null);
 		ongletAvion.setLayout(null);
 
 		// Il affiche obligatoirement un onglet avec le JPanel, voir pour
@@ -269,18 +287,7 @@ public class Main_gui {
 		JLabel lblTransport = new JLabel("Transport :");
 		lblTransport.setBounds(219, 12, 70, 21);
 		ongletAvion.add(lblTransport);
-		JPanel jpanelAvion = new JPanel();
-		DefaultTableModel tblModelAvion = new DefaultTableModel();
-		JTable tableAvion = new JTable(tblModelAvion);
-		JButton boutonAjouterAvion = new JButton("+");
-		JButton boutonSupprimerAvion = new JButton("-");
-		JButton boutonModifierAvion = new JButton("Editer");  
-		JScrollPane scrollPanelAvion = new JScrollPane();
-		 
-
-
-    	
-    	
+    		
 		JComboBox comboBoxTransport = new JComboBox();
 		comboBoxTransport.setBounds(299, 12, 124, 21);
 		ongletAvion.add(comboBoxTransport);
@@ -356,7 +363,8 @@ public class Main_gui {
 		panelPlanChargement.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelPlanChargement.setBounds(219, 58, 533, 484);
 		ongletAvion.add(panelPlanChargement);
-    	panelPrincipal.setMinimumSize(new Dimension(20, 20));
+		tabPrincipal.setMinimumSize(new Dimension(5000, 5000));
+		frmEscrim.setVisible(true);
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
 		// JButton button = new JButton(buttonIcon);
