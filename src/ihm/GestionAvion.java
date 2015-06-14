@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -46,16 +48,18 @@ public class GestionAvion extends IhmBuilder {
         				for (Component composantsPanelPrincipal : composantPanelPrincipal.getParent().getComponents()) 
         				{
 
-        					if (composantsPanelPrincipal != null  && composantsPanelPrincipal.getName()!=null && composantsPanelPrincipal.getName().equals("Gestion Avion"))
+        					if (composantsPanelPrincipal != null  && composantsPanelPrincipal.getName()!=null && composantsPanelPrincipal.getName().equals("Gestion Transport"))
         					{
         						return;
         					}
         				}
         			}
         		}
-        		
+        		//--------------------------------Onglet Avion------------------------------------------------//
         		
         		JPanel jpanelAvion = new JPanel();
+        		JTextField txtGestionAvion = new JTextField();
+        		
         		DefaultTableModel tblModelAvion = new DefaultTableModel();
         		JTable tableAvion = new JTable(tblModelAvion);
         		JButton boutonAjouterAvion = new JButton("+");
@@ -64,7 +68,7 @@ public class GestionAvion extends IhmBuilder {
         		JButton boutonModifierAvion = new JButton("Editer");  
         		JScrollPane scrollPanelAvion = new JScrollPane();
         		 
-        		tableAvion.setName("Table Avion");
+        		tableAvion.setName("Table Transports");
             	
             	tableAvion.setModel(IhmBuilder.BuildTableColumn(
             			tblModelAvion, tableAvion.getName()));
@@ -79,7 +83,7 @@ public class GestionAvion extends IhmBuilder {
         			@Override
         			public void mouseClicked(MouseEvent arg0) {
         				for (Component composant : pPanelPrincipal.getComponents()) {
-        					if (composant.getName().equals("Gestion Avion"))
+        					if (composant.getName().equals("Gestion Transport"))
         					pPanelPrincipal.remove(composant);
 						}
         				pPanelPrincipal.repaint();
@@ -87,6 +91,10 @@ public class GestionAvion extends IhmBuilder {
         				
         			}
         		});
+            	
+            	
+
+        		
             	jpanelAvion.add(boutonQuitter);
             	
             	boutonAjouterAvion.setBounds(12, 589, 97, 25);
@@ -98,15 +106,100 @@ public class GestionAvion extends IhmBuilder {
         		boutonModifierAvion.setBounds(230, 589, 97, 25);
         		jpanelAvion.add(boutonModifierAvion);	
 
-            	scrollPanelAvion.setName("Scroll Avion");
+        		txtGestionAvion = new JTextField();
+            	txtGestionAvion.setHorizontalAlignment(SwingConstants.CENTER);
+            	txtGestionAvion.setEnabled(false);
+            	txtGestionAvion.setPreferredSize(new Dimension(20, 20));
+            	txtGestionAvion.setText("Gestion Transport");
+            	txtGestionAvion.setColumns(10);
+            	txtGestionAvion.setBounds(44, 11, 260, 25);
+            	jpanelAvion.add(txtGestionAvion);
+            	
+            	scrollPanelAvion.setName("Scroll Transport");
             	scrollPanelAvion.setViewportView(tableAvion);
             	scrollPanelAvion.setBounds(12, 56, 800, 486);
             	jpanelAvion.setBounds(0, 0, 1017, 706);
             	jpanelAvion.add(scrollPanelAvion);
-            	jpanelAvion.setName("Gestion Avion");
+            	jpanelAvion.setName("Gestion Transport");
             	jpanelAvion.setLayout(null);
             	
-            	pPanelPrincipal.add(jpanelAvion, new Integer(2));
+            	JTabbedPane tabPrincipal = new JTabbedPane();
+        		tabPrincipal.setName("Gestion Transport");
+        		tabPrincipal.setBounds(0, 0, 1017, 706);
+        		tabPrincipal.add(jpanelAvion);
+        		//--------------------------------Onglet compartiment------------------------------------------------//
+        		
+        		JPanel jpanelCompartiment = new JPanel();
+        		JTextField txtCompartiment = new JTextField();
+        		
+        		DefaultTableModel tblModelCompartiment = new DefaultTableModel();
+        		JTable tableCompartiment = new JTable(tblModelAvion);
+        		JButton boutonAjouterCompartiment = new JButton("+");
+        		JButton boutonQuitterCompartiment = new JButton("Quitter");
+        		JButton boutonSupprimerCompartiment = new JButton("-");
+        		JButton boutonModifierCompartiment = new JButton("Editer");  
+        		JScrollPane scrollPanelCompartiment = new JScrollPane();
+        		
+        		tableCompartiment.setName("Table Compartiments");
+        		tableCompartiment.setModel(IhmBuilder.BuildTableColumn(
+            			tblModelCompartiment, tableCompartiment.getName()));
+        		tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
+        				.setMaxWidth(20);
+        		tableCompartiment.setBounds(12, 72, 899, 800);
+            	
+            
+            	
+        		boutonQuitterCompartiment.setBounds(800, 13, 97, 25);
+        		boutonQuitterCompartiment.addMouseListener(new MouseAdapter() {
+        			@Override
+        			public void mouseClicked(MouseEvent arg0) {
+        				for (Component composant : pPanelPrincipal.getComponents()) {
+        					if (composant.getName().equals("Gestion Transport"))
+        					pPanelPrincipal.remove(composant);
+						}
+        				pPanelPrincipal.repaint();
+        				
+        				
+        			}
+        		});
+            	
+            	
+
+        		
+        		jpanelCompartiment.add(boutonQuitterCompartiment);
+            	
+        		boutonAjouterCompartiment.setBounds(12, 589, 97, 25);
+        		jpanelCompartiment.add(boutonAjouterCompartiment);
+        		
+            	boutonSupprimerCompartiment.setBounds(121, 589, 97, 25);
+        		jpanelCompartiment.add(boutonSupprimerCompartiment);
+
+        		boutonModifierCompartiment.setBounds(230, 589, 97, 25);
+        		jpanelCompartiment.add(boutonModifierCompartiment);	
+
+        		txtCompartiment = new JTextField();
+        		txtCompartiment.setHorizontalAlignment(SwingConstants.CENTER);
+        		txtCompartiment.setEnabled(false);
+        		txtCompartiment.setPreferredSize(new Dimension(20, 20));
+        		txtCompartiment.setText("Gestion Compartiments");
+        		txtCompartiment.setColumns(10);
+        		txtCompartiment.setBounds(44, 11, 260, 25);
+        		jpanelCompartiment.add(txtCompartiment);
+            	
+        		scrollPanelCompartiment.setName("Scroll Compartiments");
+        		scrollPanelCompartiment.setViewportView(tableCompartiment);
+        		scrollPanelCompartiment.setBounds(12, 56, 800, 486);
+        		jpanelCompartiment.setBounds(0, 0, 1017, 706);
+        		jpanelCompartiment.add(scrollPanelCompartiment);
+        		jpanelCompartiment.setName("Gestion Compartiments");
+        		jpanelCompartiment.setLayout(null);
+       
+        		tabPrincipal.add(jpanelCompartiment);
+        		
+        		
+            	
+            	
+            	pPanelPrincipal.add(tabPrincipal, new Integer(2));
             	pPanelPrincipal.revalidate();
             	
 

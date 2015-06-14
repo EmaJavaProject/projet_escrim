@@ -28,7 +28,10 @@ public class IhmBuilder {
 			"Iata", "Projection", "Observation" };
 	
 	public static String[] AvionColumnName = { "", "Nom",
-			"Volume", "Nombre de niveau", "Capacité en poids" };
+			"Compartiments" };
+	
+	public static String[] CompartimentColumnName = { "", "Nom",
+		"Volume", "Nombre de niveau", "Capacité en poids" };
 	
 
 
@@ -39,7 +42,8 @@ public class IhmBuilder {
 		result.put("Materiel", materielColName);
 		result.put("Médicaments", medicColName);
 		result.put("Colis", colisColumnName);
-		result.put("Table Avion", AvionColumnName);
+		result.put("Table Transports", AvionColumnName);
+		result.put("Table Compartiments", CompartimentColumnName);
 		return Collections.unmodifiableMap(result);
 	}
 
