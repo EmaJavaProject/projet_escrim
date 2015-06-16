@@ -3,4 +3,4 @@
 /bin/
 /.settings/
 *.dia~
-/src/META-INF/*
+/src/META-INF/
