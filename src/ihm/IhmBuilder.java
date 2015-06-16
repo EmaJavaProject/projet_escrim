@@ -23,7 +23,7 @@ public class IhmBuilder {
 			"Classe Thérapeutique", "Dotation U7" };
 
 	public static String[] colisColumnName = { "", "Numéro Colis",
-			"Désignation", "Nature Colis", "Affectataire", "Module",
+			"Désignation", "Nature Colis", "Affectataire", 
 			"Optionnel", "Secteur", "Dimension", "Volume", "Poids", "Valeur",
 			"Iata", "Projection", "Observation" };
 	

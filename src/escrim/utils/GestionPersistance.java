@@ -26,6 +26,21 @@ public class GestionPersistance {
 		escrimDatabase.getEm().refresh(metier);
 
 	}
+	
+	
+	/**
+	 * On supprime dans la base l'objet de la classe metier correspondant
+	 * 
+	 * @param metier
+	 */
+	public static void removeObjetToDB(Metier metier) {
+
+		EscrimDatabase escrimDatabase = EscrimDatabase.getInstance();
+		escrimDatabase.getEm().getTransaction().begin();
+		escrimDatabase.getEm().remove(metier);
+		escrimDatabase.getEm().getTransaction().commit();
+
+	}
 
 	/**
 	 * on récupère l'objet métier qui a la class className et l'uid
@@ -38,11 +53,12 @@ public class GestionPersistance {
 		EscrimDatabase escrimDatabase = EscrimDatabase.getInstance();
 
 		try {
-			Query query = escrimDatabase.getEm().createNativeQuery(
+		/*	Query query = escrimDatabase.getEm().createNativeQuery(
 					"SELECT * FROM " + className + " WHERE uid = " + uid,
 					Class.forName("escrim.metiers." + className));
 			List result = query.getResultList();
-			Metier metier = (Metier) result.get(0);
+			Metier metier = (Metier) result.get(0); */
+			Metier metier = (Metier) escrimDatabase.getEm().find(Class.forName("escrim.metiers." + className), uid);
 			return metier;
 		} catch (ClassNotFoundException e) {
 			logger.warning(e.toString()

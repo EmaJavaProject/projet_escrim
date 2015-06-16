@@ -18,6 +18,7 @@ public class TypeColis implements Metier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
+	private String designation;
 	private float hauteur;
 	private float longueur;
 	private float largeur;
@@ -70,6 +71,14 @@ public class TypeColis implements Metier {
 
 	public void setPoidsMax(float poidsMax) {
 		this.poidsMax = poidsMax;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 }

@@ -15,6 +15,7 @@ public class Localisation implements Metier {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
 	private int numeroSector;
+	private String nomSector;
 
 	@OneToMany(mappedBy = "localisation")
 	private List<Colis> listeColis;
@@ -33,6 +34,14 @@ public class Localisation implements Metier {
 
 	public void setListeColis(List<Colis> listeColis) {
 		this.listeColis = listeColis;
+	}
+
+	public String getNomSector() {
+		return nomSector;
+	}
+
+	public void setNomSector(String nomSector) {
+		this.nomSector = nomSector;
 	}
 
 }

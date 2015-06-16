@@ -26,8 +26,7 @@ public class Colis implements Metier {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
 	private String affectation;
-	private String module;
-	private boolean optionnel;
+	private String optionnel; 
 	@ManyToOne
 	private Localisation localisation;
 	@ManyToOne
@@ -41,7 +40,7 @@ public class Colis implements Metier {
 	private float projection;
 	private String observation;
 	@ManyToMany
-	private List<ConfigurationHopital> listConfigDuColis;
+	private List<ConfigurationHopital> listeConfigDuColis;
 
 	public int getUid() {
 		return uid;
@@ -59,19 +58,11 @@ public class Colis implements Metier {
 		this.affectation = affectation;
 	}
 
-	public String getModule() {
-		return module;
-	}
-
-	public void setModule(String module) {
-		this.module = module;
-	}
-
-	public boolean isOptionnel() {
+	public String getOptionnel() {
 		return optionnel;
 	}
 
-	public void setOptionnel(boolean optionnel) {
+	public void setOptionnel(String optionnel) {
 		this.optionnel = optionnel;
 	}
 
@@ -147,13 +138,13 @@ public class Colis implements Metier {
 		this.observation = observation;
 	}
 
-	public List<ConfigurationHopital> getListConfigDuColis() {
-		return listConfigDuColis;
+	public List<ConfigurationHopital> getListeConfigDuColis() {
+		return listeConfigDuColis;
 	}
 
-	public void setListConfigDuColis(
-			List<ConfigurationHopital> listConfigDuColis) {
-		this.listConfigDuColis = listConfigDuColis;
+	public void setListeConfigDuColis(
+			List<ConfigurationHopital> listeConfigDuColis) {
+		this.listeConfigDuColis = listeConfigDuColis;
 	}
 
 }

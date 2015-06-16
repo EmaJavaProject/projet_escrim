@@ -3,7 +3,11 @@
  */
 package escrim.metiers;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Martin
@@ -14,7 +18,10 @@ public class Medicaments extends Materiel {
 	
 	private String principeActif;
 	private String dosage;
-	private String dlu;
+	
+@Temporal(TemporalType.DATE)
+	private java.util.Date dlu;
+
 	private String lot;
 	//Classe thérapeuthique
 	private String classeThera;
@@ -37,11 +44,11 @@ public class Medicaments extends Materiel {
 		this.dosage = dosage;
 	}
 
-	public String getDlu() {
+	public Date getDlu() {
 		return dlu;
 	}
 
-	public void setDlu(String dlu) {
+	public void setDlu(Date dlu) {
 		this.dlu = dlu;
 	}
 

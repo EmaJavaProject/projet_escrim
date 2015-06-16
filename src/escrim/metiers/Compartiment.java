@@ -20,7 +20,7 @@ public class Compartiment implements Metier {
 	private float volume;
 	private float poids;
 	@OneToMany
-	private List<Colis> ColisDansCompartiement;
+	private List<Colis> listeColisDansCompartiment;
 
 	public int getUid() {
 		return uid;
@@ -70,11 +70,11 @@ public class Compartiment implements Metier {
 		this.poids = poids;
 	}
 
-	public List<Colis> getColisDansCompartiement() {
-		return ColisDansCompartiement;
+	public List<Colis> getListeColisDansCompartiment() {
+		return listeColisDansCompartiment;
 	}
 
-	public void setColisDansCompartiement(List<Colis> colisDansCompartiement) {
-		ColisDansCompartiement = colisDansCompartiement;
+	public void setListeColisDansCompartiment(List<Colis> colisDansCompartiment) {
+		listeColisDansCompartiment = colisDansCompartiment;
 	}
 }
