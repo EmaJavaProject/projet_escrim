@@ -408,6 +408,7 @@ public class Main_gui {
 
 		btnAjouterStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				// On enable/disable les boutons nécessaire
 				btnValiderStockContenu.setEnabled(true);
 				btnAnnulerContenuStock.setEnabled(true);
@@ -415,6 +416,7 @@ public class Main_gui {
 				btnSupprimerStockContenu.setEnabled(false);
 				btnLocaliserStockContenu.setEnabled(false);
 				btnEditerStockContenu.setEnabled(false);
+
 				// on ajoute une ligne avec des champs nulls
 				modelTableContenu.insertRow(0, new Vector());
 				modelTableContenu.unlockFirstRow(true);
@@ -424,13 +426,17 @@ public class Main_gui {
 
 		btnValiderStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				// On créé notre objet materiel
 				Metier materiel = new Materiel();
+
 				// On désactive l'édition de cellule pour assurer la
 				// récupération des valeurs
+
 				if (tableContenu.getCellEditor() != null) {
 					tableContenu.getCellEditor().stopCellEditing();
 				}
+
 				// On récupère les données des cellules
 				if (modelTableContenu.testRowValue(tableContenu
 						.getSelectedRow())) {
@@ -439,19 +445,29 @@ public class Main_gui {
 					((Materiel) materiel).setObservations((String) tableContenu
 							.getModel().getValueAt(0, 2));
 					// Par défaut les cell sont des strings, donc on récup les
-					// int
-					// insérés
-					((Materiel) materiel).setQuantite(Integer
-							.parseInt((String) tableContenu.getModel()
-									.getValueAt(0, 3)));
+					// int insérés
+
+					try {
+						((Materiel) materiel).setQuantite(Integer
+								.parseInt((String) tableContenu.getModel()
+										.getValueAt(0, 3)));
+					} catch (NumberFormatException e) {
+						lblMessageDerreur
+								.setText("<html>La colonne Quantité doit être <br>un nombre écrit en chiffres</html>");
+						return;
+					}
+
 					// On rend persistant l'objet
 					GestionPersistance.addObjetToDB(materiel);
+
 					// On insère l'uid dans la dernière colonne invisible pour
-					// être
-					// capable d'appliquer des traitement
+					// être capable d'appliquer des traitement
+
 					tableContenu.getModel().setValueAt(
 							((Materiel) materiel).getId(), 0,
 							tableContenu.getColumnCount() - 1);
+
+					// On rétablit l'état des boutons
 					btnValiderStockContenu.setEnabled(false);
 					btnAnnulerContenuStock.setEnabled(false);
 					btnAjouterStock.setEnabled(true);
@@ -459,7 +475,8 @@ public class Main_gui {
 					btnLocaliserStockContenu.setEnabled(true);
 					btnEditerStockContenu.setEnabled(true);
 					modelTableContenu.lockAllRow(false);
-					tableContenu.getSelectedRow();
+
+					// On nettoie le message d'erreur
 					lblMessageDerreur.setText("");
 				} else {
 					lblMessageDerreur
