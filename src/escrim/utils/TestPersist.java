@@ -2,9 +2,10 @@ package escrim.utils;
 
 import java.util.List;
 
+import escrim.dao.GestionPersistance;
 import escrim.metiers.Localisation;
 import escrim.metiers.Materiel;
-import escrim.metiers.Medicaments;
+import escrim.metiers.Medicament;
 import escrim.metiers.Metier;
 
 public class TestPersist {
@@ -21,7 +22,7 @@ public class TestPersist {
 		Materiel mat = new Materiel();
 		mat.setObservations("test1");
 		
-		Medicaments medic = new Medicaments();
+		Medicament medic = new Medicament();
 		medic.setPrincipeActif("test 2");
 
 		GestionPersistance.addObjetToDB(local1);

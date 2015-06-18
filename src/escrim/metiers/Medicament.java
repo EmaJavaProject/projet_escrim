@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-public class Medicaments extends Materiel {
+public class Medicament extends Materiel {
 	
 	private String principeActif;
 	private String dosage;
@@ -76,12 +76,12 @@ public class Medicaments extends Materiel {
 		this.dotationU7 = dotationU7;
 	}
 
-	public Medicaments() {
+	public Medicament() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Medicaments(int id, String denomation, Colis colis,
+	public Medicament(int id, String denomation, Colis colis,
 			String observations, int quantite) {
 		super(id, denomation, colis, observations, quantite);
 		// TODO Auto-generated constructor stub

@@ -6,6 +6,13 @@ import java.util.Map;
 
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Classe de gestion du modèle de table
+ * 
+ * @author Martin
+ *
+ */
+
 public class EscrimModelTable extends DefaultTableModel {
 
 	private boolean lockCell;

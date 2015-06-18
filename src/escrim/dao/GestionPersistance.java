@@ -1,4 +1,4 @@
-package escrim.utils;
+package escrim.dao;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.persistence.Query;
 
 import escrim.metiers.Metier;
+import escrim.utils.EscrimDatabase;
 
 public class GestionPersistance {
 
