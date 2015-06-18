@@ -31,7 +31,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumnModel;
 
-import escrim.dao.GestionPersistance;
+import escrim.manager.GestionPersistance;
 import escrim.metiers.Materiel;
 import escrim.metiers.Metier;
 

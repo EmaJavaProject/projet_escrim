@@ -1,8 +1,7 @@
-package escrim.dao;
+package escrim.manager;
 
-import escrim.metiers.Compartiment;
 
-public class CompartimentManager extends Compartiment {
+public class CompartimentManager {
 
 	public void createCompartiment() {
 

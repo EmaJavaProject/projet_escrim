@@ -1,4 +1,4 @@
-package escrim.dao;
+package escrim.manager;
 
 public class LocalisationManager {
 

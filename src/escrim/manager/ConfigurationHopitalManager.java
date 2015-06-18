@@ -1,8 +1,7 @@
-package escrim.dao;
+package escrim.manager;
 
-import escrim.metiers.ConfigurationHopital;
 
-public class ConfigurationHopitalManager extends ConfigurationHopital {
+public class ConfigurationHopitalManager {
 
 	public void createConfigurationHopital() {
 

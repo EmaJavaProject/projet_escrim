@@ -1,4 +1,4 @@
-package escrim.dao;
+package escrim.manager;
 
 import java.util.List;
 import java.util.logging.Logger;

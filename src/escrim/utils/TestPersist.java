@@ -2,7 +2,7 @@ package escrim.utils;
 
 import java.util.List;
 
-import escrim.dao.GestionPersistance;
+import escrim.manager.GestionPersistance;
 import escrim.metiers.Localisation;
 import escrim.metiers.Materiel;
 import escrim.metiers.Medicament;
