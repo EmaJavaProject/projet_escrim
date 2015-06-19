@@ -1,6 +1,5 @@
 package ihm;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -56,6 +55,9 @@ public class Main_gui {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	/**
+	 * 
+	 */
 	private void initialize() {
 		frmEscrim = new JFrame();
 		frmEscrim.setTitle("ESCRIM");
@@ -82,13 +84,13 @@ public class Main_gui {
 		panelPrincipal.setLayout(null);
 		panelPrincipal.setName("panelPrincipale");
 		panelPrincipal.setOpaque(true);
-		
+
 		gestionairePage = new JLayeredPane();
 		gestionairePage.setBounds(0, 0, 1018, 707);
 		gestionairePage.add(panelPrincipal, new Integer(1));
 		gestionairePage.moveToBack(panelPrincipal);
 		gestionairePage.revalidate();
-		
+
 		mntmImporter = new JMenuItem("Importer...");
 		menuGestionTransport = new JMenu("Gestion Transport");
 		mntmExporter = new JMenuItem("Exporter...");
@@ -100,8 +102,6 @@ public class Main_gui {
 		menu = new JMenuBar();
 		menu.add(mnFichier);
 		menu.add(menuGestionTransport);
-
-		
 
 		tabPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		tabPrincipal.setName("");
