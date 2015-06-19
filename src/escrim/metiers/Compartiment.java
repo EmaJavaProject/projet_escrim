@@ -14,6 +14,7 @@ public class Compartiment implements Metier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
+	private String nom;
 	private float hauteur;
 	private float largeur;
 	private float longueur;
@@ -28,6 +29,14 @@ public class Compartiment implements Metier {
 
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public float getHauteur() {
@@ -58,8 +67,9 @@ public class Compartiment implements Metier {
 		return volume;
 	}
 
-	public void setVolume(float volume) {
-		this.volume = volume;
+	public void setVolume() {
+		this.volume = this.getLongueur() * this.getHauteur()
+				* this.getLargeur();
 	}
 
 	public float getPoids() {
@@ -77,4 +87,5 @@ public class Compartiment implements Metier {
 	public void setListeColisDansCompartiment(List<Colis> colisDansCompartiment) {
 		listeColisDansCompartiment = colisDansCompartiment;
 	}
+
 }

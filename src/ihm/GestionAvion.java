@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
@@ -17,8 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-public class GestionAvion extends EscrimModelTable {
+import escrim.manager.CompartimentManager;
 
+public class GestionAvion {
+
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static ActionListener CréationJpanelAvion(
 			JLayeredPane pPanelPrincipal) {
 
@@ -28,14 +31,14 @@ public class GestionAvion extends EscrimModelTable {
 					/**
 					 * J'ai été obligé de faire un double foreach car quand ont
 					 * repasse dans cette méthode composantPanelPrincipal
-					 * devient le pPanelPrincipal. je ne sais pas pk si vous avez
-					 * une autre solution pour limité le nombre de Tad gestion
-					 * des avions.ps le singleton ne marche pas ici. le double
-					 * foreach ici ne géne pas la performance car quand nous ont
-					 * revient dans cette méthod pPanelPrincipal ne comptient
-					 * qu'un seul composants. Si je ne suis pas assez clair
-					 * faite moi signe je vous expliquerai ou sinon rentré en
-					 * debug pour voir ce qu'il ce passe vraiment ps ce
+					 * devient le pPanelPrincipal. je ne sais pas pk si vous
+					 * avez une autre solution pour limité le nombre de Tad
+					 * gestion des avions.ps le singleton ne marche pas ici. le
+					 * double foreach ici ne géne pas la performance car quand
+					 * nous ont revient dans cette méthod pPanelPrincipal ne
+					 * comptient qu'un seul composants. Si je ne suis pas assez
+					 * clair faite moi signe je vous expliquerai ou sinon rentré
+					 * en debug pour voir ce qu'il ce passe vraiment ps ce
 					 * commentaire sera enlevé si le prof regarde notre code vu
 					 * les fautes d'orthographes.
 					 */
@@ -70,25 +73,24 @@ public class GestionAvion extends EscrimModelTable {
 
 				tableAvion.setName("Table Transports");
 
-				tableAvion.setModel(EscrimModelTable.BuildTableColumn(
-						tblModelAvion, tableAvion.getName()));
-				tableAvion.getColumn(tableAvion.getColumnName(0)).setMaxWidth(
-						20);
-				tableAvion.setBounds(12, 72, 899, 800);
-
-				boutonQuitter.setBounds(800, 13, 97, 25);
-				boutonQuitter.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						for (Component composant : pPanelPrincipal
-								.getComponents()) {
-							if (composant.getName().equals("Gestion Transport"))
-								pPanelPrincipal.remove(composant);
-						}
-						pPanelPrincipal.repaint();
-
-					}
-				});
+				/*
+				 * tableAvion.setModel(EscrimTableModel.BuildTableColumn(
+				 * tblModelAvion, tableAvion.getName()));
+				 * tableAvion.getColumn(tableAvion
+				 * .getColumnName(0)).setMaxWidth( 20); tableAvion.setBounds(12,
+				 * 72, 899, 800);
+				 * 
+				 * boutonQuitter.setBounds(800, 13, 97, 25);
+				 * boutonQuitter.addMouseListener(new MouseAdapter() {
+				 * 
+				 * @Override public void mouseClicked(MouseEvent arg0) { for
+				 * (Component composant : pPanelPrincipal .getComponents()) { if
+				 * (composant.getName().equals("Gestion Transport"))
+				 * pPanelPrincipal.remove(composant); }
+				 * pPanelPrincipal.repaint();
+				 * 
+				 * } });
+				 */
 
 				jpanelAvion.add(boutonQuitter);
 
@@ -128,7 +130,6 @@ public class GestionAvion extends EscrimModelTable {
 				JPanel jpanelCompartiment = new JPanel();
 				JTextField txtCompartiment = new JTextField();
 
-				DefaultTableModel tblModelCompartiment = new DefaultTableModel();
 				JTable tableCompartiment = new JTable(tblModelAvion);
 				JButton boutonAjouterCompartiment = new JButton("+");
 				JButton boutonQuitterCompartiment = new JButton("Quitter");
@@ -136,26 +137,28 @@ public class GestionAvion extends EscrimModelTable {
 				JButton boutonModifierCompartiment = new JButton("Editer");
 				JScrollPane scrollPanelCompartiment = new JScrollPane();
 
-				tableCompartiment.setName("Table Compartiments");
-				tableCompartiment.setModel(EscrimModelTable.BuildTableColumn(
-						tblModelCompartiment, tableCompartiment.getName()));
-				tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
-						.setMaxWidth(20);
-				tableCompartiment.setBounds(12, 72, 899, 800);
+				CompartimentManager.createCompartiment(1, 1, 1, 1, null);
+				CompartimentTableModel compartimentTableModel = new CompartimentTableModel();
+				tableCompartiment.setModel(compartimentTableModel);
+				scrollPanelCompartiment.setViewportView(tableCompartiment);
+
+				// tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
+				// .setMaxWidth(20);
+				// tableCompartiment.setBounds(12, 72, 899, 800);
 
 				boutonQuitterCompartiment.setBounds(800, 13, 97, 25);
-				boutonQuitterCompartiment.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						for (Component composant : pPanelPrincipal
-								.getComponents()) {
-							if (composant.getName().equals("Gestion Transport"))
-								pPanelPrincipal.remove(composant);
-						}
-						pPanelPrincipal.repaint();
-
-					}
-				});
+				/*
+				 * boutonQuitterCompartiment.addMouseListener(new MouseAdapter()
+				 * {
+				 * 
+				 * @Override public void mouseClicked(MouseEvent arg0) { for
+				 * (Component composant : pPanelPrincipal .getComponents()) { if
+				 * (composant.getName().equals("Gestion Transport"))
+				 * pPanelPrincipal.remove(composant); }
+				 * pPanelPrincipal.repaint();
+				 * 
+				 * } });
+				 */
 
 				jpanelCompartiment.add(boutonQuitterCompartiment);
 
@@ -178,7 +181,7 @@ public class GestionAvion extends EscrimModelTable {
 				jpanelCompartiment.add(txtCompartiment);
 
 				scrollPanelCompartiment.setName("Scroll Compartiments");
-				scrollPanelCompartiment.setViewportView(tableCompartiment);
+
 				scrollPanelCompartiment.setBounds(12, 56, 800, 486);
 				jpanelCompartiment.setBounds(0, 0, 1017, 706);
 				jpanelCompartiment.add(scrollPanelCompartiment);
@@ -190,11 +193,18 @@ public class GestionAvion extends EscrimModelTable {
 				pPanelPrincipal.add(tabPrincipal, new Integer(2));
 				pPanelPrincipal.revalidate();
 
+				boutonAjouterCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								System.out.println("yolo");
+								compartimentTableModel.addRow();
+							}
+						});
+
 			}
 		};
 
 		return action;
 
 	}
-
 };

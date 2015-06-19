@@ -7,9 +7,6 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,15 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumnModel;
-
-import escrim.manager.GestionPersistance;
-import escrim.metiers.Materiel;
-import escrim.metiers.Metier;
 
 public class Main_gui {
 	// private boolean clicked = true;
@@ -70,6 +62,9 @@ public class Main_gui {
 
 	/**
 	 * Initialize the contents of the frame.
+	 */
+	/**
+	 * 
 	 */
 	private void initialize() {
 		frmEscrim = new JFrame();
@@ -145,12 +140,12 @@ public class Main_gui {
 		scrollPaneContenu.setBounds(12, 56, 800, 486);
 		contenuStock.add(scrollPaneContenu);
 
-		EscrimModelTable modelTableContenu = new EscrimModelTable();
+		// EscrimTableModel modelTableContenu = new EscrimTableModel();
 		TableColumnModel allTableContenuColumn = new DefaultTableColumnModel();
-		tableContenu = new JTable(modelTableContenu);
-		tableContenu.setRowSelectionAllowed(true);
-		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableContenu.setCellSelectionEnabled(false);
+		// tableContenu = new JTable(modelTableContenu);
+		// tableContenu.setRowSelectionAllowed(true);
+		// tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// tableContenu.setCellSelectionEnabled(false);
 		scrollPaneContenu.setViewportView(tableContenu);
 
 		// JTableHeader headerContenu = new JTableHeader();
@@ -186,25 +181,21 @@ public class Main_gui {
 		JComboBox<String> comboSelectContenu = new JComboBox<String>();
 
 		// Mise a jour de la JTable en fonction de la combobox
-		comboSelectContenu.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (modelTableContenu.getColumnCount() != 0) {
-					modelTableContenu.setColumnCount(0);
-				}
-
-				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
-						modelTableContenu, comboSelectContenu.getSelectedItem()
-								.toString()));
-				tableContenu.getColumn(tableContenu.getColumnName(0))
-						.setMaxWidth(20);
-				// On cache la colonne de l'UID
-				tableContenu.getColumn(
-						tableContenu.getColumnName(tableContenu
-								.getColumnCount() - 1)).setMaxWidth(0);
-				;
-			}
-
-		});
+		/*
+		 * comboSelectContenu.addItemListener(new ItemListener() { public void
+		 * itemStateChanged(ItemEvent e) { if
+		 * (modelTableContenu.getColumnCount() != 0) {
+		 * modelTableContenu.setColumnCount(0); }
+		 * 
+		 * tableContenu.setModel(EscrimTableModel.BuildTableColumn(
+		 * modelTableContenu, comboSelectContenu.getSelectedItem()
+		 * .toString())); tableContenu.getColumn(tableContenu.getColumnName(0))
+		 * .setMaxWidth(20); // On cache la colonne de l'UID
+		 * tableContenu.getColumn( tableContenu.getColumnName(tableContenu
+		 * .getColumnCount() - 1)).setMaxWidth(0); ; }
+		 * 
+		 * });
+		 */
 		comboSelectContenu.setBounds(12, 13, 141, 25);
 		contenuStock.add(comboSelectContenu);
 		comboSelectContenu.addItem("Materiel");
@@ -318,8 +309,8 @@ public class Main_gui {
 		ongletAvion.add(lblTransport);
 
 		JPanel jpanelAvion = new JPanel();
-		EscrimModelTable tblModelAvion = new EscrimModelTable();
-		JTable tableAvion = new JTable(tblModelAvion);
+		// EscrimTableModel tblModelAvion = new EscrimTableModel();
+		// JTable tableAvion = new JTable(tblModelAvion);
 		JButton boutonAjouterAvion = new JButton("+");
 		JButton boutonSupprimerAvion = new JButton("-");
 		JButton boutonModifierAvion = new JButton("Editer");
@@ -418,72 +409,60 @@ public class Main_gui {
 				btnEditerStockContenu.setEnabled(false);
 
 				// on ajoute une ligne avec des champs nulls
-				modelTableContenu.insertRow(0, new Vector());
-				modelTableContenu.unlockFirstRow(true);
+				// modelTableContenu.insertRow(0, new Vector());
+				// modelTableContenu.unlockFirstRow(true);
 
 			}
 		});
 
-		btnValiderStockContenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				// On créé notre objet materiel
-				Metier materiel = new Materiel();
-
-				// On désactive l'édition de cellule pour assurer la
-				// récupération des valeurs
-
-				if (tableContenu.getCellEditor() != null) {
-					tableContenu.getCellEditor().stopCellEditing();
-				}
-
-				// On récupère les données des cellules
-				if (modelTableContenu.testRowValue(tableContenu
-						.getSelectedRow())) {
-					((Materiel) materiel).setDenomination((String) tableContenu
-							.getModel().getValueAt(0, 1));
-					((Materiel) materiel).setObservations((String) tableContenu
-							.getModel().getValueAt(0, 2));
-					// Par défaut les cell sont des strings, donc on récup les
-					// int insérés
-
-					try {
-						((Materiel) materiel).setQuantite(Integer
-								.parseInt((String) tableContenu.getModel()
-										.getValueAt(0, 3)));
-					} catch (NumberFormatException e) {
-						lblMessageDerreur
-								.setText("<html>La colonne Quantité doit être <br>un nombre écrit en chiffres</html>");
-						return;
-					}
-
-					// On rend persistant l'objet
-					GestionPersistance.addObjetToDB(materiel);
-
-					// On insère l'uid dans la dernière colonne invisible pour
-					// être capable d'appliquer des traitement
-
-					tableContenu.getModel().setValueAt(
-							((Materiel) materiel).getId(), 0,
-							tableContenu.getColumnCount() - 1);
-
-					// On rétablit l'état des boutons
-					btnValiderStockContenu.setEnabled(false);
-					btnAnnulerContenuStock.setEnabled(false);
-					btnAjouterStock.setEnabled(true);
-					btnSupprimerStockContenu.setEnabled(true);
-					btnLocaliserStockContenu.setEnabled(true);
-					btnEditerStockContenu.setEnabled(true);
-					modelTableContenu.lockAllRow(false);
-
-					// On nettoie le message d'erreur
-					lblMessageDerreur.setText("");
-				} else {
-					lblMessageDerreur
-							.setText("Erreur dans la saisie des données");
-				}
-			}
-		});
+		/*
+		 * btnValiderStockContenu.addActionListener(new ActionListener() {
+		 * public void actionPerformed(ActionEvent arg0) {
+		 * 
+		 * // On créé notre objet materiel Metier materiel = new Materiel();
+		 * 
+		 * // On désactive l'édition de cellule pour assurer la // récupération
+		 * des valeurs
+		 * 
+		 * if (tableContenu.getCellEditor() != null) {
+		 * tableContenu.getCellEditor().stopCellEditing(); }
+		 * 
+		 * // On récupère les données des cellules if
+		 * (modelTableContenu.testRowValue(tableContenu .getSelectedRow())) {
+		 * ((Materiel) materiel).setDenomination((String) tableContenu
+		 * .getModel().getValueAt(0, 1)); ((Materiel)
+		 * materiel).setObservations((String) tableContenu
+		 * .getModel().getValueAt(0, 2)); // Par défaut les cell sont des
+		 * strings, donc on récup les // int insérés
+		 * 
+		 * try { ((Materiel) materiel).setQuantite(Integer .parseInt((String)
+		 * tableContenu.getModel() .getValueAt(0, 3))); } catch
+		 * (NumberFormatException e) { lblMessageDerreur .setText(
+		 * "<html>La colonne Quantité doit être <br>un nombre écrit en chiffres</html>"
+		 * ); return; }
+		 * 
+		 * // On rend persistant l'objet
+		 * GestionPersistance.addObjetToDB(materiel);
+		 * 
+		 * // On insère l'uid dans la dernière colonne invisible pour // être
+		 * capable d'appliquer des traitement
+		 * 
+		 * tableContenu.getModel().setValueAt( ((Materiel) materiel).getId(), 0,
+		 * tableContenu.getColumnCount() - 1);
+		 * 
+		 * // On rétablit l'état des boutons
+		 * btnValiderStockContenu.setEnabled(false);
+		 * btnAnnulerContenuStock.setEnabled(false);
+		 * btnAjouterStock.setEnabled(true);
+		 * btnSupprimerStockContenu.setEnabled(true);
+		 * btnLocaliserStockContenu.setEnabled(true);
+		 * btnEditerStockContenu.setEnabled(true);
+		 * modelTableContenu.lockAllRow(false);
+		 * 
+		 * // On nettoie le message d'erreur lblMessageDerreur.setText(""); }
+		 * else { lblMessageDerreur
+		 * .setText("Erreur dans la saisie des données"); } } });
+		 */
 
 		// Icon buttonIcon = new ImageIcon("images/ICONE_AVION.jpg");
 		// Icon buttonIcon2 = new ImageIcon("images/ICONE_AVION_GRIS.jpg");
