@@ -119,26 +119,15 @@ public class Localisation {
 		JButton btnNewButton = new JButton("Editer localisation");
 		btnNewButton.setBounds(340, 279, 149, 25);
 		conteneurLocalisation.add(btnNewButton);
-
-		JComboBox<?> secteur = new JComboBox<Object>();
-		secteur.setBounds(63, 29, 160, 22);
-		conteneurLocalisation.add(secteur);
-
-		tableLocalConteneurTop = new JTable();
-		tableLocalConteneurTop.setBounds(12, 72, 899, 194);
-		conteneurLocalisation.add(tableLocalConteneurTop);
-
-		tableLocalConteneurBot = new JTable();
-		tableLocalConteneurBot.setBounds(12, 357, 899, 194);
-		conteneurLocalisation.add(tableLocalConteneurBot);
 		//LOCAL CONTENEUR
 		
-
+		JScrollPane scrollPaneConteneur = new JScrollPane();
+		scrollPaneConteneur.setBounds(12, 56, 800, 486);
 				btnNewButton = new JButton("Editer localisation");
 				btnNewButton.setBounds(340, 279, 149, 25);
 				conteneurLocalisation.add(btnNewButton);
 
-				secteur = new JComboBox<Object>();
+				JComboBox<?> 	secteur = new JComboBox<Object>();
 				secteur.setName("");
 				secteur.setBounds(75, 29, 160, 22);
 				conteneurLocalisation.add(secteur);

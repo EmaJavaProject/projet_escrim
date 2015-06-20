@@ -52,7 +52,7 @@ public class Stock {
 		contenuStock.add(scrollPaneContenu);
 
 		EscrimModelTable modelTableContenu = new EscrimModelTable();
-		TableColumnModel allTableContenuColumn = new DefaultTableColumnModel();
+		EscrimModelTable allTableContenuColumn = new EscrimModelTable();
 		tableContenu = new JTable(modelTableContenu);
 		scrollPaneContenu.setViewportView(tableContenu);
 
