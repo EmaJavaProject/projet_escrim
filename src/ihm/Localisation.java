@@ -6,11 +6,13 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class Localisation {
@@ -128,6 +130,44 @@ public class Localisation {
 		tableLocalConteneurBot = new JTable();
 		tableLocalConteneurBot.setBounds(12, 357, 899, 194);
 		conteneurLocalisation.add(tableLocalConteneurBot);
+		//LOCAL CONTENEUR
+		
+
+				btnNewButton = new JButton("Editer localisation");
+				btnNewButton.setBounds(340, 279, 149, 25);
+				conteneurLocalisation.add(btnNewButton);
+
+				secteur = new JComboBox<Object>();
+				secteur.setName("");
+				secteur.setBounds(75, 29, 160, 22);
+				conteneurLocalisation.add(secteur);
+
+				JScrollPane scrollPaneLocalConteneurTop = new JScrollPane();
+				scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
+				conteneurLocalisation.add(scrollPaneLocalConteneurTop);
+				
+				EscrimModelTable modelLocalConteneurTop = new EscrimModelTable();
+				tableLocalConteneurTop = new JTable(modelLocalConteneurTop);
+				tableLocalConteneurTop.setRowSelectionAllowed(true);
+				tableLocalConteneurTop.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tableLocalConteneurTop.setCellSelectionEnabled(false);
+				scrollPaneConteneur.setViewportView(tableLocalConteneurTop);
+				
+				
+				JScrollPane scrollPaneLocalConteneurBot = new JScrollPane();
+				scrollPaneLocalConteneurBot.setBounds(12, 357, 899, 194);
+				conteneurLocalisation.add(scrollPaneLocalConteneurBot);
+				
+				JLabel lblSecteur = new JLabel("Secteur :");
+				lblSecteur.setBounds(12, 32, 56, 16);
+				conteneurLocalisation.add(lblSecteur);
+				
+				EscrimModelTable modelLocalConteneurBot = new EscrimModelTable();
+				tableLocalConteneurBot = new JTable(modelLocalConteneurBot);
+				tableLocalConteneurBot.setRowSelectionAllowed(true);
+				tableLocalConteneurBot.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tableLocalConteneurBot.setCellSelectionEnabled(false);
+				scrollPaneConteneur.setViewportView(tableLocalConteneurBot);
 
 	}
 }

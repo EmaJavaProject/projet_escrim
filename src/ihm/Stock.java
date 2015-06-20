@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -155,6 +156,50 @@ public class Stock {
 
 			}
 		});
+		//STOCK CONTENEUR 
+		JScrollPane scrollPaneConteneur = new JScrollPane();
+		scrollPaneConteneur.setBounds(12, 56, 800, 486);
+		conteneurStock.add(scrollPaneConteneur);
+		
+		EscrimModelTable modelTableConteneur = new EscrimModelTable();
+		tableConteneur = new JTable(modelTableConteneur);
+		tableConteneur.setRowSelectionAllowed(true);
+		tableConteneur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableConteneur.setCellSelectionEnabled(false);
+		scrollPaneConteneur.setViewportView(tableConteneur);
+		
+		JButton btnAjouterStockConteneur = new JButton("+");
+
+		btnAjouterStockConteneur.setBounds(12, 589, 97, 25);
+		conteneurStock.add(btnAjouterStockConteneur);
+		
+		JButton btnSupprimerStockConteneur = new JButton("-");
+		btnSupprimerStockConteneur.setBounds(121, 589, 97, 25);
+		conteneurStock.add(btnSupprimerStockConteneur);
+		
+		JButton btnValiderStockConteneur = new JButton("Valider");
+
+		btnValiderStockConteneur.setBounds(446, 590, 89, 23);
+		conteneurStock.add(btnValiderStockConteneur);
+
+		JButton btnAnnulerConteneurStock = new JButton("Annuler");
+		btnAnnulerConteneurStock.setBounds(545, 590, 89, 23);
+		conteneurStock.add(btnAnnulerConteneurStock);
+
+
+		JButton btnEditerStockConteneur = new JButton("Editer");
+		btnEditerStockConteneur.setBounds(230, 589, 97, 25);
+		conteneurStock.add(btnEditerStockConteneur);
+
+		JButton btnLocaliserStockConteneur = new JButton("Localiser");
+		btnLocaliserStockConteneur.setBounds(339, 589, 97, 25);
+		conteneurStock.add(btnLocaliserStockConteneur);
+
+		btnValiderStockConteneur.setEnabled(false);
+		btnAnnulerConteneurStock.setEnabled(false);
+		
+		
+		
 
 		btnValiderStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
