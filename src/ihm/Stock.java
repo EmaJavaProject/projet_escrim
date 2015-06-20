@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import escrim.dao.GestionPersistance;
+import escrim.manager.GestionPersistance;
 import escrim.metiers.Materiel;
 import escrim.metiers.Metier;
 
@@ -46,7 +46,7 @@ public class Stock {
 		scrollPaneContenu.setBounds(12, 56, 800, 486);
 		contenuStock.add(scrollPaneContenu);
 
-		DefaultTableModel modelTableContenu = new DefaultTableModel();
+		EscrimModelTable modelTableContenu = new EscrimModelTable();
 		TableColumnModel allTableContenuColumn = new DefaultTableColumnModel();
 		tableContenu = new JTable(modelTableContenu);
 		scrollPaneContenu.setViewportView(tableContenu);
