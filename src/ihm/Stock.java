@@ -93,6 +93,29 @@ public class Stock {
 			}
 
 		});
+		JButton btnValiderStockContenu = new JButton("Valider");
+
+		btnValiderStockContenu.setBounds(446, 590, 89, 23);
+		contenuStock.add(btnValiderStockContenu);
+
+		JButton btnAnnulerContenuStock = new JButton("Annuler");
+		btnAnnulerContenuStock.setBounds(545, 590, 89, 23);
+		contenuStock.add(btnAnnulerContenuStock);
+
+		JButton btnSupprimerStockContenu = new JButton("-");
+		btnSupprimerStockContenu.setBounds(121, 589, 97, 25);
+		contenuStock.add(btnSupprimerStockContenu);
+
+		JButton btnEditerStockContenu = new JButton("Editer");
+		btnEditerStockContenu.setBounds(230, 589, 97, 25);
+		contenuStock.add(btnEditerStockContenu);
+
+		JButton btnLocaliserStockContenu = new JButton("Localiser");
+		btnLocaliserStockContenu.setBounds(339, 589, 97, 25);
+		contenuStock.add(btnLocaliserStockContenu);
+
+		btnValiderStockContenu.setEnabled(false);
+		btnAnnulerContenuStock.setEnabled(false);
 		comboSelectContenu.setBounds(12, 13, 141, 25);
 		contenuStock.add(comboSelectContenu);
 		comboSelectContenu.addItem("Materiel");
