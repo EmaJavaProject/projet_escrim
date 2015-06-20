@@ -84,7 +84,7 @@ public class Stock {
 					modelTableContenu.setColumnCount(0);
 				}
 
-				tableContenu.setModel(IhmBuilder.BuildTableColumn(
+				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
 						modelTableContenu, comboSelectContenu.getSelectedItem()
 								.toString()));
 				tableContenu.getColumn(tableContenu.getColumnName(0))
