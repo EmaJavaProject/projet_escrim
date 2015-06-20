@@ -1,5 +1,6 @@
 package ihm;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,10 +13,12 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -32,6 +35,7 @@ public class Stock {
 	}
 	
 	private void initPage(JTabbedPane tabPrincipal){
+		
 		
 		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
 		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -75,6 +79,13 @@ public class Stock {
 		btnLocaliserStock.setBounds(339, 589, 97, 25);
 		contenuStock.add(btnLocaliserStock);
 
+		JLabel lblMessageDerreur = new JLabel("");
+		lblMessageDerreur.setVerticalAlignment(SwingConstants.TOP);
+		lblMessageDerreur.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMessageDerreur.setEnabled(true);
+		lblMessageDerreur.setForeground(Color.RED);
+		lblMessageDerreur.setBounds(644, 594, 265, 50);
+		
 		JComboBox<String> comboSelectContenu = new JComboBox<String>();
 
 		// Mise a jour de la JTable en fonction de la combobox

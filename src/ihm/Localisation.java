@@ -24,7 +24,7 @@ public class Localisation {
 	private JTabbedPane onglet;
 	private JScrollPane scrollPaneContenu;
 	private JPanel contenuLocalisation;
-	private DefaultTableModel modelTableContenu;
+	private EscrimModelTable modelTableContenu;
 	
 	public Localisation(JTabbedPane tabPrincipal) {
 		
@@ -49,7 +49,7 @@ public class Localisation {
 		scrollPaneContenu.setBounds(52, 73, 706, 212);
 	
 		
-		modelTableContenu = new DefaultTableModel();
+		modelTableContenu = new EscrimModelTable();
 		contenuLocalisation.add(scrollPaneContenu);
 		
 		tableLocalContenuTop = new JTable(modelTableContenu);
@@ -62,7 +62,7 @@ public class Localisation {
 		filtreRecherche.setColumns(10);
 		
 		
-		DefaultTableModel modelTableContenuLocalBot = new DefaultTableModel();
+		EscrimModelTable modelTableContenuLocalBot = new EscrimModelTable();
 		tableLocalContenuBot = new JTable(modelTableContenuLocalBot);
 		tableLocalContenuBot.setName("Caisse");
 		tableLocalContenuBot.setModel(EscrimModelTable.BuildTableColumn(

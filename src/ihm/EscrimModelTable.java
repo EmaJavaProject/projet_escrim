@@ -36,6 +36,9 @@ public class EscrimModelTable extends DefaultTableModel {
 			"Désignation", "Nature Colis", "Affectataire", "Optionnel",
 			"Secteur", "Dimension", "Volume", "Poids", "Valeur", "Iata",
 			"Projection", "Observation", "uid" };
+	
+	public static String[] caisse = { "", "Numéro Caisse",
+		"Secteur", "Dimension", "Observation"};
 
 	public static String[] AvionColumnName = { "", "Nom", "Compartiments",
 			"uid" };
@@ -50,6 +53,7 @@ public class EscrimModelTable extends DefaultTableModel {
 		result.put("Materiel", materielColName);
 		result.put("Médicaments", medicColName);
 		result.put("Colis", colisColumnName);
+		result.put("Caisse", caisse);
 		result.put("Table Transports", AvionColumnName);
 		result.put("Table Compartiments", CompartimentColumnName);
 		return Collections.unmodifiableMap(result);
