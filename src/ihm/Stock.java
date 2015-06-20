@@ -29,7 +29,7 @@ import escrim.metiers.Materiel;
 import escrim.metiers.Metier;
 
 public class Stock {
-	
+	private JTable tableConteneur;
 	private JTable tableContenu;
 	public Stock(JTabbedPane tabPrincipal) {
 		this.initPage(tabPrincipal);
@@ -157,6 +157,7 @@ public class Stock {
 			}
 		});
 		//STOCK CONTENEUR 
+		
 		JScrollPane scrollPaneConteneur = new JScrollPane();
 		scrollPaneConteneur.setBounds(12, 56, 800, 486);
 		conteneurStock.add(scrollPaneConteneur);

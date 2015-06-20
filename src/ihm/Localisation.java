@@ -28,6 +28,7 @@ public class Localisation {
 	private JPanel contenuLocalisation;
 	private EscrimModelTable modelTableContenu;
 	
+	
 	public Localisation(JTabbedPane tabPrincipal) {
 		
 		this.initPage(tabPrincipal);
