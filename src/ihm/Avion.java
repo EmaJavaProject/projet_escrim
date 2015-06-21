@@ -16,116 +16,143 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Avion {
+	
+	private JPanel ongletAvion;
+	private JPanel donneeAvion;
+	private JLabel lblDonnee1;
+	private JLabel lblValeur1;
+	private JLabel lblDonnee2;
+	private JLabel lblValeur2;
+	private JLabel lblTransport;
+	private JComboBox comboBoxTransport;
+	private JLabel lblConfiguration;
+	private JComboBox comboBoxConfiguration;
+	private JButton btnValidationChargement;
+	private JPanel listeCaisse;
+	private JPanel caisseObligatoire;
+	private JScrollPane scrollPaneEditChargement;
+	private JTable tableCaisseObligatoire;
+	private JPanel caisseOptionnel;
+	private JTable tableCaisseOptionnelle;
+	private JPanel validation;
+	private JButton btnValidationCaisse;
+	private JLabel labelValidModif;
+	private JLabel lblNewLabel_1;
+	private JLabel lblEnCompte;
+	private JButton btnExporter;
+	private JPanel panelPlanChargement;
+	
 	public Avion(JTabbedPane tabPrincipal) {
 		this.InitPage(tabPrincipal);
 	}
 	
 	private void InitPage(JTabbedPane tabPrincipal){
-
-				JPanel ongletAvion = new JPanel();
-				tabPrincipal.addTab("Avion", null, ongletAvion, null);
-				ongletAvion.setLayout(null);
-
-				// Il affiche obligatoirement un onglet avec le JPanel, voir pour
-				// l'enlever ?
-				JPanel donneeAvion = new JPanel();
-				donneeAvion.setBounds(10, 11, 177, 143);
-				ongletAvion.add(donneeAvion);
-				donneeAvion.setLayout(new GridLayout(0, 2, 0, 0));
-
-				JLabel lblDonnee1 = new JLabel("Donn\u00E9e 1 :");
+	
+				lblDonnee1 = new JLabel("Donn\u00E9e 1 :");
 				lblDonnee1.setHorizontalAlignment(SwingConstants.CENTER);
-				donneeAvion.add(lblDonnee1);
-
-				JLabel lblValeur1 = new JLabel("Valeur");
-				donneeAvion.add(lblValeur1);
-
-				JLabel lblDonne2 = new JLabel("Donn\u00E9e 2 :");
-				lblDonne2.setHorizontalAlignment(SwingConstants.CENTER);
-				donneeAvion.add(lblDonne2);
-
-				JLabel lblValeur2 = new JLabel("Valeur");
-				donneeAvion.add(lblValeur2);
-
-				JLabel lblTransport = new JLabel("Transport :");
+				
+				lblValeur1 = new JLabel("Valeur");
+				
+				lblDonnee2 = new JLabel("Donn\u00E9e 2 :");
+				lblDonnee2.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				lblValeur2 = new JLabel("Valeur");
+				
+				lblTransport = new JLabel("Transport :");
 				lblTransport.setBounds(219, 12, 70, 21);
-				ongletAvion.add(lblTransport);
 		    		
-				JComboBox comboBoxTransport = new JComboBox();
+				comboBoxTransport = new JComboBox();
 				comboBoxTransport.setBounds(299, 12, 124, 21);
-				ongletAvion.add(comboBoxTransport);
 
-				JLabel lblConfiguration = new JLabel("configuration");
+				lblConfiguration = new JLabel("configuration");
 				lblConfiguration.setBounds(451, 12, 70, 21);
-				ongletAvion.add(lblConfiguration);
 
-				JComboBox comboBoxConfiguration = new JComboBox();
+				comboBoxConfiguration = new JComboBox();
 				comboBoxConfiguration.setBounds(531, 12, 124, 21);
-				ongletAvion.add(comboBoxConfiguration);
-
-				JButton btnValidationChargement = new JButton("Valider");
+				
+				btnValidationChargement = new JButton("Valider");
 				btnValidationChargement.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
 				btnValidationChargement.setBounds(688, 11, 89, 23);
-				ongletAvion.add(btnValidationChargement);
-
-				JScrollPane scrollPaneEditChargement = new JScrollPane();
+			
+				scrollPaneEditChargement = new JScrollPane();
 				scrollPaneEditChargement.setBounds(10, 178, 177, 484);
-				ongletAvion.add(scrollPaneEditChargement);
-
-				JPanel listeCaisse = new JPanel();
 				scrollPaneEditChargement.setViewportView(listeCaisse);
-				listeCaisse.setLayout(new GridLayout(0, 1, 0, 0));
-
-				JPanel caisseObligatoire = new JPanel();
-				listeCaisse.add(caisseObligatoire);
-				caisseObligatoire.setLayout(null);
-
-				JTable tableCaisseObligatoire = new JTable();
+				
+				tableCaisseObligatoire = new JTable();
 				tableCaisseObligatoire.setBounds(0, 155, 175, -152);
+				
+				caisseObligatoire = new JPanel();
+				caisseObligatoire.setLayout(null);
 				caisseObligatoire.add(tableCaisseObligatoire);
 
-				JPanel caisseOptionnel = new JPanel();
-				listeCaisse.add(caisseOptionnel);
-				caisseOptionnel.setLayout(null);
-
-				JTable tableCaisseOptionnelle = new JTable();
+				tableCaisseOptionnelle = new JTable();
 				tableCaisseOptionnelle.setBounds(87, 5, 0, 0);
+				
+				caisseOptionnel = new JPanel();
+				caisseOptionnel.setLayout(null);
 				caisseOptionnel.add(tableCaisseOptionnelle);
+				
 
-				JPanel validation = new JPanel();
-				listeCaisse.add(validation);
-				validation.setLayout(null);
-
-				JButton btnValidationCaisse = new JButton("Enregistrer");
+				btnValidationCaisse = new JButton("Enregistrer");
 				btnValidationCaisse.setBounds(43, 76, 89, 23);
-				validation.add(btnValidationCaisse);
 
-				JLabel labelValidModif = new JLabel("Toutes modifications non");
+				labelValidModif = new JLabel("Toutes modifications non");
 				labelValidModif.setHorizontalAlignment(SwingConstants.CENTER);
 				labelValidModif.setBounds(10, 11, 155, 23);
-				validation.add(labelValidModif);
-
-				JLabel lblNewLabel_1 = new JLabel(" valid\u00E9es ne seront pas prises");
+				
+				lblNewLabel_1 = new JLabel(" valid\u00E9es ne seront pas prises");
 				lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel_1.setBounds(10, 34, 155, 14);
-				validation.add(lblNewLabel_1);
-
-				JLabel lblEnCompte = new JLabel(" en compte");
+				
+				lblEnCompte = new JLabel(" en compte");
 				lblEnCompte.setHorizontalAlignment(SwingConstants.CENTER);
 				lblEnCompte.setBounds(10, 51, 155, 14);
-				validation.add(lblEnCompte);
-
-				JButton btnExporter = new JButton("Export");
+				
+				btnExporter = new JButton("Export");
 				btnExporter.setBounds(570, 602, 120, 31);
-				ongletAvion.add(btnExporter);
-
-				JPanel panelPlanChargement = new JPanel();
+				
+				panelPlanChargement = new JPanel();
 				panelPlanChargement.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 				panelPlanChargement.setBounds(219, 58, 533, 484);
+				
+				validation = new JPanel();
+				validation.setLayout(null);
+				validation.add(btnValidationCaisse);
+				validation.add(labelValidModif);
+				validation.add(lblNewLabel_1);
+				validation.add(lblNewLabel_1);
+				validation.add(lblEnCompte);
+				
+				listeCaisse = new JPanel();
+				listeCaisse.setLayout(new GridLayout(0, 1, 0, 0));
+				listeCaisse.add(caisseObligatoire);
+				listeCaisse.add(validation);
+				listeCaisse.add(caisseOptionnel);
+				
+				donneeAvion = new JPanel();
+				donneeAvion.setBounds(10, 11, 177, 143);
+				donneeAvion.setLayout(new GridLayout(0, 2, 0, 0));
+				donneeAvion.add(lblDonnee1);
+				donneeAvion.add(lblValeur1);
+				donneeAvion.add(lblDonnee2);
+				donneeAvion.add(lblValeur2);
+				
+				ongletAvion = new JPanel();
+				ongletAvion.setLayout(null);
+				ongletAvion.add(comboBoxTransport);
+				ongletAvion.add(lblConfiguration);
+				ongletAvion.add(btnValidationChargement);
 				ongletAvion.add(panelPlanChargement);
+				ongletAvion.add(btnExporter);
+				ongletAvion.add(scrollPaneEditChargement);
+				ongletAvion.add(comboBoxConfiguration);
+				ongletAvion.add(lblTransport);
+				ongletAvion.add(donneeAvion);	
+			
+				tabPrincipal.addTab("Avion", null, ongletAvion, null);
 	}
 
 }

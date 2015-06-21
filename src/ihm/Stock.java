@@ -20,189 +20,177 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import escrim.manager.GestionPersistance;
 import escrim.metiers.Materiel;
 import escrim.metiers.Metier;
 
 public class Stock {
+
 	private JTable tableConteneur;
 	private JTable tableContenu;
+	private JTabbedPane ongletStock;
+	private JPanel contenuStock;
+	private JScrollPane scrollPaneContenu;
+	private EscrimModelTable modelTableContenu;
+	private JButton btnAjouterStock;
+	private JButton btnSupprimerStock;
+	private JButton btnEditerStock;
+	private JButton btnLocaliserStock;
+	private JLabel lblMessageDerreur;
+	private JButton btnValiderStockContenu;
+	private JButton btnAnnulerContenuStock;
+	private JButton btnSupprimerStockContenu;
+	private JButton btnEditerStockContenu;
+	private JButton btnLocaliserStockContenu;
+	private JComboBox<String> comboSelectContenu;
+	private JPanel conteneurStock;
+	private JComboBox<?> comboSelectConteneur;
+	private JScrollPane scrollPaneConteneur;
+	private EscrimModelTable modelTableConteneur;
+	private JButton btnAjouterStockConteneur;
+	private JButton btnSupprimerStockConteneur;
+	private JButton btnValiderStockConteneur;
+	private JButton btnAnnulerConteneurStock;
+	private JButton btnEditerStockConteneur;
+	private JButton btnLocaliserStockConteneur;
+
 	public Stock(JTabbedPane tabPrincipal) {
 		this.initPage(tabPrincipal);
 	}
+
+	private void initPage(JTabbedPane tabPrincipal) {
+
 	
-	private void initPage(JTabbedPane tabPrincipal){
-		
-		
-		JTabbedPane ongletStock = new JTabbedPane(JTabbedPane.TOP);
-		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
-		ongletStock.setAlignmentX(Component.LEFT_ALIGNMENT);
-		tabPrincipal.addTab("Stock", null, ongletStock, null);
-		
-		JPanel contenuStock = new JPanel();
-		contenuStock.setMinimumSize(new Dimension(20, 20));
-		ongletStock.addTab("Contenu", null, contenuStock, null);
-		contenuStock.setLayout(null);
-		JScrollPane scrollPaneContenu = new JScrollPane();
-		scrollPaneContenu.setBounds(12, 56, 800, 486);
-		contenuStock.add(scrollPaneContenu);
-
-		EscrimModelTable modelTableContenu = new EscrimModelTable();
-		EscrimModelTable allTableContenuColumn = new EscrimModelTable();
+		modelTableContenu = new EscrimModelTable();
 		tableContenu = new JTable(modelTableContenu);
-		scrollPaneContenu.setViewportView(tableContenu);
+		tableContenu.setRowSelectionAllowed(true);
+		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableContenu.setCellSelectionEnabled(false);
 
-		// JTableHeader headerContenu = new JTableHeader();
-
-		JButton btnAjouterStock = new JButton("+");
-		btnAjouterStock.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				modelTableContenu.addRow(new Object[] { "", "", "", "" });
-			}
-		});
+		btnAjouterStock = new JButton("+");
+		btnAjouterStock.addMouseListener(mouseAdapterAjouterStock());
 		btnAjouterStock.setBounds(12, 589, 97, 25);
-		contenuStock.add(btnAjouterStock);
+		btnAjouterStock.addActionListener(actionAjouterStock());
 
-		JButton btnSupprimerStock = new JButton("-");
+		btnSupprimerStock = new JButton("-");
 		btnSupprimerStock.setBounds(121, 589, 97, 25);
-		contenuStock.add(btnSupprimerStock);
 
-		JButton btnEditerStock = new JButton("Editer");
+		btnEditerStock = new JButton("Editer");
 		btnEditerStock.setBounds(230, 589, 97, 25);
-		contenuStock.add(btnEditerStock);
-
-		JButton btnLocaliserStock = new JButton("Localiser");
+		
+		btnLocaliserStock = new JButton("Localiser");
 		btnLocaliserStock.setBounds(339, 589, 97, 25);
-		contenuStock.add(btnLocaliserStock);
-
-		JLabel lblMessageDerreur = new JLabel("");
+		
+		lblMessageDerreur = new JLabel("");
 		lblMessageDerreur.setVerticalAlignment(SwingConstants.TOP);
 		lblMessageDerreur.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMessageDerreur.setEnabled(true);
 		lblMessageDerreur.setForeground(Color.RED);
 		lblMessageDerreur.setBounds(644, 594, 265, 50);
+
+
 		
-		JComboBox<String> comboSelectContenu = new JComboBox<String>();
-
-		// Mise a jour de la JTable en fonction de la combobox
-		comboSelectContenu.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (modelTableContenu.getColumnCount() != 0) {
-					modelTableContenu.setColumnCount(0);
-				}
-
-				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
-						modelTableContenu, comboSelectContenu.getSelectedItem()
-								.toString()));
-				tableContenu.getColumn(tableContenu.getColumnName(0))
-						.setMaxWidth(20);
-				;
-			}
-
-		});
-		JButton btnValiderStockContenu = new JButton("Valider");
-
+		btnValiderStockContenu = new JButton("Valider");
 		btnValiderStockContenu.setBounds(446, 590, 89, 23);
-		contenuStock.add(btnValiderStockContenu);
-
-		JButton btnAnnulerContenuStock = new JButton("Annuler");
+		btnValiderStockContenu.addActionListener(actionValiderStockContenu());
+		
+		btnAnnulerContenuStock = new JButton("Annuler");
 		btnAnnulerContenuStock.setBounds(545, 590, 89, 23);
-		contenuStock.add(btnAnnulerContenuStock);
-
-		JButton btnSupprimerStockContenu = new JButton("-");
+		
+		btnSupprimerStockContenu = new JButton("-");
 		btnSupprimerStockContenu.setBounds(121, 589, 97, 25);
-		contenuStock.add(btnSupprimerStockContenu);
-
-		JButton btnEditerStockContenu = new JButton("Editer");
+		
+		btnEditerStockContenu = new JButton("Editer");
 		btnEditerStockContenu.setBounds(230, 589, 97, 25);
-		contenuStock.add(btnEditerStockContenu);
-
-		JButton btnLocaliserStockContenu = new JButton("Localiser");
+		
+		btnLocaliserStockContenu = new JButton("Localiser");
 		btnLocaliserStockContenu.setBounds(339, 589, 97, 25);
-		contenuStock.add(btnLocaliserStockContenu);
-
+	
 		btnValiderStockContenu.setEnabled(false);
 		btnAnnulerContenuStock.setEnabled(false);
+		
+		comboSelectContenu = new JComboBox<String>();
 		comboSelectContenu.setBounds(12, 13, 141, 25);
-		contenuStock.add(comboSelectContenu);
+		comboSelectContenu.addItemListener(listenerComboContenue());
 		comboSelectContenu.addItem("Materiel");
 		comboSelectContenu.addItem("Médicaments");
-
-		JComboBox<?> comboBox = new JComboBox<Object>();
-		comboBox.setBounds(12, 13, 141, 25);
-		contenuStock.add(comboBox);
-
-		JPanel conteneurStock = new JPanel();
-		ongletStock.addTab("Conteneur", null, conteneurStock, null);
-		btnAjouterStock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				// On enable/disable les boutons nécessaire
-				btnValiderStockContenu.setEnabled(true);
-				btnAnnulerContenuStock.setEnabled(true);
-				btnAjouterStock.setEnabled(false);
-				btnSupprimerStockContenu.setEnabled(false);
-				btnLocaliserStockContenu.setEnabled(false);
-				btnEditerStockContenu.setEnabled(false);
-
-				// on ajoute une ligne avec des champs nulls
-				modelTableContenu.insertRow(0, new Vector());
-				modelTableContenu.unlockFirstRow(true);
-
-			}
-		});
-		//STOCK CONTENEUR 
+	
+		comboSelectConteneur = new JComboBox<String>();
+		comboSelectConteneur.setBounds(12, 13, 141, 25);
 		
-		JScrollPane scrollPaneConteneur = new JScrollPane();
-		scrollPaneConteneur.setBounds(12, 56, 800, 486);
-		conteneurStock.add(scrollPaneConteneur);
-		
-		EscrimModelTable modelTableConteneur = new EscrimModelTable();
+		modelTableConteneur = new EscrimModelTable();
 		tableConteneur = new JTable(modelTableConteneur);
 		tableConteneur.setRowSelectionAllowed(true);
 		tableConteneur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableConteneur.setCellSelectionEnabled(false);
-		scrollPaneConteneur.setViewportView(tableConteneur);
 		
-		JButton btnAjouterStockConteneur = new JButton("+");
-
+		btnAjouterStockConteneur = new JButton("+");
 		btnAjouterStockConteneur.setBounds(12, 589, 97, 25);
-		conteneurStock.add(btnAjouterStockConteneur);
-		
-		JButton btnSupprimerStockConteneur = new JButton("-");
+
+		btnSupprimerStockConteneur = new JButton("-");
 		btnSupprimerStockConteneur.setBounds(121, 589, 97, 25);
-		conteneurStock.add(btnSupprimerStockConteneur);
-		
-		JButton btnValiderStockConteneur = new JButton("Valider");
 
-		btnValiderStockConteneur.setBounds(446, 590, 89, 23);
-		conteneurStock.add(btnValiderStockConteneur);
-
-		JButton btnAnnulerConteneurStock = new JButton("Annuler");
+		btnAnnulerConteneurStock = new JButton("Annuler");
 		btnAnnulerConteneurStock.setBounds(545, 590, 89, 23);
-		conteneurStock.add(btnAnnulerConteneurStock);
-
-
-		JButton btnEditerStockConteneur = new JButton("Editer");
-		btnEditerStockConteneur.setBounds(230, 589, 97, 25);
-		conteneurStock.add(btnEditerStockConteneur);
-
-		JButton btnLocaliserStockConteneur = new JButton("Localiser");
-		btnLocaliserStockConteneur.setBounds(339, 589, 97, 25);
-		conteneurStock.add(btnLocaliserStockConteneur);
-
-		btnValiderStockConteneur.setEnabled(false);
 		btnAnnulerConteneurStock.setEnabled(false);
 		
+		btnEditerStockConteneur = new JButton("Editer");
+		btnEditerStockConteneur.setBounds(230, 589, 97, 25);
 		
+		btnLocaliserStockConteneur = new JButton("Localiser");
+		btnLocaliserStockConteneur.setBounds(339, 589, 97, 25);
 		
+		btnValiderStockConteneur = new JButton("Valider");
+		btnValiderStockConteneur.setEnabled(false);
+		btnValiderStockConteneur.setBounds(446, 590, 89, 23);
+		
+		scrollPaneConteneur = new JScrollPane();
+		scrollPaneConteneur.setBounds(12, 56, 800, 486);
+		scrollPaneConteneur.setViewportView(tableConteneur);
+		
+		scrollPaneContenu = new JScrollPane();
+		scrollPaneContenu.setBounds(12, 56, 800, 486);
+		scrollPaneContenu.setViewportView(tableContenu);
+		
+		contenuStock = new JPanel();
+		contenuStock.setMinimumSize(new Dimension(20, 20));
+		contenuStock.setLayout(null);
+		contenuStock.add(comboSelectContenu);
+		contenuStock.add(btnLocaliserStockContenu);
+		contenuStock.add(btnEditerStockContenu);
+		contenuStock.add(btnAnnulerContenuStock);
+		contenuStock.add(btnSupprimerStockContenu);
+		contenuStock.add(btnValiderStockContenu);
+		contenuStock.add(btnLocaliserStock);
+		contenuStock.add(btnEditerStock);
+		contenuStock.add(scrollPaneContenu);
+		contenuStock.add(btnSupprimerStock);
+		contenuStock.add(btnAjouterStock);
+		
+		conteneurStock = new JPanel();
+		conteneurStock.setMinimumSize(new Dimension(20, 20));
+		conteneurStock.setLayout(null);
+		conteneurStock.add(btnAnnulerConteneurStock);
+		conteneurStock.add(scrollPaneConteneur);
+		conteneurStock.add(btnEditerStockConteneur);
+		conteneurStock.add(btnLocaliserStockConteneur);
+		conteneurStock.add(btnValiderStockConteneur);
+		conteneurStock.add(btnSupprimerStockConteneur);
+		conteneurStock.add(btnAjouterStockConteneur);
+		conteneurStock.add(comboSelectConteneur);
+		
+		ongletStock = new JTabbedPane(JTabbedPane.TOP);
+		ongletStock.setAlignmentY(Component.TOP_ALIGNMENT);
+		ongletStock.setAlignmentX(Component.LEFT_ALIGNMENT);
+		ongletStock.addTab("Contenu", null, contenuStock, null);
+		ongletStock.addTab("Conteneur", null, conteneurStock, null);
+		
+		tabPrincipal.addTab("Stock", null, ongletStock, null);
+	}
 
-		btnValiderStockContenu.addActionListener(new ActionListener() {
+	private ActionListener actionValiderStockContenu() {
+		ActionListener action = new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				// On créé notre objet materiel
@@ -261,8 +249,61 @@ public class Stock {
 							.setText("Erreur dans la saisie des données");
 				}
 			}
-		});
-		
+		};
+		return action;
 	}
+
+	private ActionListener actionAjouterStock() {
+		ActionListener action = new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				// On enable/disable les boutons nécessaire
+				btnValiderStockContenu.setEnabled(true);
+				btnAnnulerContenuStock.setEnabled(true);
+				btnAjouterStock.setEnabled(false);
+				btnSupprimerStockContenu.setEnabled(false);
+				btnLocaliserStockContenu.setEnabled(false);
+				btnEditerStockContenu.setEnabled(false);
+
+				// on ajoute une ligne avec des champs nulls
+				modelTableContenu.insertRow(0, new Vector());
+				modelTableContenu.unlockFirstRow(true);
+
+			}
+		};
+		return action;
+	}
+
+	private ItemListener listenerComboContenue() {
+		ItemListener listern = new ItemListener() {
+
+			public void itemStateChanged(ItemEvent e) {
+				if (modelTableContenu.getColumnCount() != 0) {
+					modelTableContenu.setColumnCount(0);
+				}
+
+				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
+						modelTableContenu, comboSelectContenu.getSelectedItem()
+								.toString()));
+				tableContenu.getColumn(tableContenu.getColumnName(0))
+						.setMaxWidth(20);
+
+			}
+
+		};
+		return listern;
+	}
+
+	private MouseAdapter mouseAdapterAjouterStock() {
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent arg0) {
+				modelTableContenu.addRow(new Object[] { "", "", "", "" });
+			}
+
+		};
+		return mouseAdapter;
+	}
+	
 
 }

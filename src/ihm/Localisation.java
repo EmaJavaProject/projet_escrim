@@ -13,73 +13,73 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
 public class Localisation {
-	
+
 	private JTable tableLocalContenuTop;
 	private JTable tableLocalContenuBot;
-	
 	private JTable tableLocalConteneurTop;
-	private JTable tableLocalConteneurBot;	
+	private JTable tableLocalConteneurBot;
 	private JTextField filtreRecherche;
 	private JTabbedPane onglet;
 	private JScrollPane scrollPaneContenu;
 	private JPanel contenuLocalisation;
 	private EscrimModelTable modelTableContenu;
-	
-	
+	private JScrollPane scrollPaneContenuLocalBot;
+	private EscrimModelTable modelTableContenuLocalBot;
+	private JComboBox<String> comboSelectContenuLocal;
+	private JButton btnModifierContenu;
+	private JPanel conteneurLocalisation;
+	private JButton boutonEditerLocalisation;
+	private JScrollPane scrollPaneConteneur;
+	private JComboBox<?> secteur;
+	private JScrollPane scrollPaneLocalConteneurTop;
+	private EscrimModelTable modelLocalConteneurTop;
+	private JScrollPane scrollPaneLocalConteneurBot;
+	private JLabel lblSecteur;
+	private EscrimModelTable modelLocalConteneurBot;
+
 	public Localisation(JTabbedPane tabPrincipal) {
-		
+
 		this.initPage(tabPrincipal);
-		
+
 	}
 
 	private void initPage(JTabbedPane tabPrincipal) {
+
+
+
 		
-		onglet= new JTabbedPane(JTabbedPane.TOP);
-		onglet.setBorder(null);
-		onglet.setAlignmentY(Component.TOP_ALIGNMENT);
-		onglet.setAlignmentX(Component.LEFT_ALIGNMENT);
-		tabPrincipal.addTab("Localisation", null, onglet, null);
-
-
-		contenuLocalisation = new JPanel();
-		onglet.addTab("Contenu", null, contenuLocalisation, null);
-		contenuLocalisation.setLayout(null);
 
 		scrollPaneContenu = new JScrollPane();
 		scrollPaneContenu.setBounds(52, 73, 706, 212);
-	
-		
+
 		modelTableContenu = new EscrimModelTable();
-		contenuLocalisation.add(scrollPaneContenu);
-		
+	
+
 		tableLocalContenuTop = new JTable(modelTableContenu);
 		tableLocalContenuTop.setBounds(62, 287, 706, 223);
-		scrollPaneContenu.add(tableLocalContenuTop);
-		scrollPaneContenu.setViewportView(tableLocalContenuTop);
+
 		filtreRecherche = new JTextField();
 		filtreRecherche.setBounds(504, 13, 177, 22);
-		contenuLocalisation.add(filtreRecherche);
+		
 		filtreRecherche.setColumns(10);
-		
-		
-		EscrimModelTable modelTableContenuLocalBot = new EscrimModelTable();
+
+		modelTableContenuLocalBot = new EscrimModelTable();
 		tableLocalContenuBot = new JTable(modelTableContenuLocalBot);
 		tableLocalContenuBot.setName("Caisse");
 		tableLocalContenuBot.setModel(EscrimModelTable.BuildTableColumn(
 				modelTableContenuLocalBot, tableLocalContenuBot.getName()));
 		tableLocalContenuBot.getColumn(tableLocalContenuBot.getColumnName(0))
 				.setMaxWidth(20);
-		tableLocalContenuBot.setBounds(52, 324, 706, 223); //todo
-		JScrollPane scrollPaneContenuLocalBot = new JScrollPane();
+		tableLocalContenuBot.setBounds(52, 324, 706, 223); // todo
+		scrollPaneContenuLocalBot = new JScrollPane();
 		scrollPaneContenuLocalBot.setBounds(52, 324, 706, 223);
 		scrollPaneContenuLocalBot.add(tableLocalContenuBot);
 		scrollPaneContenuLocalBot.setViewportView(tableLocalContenuBot);
-		contenuLocalisation.add(scrollPaneContenuLocalBot);
-		
-		JComboBox<String> comboSelectContenuLocal = new JComboBox<String>();
+
+
+		comboSelectContenuLocal = new JComboBox<String>();
 
 		// Mise a jour de la JTable en fonction de la combobox
 		comboSelectContenuLocal.addItemListener(new ItemListener() {
@@ -88,76 +88,97 @@ public class Localisation {
 					modelTableContenu.setColumnCount(0);
 				}
 
-				tableLocalContenuTop.setModel(EscrimModelTable.BuildTableColumn(
-						modelTableContenu, comboSelectContenuLocal.getSelectedItem()
-								.toString()));
-				tableLocalContenuTop.getColumn(tableLocalContenuTop.getColumnName(0))
-						.setMaxWidth(20);
+				tableLocalContenuTop.setModel(EscrimModelTable
+						.BuildTableColumn(modelTableContenu,
+								comboSelectContenuLocal.getSelectedItem()
+										.toString()));
+				tableLocalContenuTop.getColumn(
+						tableLocalContenuTop.getColumnName(0)).setMaxWidth(20);
 				;
 			}
 
 		});
+		
 		comboSelectContenuLocal.addItem("Materiel");
 		comboSelectContenuLocal.addItem("Médicaments");
-
 		comboSelectContenuLocal.setBounds(121, 13, 136, 22);
-		contenuLocalisation.add(comboSelectContenuLocal);
+		
 		filtreRecherche = new JTextField();
 		filtreRecherche.setBounds(504, 13, 177, 22);
-		contenuLocalisation.add(filtreRecherche);
 		filtreRecherche.setColumns(10);
 
-
-		JButton btnModifierContenu = new JButton("Modifier contenu");
+		btnModifierContenu = new JButton("Modifier contenu");
 		btnModifierContenu.setBounds(121, 612, 136, 25);
-		contenuLocalisation.add(btnModifierContenu);
 
-		JPanel conteneurLocalisation = new JPanel();
-		onglet.addTab("Conteneur", null, conteneurLocalisation, null);
-		conteneurLocalisation.setLayout(null);
-
-		JButton btnNewButton = new JButton("Editer localisation");
-		btnNewButton.setBounds(340, 279, 149, 25);
-		conteneurLocalisation.add(btnNewButton);
-		//LOCAL CONTENEUR
+		boutonEditerLocalisation = new JButton("Editer localisation");
+		boutonEditerLocalisation.setBounds(340, 279, 149, 25);
 		
-		JScrollPane scrollPaneConteneur = new JScrollPane();
+		// LOCAL CONTENEUR
+
+		boutonEditerLocalisation = new JButton("Editer localisation");
+		boutonEditerLocalisation.setBounds(340, 279, 149, 25);
+		
+		scrollPaneContenu.add(tableLocalContenuTop);
+		scrollPaneContenu.setViewportView(tableLocalContenuTop);
+
+		secteur = new JComboBox<Object>();
+		secteur.setName("");
+		secteur.setBounds(75, 29, 160, 22);
+
+		scrollPaneLocalConteneurTop = new JScrollPane();
+		scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
+		
+
+		modelLocalConteneurTop = new EscrimModelTable();
+		tableLocalConteneurTop = new JTable(modelLocalConteneurTop);
+		tableLocalConteneurTop.setRowSelectionAllowed(true);
+		tableLocalConteneurTop
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableLocalConteneurTop.setCellSelectionEnabled(false);
+		
+		
+		scrollPaneLocalConteneurBot = new JScrollPane();
+		scrollPaneLocalConteneurBot.setBounds(12, 357, 899, 194);
+		
+		lblSecteur = new JLabel("Secteur :");
+		lblSecteur.setBounds(12, 32, 56, 16);
+		
+		modelLocalConteneurBot = new EscrimModelTable();
+		tableLocalConteneurBot = new JTable(modelLocalConteneurBot);
+		tableLocalConteneurBot.setRowSelectionAllowed(true);
+		tableLocalConteneurBot
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableLocalConteneurBot.setCellSelectionEnabled(false);
+		
+
+		scrollPaneConteneur = new JScrollPane();
 		scrollPaneConteneur.setBounds(12, 56, 800, 486);
-				btnNewButton = new JButton("Editer localisation");
-				btnNewButton.setBounds(340, 279, 149, 25);
-				conteneurLocalisation.add(btnNewButton);
+		scrollPaneConteneur.setViewportView(tableLocalConteneurTop);
+		scrollPaneConteneur.setViewportView(tableLocalConteneurBot);
+		
+		contenuLocalisation = new JPanel();
+		contenuLocalisation.setLayout(null);
+		contenuLocalisation.add(filtreRecherche);
+		contenuLocalisation.add(comboSelectContenuLocal);
+		contenuLocalisation.add(scrollPaneContenuLocalBot);
+		contenuLocalisation.add(scrollPaneContenu);
+		
+		conteneurLocalisation = new JPanel();
+		conteneurLocalisation.setLayout(null);
+		conteneurLocalisation.add(boutonEditerLocalisation);
+		conteneurLocalisation.add(scrollPaneLocalConteneurBot);
+		conteneurLocalisation.add(lblSecteur);
+		conteneurLocalisation.add(scrollPaneLocalConteneurTop);
+		conteneurLocalisation.add(secteur);
 
-				JComboBox<?> 	secteur = new JComboBox<Object>();
-				secteur.setName("");
-				secteur.setBounds(75, 29, 160, 22);
-				conteneurLocalisation.add(secteur);
-
-				JScrollPane scrollPaneLocalConteneurTop = new JScrollPane();
-				scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
-				conteneurLocalisation.add(scrollPaneLocalConteneurTop);
-				
-				EscrimModelTable modelLocalConteneurTop = new EscrimModelTable();
-				tableLocalConteneurTop = new JTable(modelLocalConteneurTop);
-				tableLocalConteneurTop.setRowSelectionAllowed(true);
-				tableLocalConteneurTop.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				tableLocalConteneurTop.setCellSelectionEnabled(false);
-				scrollPaneConteneur.setViewportView(tableLocalConteneurTop);
-				
-				
-				JScrollPane scrollPaneLocalConteneurBot = new JScrollPane();
-				scrollPaneLocalConteneurBot.setBounds(12, 357, 899, 194);
-				conteneurLocalisation.add(scrollPaneLocalConteneurBot);
-				
-				JLabel lblSecteur = new JLabel("Secteur :");
-				lblSecteur.setBounds(12, 32, 56, 16);
-				conteneurLocalisation.add(lblSecteur);
-				
-				EscrimModelTable modelLocalConteneurBot = new EscrimModelTable();
-				tableLocalConteneurBot = new JTable(modelLocalConteneurBot);
-				tableLocalConteneurBot.setRowSelectionAllowed(true);
-				tableLocalConteneurBot.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				tableLocalConteneurBot.setCellSelectionEnabled(false);
-				scrollPaneConteneur.setViewportView(tableLocalConteneurBot);
+		
+		onglet = new JTabbedPane(JTabbedPane.TOP);
+		onglet.addTab("Contenu", null, contenuLocalisation, null);
+		onglet.addTab("Conteneur", null, conteneurLocalisation, null);
+		onglet.setBorder(null);
+		onglet.setAlignmentY(Component.TOP_ALIGNMENT);
+		onglet.setAlignmentX(Component.LEFT_ALIGNMENT);
+		tabPrincipal.addTab("Localisation", null, onglet, null);
 
 	}
 }
