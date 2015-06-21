@@ -78,9 +78,7 @@ public class GestionTransport extends EscrimModelTable {
         		}
         		//--------------------------------Onglet Transport------------------------------------------------//
         		
-        		
-        		
-        		
+        			
         		tblModelTransport = new DefaultTableModel();
         		tableTransport = new JTable(tblModelTransport);
         		tableTransport.setName("Table Transports");
