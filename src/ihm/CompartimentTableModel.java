@@ -84,7 +84,7 @@ public class CompartimentTableModel extends EscrimTableModel {
 
 	public void addElement() {
 		// Adds the element in the last position in the list
-		listeCompartiment.add(CompartimentManager.createTempCompartiment());
+		listeCompartiment.add(0, CompartimentManager.createTempCompartiment());
 		fireTableRowsInserted(0, getRowCount());
 	}
 }
