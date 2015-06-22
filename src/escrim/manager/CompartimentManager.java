@@ -20,6 +20,10 @@ public class CompartimentManager {
 
 	}
 
+	public static Compartiment createTempCompartiment() {
+		return new Compartiment();
+	}
+
 	public static void updateCompartiment(int uid, float hauteur,
 			float largeur, float longueur, float poids,
 			List<Colis> colisDansCompartiment) {

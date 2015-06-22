@@ -193,14 +193,6 @@ public class GestionAvion {
 				pPanelPrincipal.add(tabPrincipal, new Integer(2));
 				pPanelPrincipal.revalidate();
 
-				boutonAjouterCompartiment
-						.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								System.out.println("yolo");
-								compartimentTableModel.addRow();
-							}
-						});
-
 			}
 		};
 
