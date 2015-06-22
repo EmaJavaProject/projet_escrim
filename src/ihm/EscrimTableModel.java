@@ -1,9 +1,5 @@
 package ihm;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  *
  */
 
-public class EscrimModelTable extends DefaultTableModel {
+public abstract class EscrimTableModel extends DefaultTableModel {
 
 	private boolean lockCell;
 
@@ -39,45 +35,6 @@ public class EscrimModelTable extends DefaultTableModel {
 
 	public static String[] AvionColumnName = { "", "Nom", "Compartiments",
 			"uid" };
-
-	public static String[] CompartimentColumnName = { "", "Nom", "Volume",
-			"Nombre de niveau", "Capacité en poids", "uid" };
-
-	private static final Map<String, String[]> mapTableToColumn = createMap();
-
-	private static Map<String, String[]> createMap() {
-		Map<String, String[]> result = new HashMap<String, String[]>();
-		result.put("Materiel", materielColName);
-		result.put("Médicaments", medicColName);
-		result.put("Colis", colisColumnName);
-		result.put("Table Transports", AvionColumnName);
-		result.put("Table Compartiments", CompartimentColumnName);
-		return Collections.unmodifiableMap(result);
-	}
-
-	/**
-	 * 
-	 * @param modelTableContenu
-	 *            modèle de colonnes pour la table en question
-	 * @param tableParam
-	 *            nom de la table a initialiser
-	 */
-
-	public static DefaultTableModel BuildTableColumn(
-			DefaultTableModel modelTableContenu, String tableParam) {
-		while (modelTableContenu.getRowCount() != 0) {
-			modelTableContenu.removeRow(0);
-		}
-
-		for (String col : mapTableToColumn.get(tableParam)) {
-			modelTableContenu.addColumn(col);
-			if (col == "") {
-			}
-		}
-
-		return modelTableContenu;
-
-	}
 
 	public void isRowEditable(boolean rowEdit) {
 		for (int i = 0; i < this.getRowCount(); i++) {

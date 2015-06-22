@@ -1,11 +1,11 @@
 package ihm;
+import escrim.manager.MaterielManager;
+import escrim.manager.MedicamentManager;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-public class GestionAvion extends EscrimModelTable {
+public class GestionAvion {
 
 	public static ActionListener CréationJpanelAvion(
 			JLayeredPane pPanelPrincipal) {
@@ -70,14 +70,14 @@ public class GestionAvion extends EscrimModelTable {
 
 				tableAvion.setName("Table Transports");
 
-				tableAvion.setModel(EscrimModelTable.BuildTableColumn(
-						tblModelAvion, tableAvion.getName()));
+//				tableAvion.setModel(EscrimTableModel.BuildTableColumn(
+//						tblModelAvion, tableAvion.getName()));
 				tableAvion.getColumn(tableAvion.getColumnName(0)).setMaxWidth(
 						20);
 				tableAvion.setBounds(12, 72, 899, 800);
 
 				boutonQuitter.setBounds(800, 13, 97, 25);
-				boutonQuitter.addMouseListener(new MouseAdapter() {
+				/*boutonQuitter.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						for (Component composant : pPanelPrincipal
@@ -88,7 +88,7 @@ public class GestionAvion extends EscrimModelTable {
 						pPanelPrincipal.repaint();
 
 					}
-				});
+				});*/
 
 				jpanelAvion.add(boutonQuitter);
 
@@ -137,25 +137,25 @@ public class GestionAvion extends EscrimModelTable {
 				JScrollPane scrollPanelCompartiment = new JScrollPane();
 
 				tableCompartiment.setName("Table Compartiments");
-				tableCompartiment.setModel(EscrimModelTable.BuildTableColumn(
-						tblModelCompartiment, tableCompartiment.getName()));
+//				tableCompartiment.setModel(EscrimTableModel.BuildTableColumn(
+//						tblModelCompartiment, tableCompartiment.getName()));
 				tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
 						.setMaxWidth(20);
 				tableCompartiment.setBounds(12, 72, 899, 800);
 
 				boutonQuitterCompartiment.setBounds(800, 13, 97, 25);
-				boutonQuitterCompartiment.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						for (Component composant : pPanelPrincipal
-								.getComponents()) {
-							if (composant.getName().equals("Gestion Transport"))
-								pPanelPrincipal.remove(composant);
-						}
-						pPanelPrincipal.repaint();
-
-					}
-				});
+//				boutonQuitterCompartiment.addMouseListener(new MouseAdapter() {
+//					@Override
+//					public void mouseClicked(MouseEvent arg0) {
+//						for (Component composant : pPanelPrincipal
+//								.getComponents()) {
+//							if (composant.getName().equals("Gestion Transport"))
+//								pPanelPrincipal.remove(composant);
+//						}
+//						pPanelPrincipal.repaint();
+//
+//					}
+//				});
 
 				jpanelCompartiment.add(boutonQuitterCompartiment);
 
@@ -196,5 +196,4 @@ public class GestionAvion extends EscrimModelTable {
 		return action;
 
 	}
-
 };
