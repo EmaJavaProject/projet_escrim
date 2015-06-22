@@ -1,13 +1,14 @@
 package ihm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import escrim.manager.CompartimentManager;
 import escrim.metiers.Compartiment;
 
+@SuppressWarnings("serial")
 public class CompartimentTableModel extends EscrimTableModel {
-	private List<Compartiment> listeCompartiment = new ArrayList();
+	private List<Compartiment> listeCompartiment = CompartimentManager
+			.loadAllCompartiment();
 	private String[] CompartimentColumnName = { "", "Nom", "Hauteur",
 			"Longueur", "Largeur", "Volume", "Poids", "uid" };
 
@@ -24,8 +25,9 @@ public class CompartimentTableModel extends EscrimTableModel {
 	public int getRowCount() {
 		if (listeCompartiment != null) {
 			return listeCompartiment.size();
-		} else
+		} else {
 			return 0;
+		}
 	}
 
 	@Override
@@ -80,8 +82,9 @@ public class CompartimentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	public void addRow() {
-		listeCompartiment.add(0, null);
-		fireTableDataChanged();
+	public void addElement() {
+		// Adds the element in the last position in the list
+		listeCompartiment.add(CompartimentManager.createTempCompartiment());
+		fireTableRowsInserted(0, getRowCount());
 	}
 }

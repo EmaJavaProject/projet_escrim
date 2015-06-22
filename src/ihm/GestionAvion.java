@@ -196,8 +196,9 @@ public class GestionAvion {
 				boutonAjouterCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								System.out.println("yolo");
-								compartimentTableModel.addRow();
+								((CompartimentTableModel) tableCompartiment
+										.getModel()).addElement();
+
 							}
 						});
 

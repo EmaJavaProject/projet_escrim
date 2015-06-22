@@ -23,6 +23,10 @@ public class Compartiment implements Metier {
 	@OneToMany
 	private List<Colis> listeColisDansCompartiment;
 
+	public Compartiment() {
+
+	}
+
 	public int getUid() {
 		return uid;
 	}
