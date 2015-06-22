@@ -48,16 +48,16 @@ public class GestionTransport {
 					/**
 					 * J'ai été obligé de faire un double foreach car quand ont
 					 * repasse dans cette méthode composantPanelPrincipal
-					 * devient le pPanelPrincipal. je ne sais pas pk si vous avez
-					 * une autre solution pour limité le nombre de Tad gestion
-					 * des Transports.ps le singleton ne marche pas ici. le
-					 * double foreach ici ne géne pas la performance car quand
-					 * nous ont revient dans cette méthod pPanelPrincipal ne
-					 * comptient qu'un seul composants. Si je ne suis pas assez
-					 * clair faite moi signe je vous expliquerai ou sinon rentré
-					 * en debug pour voir ce qu'il ce passe vraiment ps ce
-					 * commentaire sera enlevé si le prof regarde notre code vu
-					 * les fautes d'orthographes.
+					 * devient le pPanelPrincipal. je ne sais pas pk si vous
+					 * avez une autre solution pour limité le nombre de Tad
+					 * gestion des Transports.ps le singleton ne marche pas ici.
+					 * le double foreach ici ne géne pas la performance car
+					 * quand nous ont revient dans cette méthod pPanelPrincipal
+					 * ne comptient qu'un seul composants. Si je ne suis pas
+					 * assez clair faite moi signe je vous expliquerai ou sinon
+					 * rentré en debug pour voir ce qu'il ce passe vraiment ps
+					 * ce commentaire sera enlevé si le prof regarde notre code
+					 * vu les fautes d'orthographes.
 					 */
 
 					for (Component composantPanelPrincipal : pPanelPrincipal
@@ -80,8 +80,6 @@ public class GestionTransport {
 				tblModelTransport = new DefaultTableModel();
 				tableTransport = new JTable(tblModelTransport);
 				tableTransport.setName("Table Transports");
-				tableTransport.getColumn(tableTransport.getColumnName(0))
-						.setMaxWidth(20);
 				tableTransport.setBounds(12, 72, 899, 800);
 				boutonQuitter = new JButton("Quitter");
 				boutonQuitter.setBounds(800, 13, 97, 25);
@@ -128,8 +126,6 @@ public class GestionTransport {
 				tblModelCompartiment = new DefaultTableModel();
 				tableCompartiment = new JTable(tblModelTransport);
 				tableCompartiment.setName("Table Compartiments");
-				tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
-						.setMaxWidth(20);
 				tableCompartiment.setBounds(12, 72, 899, 800);
 
 				boutonQuitterCompartiment = new JButton("Quitter");

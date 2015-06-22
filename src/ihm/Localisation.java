@@ -10,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
 public class Localisation {
 
@@ -54,8 +53,6 @@ public class Localisation {
 
 		tableLocalContenuBot = new JTable();
 		tableLocalContenuBot.setName("Caisse");
-		tableLocalContenuBot.getColumn(tableLocalContenuBot.getColumnName(0))
-				.setMaxWidth(20);
 		tableLocalContenuBot.setBounds(52, 324, 706, 223); // todo
 		scrollPaneContenuLocalBot = new JScrollPane();
 		scrollPaneContenuLocalBot.setBounds(52, 324, 706, 223);
@@ -95,21 +92,11 @@ public class Localisation {
 		scrollPaneLocalConteneurTop = new JScrollPane();
 		scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
 
-		tableLocalConteneurTop.setRowSelectionAllowed(true);
-		tableLocalConteneurTop
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLocalConteneurTop.setCellSelectionEnabled(false);
-
 		scrollPaneLocalConteneurBot = new JScrollPane();
 		scrollPaneLocalConteneurBot.setBounds(12, 357, 899, 194);
 
 		lblSecteur = new JLabel("Secteur :");
 		lblSecteur.setBounds(12, 32, 56, 16);
-
-		tableLocalConteneurBot.setRowSelectionAllowed(true);
-		tableLocalConteneurBot
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLocalConteneurBot.setCellSelectionEnabled(false);
 
 		scrollPaneConteneur = new JScrollPane();
 		scrollPaneConteneur.setBounds(12, 56, 800, 486);
