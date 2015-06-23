@@ -32,7 +32,7 @@ public class Stock {
 	private JTabbedPane ongletStock;
 	private JPanel contenuStock;
 	private JScrollPane scrollPaneContenu;
-	private EscrimModelTable modelTableContenu;
+	private EscrimTableModel modelTableContenu;
 	private JButton btnAjouterStock;
 	private JButton btnSupprimerStock;
 	private JButton btnEditerStock;
@@ -47,7 +47,7 @@ public class Stock {
 	private JPanel conteneurStock;
 	private JComboBox<?> comboSelectConteneur;
 	private JScrollPane scrollPaneConteneur;
-	private EscrimModelTable modelTableConteneur;
+	private EscrimTableModel modelTableConteneur;
 	private JButton btnAjouterStockConteneur;
 	private JButton btnSupprimerStockConteneur;
 	private JButton btnValiderStockConteneur;
@@ -62,7 +62,7 @@ public class Stock {
 	private void initPage(JTabbedPane tabPrincipal) {
 
 	
-		modelTableContenu = new EscrimModelTable();
+//		modelTableContenu = new EscrimModelTable();
 		tableContenu = new JTable(modelTableContenu);
 		tableContenu.setRowSelectionAllowed(true);
 		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -119,7 +119,7 @@ public class Stock {
 		comboSelectConteneur = new JComboBox<String>();
 		comboSelectConteneur.setBounds(12, 13, 141, 25);
 		
-		modelTableConteneur = new EscrimModelTable();
+//		modelTableConteneur = new EscrimModelTable();
 		tableConteneur = new JTable(modelTableConteneur);
 		tableConteneur.setRowSelectionAllowed(true);
 		tableConteneur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -282,9 +282,9 @@ public class Stock {
 					modelTableContenu.setColumnCount(0);
 				}
 
-				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
-						modelTableContenu, comboSelectContenu.getSelectedItem()
-								.toString()));
+//				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
+//						modelTableContenu, comboSelectContenu.getSelectedItem()
+//								.toString()));
 				tableContenu.getColumn(tableContenu.getColumnName(0))
 						.setMaxWidth(20);
 

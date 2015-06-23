@@ -24,9 +24,9 @@ public class Localisation {
 	private JTabbedPane onglet;
 	private JScrollPane scrollPaneContenu;
 	private JPanel contenuLocalisation;
-	private EscrimModelTable modelTableContenu;
+	private EscrimTableModel modelTableContenu;
 	private JScrollPane scrollPaneContenuLocalBot;
-	private EscrimModelTable modelTableContenuLocalBot;
+	private EscrimTableModel modelTableContenuLocalBot;
 	private JComboBox<String> comboSelectContenuLocal;
 	private JButton btnModifierContenu;
 	private JPanel conteneurLocalisation;
@@ -34,10 +34,10 @@ public class Localisation {
 	private JScrollPane scrollPaneConteneur;
 	private JComboBox<?> secteur;
 	private JScrollPane scrollPaneLocalConteneurTop;
-	private EscrimModelTable modelLocalConteneurTop;
+	private EscrimTableModel modelLocalConteneurTop;
 	private JScrollPane scrollPaneLocalConteneurBot;
 	private JLabel lblSecteur;
-	private EscrimModelTable modelLocalConteneurBot;
+	private EscrimTableModel modelLocalConteneurBot;
 
 	public Localisation(JTabbedPane tabPrincipal) {
 
@@ -54,7 +54,7 @@ public class Localisation {
 		scrollPaneContenu = new JScrollPane();
 		scrollPaneContenu.setBounds(52, 73, 706, 212);
 
-		modelTableContenu = new EscrimModelTable();
+//		modelTableContenu = new EscrimModelTable();
 	
 
 		tableLocalContenuTop = new JTable(modelTableContenu);
@@ -65,11 +65,11 @@ public class Localisation {
 		
 		filtreRecherche.setColumns(10);
 
-		modelTableContenuLocalBot = new EscrimModelTable();
+//		modelTableContenuLocalBot = new EscrimModelTable();
 		tableLocalContenuBot = new JTable(modelTableContenuLocalBot);
 		tableLocalContenuBot.setName("Caisse");
-		tableLocalContenuBot.setModel(EscrimModelTable.BuildTableColumn(
-				modelTableContenuLocalBot, tableLocalContenuBot.getName()));
+//		tableLocalContenuBot.setModel(EscrimModelTable.BuildTableColumn(
+//				modelTableContenuLocalBot, tableLocalContenuBot.getName()));
 		tableLocalContenuBot.getColumn(tableLocalContenuBot.getColumnName(0))
 				.setMaxWidth(20);
 		tableLocalContenuBot.setBounds(52, 324, 706, 223); // todo
@@ -88,10 +88,10 @@ public class Localisation {
 					modelTableContenu.setColumnCount(0);
 				}
 
-				tableLocalContenuTop.setModel(EscrimModelTable
-						.BuildTableColumn(modelTableContenu,
-								comboSelectContenuLocal.getSelectedItem()
-										.toString()));
+//				tableLocalContenuTop.setModel(EscrimModelTable
+//						.BuildTableColumn(modelTableContenu,
+//								comboSelectContenuLocal.getSelectedItem()
+//										.toString()));
 				tableLocalContenuTop.getColumn(
 						tableLocalContenuTop.getColumnName(0)).setMaxWidth(20);
 				;
@@ -129,7 +129,7 @@ public class Localisation {
 		scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
 		
 
-		modelLocalConteneurTop = new EscrimModelTable();
+//		modelLocalConteneurTop = new EscrimModelTable();
 		tableLocalConteneurTop = new JTable(modelLocalConteneurTop);
 		tableLocalConteneurTop.setRowSelectionAllowed(true);
 		tableLocalConteneurTop
@@ -143,7 +143,7 @@ public class Localisation {
 		lblSecteur = new JLabel("Secteur :");
 		lblSecteur.setBounds(12, 32, 56, 16);
 		
-		modelLocalConteneurBot = new EscrimModelTable();
+//		modelLocalConteneurBot = new EscrimModelTable();
 		tableLocalConteneurBot = new JTable(modelLocalConteneurBot);
 		tableLocalConteneurBot.setRowSelectionAllowed(true);
 		tableLocalConteneurBot

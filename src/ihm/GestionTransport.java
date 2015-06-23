@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class GestionTransport extends EscrimModelTable {
+public class GestionTransport extends EscrimTableModel {
 	
 		
 	private static JPanel jpanelTransport;
@@ -82,8 +82,8 @@ public class GestionTransport extends EscrimModelTable {
         		tblModelTransport = new DefaultTableModel();
         		tableTransport = new JTable(tblModelTransport);
         		tableTransport.setName("Table Transports");
-            	tableTransport.setModel(EscrimModelTable.BuildTableColumn(
-            			tblModelTransport, tableTransport.getName()));
+//            	tableTransport.setModel(EscrimModelTable.BuildTableColumn(
+//            			tblModelTransport, tableTransport.getName()));
             	tableTransport.getColumn(tableTransport.getColumnName(0))
         				.setMaxWidth(20);
             	tableTransport.setBounds(12, 72, 899, 800);
@@ -132,8 +132,8 @@ public class GestionTransport extends EscrimModelTable {
         		tblModelCompartiment = new DefaultTableModel();
         		tableCompartiment = new JTable(tblModelTransport);
         		tableCompartiment.setName("Table Compartiments");
-        		tableCompartiment.setModel(EscrimModelTable.BuildTableColumn(
-            			tblModelCompartiment, tableCompartiment.getName()));
+//        		tableCompartiment.setModel(EscrimModelTable.BuildTableColumn(
+//            			tblModelCompartiment, tableCompartiment.getName()));
         		tableCompartiment.getColumn(tableCompartiment.getColumnName(0))
         				.setMaxWidth(20);
         		tableCompartiment.setBounds(12, 72, 899, 800);
