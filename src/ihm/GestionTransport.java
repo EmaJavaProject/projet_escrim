@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class GestionTransport extends EscrimTableModel {
+public class GestionTransport extends EscrimModelTable {
 	
 		
 	private static JPanel jpanelTransport;

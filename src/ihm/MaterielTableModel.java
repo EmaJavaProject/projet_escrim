@@ -5,7 +5,7 @@ import java.util.List;
 import escrim.manager.MaterielManager;
 import escrim.metiers.Materiel;
 
-public class MaterielTableModel extends EscrimTableModel{
+public class MaterielTableModel extends EscrimModelTable{
 	private List<Materiel> listeMateriel = new ArrayList();
 	public String[] materielColName = { "", "Dénomination",
 		"Observations", "Quantité", "uid" };
@@ -70,5 +70,5 @@ public class MaterielTableModel extends EscrimTableModel{
 	public void addRow() {
 		listeMateriel.add(0, null);
 		fireTableDataChanged();
-	}	
+	}
 }

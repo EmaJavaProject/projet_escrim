@@ -14,6 +14,14 @@ public class Localisation implements Metier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
 	private int numeroSector;
 	private String nomSector;
 

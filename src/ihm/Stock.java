@@ -9,6 +9,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -21,9 +22,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import escrim.manager.GestionPersistance;
-import escrim.metiers.Materiel;
-import escrim.metiers.Metier;
+import escrim.manager.CompartimentManager;
+import escrim.metiers.Compartiment;
 
 public class Stock {
 
@@ -32,7 +32,7 @@ public class Stock {
 	private JTabbedPane ongletStock;
 	private JPanel contenuStock;
 	private JScrollPane scrollPaneContenu;
-	private EscrimTableModel modelTableContenu;
+	private EscrimModelTable modelTableContenu;
 	private JButton btnAjouterStock;
 	private JButton btnSupprimerStock;
 	private JButton btnEditerStock;
@@ -47,14 +47,16 @@ public class Stock {
 	private JPanel conteneurStock;
 	private JComboBox<?> comboSelectConteneur;
 	private JScrollPane scrollPaneConteneur;
-	private EscrimTableModel modelTableConteneur;
+	private EscrimModelTable modelTableConteneur;
 	private JButton btnAjouterStockConteneur;
 	private JButton btnSupprimerStockConteneur;
 	private JButton btnValiderStockConteneur;
 	private JButton btnAnnulerConteneurStock;
 	private JButton btnEditerStockConteneur;
 	private JButton btnLocaliserStockConteneur;
-
+	private MaterielTable materielTable;
+	private MedicamentTable medicamentTable;
+	
 	public Stock(JTabbedPane tabPrincipal) {
 		this.initPage(tabPrincipal);
 	}
@@ -62,7 +64,7 @@ public class Stock {
 	private void initPage(JTabbedPane tabPrincipal) {
 
 	
-//		modelTableContenu = new EscrimModelTable();
+		modelTableContenu = new EscrimModelTable();
 		tableContenu = new JTable(modelTableContenu);
 		tableContenu.setRowSelectionAllowed(true);
 		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -100,9 +102,11 @@ public class Stock {
 		
 		btnSupprimerStockContenu = new JButton("-");
 		btnSupprimerStockContenu.setBounds(121, 589, 97, 25);
+		btnSupprimerStockContenu.addActionListener(actionSupprimerStockContenu());
 		
 		btnEditerStockContenu = new JButton("Editer");
 		btnEditerStockContenu.setBounds(230, 589, 97, 25);
+		btnEditerStockContenu.addActionListener(actionUpdateStockContenu());
 		
 		btnLocaliserStockContenu = new JButton("Localiser");
 		btnLocaliserStockContenu.setBounds(339, 589, 97, 25);
@@ -119,7 +123,7 @@ public class Stock {
 		comboSelectConteneur = new JComboBox<String>();
 		comboSelectConteneur.setBounds(12, 13, 141, 25);
 		
-//		modelTableConteneur = new EscrimModelTable();
+		modelTableConteneur = new EscrimModelTable();
 		tableConteneur = new JTable(modelTableConteneur);
 		tableConteneur.setRowSelectionAllowed(true);
 		tableConteneur.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -187,69 +191,15 @@ public class Stock {
 		ongletStock.addTab("Conteneur", null, conteneurStock, null);
 		
 		tabPrincipal.addTab("Stock", null, ongletStock, null);
+
 	}
 
 	private ActionListener actionValiderStockContenu() {
 		ActionListener action = new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				// On créé notre objet materiel
-				Metier materiel = new Materiel();
-
-				// On désactive l'édition de cellule pour assurer la
-				// récupération des valeurs
-
-				if (tableContenu.getCellEditor() != null) {
-					tableContenu.getCellEditor().stopCellEditing();
-				}
-
-				// On récupère les données des cellules
-				if (modelTableContenu.testRowValue(tableContenu
-						.getSelectedRow())) {
-					((Materiel) materiel).setDenomination((String) tableContenu
-							.getModel().getValueAt(0, 1));
-					((Materiel) materiel).setObservations((String) tableContenu
-							.getModel().getValueAt(0, 2));
-					// Par défaut les cell sont des strings, donc on récup les
-					// int insérés
-
-					try {
-						((Materiel) materiel).setQuantite(Integer
-								.parseInt((String) tableContenu.getModel()
-										.getValueAt(0, 3)));
-					} catch (NumberFormatException e) {
-						lblMessageDerreur
-								.setText("<html>La colonne Quantité doit être <br>un nombre écrit en chiffres</html>");
-						return;
-					}
-
-					// On rend persistant l'objet
-					GestionPersistance.addObjetToDB(materiel);
-
-					// On insère l'uid dans la dernière colonne invisible pour
-					// être capable d'appliquer des traitement
-
-					tableContenu.getModel().setValueAt(
-							((Materiel) materiel).getId(), 0,
-							tableContenu.getColumnCount() - 1);
-
-					// On rétablit l'état des boutons
-					btnValiderStockContenu.setEnabled(false);
-					btnAnnulerContenuStock.setEnabled(false);
-					btnAjouterStock.setEnabled(true);
-					btnSupprimerStockContenu.setEnabled(true);
-					btnLocaliserStockContenu.setEnabled(true);
-					btnEditerStockContenu.setEnabled(true);
-					modelTableContenu.lockAllRow(false);
-
-					// On nettoie le message d'erreur
-					lblMessageDerreur.setText("");
-				} else {
-					lblMessageDerreur
-							.setText("Erreur dans la saisie des données");
-				}
 			}
-		};
+			};
 		return action;
 	}
 
@@ -266,14 +216,47 @@ public class Stock {
 				btnEditerStockContenu.setEnabled(false);
 
 				// on ajoute une ligne avec des champs nulls
-				modelTableContenu.insertRow(0, new Vector());
+				Vector<Compartiment> lVecteur = new Vector();
+				lVecteur.add(CompartimentManager.createTempCompartiment());
+				modelTableContenu.insertRow(0, lVecteur);
 				modelTableContenu.unlockFirstRow(true);
 
 			}
 		};
 		return action;
 	}
+	private ActionListener actionSupprimerStockContenu() {
+		ActionListener action = new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
+				// On enable/disable les boutons nécessaire
+				btnValiderStockContenu.setEnabled(true);
+				btnAnnulerContenuStock.setEnabled(true);
+				btnAjouterStock.setEnabled(false);
+				btnSupprimerStockContenu.setEnabled(true);
+				btnLocaliserStockContenu.setEnabled(false);
+				btnEditerStockContenu.setEnabled(false);
+
+			}
+		};
+		return action;
+	}
+	private ActionListener actionUpdateStockContenu() {
+		ActionListener action = new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				// On enable/disable les boutons nécessaire
+				btnValiderStockContenu.setEnabled(true);
+				btnAnnulerContenuStock.setEnabled(true);
+				btnAjouterStock.setEnabled(false);
+				btnSupprimerStockContenu.setEnabled(false);
+				btnLocaliserStockContenu.setEnabled(false);
+				btnEditerStockContenu.setEnabled(true);
+
+			}
+		};
+		return action;
+	}
 	private ItemListener listenerComboContenue() {
 		ItemListener listern = new ItemListener() {
 
@@ -282,12 +265,11 @@ public class Stock {
 					modelTableContenu.setColumnCount(0);
 				}
 
-//				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
-//						modelTableContenu, comboSelectContenu.getSelectedItem()
-//								.toString()));
+				tableContenu.setModel(EscrimModelTable.BuildTableColumn(
+						modelTableContenu, comboSelectContenu.getSelectedItem()
+								.toString()));
 				tableContenu.getColumn(tableContenu.getColumnName(0))
 						.setMaxWidth(20);
-
 			}
 
 		};
@@ -305,5 +287,5 @@ public class Stock {
 		return mouseAdapter;
 	}
 	
-
+	
 }

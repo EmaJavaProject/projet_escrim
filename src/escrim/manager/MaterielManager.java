@@ -7,7 +7,7 @@ import escrim.metiers.Materiel;
 
 public class MaterielManager {
 
-	public void createMateriel(String denomination, String observation, int quantite) {
+	public static void createMateriel(String denomination, String observation, int quantite) {
 		Materiel materiel = new Materiel();
 		materiel.setDenomination(denomination);
 		materiel.setObservations(observation);
@@ -15,7 +15,7 @@ public class MaterielManager {
 		MaterielDao.create(materiel);
 	}
 
-	public void updateMateriel(int uid, String denomination, String observation, int quantite) {
+	public static void updateMateriel(int uid, String denomination, String observation, int quantite) {
 		Materiel materielTemporaire = loadMateriel(uid);
 		materielTemporaire.setDenomination(denomination);
 		materielTemporaire.setObservations(observation);
@@ -23,7 +23,7 @@ public class MaterielManager {
 		MaterielDao.update(materielTemporaire, uid);
 	}
 
-	public void deleteMateriel(int uid) {
+	public static void deleteMateriel(int uid) {
 		Materiel deleteMateriel = loadMateriel(uid);
 		MaterielDao.remove(deleteMateriel);
 	}

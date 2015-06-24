@@ -8,7 +8,7 @@ import escrim.metiers.Medicament;
 
 public class MedicamentManager {
 
-	public void createMedicaments(String denomination, String principeActif, String dosage, Date dLU,int quantite, String lot, String classeThera, int dotationU7) {
+	public static void createMedicaments(String denomination, String principeActif, String dosage, Date dLU,int quantite, String lot, String classeThera, int dotationU7) {
 		Medicament medicament = new Medicament();
 		medicament.setClasseThera(classeThera);
 		medicament.setDlu(dLU);
@@ -21,7 +21,7 @@ public class MedicamentManager {
 		MedicamentDao.create(medicament);
 	}
 
-	public void updateMedicaments(int uid, String denomination, String principeActif, String dosage, Date dLU,int quantite, String lot, String classeThera, int dotationU7) {
+	public static void updateMedicaments(int uid, String denomination, String principeActif, String dosage, Date dLU,int quantite, String lot, String classeThera, int dotationU7) {
 		Medicament medicament = loadMedicament(uid);
 		medicament.setClasseThera(classeThera);
 		medicament.setDlu(dLU);
@@ -34,7 +34,7 @@ public class MedicamentManager {
 		MedicamentDao.update(medicament, uid);
 	}
 
-	public void deleteMedicaments(int uid) {
+	public static void deleteMedicaments(int uid) {
 		Medicament deleteMedicaments = loadMedicament(uid);
 		MedicamentDao.remove(deleteMedicaments);
 	}

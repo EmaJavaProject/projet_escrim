@@ -5,7 +5,7 @@ import java.util.Date;
 import escrim.manager.MedicamentManager;
 import escrim.metiers.Medicament;
 
-public class MedicamentTableModel extends EscrimTableModel {
+public class MedicamentTableModel extends EscrimModelTable {
 	private List<Medicament> listeMedicament = new ArrayList();
 	public String[] medicColName = { "", "Dénomination",
 		"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
