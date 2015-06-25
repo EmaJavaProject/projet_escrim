@@ -43,11 +43,4 @@ public class Transport {
 		this.poidsMax = poidsMax;
 	}
 
-	public List<Compartiment> getListeCompartiments() {
-		return listeCompartiments;
-	}
-
-	public void setListeCompartiments(List<Compartiment> listeCompartiments) {
-		this.listeCompartiments = listeCompartiments;
-	}
 }
