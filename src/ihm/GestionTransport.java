@@ -138,6 +138,9 @@ public class GestionTransport {
 					public void actionPerformed(ActionEvent arg0) {
 						disableTransportButton(true);
 						tblModelTransport.addElement();
+						tableTransport.setRowSelectionInterval(
+								tableTransport.getRowCount() - 1,
+								tableTransport.getRowCount() - 1);
 
 					}
 
@@ -146,6 +149,7 @@ public class GestionTransport {
 				boutonModifierTransport.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 
+						disableTransportButton(true);
 						tblModelTransport.updateElement(tableTransport
 								.getSelectedRow());
 
@@ -160,7 +164,7 @@ public class GestionTransport {
 						}
 						disableTransportButton(false);
 						tblModelTransport.persistData(
-								tableTransport.getSelectedRow() + 1, true);
+								tableTransport.getSelectedRow(), true);
 					}
 
 				});

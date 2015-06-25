@@ -124,7 +124,7 @@ public class MaterielTableModel extends EscrimTableModel {
 			} else if (!super.isAddition() && super.isEdition()
 					&& !super.isRemove()) {
 				MaterielManager.updateMateriel(listeMateriel.get(rowIndex),
-						(Integer) getValueAt(rowIndex, 6));
+						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
 				setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {

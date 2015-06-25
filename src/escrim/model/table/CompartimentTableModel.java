@@ -149,7 +149,7 @@ public class CompartimentTableModel extends EscrimTableModel {
 					&& !super.isRemove()) {
 				CompartimentManager.updateCompartiment(
 						listeCompartiment.get(rowIndex),
-						(Integer) getValueAt(rowIndex, 6));
+						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
 				super.setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {

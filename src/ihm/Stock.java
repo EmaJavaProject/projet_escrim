@@ -99,6 +99,9 @@ public class Stock {
 			public void actionPerformed(ActionEvent arg0) {
 				disableStockButton(true);
 				materielTableModel.addElement();
+				tableContenu.setRowSelectionInterval(
+						tableContenu.getRowCount() - 1,
+						tableContenu.getRowCount() - 1);
 
 			}
 
@@ -208,6 +211,14 @@ public class Stock {
 		ongletStock.addTab("Conteneur", null, conteneurStock, null);
 
 		tabPrincipal.addTab("Stock", null, ongletStock, null);
+
+		comboSelectContenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// if(comboSelectContenu.getSelectedItem())
+
+			}
+		});
+
 	}
 
 	private static void disableStockButton(boolean disable) {

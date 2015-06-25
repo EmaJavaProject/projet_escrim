@@ -175,7 +175,7 @@ public class MedicamentTableModel extends EscrimTableModel {
 					&& !super.isRemove()) {
 				MedicamentManager.updateMedicament(
 						listeMedicament.get(rowIndex),
-						(Integer) getValueAt(rowIndex, 6));
+						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
 				super.setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {

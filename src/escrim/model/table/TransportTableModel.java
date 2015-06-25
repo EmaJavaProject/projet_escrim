@@ -9,8 +9,8 @@ import escrim.metiers.Transport;
 public class TransportTableModel extends EscrimTableModel {
 	private List<Transport> listeTransport = TransportManager
 			.loadAllTransport();
-	private String[] TransportColumnName = { "", "Dénomination",
-			"Poids Max", "uid"};
+	private String[] TransportColumnName = { "", "Dénomination", "Poids Max",
+			"uid" };
 
 	public TransportTableModel() {
 		listeTransport = TransportManager.loadAllTransport();
@@ -56,13 +56,13 @@ public class TransportTableModel extends EscrimTableModel {
 		switch (columnIndex) {
 
 		case 1:
+			listeTransport.get(rowIndex).setDenomination(
+					aValue == null ? null : aValue.toString());
+			break;
+		case 2:
 			listeTransport.get(rowIndex).setPoidsMax(
 					aValue == null ? new Float(0) : Float
 							.parseFloat(((String) aValue).trim()));
-			break;
-		case 2:
-			listeTransport.get(rowIndex).setDenomination(
-					aValue == null ? null : aValue.toString());
 			break;
 
 		default:
@@ -96,7 +96,7 @@ public class TransportTableModel extends EscrimTableModel {
 
 	public void addElement() {
 		// Adds the element in the last position in the list
-		
+
 		setAddition(true);
 		setEdition(false);
 		setRemove(false);
@@ -119,7 +119,7 @@ public class TransportTableModel extends EscrimTableModel {
 				setAddition(false);
 			} else if (!isAddition() && isEdition() && !isRemove()) {
 				TransportManager.updateTransport(listeTransport.get(rowIndex),
-						(Integer) getValueAt(rowIndex, 6));
+						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
 				setEdition(false);
 			} else if (!isAddition() && !isEdition() && isRemove()) {
 				TransportManager.removeTransport((Integer) getValueAt(rowIndex,
