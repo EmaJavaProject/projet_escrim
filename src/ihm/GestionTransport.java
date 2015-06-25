@@ -16,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
 import escrim.model.table.CompartimentTableModel;
 import escrim.model.table.TransportTableModel;
@@ -87,7 +86,6 @@ public class GestionTransport {
 				}
 				// --------------------------------Onglet
 				// Transport------------------------------------------------//
-
 
 				tblModelTransport = new TransportTableModel();
 				tableTransport = new JTable(tblModelTransport);
@@ -256,6 +254,9 @@ public class GestionTransport {
 							public void actionPerformed(ActionEvent arg0) {
 								disableCompartimentButton(true);
 								compartimentTableModel.addElement();
+								tableCompartiment.setRowSelectionInterval(
+										tableCompartiment.getRowCount() - 1,
+										tableCompartiment.getRowCount() - 1);
 
 							}
 
@@ -381,6 +382,7 @@ public class GestionTransport {
 			boutonAnnulerCompartiment.setEnabled(false);
 		}
 	}
+
 	private static void disableTransportButton(boolean disable) {
 		if (disable) {
 			boutonAjouterTransport.setEnabled(false);

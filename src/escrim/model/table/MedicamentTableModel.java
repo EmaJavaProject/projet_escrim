@@ -1,5 +1,9 @@
 package escrim.model.table;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import escrim.manager.MedicamentManager;
@@ -12,6 +16,7 @@ public class MedicamentTableModel extends EscrimTableModel {
 	private String[] MedicamentColumnName = { "", "Dénomination",
 			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
 			"Classe Thérapeutique", "Dotation U7", "uid" };
+	DateFormat formatter = new SimpleDateFormat("dd/mm/yy");
 
 	public MedicamentTableModel() {
 		listeMedicament = MedicamentManager.loadAllMedicament();
@@ -55,11 +60,11 @@ public class MedicamentTableModel extends EscrimTableModel {
 		case 6:
 			return Medicament.getLot();
 		case 7:
-			return Medicament.getLot();
+			return Medicament.getClasseThera();
 		case 8:
-			return Medicament.getLot();
+			return Medicament.getDotationU7();
 		case 9:
-			return Medicament.getLot();
+			return Medicament.getUid();
 		}
 		return null;
 	}
@@ -73,26 +78,40 @@ public class MedicamentTableModel extends EscrimTableModel {
 					aValue == null ? null : aValue.toString());
 			break;
 		case 2:
-			listeMedicament.get(rowIndex).setHauteur(
-					aValue == null ? new Float(0) : Float
-							.parseFloat(((String) aValue).trim()));
+			listeMedicament.get(rowIndex).setPrincipeActif(
+					aValue == null ? null : aValue.toString());
 			break;
 		case 3:
-			listeMedicament.get(rowIndex).setLongueur(
-					aValue == null ? new Float(0) : Float
-							.parseFloat(((String) aValue).trim()));
+			listeMedicament.get(rowIndex).setDosage(
+					aValue == null ? null : aValue.toString());
 			break;
 		case 4:
-			listeMedicament.get(rowIndex).setLargeur(
-					aValue == null ? new Float(0) : Float
-							.parseFloat(((String) aValue).trim()));
+			try {
+				listeMedicament.get(rowIndex).setDlu(
+						aValue == null ? new Date() : formatter.parse(aValue
+								.toString()));
+			} catch (ParseException e) {
+				// Ici faut renvoyer un msg d'erreur
+			}
 			break;
 		case 5:
-			listeMedicament.get(rowIndex).setPoids(
-					aValue == null ? new Float(0) : Float
-							.parseFloat(((String) aValue).trim()));
+			listeMedicament.get(rowIndex).setQuantite(
+					aValue == null ? new Integer(0) : Integer
+							.parseInt(((String) aValue).trim()));
 			break;
-
+		case 6:
+			listeMedicament.get(rowIndex).setLot(
+					aValue == null ? null : aValue.toString());
+			break;
+		case 7:
+			listeMedicament.get(rowIndex).setClasseThera(
+					aValue == null ? null : aValue.toString());
+			break;
+		case 8:
+			listeMedicament.get(rowIndex).setDotationU7(
+					aValue == null ? new Integer(0) : Integer
+							.parseInt(((String) aValue).trim()));
+			break;
 		default:
 			break;
 		}
