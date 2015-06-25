@@ -161,7 +161,6 @@ public class GestionTransport {
 						disableTransportButton(false);
 						tblModelTransport.persistData(
 								tableTransport.getSelectedRow() + 1, true);
-
 					}
 
 				});

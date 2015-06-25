@@ -90,7 +90,6 @@ public class TransportTableModel extends EscrimTableModel {
 			return String.class;
 		case 3:
 			return Integer.class;
-
 		}
 		return null;
 	}

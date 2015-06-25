@@ -42,5 +42,4 @@ public class Transport {
 	public void setPoidsMax(float poidsMax) {
 		this.poidsMax = poidsMax;
 	}
-
 }
