@@ -14,8 +14,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import escrim.model.table.CompartimentTableModel;
 
 public class GestionTransport {
 
@@ -27,18 +30,25 @@ public class GestionTransport {
 	private static JButton boutonQuitter;
 	private static JButton boutonSupprimerTransport;
 	private static JButton boutonModifierTransport;
+	private static JButton boutonValiderTransport;
+	private static JButton boutonAnnulerTransport;
 	private static JScrollPane scrollPanelTransport;
 	private static JPanel jpanelCompartiment;
 	private static JTextField txtCompartiment;
-	private static DefaultTableModel tblModelCompartiment;
+	private static CompartimentTableModel compartimentTableModel;
 	private static JTable tableCompartiment;
 	private static JButton boutonAjouterCompartiment;
 	private static JButton boutonQuitterCompartiment;
 	private static JButton boutonSupprimerCompartiment;
 	private static JButton boutonModifierCompartiment;
+	private static JButton boutonValiderCompartiment;
+	private static JButton boutonAnnulerCompartiment;
 	private static JScrollPane scrollPanelCompartiment;
 	private static JTabbedPane tabPrincipal;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static ActionListener CréationJpanelTransport(
 			JLayeredPane pPanelPrincipal) {
 
@@ -105,6 +115,15 @@ public class GestionTransport {
 				boutonModifierTransport = new JButton("Editer");
 				boutonModifierTransport.setBounds(230, 589, 97, 25);
 
+				boutonValiderTransport = new JButton("Valider");
+				boutonValiderTransport.setBounds(340, 589, 97, 25);
+
+				boutonAnnulerTransport = new JButton("Annuler");
+				boutonAnnulerTransport.setBounds(450, 589, 97, 25);
+
+				boutonValiderTransport.setEnabled(false);
+				boutonAnnulerTransport.setEnabled(false);
+
 				txtGestionTransport = new JTextField();
 				txtGestionTransport = new JTextField();
 				txtGestionTransport
@@ -123,10 +142,13 @@ public class GestionTransport {
 				// --------------------------------Onglet
 				// compartiment------------------------------------------------//
 
-				tblModelCompartiment = new DefaultTableModel();
-				tableCompartiment = new JTable(tblModelTransport);
+				// CompartimentManager.createCompartiment(1, 1, 1, 1, null);
+				compartimentTableModel = new CompartimentTableModel();
+				tableCompartiment = new JTable(compartimentTableModel);
 				tableCompartiment.setName("Table Compartiments");
 				tableCompartiment.setBounds(12, 72, 899, 800);
+				tableCompartiment
+						.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 				boutonQuitterCompartiment = new JButton("Quitter");
 				boutonQuitterCompartiment.setBounds(800, 13, 97, 25);
@@ -151,6 +173,78 @@ public class GestionTransport {
 
 				boutonModifierCompartiment = new JButton("Editer");
 				boutonModifierCompartiment.setBounds(230, 589, 97, 25);
+
+				boutonValiderCompartiment = new JButton("Valider");
+				boutonValiderCompartiment.setBounds(340, 589, 97, 25);
+
+				boutonAnnulerCompartiment = new JButton("Annuler");
+				boutonAnnulerCompartiment.setBounds(450, 589, 97, 25);
+
+				boutonValiderCompartiment.setEnabled(false);
+				boutonAnnulerCompartiment.setEnabled(false);
+
+				// Event sur les boutons
+
+				boutonSupprimerCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								compartimentTableModel
+										.removeElement(tableCompartiment
+												.getSelectedRow());
+
+							}
+
+						});
+
+				boutonAjouterCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								disableCompartimentButton(true);
+								compartimentTableModel.addElement();
+
+							}
+
+						});
+
+				boutonModifierCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+
+								compartimentTableModel
+										.updateElement(tableCompartiment
+												.getSelectedRow());
+
+							}
+
+						});
+
+				boutonValiderCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								if (tableCompartiment.isEditing()) {
+									tableCompartiment.getCellEditor()
+											.stopCellEditing();
+								}
+								disableCompartimentButton(false);
+								compartimentTableModel.persistData(
+										tableCompartiment.getSelectedRow(),
+										true);
+
+							}
+
+						});
+
+				boutonAnnulerCompartiment
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								disableCompartimentButton(false);
+								compartimentTableModel.persistData(
+										tableCompartiment.getSelectedRow(),
+										false);
+
+							}
+
+						});
 
 				txtCompartiment = new JTextField();
 				txtCompartiment = new JTextField();
@@ -180,6 +274,8 @@ public class GestionTransport {
 				jpanelCompartiment.add(boutonSupprimerCompartiment);
 				jpanelCompartiment.add(boutonAjouterCompartiment);
 				jpanelCompartiment.add(boutonQuitterCompartiment);
+				jpanelCompartiment.add(boutonValiderCompartiment);
+				jpanelCompartiment.add(boutonAnnulerCompartiment);
 
 				jpanelTransport = new JPanel();
 				jpanelTransport.add(boutonModifierTransport);
@@ -192,7 +288,8 @@ public class GestionTransport {
 				jpanelTransport.add(boutonModifierTransport);
 				jpanelTransport.add(boutonSupprimerTransport);
 				jpanelTransport.add(boutonAjouterTransport);
-				jpanelTransport.add(boutonAjouterTransport);
+				jpanelTransport.add(boutonValiderTransport);
+				jpanelTransport.add(boutonAnnulerTransport);
 
 				tabPrincipal = new JTabbedPane();
 				tabPrincipal.setName("Gestion Transport");
@@ -203,11 +300,32 @@ public class GestionTransport {
 				pPanelPrincipal.add(tabPrincipal, new Integer(2));
 				pPanelPrincipal.revalidate();
 
+				// Suppression de la colonne UID
+
+				// tableCompartiment.removeColumn(tableCompartiment
+				// .getColumn("uid"));
+
 			}
 		};
 
 		return action;
 
+	}
+
+	private static void disableCompartimentButton(boolean disable) {
+		if (disable) {
+			boutonAjouterCompartiment.setEnabled(false);
+			boutonSupprimerCompartiment.setEnabled(false);
+			boutonModifierCompartiment.setEnabled(false);
+			boutonValiderCompartiment.setEnabled(true);
+			boutonAnnulerCompartiment.setEnabled(true);
+		} else {
+			boutonAjouterCompartiment.setEnabled(true);
+			boutonSupprimerCompartiment.setEnabled(true);
+			boutonModifierCompartiment.setEnabled(true);
+			boutonValiderCompartiment.setEnabled(false);
+			boutonAnnulerCompartiment.setEnabled(false);
+		}
 	}
 
 };
