@@ -142,13 +142,14 @@ public class GestionTransport {
 				// --------------------------------Onglet
 				// compartiment------------------------------------------------//
 
-				// CompartimentManager.createCompartiment(1, 1, 1, 1, null);
 				compartimentTableModel = new CompartimentTableModel();
 				tableCompartiment = new JTable(compartimentTableModel);
 				tableCompartiment.setName("Table Compartiments");
 				tableCompartiment.setBounds(12, 72, 899, 800);
 				tableCompartiment
 						.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tableCompartiment.setCellSelectionEnabled(false);
+				tableCompartiment.setRowSelectionAllowed(true);
 
 				boutonQuitterCompartiment = new JButton("Quitter");
 				boutonQuitterCompartiment.setBounds(800, 13, 97, 25);
@@ -246,7 +247,6 @@ public class GestionTransport {
 
 						});
 
-				txtCompartiment = new JTextField();
 				txtCompartiment = new JTextField();
 				txtCompartiment.setHorizontalAlignment(SwingConstants.CENTER);
 				txtCompartiment.setEnabled(false);

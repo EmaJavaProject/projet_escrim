@@ -50,12 +50,12 @@ public class Materiel implements Metier {
 		this.colis = colis;
 	}
 
-	public int getId() {
+	public int getUid() {
 		return uid;
 	}
 
-	public void setId(int id) {
-		this.uid = id;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
 	public String getDenomination() {

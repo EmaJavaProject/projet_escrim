@@ -16,40 +16,37 @@ public abstract class EscrimTableModel extends DefaultTableModel {
 	protected boolean remove = false;
 	protected int editedRow;
 
-	public int getEditedRow() {
+	protected int getEditedRow() {
 		return editedRow;
 	}
 
-	public void setEditedRow(int editedRow) {
+	protected void setEditedRow(int editedRow) {
 		this.editedRow = editedRow;
 	}
 
-	public boolean isEdition() {
+	protected boolean isEdition() {
 		return edition;
 	}
 
-	public void setEdition(boolean edition) {
+	protected void setEdition(boolean edition) {
 		this.edition = edition;
 	}
 
-	public boolean isAddition() {
+	protected boolean isAddition() {
 		return addition;
 	}
 
-	public void setAddition(boolean add) {
+	protected void setAddition(boolean addition) {
 		this.addition = addition;
 	}
 
-	public boolean isRemove() {
+	protected boolean isRemove() {
 		return remove;
 	}
 
-	public void setRemove(boolean remove) {
+	protected void setRemove(boolean remove) {
 		this.remove = remove;
 	}
-
-	public static String[] materielColName = { "", "Dénomination",
-			"Observations", "Quantité", "uid" };
 
 	public static String[] medicColName = { "", "Dénomination",
 			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",

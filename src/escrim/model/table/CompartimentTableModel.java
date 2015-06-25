@@ -12,30 +12,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 	private String[] CompartimentColumnName = { "", "Nom", "Hauteur",
 			"Longueur", "Largeur", "Poids", "uid" };
 
-	public boolean isEdition() {
-		return edition;
-	}
-
-	public void setEdition(boolean edition) {
-		this.edition = edition;
-	}
-
-	public boolean isAddition() {
-		return addition;
-	}
-
-	public void setAddition(boolean addition) {
-		this.addition = addition;
-	}
-
-	public boolean isRemove() {
-		return remove;
-	}
-
-	public void setRemove(boolean remove) {
-		this.remove = remove;
-	}
-
 	public CompartimentTableModel() {
 		listeCompartiment = CompartimentManager.loadAllCompartiment();
 	}
@@ -148,36 +124,38 @@ public class CompartimentTableModel extends EscrimTableModel {
 
 	public void addElement() {
 		// Adds the element in the last position in the list
-		setAddition(true);
-		setEdition(false);
-		setRemove(false);
+		super.setAddition(true);
+		super.setEdition(false);
+		super.setRemove(false);
 		listeCompartiment.add(getRowCount(),
 				CompartimentManager.createTempCompartiment());
 		fireTableRowsInserted(0, getRowCount());
 	}
 
 	public void removeElement(int rowIndex) {
-		setRemove(true);
-		setAddition(false);
-		setEdition(false);
+		super.setRemove(true);
+		super.setAddition(false);
+		super.setEdition(false);
 		persistData(rowIndex, true);
 	}
 
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
-			if (isAddition() && !isEdition() && !isRemove()) {
+			if (super.isAddition() && !super.isEdition() && !super.isRemove()) {
 				CompartimentManager.createCompartiment(listeCompartiment
 						.get(rowIndex));
-				setAddition(false);
-			} else if (!isAddition() && isEdition() && !isRemove()) {
+				super.setAddition(false);
+			} else if (!super.isAddition() && super.isEdition()
+					&& !super.isRemove()) {
 				CompartimentManager.updateCompartiment(
 						listeCompartiment.get(rowIndex),
 						(Integer) getValueAt(rowIndex, 6));
-				setEdition(false);
-			} else if (!isAddition() && !isEdition() && isRemove()) {
+				super.setEdition(false);
+			} else if (!super.isAddition() && !super.isEdition()
+					&& super.isRemove()) {
 				CompartimentManager.removeCompartiment((Integer) getValueAt(
 						rowIndex, 6));
-				setRemove(false);
+				super.setRemove(false);
 			}
 		}
 
@@ -186,9 +164,9 @@ public class CompartimentTableModel extends EscrimTableModel {
 	}
 
 	public void updateElement(int rowIndex) {
-		setEditedRow(rowIndex);
-		setEdition(true);
-		setAddition(false);
-		setRemove(false);
+		super.setEditedRow(rowIndex);
+		super.setEdition(true);
+		super.setAddition(false);
+		super.setRemove(false);
 	}
 }
