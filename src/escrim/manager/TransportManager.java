@@ -1,21 +1,39 @@
 package escrim.manager;
 
+import java.util.List;
+
+import escrim.dao.TransportDao;
+import escrim.metiers.Transport;
+
 public class TransportManager {
 
-	public void createTransport() {
+	public static void createTransport(Transport Transport) {
+		TransportDao.create(Transport);
 
 	}
 
-	public void updateTransport() {
+	public static Transport createTempTransport() {
+		return new Transport();
+	}
+
+	public static void updateTransport(Transport Transport, int uid) {
+		TransportDao.update(Transport, uid);
 
 	}
 
-	public void deleteTransport() {
+	public static void removeTransport(int uid) {
+		Transport TransportRemoved = loadTransport(uid);
+		TransportDao.remove(TransportRemoved);
 
 	}
 
-	public void loadTransport() {
+	public static Transport loadTransport(int uid) {
+		return TransportDao.load(uid);
 
+	}
+
+	public static List<Transport> loadAllTransport() {
+		return TransportDao.loadAll();
 	}
 
 }

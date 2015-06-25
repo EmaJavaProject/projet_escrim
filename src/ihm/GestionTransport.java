@@ -19,12 +19,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import escrim.model.table.CompartimentTableModel;
+import escrim.model.table.TransportTableModel;
 
 public class GestionTransport {
 
 	private static JPanel jpanelTransport;
 	private static JTextField txtGestionTransport;
-	private static DefaultTableModel tblModelTransport;
+	private static TransportTableModel tblModelTransport;
 	private static JTable tableTransport;
 	private static JButton boutonAjouterTransport;
 	private static JButton boutonQuitter;
@@ -87,7 +88,8 @@ public class GestionTransport {
 				// --------------------------------Onglet
 				// Transport------------------------------------------------//
 
-				tblModelTransport = new DefaultTableModel();
+
+				tblModelTransport = new TransportTableModel();
 				tableTransport = new JTable(tblModelTransport);
 				tableTransport.setName("Table Transports");
 				tableTransport.setBounds(12, 72, 899, 800);
@@ -123,6 +125,58 @@ public class GestionTransport {
 
 				boutonValiderTransport.setEnabled(false);
 				boutonAnnulerTransport.setEnabled(false);
+
+				boutonSupprimerTransport
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								tblModelTransport.removeElement(tableTransport
+										.getSelectedRow());
+
+							}
+
+						});
+
+				boutonAjouterTransport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						disableTransportButton(true);
+						tblModelTransport.addElement();
+
+					}
+
+				});
+
+				boutonModifierTransport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+
+						tblModelTransport.updateElement(tableTransport
+								.getSelectedRow());
+
+					}
+
+				});
+
+				boutonValiderTransport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (tableTransport.isEditing()) {
+							tableTransport.getCellEditor().stopCellEditing();
+						}
+						disableTransportButton(false);
+						tblModelTransport.persistData(
+								tableTransport.getSelectedRow() + 1, true);
+
+					}
+
+				});
+
+				boutonAnnulerTransport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						disableTransportButton(false);
+						tblModelTransport.persistData(
+								tableTransport.getSelectedRow(), false);
+
+					}
+
+				});
 
 				txtGestionTransport = new JTextField();
 				txtGestionTransport = new JTextField();
@@ -325,6 +379,21 @@ public class GestionTransport {
 			boutonModifierCompartiment.setEnabled(true);
 			boutonValiderCompartiment.setEnabled(false);
 			boutonAnnulerCompartiment.setEnabled(false);
+		}
+	}
+	private static void disableTransportButton(boolean disable) {
+		if (disable) {
+			boutonAjouterTransport.setEnabled(false);
+			boutonSupprimerTransport.setEnabled(false);
+			boutonModifierTransport.setEnabled(false);
+			boutonValiderTransport.setEnabled(true);
+			boutonAnnulerTransport.setEnabled(true);
+		} else {
+			boutonAjouterTransport.setEnabled(true);
+			boutonSupprimerTransport.setEnabled(true);
+			boutonModifierTransport.setEnabled(true);
+			boutonValiderTransport.setEnabled(false);
+			boutonAnnulerTransport.setEnabled(false);
 		}
 	}
 
