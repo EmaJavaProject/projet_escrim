@@ -89,7 +89,9 @@ public class Stock {
 
 		btnSupprimerStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(!(tableContenu.getSelectedRow()==-1)){
 				materielTableModel.removeElement(tableContenu.getSelectedRow());
+				}
 
 			}
 
