@@ -128,8 +128,8 @@ public class MaterielTableModel extends EscrimTableModel {
 				setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {
-				MaterielManager
-						.removeMateriel((Integer) getValueAt(rowIndex, 6));
+				MaterielManager.removeMateriel((Integer) getValueAt(rowIndex,
+						getColumnCount() - 1));
 				setRemove(false);
 			}
 		}

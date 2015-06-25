@@ -53,9 +53,9 @@ public class Stock {
 
 		materielTableModel = new MaterielTableModel();
 		tableContenu = new JTable(materielTableModel);
-		tableContenu.setRowSelectionAllowed(true);
 		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableContenu.setCellSelectionEnabled(false);
+		tableContenu.setRowSelectionAllowed(true);
 
 		btnAjouterStockContenu = new JButton("+");
 		btnAjouterStockContenu.setBounds(12, 589, 97, 25);
@@ -215,12 +215,14 @@ public class Stock {
 			btnAjouterStockContenu.setEnabled(false);
 			btnSupprimerStockContenu.setEnabled(false);
 			btnEditerStockContenu.setEnabled(false);
+			btnLocaliserStockContenu.setEnabled(false);
 			btnValiderStockContenu.setEnabled(true);
 			btnAnnulerStockContenu.setEnabled(true);
 		} else {
 			btnAjouterStockContenu.setEnabled(true);
 			btnSupprimerStockContenu.setEnabled(true);
 			btnEditerStockContenu.setEnabled(true);
+			btnLocaliserStockContenu.setEnabled(true);
 			btnValiderStockContenu.setEnabled(false);
 			btnAnnulerStockContenu.setEnabled(false);
 		}

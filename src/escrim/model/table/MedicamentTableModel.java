@@ -3,14 +3,16 @@ package escrim.model.table;
 import java.util.List;
 
 import escrim.manager.CompartimentManager;
+import escrim.manager.MedicamentManager;
 import escrim.metiers.Compartiment;
+import escrim.metiers.Medicament;
 
 @SuppressWarnings("serial")
-public class CompartimentTableModel extends EscrimTableModel {
-	private List<Compartiment> listeCompartiment = CompartimentManager
-			.loadAllCompartiment();
-	private String[] CompartimentColumnName = { "", "Nom", "Hauteur",
-			"Longueur", "Largeur", "Poids", "uid" };
+public class MedicamentTableModel extends EscrimTableModel {
+	private List<Medicament> listeMedicament = MedicamentManager
+			.loadAllMedicament();
+	private String[] MedicamentColumnName = { "", "Nom", "Hauteur", "Longueur",
+			"Largeur", "Poids", "uid" };
 
 	public CompartimentTableModel() {
 		listeCompartiment = CompartimentManager.loadAllCompartiment();
