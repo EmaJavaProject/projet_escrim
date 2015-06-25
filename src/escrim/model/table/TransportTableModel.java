@@ -9,32 +9,8 @@ import escrim.metiers.Transport;
 public class TransportTableModel extends EscrimTableModel {
 	private List<Transport> listeTransport = TransportManager
 			.loadAllTransport();
-	private String[] TransportColumnName = { "", "Dénomination", "Compartiments",
-	"uid" };
-
-	public boolean isEdition() {
-		return edition;
-	}
-
-	public void setEdition(boolean edition) {
-		this.edition = edition;
-	}
-
-	public boolean isAddition() {
-		return addition;
-	}
-
-	public void setAddition(boolean addition) {
-		this.addition = addition;
-	}
-
-	public boolean isRemove() {
-		return remove;
-	}
-
-	public void setRemove(boolean remove) {
-		this.remove = remove;
-	}
+	private String[] TransportColumnName = { "", "Dénomination",
+			"Compartiments", "uid" };
 
 	public TransportTableModel() {
 		listeTransport = TransportManager.loadAllTransport();
@@ -56,7 +32,7 @@ public class TransportTableModel extends EscrimTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 7;
+		return 4;
 	}
 
 	@Override
@@ -88,7 +64,7 @@ public class TransportTableModel extends EscrimTableModel {
 			break;
 		case 2:
 			listeTransport.get(rowIndex).setDenomination(
-					 aValue == null ? null : aValue.toString());
+					aValue == null ? null : aValue.toString());
 			break;
 
 		default:
@@ -141,17 +117,15 @@ public class TransportTableModel extends EscrimTableModel {
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
 			if (isAddition() && !isEdition() && !isRemove()) {
-				TransportManager.createTransport(listeTransport
-						.get(rowIndex));
+				TransportManager.createTransport(listeTransport.get(rowIndex));
 				setAddition(false);
 			} else if (!isAddition() && isEdition() && !isRemove()) {
-				TransportManager.updateTransport(
-						listeTransport.get(rowIndex),
+				TransportManager.updateTransport(listeTransport.get(rowIndex),
 						(Integer) getValueAt(rowIndex, 6));
 				setEdition(false);
 			} else if (!isAddition() && !isEdition() && isRemove()) {
-				TransportManager.removeTransport((Integer) getValueAt(
-						rowIndex, 6));
+				TransportManager.removeTransport((Integer) getValueAt(rowIndex,
+						6));
 				setRemove(false);
 			}
 		}

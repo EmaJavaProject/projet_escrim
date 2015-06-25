@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Transport implements Metier {
+public class Transport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

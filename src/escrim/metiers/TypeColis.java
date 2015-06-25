@@ -13,7 +13,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class TypeColis implements Metier {
+public class TypeColis {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -20,13 +20,13 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class Colis implements Metier {
+public class Colis {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
 	private String affectation;
-	private String optionnel; 
+	private String optionnel;
 	@ManyToOne
 	private Localisation localisation;
 	@ManyToOne

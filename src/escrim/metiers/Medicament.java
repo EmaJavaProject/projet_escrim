@@ -15,18 +15,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Medicament extends Materiel {
-	
+
 	private String principeActif;
 	private String dosage;
-	
-@Temporal(TemporalType.DATE)
+
+	@Temporal(TemporalType.DATE)
 	private java.util.Date dlu;
 
 	private String lot;
-	//Classe thérapeuthique
+	// Classe thérapeuthique
 	private String classeThera;
 	private int dotationU7;
-	
 
 	public String getPrincipeActif() {
 		return principeActif;
@@ -86,7 +85,5 @@ public class Medicament extends Materiel {
 		super(id, denomation, colis, observations, quantite);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }

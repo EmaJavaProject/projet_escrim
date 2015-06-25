@@ -2,31 +2,30 @@ package escrim.model.table;
 
 import java.util.List;
 
-import escrim.manager.CompartimentManager;
 import escrim.manager.MedicamentManager;
-import escrim.metiers.Compartiment;
 import escrim.metiers.Medicament;
 
 @SuppressWarnings("serial")
 public class MedicamentTableModel extends EscrimTableModel {
 	private List<Medicament> listeMedicament = MedicamentManager
 			.loadAllMedicament();
-	private String[] MedicamentColumnName = { "", "Nom", "Hauteur", "Longueur",
-			"Largeur", "Poids", "uid" };
+	private String[] MedicamentColumnName = { "", "Dénomination",
+			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
+			"Classe Thérapeutique", "Dotation U7", "uid" };
 
-	public CompartimentTableModel() {
-		listeCompartiment = CompartimentManager.loadAllCompartiment();
+	public MedicamentTableModel() {
+		listeMedicament = MedicamentManager.loadAllMedicament();
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		return CompartimentColumnName[columnIndex];
+		return MedicamentColumnName[columnIndex];
 	}
 
 	@Override
 	public int getRowCount() {
-		if (listeCompartiment != null) {
-			return listeCompartiment.size();
+		if (listeMedicament != null) {
+			return listeMedicament.size();
 		} else {
 			return 0;
 		}
@@ -34,27 +33,33 @@ public class MedicamentTableModel extends EscrimTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 7;
+		return 10;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Compartiment compartiment = listeCompartiment.get(rowIndex);
+		Medicament Medicament = listeMedicament.get(rowIndex);
 		switch (columnIndex) {
 		case 0:
 			return null;
 		case 1:
-			return compartiment.getNom();
+			return Medicament.getDenomination();
 		case 2:
-			return compartiment.getHauteur();
+			return Medicament.getPrincipeActif();
 		case 3:
-			return compartiment.getLongueur();
+			return Medicament.getDosage();
 		case 4:
-			return compartiment.getLargeur();
+			return Medicament.getDlu();
 		case 5:
-			return compartiment.getPoids();
+			return Medicament.getQuantite();
 		case 6:
-			return compartiment.getUid();
+			return Medicament.getLot();
+		case 7:
+			return Medicament.getLot();
+		case 8:
+			return Medicament.getLot();
+		case 9:
+			return Medicament.getLot();
 		}
 		return null;
 	}
@@ -64,26 +69,26 @@ public class MedicamentTableModel extends EscrimTableModel {
 		switch (columnIndex) {
 
 		case 1:
-			listeCompartiment.get(rowIndex).setNom(
+			listeMedicament.get(rowIndex).setDenomination(
 					aValue == null ? null : aValue.toString());
 			break;
 		case 2:
-			listeCompartiment.get(rowIndex).setHauteur(
+			listeMedicament.get(rowIndex).setHauteur(
 					aValue == null ? new Float(0) : Float
 							.parseFloat(((String) aValue).trim()));
 			break;
 		case 3:
-			listeCompartiment.get(rowIndex).setLongueur(
+			listeMedicament.get(rowIndex).setLongueur(
 					aValue == null ? new Float(0) : Float
 							.parseFloat(((String) aValue).trim()));
 			break;
 		case 4:
-			listeCompartiment.get(rowIndex).setLargeur(
+			listeMedicament.get(rowIndex).setLargeur(
 					aValue == null ? new Float(0) : Float
 							.parseFloat(((String) aValue).trim()));
 			break;
 		case 5:
-			listeCompartiment.get(rowIndex).setPoids(
+			listeMedicament.get(rowIndex).setPoids(
 					aValue == null ? new Float(0) : Float
 							.parseFloat(((String) aValue).trim()));
 			break;
@@ -94,11 +99,11 @@ public class MedicamentTableModel extends EscrimTableModel {
 	}
 
 	public void validatePersistance(int rowIndex) {
-		CompartimentManager.createCompartiment(listeCompartiment.get(rowIndex));
+		MedicamentManager.createMedicament(listeMedicament.get(rowIndex));
 	}
 
 	public void refreshModel() {
-		listeCompartiment = CompartimentManager.loadAllCompartiment();
+		listeMedicament = MedicamentManager.loadAllMedicament();
 		fireTableDataChanged();
 	}
 
@@ -129,8 +134,8 @@ public class MedicamentTableModel extends EscrimTableModel {
 		super.setAddition(true);
 		super.setEdition(false);
 		super.setRemove(false);
-		listeCompartiment.add(getRowCount(),
-				CompartimentManager.createTempCompartiment());
+		listeMedicament.add(getRowCount(),
+				MedicamentManager.createTempMedicament());
 		fireTableRowsInserted(0, getRowCount());
 	}
 
@@ -144,18 +149,18 @@ public class MedicamentTableModel extends EscrimTableModel {
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
 			if (super.isAddition() && !super.isEdition() && !super.isRemove()) {
-				CompartimentManager.createCompartiment(listeCompartiment
+				MedicamentManager.createMedicament(listeMedicament
 						.get(rowIndex));
 				super.setAddition(false);
 			} else if (!super.isAddition() && super.isEdition()
 					&& !super.isRemove()) {
-				CompartimentManager.updateCompartiment(
-						listeCompartiment.get(rowIndex),
+				MedicamentManager.updateMedicament(
+						listeMedicament.get(rowIndex),
 						(Integer) getValueAt(rowIndex, 6));
 				super.setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {
-				CompartimentManager.removeCompartiment((Integer) getValueAt(
+				MedicamentManager.removeMedicament((Integer) getValueAt(
 						rowIndex, getColumnCount() - 1));
 				super.setRemove(false);
 			}
