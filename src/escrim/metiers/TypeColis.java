@@ -7,11 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Martin
  *
  */
+
+@Table
 @Entity
 public class TypeColis {
 
@@ -61,8 +64,8 @@ public class TypeColis {
 		return volume;
 	}
 
-	public void setVolume(float volume) {
-		this.volume = volume;
+	public void setVolume() {
+		this.volume = getLargeur() * getLongueur() * getHauteur();
 	}
 
 	public float getPoidsMax() {

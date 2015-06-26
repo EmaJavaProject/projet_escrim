@@ -128,9 +128,11 @@ public class GestionTransport {
 						.addActionListener(new ActionListener() {
 							@SuppressWarnings("deprecation")
 							public void actionPerformed(ActionEvent arg0) {
-								if(!(tableTransport.getSelectedRow()==-1)){
-								tblModelTransport.removeElement(tableTransport
-										.getSelectedRow());}
+								if (!(tableTransport.getSelectedRow() == -1)) {
+									tblModelTransport
+											.removeElement(tableTransport
+													.getSelectedRow());
+								}
 							}
 
 						});
@@ -149,11 +151,12 @@ public class GestionTransport {
 
 				boutonModifierTransport.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if (!(tableTransport.getSelectedRow() == -1)) {
+							disableTransportButton(true);
+							tblModelTransport.updateElement(tableTransport
+									.getSelectedRow());
 
-						disableTransportButton(true);
-						tblModelTransport.updateElement(tableTransport
-								.getSelectedRow());
-
+						}
 					}
 
 				});
@@ -245,9 +248,11 @@ public class GestionTransport {
 				boutonSupprimerCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-							if(!(tableCompartiment.getSelectedRow()==-1)){
-								compartimentTableModel.removeElement(tableCompartiment
-										.getSelectedRow());}
+								if (!(tableCompartiment.getSelectedRow() == -1)) {
+									compartimentTableModel
+											.removeElement(tableCompartiment
+													.getSelectedRow());
+								}
 							}
 
 						});
@@ -255,12 +260,13 @@ public class GestionTransport {
 				boutonAjouterCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-								disableCompartimentButton(true);
-								compartimentTableModel.addElement();
-								tableCompartiment.setRowSelectionInterval(
-										tableCompartiment.getRowCount() - 1,
-										tableCompartiment.getRowCount() - 1);
-
+								if (!(tableCompartiment.getSelectedRow() == -1)) {
+									disableCompartimentButton(true);
+									compartimentTableModel.addElement();
+									tableCompartiment.setRowSelectionInterval(
+											tableCompartiment.getRowCount() - 1,
+											tableCompartiment.getRowCount() - 1);
+								}
 							}
 
 						});
@@ -360,8 +366,9 @@ public class GestionTransport {
 
 				// Suppression de la colonne UID
 
-				// tableCompartiment.removeColumn(tableCompartiment
-				// .getColumn("uid"));
+				tableCompartiment.removeColumn(tableCompartiment
+						.getColumn("uid"));
+				tableTransport.removeColumn(tableTransport.getColumn("uid"));
 
 			}
 		};
@@ -369,6 +376,12 @@ public class GestionTransport {
 		return action;
 
 	}
+
+	/**
+	 * Fonction de gestion des boutons de la vue compartiment
+	 * 
+	 * @param disable
+	 */
 
 	private static void disableCompartimentButton(boolean disable) {
 		if (disable) {
@@ -385,6 +398,12 @@ public class GestionTransport {
 			boutonAnnulerCompartiment.setEnabled(false);
 		}
 	}
+
+	/**
+	 * Fonction de gestion des boutons de la vue Transport
+	 * 
+	 * @param disable
+	 */
 
 	private static void disableTransportButton(boolean disable) {
 		if (disable) {

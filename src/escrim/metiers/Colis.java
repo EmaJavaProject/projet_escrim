@@ -26,11 +26,10 @@ public class Colis {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
 	private String affectation;
-	private String optionnel;
+	private boolean optionnel;
+	private int secteur;
 	@ManyToOne
-	private Localisation localisation;
-	@ManyToOne
-	private TypeColis typeColis;
+	private TypeColis typeColis = new TypeColis();
 	private int numeroColis;
 	private String designation;
 	@OneToMany(mappedBy = "colis", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
@@ -58,20 +57,20 @@ public class Colis {
 		this.affectation = affectation;
 	}
 
-	public String getOptionnel() {
+	public boolean isOptionnel() {
 		return optionnel;
 	}
 
-	public void setOptionnel(String optionnel) {
+	public void setOptionnel(boolean optionnel) {
 		this.optionnel = optionnel;
 	}
 
-	public Localisation getSecteur() {
-		return localisation;
+	public int getSecteur() {
+		return secteur;
 	}
 
-	public void setSecteur(Localisation localisation) {
-		this.localisation = localisation;
+	public void setSecteur(int secteur) {
+		this.secteur = secteur;
 	}
 
 	public TypeColis getTypeColis() {

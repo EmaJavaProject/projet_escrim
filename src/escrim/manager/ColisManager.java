@@ -7,8 +7,10 @@ import escrim.metiers.Colis;
 
 public class ColisManager {
 
-	public static void createColis(Colis Colis) {
-		ColisDao.create(Colis);
+	public static void createColis(Colis colis) {
+		colis.setTypeColis(TypeColisManager.findTypeColisByName(colis
+				.getTypeColis().getDesignation()));
+		ColisDao.create(colis);
 
 	}
 
@@ -16,14 +18,14 @@ public class ColisManager {
 		return new Colis();
 	}
 
-	public static void updateColis(Colis Colis, int uid) {
-		ColisDao.update(Colis, uid);
+	public static void updateColis(Colis colis, int uid) {
+		ColisDao.update(colis, uid);
 
 	}
 
 	public static void removeColis(int uid) {
-		Colis ColisRemoved = loadColis(uid);
-		ColisDao.remove(ColisRemoved);
+		Colis colisRemoved = loadColis(uid);
+		ColisDao.remove(colisRemoved);
 
 	}
 

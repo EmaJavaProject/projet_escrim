@@ -103,7 +103,6 @@ public class Main_gui {
 		menu = new JMenuBar();
 		menu.add(mnFichier);
 		menu.add(menuGestion);
-		
 
 		tabPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		tabPrincipal.setName("");
@@ -114,10 +113,11 @@ public class Main_gui {
 		sousMenuGestionTransport.addActionListener(GestionTransport
 				.CréationJpanelTransport(gestionairePage));
 		menuGestion.add(sousMenuGestionTransport);
-		
-		sousMenuHopitalColis = new JMenuItem("Gestion configuration hopital / Création de colis");
-		sousMenuHopitalColis.addActionListener(CreationHopitalColis
-				.CréationJpanelColis(gestionairePage));
+
+		sousMenuHopitalColis = new JMenuItem(
+				"Gestion configuration hopital / Création de Type colis");
+		sousMenuHopitalColis.addActionListener(CreationHopitalTypeColis
+				.CréationJpanelTypeColis(gestionairePage));
 		menuGestion.add(sousMenuHopitalColis);
 
 		stockPage = new Stock(tabPrincipal);

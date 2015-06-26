@@ -7,7 +7,6 @@
 		<class>escrim.metiers.TypeColis</class>
 		<class>escrim.metiers.Compartiment</class>
 		<class>escrim.metiers.ConfigurationHopital</class>
-		<class>escrim.metiers.Localisation</class>
 		<class>escrim.metiers.Transport</class>
 		<properties>
 

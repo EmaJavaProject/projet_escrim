@@ -158,7 +158,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 	}
 
 	public void addElement() {
-		// Adds the element in the last position in the list
 		super.setAddition(true);
 		super.setEdition(false);
 		super.setRemove(false);

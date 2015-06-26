@@ -17,23 +17,22 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import escrim.model.table.ColisTableModel;
 import escrim.model.table.ConfigurationHopitalTableModel;
-import escrim.model.table.EscrimTableModel;
+import escrim.model.table.TypeColisTableModel;
 
-public class CreationHopitalColis {
+public class CreationHopitalTypeColis {
 
-	private static JPanel jpanelColis;
-	private static JTable tableColis;
-	private static JScrollPane scrollPanelColis;
-	private static JTextField txtColis;
-	private static ColisTableModel tblModelColis;
-	private static JButton boutonAjouterColis;
+	private static JPanel jpanelTypeColis;
+	private static JTable tableTypeColis;
+	private static JScrollPane scrollPanelTypeColis;
+	private static JTextField txtTypeColis;
+	private static TypeColisTableModel typeColisTableModel;
+	private static JButton boutonAjouterTypeColis;
 	private static JButton boutonQuitter;
-	private static JButton boutonSupprimerColis;
-	private static JButton boutonModifierColis;
-	private static JButton boutonValiderColis;
-	private static JButton boutonAnnulerColis;
+	private static JButton boutonSupprimerTypeColis;
+	private static JButton boutonModifierTypeColis;
+	private static JButton boutonValiderTypeColis;
+	private static JButton boutonAnnulerTypeColis;
 	private static JTabbedPane tabPrincipal;
 	private static JPanel jpanelConfigurationHopital;
 	private static JTextField txtConfigurationHopital;
@@ -47,7 +46,7 @@ public class CreationHopitalColis {
 	private static JButton boutonAnnulerConfigurationHopital;
 	private static JScrollPane scrollPanelConfigurationHopital;
 
-	public static ActionListener CréationJpanelColis(
+	public static ActionListener CréationJpanelTypeColis(
 			JLayeredPane pPanelPrincipal) {
 
 		ActionListener action = new ActionListener() {
@@ -61,8 +60,9 @@ public class CreationHopitalColis {
 
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
-									&& composantsPanelPrincipal.getName()
-											.equals("Création de colis")) {
+									&& composantsPanelPrincipal
+											.getName()
+											.equals("Création de type de colis")) {
 								return;
 							}
 						}
@@ -92,7 +92,7 @@ public class CreationHopitalColis {
 								for (Component composant : pPanelPrincipal
 										.getComponents()) {
 									if (composant.getName().equals(
-											"Création de colis"))
+											"Création de type de colis"))
 										pPanelPrincipal.remove(composant);
 								}
 								pPanelPrincipal.repaint();
@@ -208,10 +208,10 @@ public class CreationHopitalColis {
 				// ------------------------------------ Jpanel
 				// Colis---------------------------//
 
-				tblModelColis = new ColisTableModel();
-				tableColis = new JTable(tblModelColis);
-				tableColis.setName("Table Colis");
-				tableColis.setBounds(12, 72, 899, 800);
+				typeColisTableModel = new TypeColisTableModel();
+				tableTypeColis = new JTable(typeColisTableModel);
+				tableTypeColis.setName("Table Colis");
+				tableTypeColis.setBounds(12, 72, 899, 800);
 				boutonQuitter = new JButton("Quitter");
 				boutonQuitter.setBounds(800, 13, 97, 25);
 				boutonQuitter.addMouseListener(new MouseAdapter() {
@@ -219,7 +219,8 @@ public class CreationHopitalColis {
 					public void mouseClicked(MouseEvent arg0) {
 						for (Component composant : pPanelPrincipal
 								.getComponents()) {
-							if (composant.getName().equals("Création de colis"))
+							if (composant.getName().equals(
+									"Création de type de colis"))
 								pPanelPrincipal.remove(composant);
 						}
 						pPanelPrincipal.repaint();
@@ -227,36 +228,94 @@ public class CreationHopitalColis {
 					}
 				});
 
-				boutonAjouterColis = new JButton("+");
-				boutonAjouterColis.setBounds(12, 589, 97, 25);
+				boutonAjouterTypeColis = new JButton("+");
+				boutonAjouterTypeColis.setBounds(12, 589, 97, 25);
 
-				boutonSupprimerColis = new JButton("-");
-				boutonSupprimerColis.setBounds(121, 589, 97, 25);
+				boutonSupprimerTypeColis = new JButton("-");
+				boutonSupprimerTypeColis.setBounds(121, 589, 97, 25);
 
-				boutonModifierColis = new JButton("Editer");
-				boutonModifierColis.setBounds(230, 589, 97, 25);
+				boutonModifierTypeColis = new JButton("Editer");
+				boutonModifierTypeColis.setBounds(230, 589, 97, 25);
 
-				boutonValiderColis = new JButton("Valider");
-				boutonValiderColis.setBounds(340, 589, 97, 25);
+				boutonValiderTypeColis = new JButton("Valider");
+				boutonValiderTypeColis.setBounds(340, 589, 97, 25);
 
-				boutonAnnulerColis = new JButton("Annuler");
-				boutonAnnulerColis.setBounds(450, 589, 97, 25);
+				boutonAnnulerTypeColis = new JButton("Annuler");
+				boutonAnnulerTypeColis.setBounds(450, 589, 97, 25);
 
-				boutonValiderColis.setEnabled(false);
-				boutonAnnulerColis.setEnabled(false);
+				boutonValiderTypeColis.setEnabled(false);
+				boutonAnnulerTypeColis.setEnabled(false);
 
-				scrollPanelColis = new JScrollPane();
-				scrollPanelColis.setName("Scroll Colis");
-				scrollPanelColis.setViewportView(tableColis);
-				scrollPanelColis.setBounds(12, 56, 950, 486);
+				boutonSupprimerTypeColis
+						.addActionListener(new ActionListener() {
+							@SuppressWarnings("deprecation")
+							public void actionPerformed(ActionEvent arg0) {
+								if (!(tableTypeColis.getSelectedRow() == -1)) {
+									typeColisTableModel
+											.removeElement(tableTypeColis
+													.getSelectedRow());
+								}
+							}
 
-				txtColis = new JTextField();
-				txtColis.setHorizontalAlignment(SwingConstants.CENTER);
-				txtColis.setEnabled(false);
-				txtColis.setPreferredSize(new Dimension(20, 20));
-				txtColis.setText("Gestion Colis");
-				txtColis.setColumns(10);
-				txtColis.setBounds(44, 11, 260, 25);
+						});
+
+				boutonAjouterTypeColis.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						disableTypeColisButton(true);
+						typeColisTableModel.addElement();
+						tableTypeColis.setRowSelectionInterval(
+								tableTypeColis.getRowCount() - 1,
+								tableTypeColis.getRowCount() - 1);
+
+					}
+
+				});
+
+				boutonModifierTypeColis.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+
+						disableTypeColisButton(true);
+						typeColisTableModel.updateElement(tableTypeColis
+								.getSelectedRow());
+
+					}
+
+				});
+
+				boutonValiderTypeColis.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (tableTypeColis.isEditing()) {
+							tableTypeColis.getCellEditor().stopCellEditing();
+						}
+						disableTypeColisButton(false);
+						typeColisTableModel.persistData(
+								tableTypeColis.getSelectedRow(), true);
+					}
+
+				});
+
+				boutonAnnulerTypeColis.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						disableTypeColisButton(false);
+						typeColisTableModel.persistData(
+								tableTypeColis.getSelectedRow(), false);
+
+					}
+
+				});
+
+				scrollPanelTypeColis = new JScrollPane();
+				scrollPanelTypeColis.setName("Scroll TypeColis");
+				scrollPanelTypeColis.setViewportView(tableTypeColis);
+				scrollPanelTypeColis.setBounds(12, 56, 950, 486);
+
+				txtTypeColis = new JTextField();
+				txtTypeColis.setHorizontalAlignment(SwingConstants.CENTER);
+				txtTypeColis.setEnabled(false);
+				txtTypeColis.setPreferredSize(new Dimension(20, 20));
+				txtTypeColis.setText("Gestion Type de Colis");
+				txtTypeColis.setColumns(10);
+				txtTypeColis.setBounds(44, 11, 260, 25);
 
 				// ---------------------------------------------création et
 				// ajout des Jpanel dans le
@@ -282,25 +341,25 @@ public class CreationHopitalColis {
 				jpanelConfigurationHopital
 						.add(boutonAnnulerConfigurationHopital);
 
-				jpanelColis = new JPanel();
-				jpanelColis.add(boutonModifierColis);
-				jpanelColis.setBounds(0, 0, 1017, 706);
-				jpanelColis.setName("Création De colis");
-				jpanelColis.add(txtColis);
-				jpanelColis.add(scrollPanelColis);
-				jpanelColis.setLayout(null);
-				jpanelColis.add(boutonQuitter);
-				jpanelColis.add(boutonModifierColis);
-				jpanelColis.add(boutonSupprimerColis);
-				jpanelColis.add(boutonAjouterColis);
-				jpanelColis.add(boutonValiderColis);
-				jpanelColis.add(boutonAnnulerColis);
+				jpanelTypeColis = new JPanel();
+				jpanelTypeColis.add(boutonModifierTypeColis);
+				jpanelTypeColis.setBounds(0, 0, 1017, 706);
+				jpanelTypeColis.setName("Création de type de colis");
+				jpanelTypeColis.add(txtTypeColis);
+				jpanelTypeColis.add(scrollPanelTypeColis);
+				jpanelTypeColis.setLayout(null);
+				jpanelTypeColis.add(boutonQuitter);
+				jpanelTypeColis.add(boutonModifierTypeColis);
+				jpanelTypeColis.add(boutonSupprimerTypeColis);
+				jpanelTypeColis.add(boutonAjouterTypeColis);
+				jpanelTypeColis.add(boutonValiderTypeColis);
+				jpanelTypeColis.add(boutonAnnulerTypeColis);
 
 				tabPrincipal = new JTabbedPane();
-				tabPrincipal.setName("Création de colis");
+				tabPrincipal.setName("Création de type de colis");
 				tabPrincipal.setBounds(0, 0, 1017, 706);
 				tabPrincipal.add(jpanelConfigurationHopital);
-				tabPrincipal.add(jpanelColis);
+				tabPrincipal.add(jpanelTypeColis);
 
 				pPanelPrincipal.add(tabPrincipal, new Integer(3));
 				pPanelPrincipal.revalidate();
@@ -325,6 +384,22 @@ public class CreationHopitalColis {
 			boutonModifierConfigurationHopital.setEnabled(true);
 			boutonValiderConfigurationHopital.setEnabled(false);
 			boutonAnnulerConfigurationHopital.setEnabled(false);
+		}
+	}
+
+	private static void disableTypeColisButton(boolean disable) {
+		if (disable) {
+			boutonAjouterTypeColis.setEnabled(false);
+			boutonSupprimerTypeColis.setEnabled(false);
+			boutonModifierTypeColis.setEnabled(false);
+			boutonValiderTypeColis.setEnabled(true);
+			boutonAnnulerTypeColis.setEnabled(true);
+		} else {
+			boutonAjouterTypeColis.setEnabled(true);
+			boutonSupprimerTypeColis.setEnabled(true);
+			boutonModifierTypeColis.setEnabled(true);
+			boutonValiderTypeColis.setEnabled(false);
+			boutonAnnulerTypeColis.setEnabled(false);
 		}
 	}
 
