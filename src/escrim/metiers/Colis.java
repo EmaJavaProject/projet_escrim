@@ -32,7 +32,7 @@ public class Colis {
 	@ManyToOne
 	private TypeColis typeColis;
 	private int numeroColis;
-	private String nomColis;
+	private String designation;
 	@OneToMany(mappedBy = "colis", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Materiel> listeMateriel;
 	private float valeur;
@@ -90,14 +90,6 @@ public class Colis {
 		this.numeroColis = numeroColis;
 	}
 
-	public String getNomColis() {
-		return nomColis;
-	}
-
-	public void setNomColis(String nomColis) {
-		this.nomColis = nomColis;
-	}
-
 	public List<Materiel> getListeMateriel() {
 		return listeMateriel;
 	}
@@ -145,6 +137,14 @@ public class Colis {
 	public void setListeConfigDuColis(
 			List<ConfigurationHopital> listeConfigDuColis) {
 		this.listeConfigDuColis = listeConfigDuColis;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 }

@@ -1,6 +1,11 @@
 package escrim.model.table;
 
+import java.util.List;
+
+import javax.persistence.ManyToMany;
 import javax.swing.table.DefaultTableModel;
+
+import escrim.metiers.Colis;
 
 /**
  * Classe de gestion du modèle de table
@@ -62,6 +67,8 @@ public abstract class EscrimTableModel extends DefaultTableModel {
 
 	public static String[] AvionColumnName = { "", "Nom", "Compartiments",
 			"uid" };
+
+
 
 	@Override
 	public boolean isCellEditable(int row, int column) {
