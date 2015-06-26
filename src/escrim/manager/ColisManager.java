@@ -4,12 +4,15 @@ import java.util.List;
 
 import escrim.dao.ColisDao;
 import escrim.metiers.Colis;
+import escrim.metiers.TypeColis;
 
 public class ColisManager {
 
 	public static void createColis(Colis colis) {
-		colis.setTypeColis(TypeColisManager.findTypeColisByName(colis
-				.getTypeColis().getDesignation()));
+		TypeColis typeColis = new TypeColis();
+		typeColis = TypeColisManager.findTypeColisByName(colis.getTypeColis()
+				.getDesignation());
+		colis.setTypeColis(typeColis);
 		ColisDao.create(colis);
 
 	}
@@ -19,6 +22,10 @@ public class ColisManager {
 	}
 
 	public static void updateColis(Colis colis, int uid) {
+		TypeColis typeColis = new TypeColis();
+		typeColis = TypeColisManager.findTypeColisByName(colis.getTypeColis()
+				.getDesignation());
+		colis.setTypeColis(typeColis);
 		ColisDao.update(colis, uid);
 
 	}

@@ -99,22 +99,23 @@ public class Stock {
 		btnSupprimerStockContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.removeElement(tableContenu
-							.getSelectedRow());
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.removeElement(tableContenu
-							.getSelectedRow());
+				if (!(tableContenu.getSelectedRow() == -1)) {
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.removeElement(tableContenu
+								.getSelectedRow());
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.removeElement(tableContenu
+								.getSelectedRow());
+					}
 				}
-
 			}
 
 		});
 
 		btnAjouterStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableStockButton(true);
 
+				disableStockButton(true);
 				if (comboSelectContenu.getSelectedItem() == "Materiels") {
 					materielTableModel.addElement();
 
@@ -131,31 +132,37 @@ public class Stock {
 
 		btnEditerStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableStockButton(true);
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.updateElement(tableContenu
-							.getSelectedRow());
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.updateElement(tableContenu
-							.getSelectedRow());
-				}
+				if (!(tableContenu.getSelectedRow() == -1)) {
+					disableStockButton(true);
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.updateElement(tableContenu
+								.getSelectedRow());
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.updateElement(tableContenu
+								.getSelectedRow());
+					}
 
+				}
 			}
 
 		});
 
 		btnValiderStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (tableContenu.isEditing()) {
-					tableContenu.getCellEditor().stopCellEditing();
-				}
-				disableStockButton(false);
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.persistData(
-							tableContenu.getSelectedRow(), true);
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.persistData(
-							tableContenu.getSelectedRow(), true);
+				try {
+					if (tableContenu.isEditing()) {
+						tableContenu.getCellEditor().stopCellEditing();
+					}
+					disableStockButton(false);
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.persistData(
+								tableContenu.getSelectedRow(), true);
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.persistData(
+								tableContenu.getSelectedRow(), true);
+					}
+				} catch (Exception e) {
+					disableStockButton(true);
 				}
 
 			}
@@ -235,7 +242,9 @@ public class Stock {
 		btnSupprimerStockColis.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				colisTableModel.removeElement(tableColis.getSelectedRow());
+				if (!(tableColis.getSelectedRow() == -1)) {
+					colisTableModel.removeElement(tableColis.getSelectedRow());
+				}
 
 			}
 
@@ -258,8 +267,12 @@ public class Stock {
 
 		btnEditerStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableColisButton(true);
-				colisTableModel.updateElement(tableColis.getSelectedRow());
+				if (!(tableColis.getSelectedRow() == -1)) {
+					ComboBoxBuilder.setUpTypeColisColumn(tableColis,
+							tableColis.getColumn("Type Colis"));
+					disableColisButton(true);
+					colisTableModel.updateElement(tableColis.getSelectedRow());
+				}
 
 			}
 
@@ -267,11 +280,16 @@ public class Stock {
 
 		btnValiderStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (tableColis.isEditing()) {
-					tableColis.getCellEditor().stopCellEditing();
+				try {
+					if (tableColis.isEditing()) {
+						tableColis.getCellEditor().stopCellEditing();
+					}
+					disableColisButton(false);
+					colisTableModel.persistData(tableColis.getSelectedRow(),
+							true);
+				} catch (Exception e) {
+					disableColisButton(true);
 				}
-				disableColisButton(false);
-				colisTableModel.persistData(tableColis.getSelectedRow(), true);
 
 			}
 

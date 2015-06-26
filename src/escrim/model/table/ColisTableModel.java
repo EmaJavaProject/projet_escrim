@@ -3,6 +3,7 @@ package escrim.model.table;
 import java.util.List;
 
 import escrim.manager.ColisManager;
+import escrim.manager.TypeColisManager;
 import escrim.metiers.Colis;
 
 @SuppressWarnings("serial")
@@ -103,6 +104,8 @@ public class ColisTableModel extends EscrimTableModel {
 							.parseInt(((String) aValue).trim()));
 			break;
 		case 6:
+			listeColis.get(rowIndex).setTypeColis(
+					TypeColisManager.createTempTypeColis());
 			listeColis.get(rowIndex).getTypeColis()
 					.setDesignation(aValue == null ? null : aValue.toString());
 			break;

@@ -18,6 +18,7 @@ public class TypeColisManager {
 	}
 
 	public static void updateTypeColis(TypeColis typeColis, int uid) {
+		typeColis.setVolume();
 		TypeColisDao.update(typeColis, uid);
 
 	}

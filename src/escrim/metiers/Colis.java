@@ -28,7 +28,7 @@ public class Colis {
 	private String affectation;
 	private boolean optionnel;
 	private int secteur;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	private TypeColis typeColis = new TypeColis();
 	private int numeroColis;
 	private String designation;
