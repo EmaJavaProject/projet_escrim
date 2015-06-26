@@ -28,6 +28,7 @@ public class GestionTransport {
 	private static JTable tableTransport;
 	private static JButton boutonAjouterTransport;
 	private static JButton boutonQuitter;
+	private static JButton boutonRemplissagecompartimentTransport;
 	private static JButton boutonSupprimerTransport;
 	private static JButton boutonModifierTransport;
 	private static JButton boutonValiderTransport;
@@ -78,7 +79,12 @@ public class GestionTransport {
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
 									&& composantsPanelPrincipal.getName()
-											.equals("Gestion Transport")) {
+											.equals("Gestion Transport")
+									|| composantsPanelPrincipal
+											.getName()
+											.equals("Création de type de colis")||composantsPanelPrincipal
+											.getName()
+											.equals("Remplissage")) {
 								return;
 							}
 						}
@@ -121,6 +127,25 @@ public class GestionTransport {
 				boutonAnnulerTransport = new JButton("Annuler");
 				boutonAnnulerTransport.setBounds(450, 589, 97, 25);
 
+				boutonRemplissagecompartimentTransport = new JButton(
+						"éditer le transport sélectionné");
+				boutonRemplissagecompartimentTransport.setBounds(560, 589, 230,
+						25);
+				boutonRemplissagecompartimentTransport
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								if (!(tableTransport.getSelectedRow() == -1))
+									Remplissage
+											.CréationJpanelRemplissageTransport(
+													pPanelPrincipal,
+													tblModelTransport,
+													tableTransport
+															.getSelectedRow());
+
+							}
+
+						});
+				
 				boutonValiderTransport.setEnabled(false);
 				boutonAnnulerTransport.setEnabled(false);
 
@@ -183,7 +208,6 @@ public class GestionTransport {
 
 				});
 
-				txtGestionTransport = new JTextField();
 				txtGestionTransport = new JTextField();
 				txtGestionTransport
 						.setHorizontalAlignment(SwingConstants.CENTER);
@@ -351,6 +375,7 @@ public class GestionTransport {
 				jpanelTransport.add(boutonQuitter);
 				jpanelTransport.add(boutonModifierTransport);
 				jpanelTransport.add(boutonSupprimerTransport);
+				jpanelTransport.add(boutonRemplissagecompartimentTransport);
 				jpanelTransport.add(boutonAjouterTransport);
 				jpanelTransport.add(boutonValiderTransport);
 				jpanelTransport.add(boutonAnnulerTransport);

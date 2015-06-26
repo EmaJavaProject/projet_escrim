@@ -120,7 +120,7 @@ public class Main_gui {
 				.CréationJpanelTypeColis(gestionairePage));
 		menuGestion.add(sousMenuHopitalColis);
 
-		stockPage = new Stock(tabPrincipal);
+		stockPage = new Stock(tabPrincipal,gestionairePage);
 		localisationPage = new Localisation(tabPrincipal);
 		avionPage = new Avion(tabPrincipal);
 

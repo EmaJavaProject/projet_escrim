@@ -41,6 +41,7 @@ public class CreationHopitalTypeColis {
 	private static JButton boutonAjouterConfigurationHopital;
 	private static JButton boutonQuitterConfigurationHopital;
 	private static JButton boutonSupprimerConfigurationHopital;
+	private static JButton boutonRemplissageConfigurationHopital;
 	private static JButton boutonModifierConfigurationHopital;
 	private static JButton boutonValiderConfigurationHopital;
 	private static JButton boutonAnnulerConfigurationHopital;
@@ -53,6 +54,8 @@ public class CreationHopitalTypeColis {
 			public void actionPerformed(ActionEvent e) {
 				if (pPanelPrincipal != null) {
 
+					
+					//-------------------------pour éviter de créer plusieur Jpanel-----------//////////
 					for (Component composantPanelPrincipal : pPanelPrincipal
 							.getComponents()) {
 						for (Component composantsPanelPrincipal : composantPanelPrincipal
@@ -62,7 +65,10 @@ public class CreationHopitalTypeColis {
 									&& composantsPanelPrincipal.getName() != null
 									&& composantsPanelPrincipal
 											.getName()
-											.equals("Création de type de colis")) {
+											.equals("Création de type de colis")|| composantsPanelPrincipal.getName()
+											.equals("Gestion Transport")||composantsPanelPrincipal
+											.getName()
+											.equals("Remplissage")) {
 								return;
 							}
 						}
@@ -114,6 +120,23 @@ public class CreationHopitalTypeColis {
 
 				boutonAnnulerConfigurationHopital = new JButton("Annuler");
 				boutonAnnulerConfigurationHopital.setBounds(450, 589, 97, 25);
+				
+				boutonRemplissageConfigurationHopital = new JButton("Éditer La configuration d'hôpital sélectionné");
+				boutonRemplissageConfigurationHopital.setBounds(560, 589, 283, 25);
+				boutonRemplissageConfigurationHopital.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (!(tableConfigurationHopital.getSelectedRow() == -1))
+							Remplissage
+									.CréationJpanelRemplissageConfigHopital(
+											pPanelPrincipal,
+											configurationHopitalTableModel,
+											tableConfigurationHopital
+													.getSelectedRow());
+
+					}
+
+				});
+
 
 				boutonValiderConfigurationHopital.setEnabled(false);
 				boutonAnnulerConfigurationHopital.setEnabled(false);
@@ -340,6 +363,8 @@ public class CreationHopitalTypeColis {
 						.add(boutonValiderConfigurationHopital);
 				jpanelConfigurationHopital
 						.add(boutonAnnulerConfigurationHopital);
+				jpanelConfigurationHopital
+				.add(boutonRemplissageConfigurationHopital);
 
 				jpanelTypeColis = new JPanel();
 				jpanelTypeColis.add(boutonModifierTypeColis);

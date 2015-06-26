@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -47,6 +48,7 @@ public class Stock {
 	private static JButton btnAjouterStockColis;
 	private static JButton btnSupprimerStockColis;
 	private static JButton btnValiderStockColis;
+	private static JButton btnRemplirStockColis;
 	private static JButton btnAnnulerStockColis;
 	private static JButton btnEditerStockColis;
 	private static JButton btnLocaliserStockColis;
@@ -54,11 +56,11 @@ public class Stock {
 	private static MedicamentTableModel medicamentTableModel;
 	private static ColisTableModel colisTableModel;
 
-	public Stock(JTabbedPane tabPrincipal) {
-		this.initPage(tabPrincipal);
+	public Stock(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
+		this.initPage(tabPrincipal,gestionairePage);
 	}
 
-	private void initPage(JTabbedPane tabPrincipal) {
+	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
 		materielTableModel = new MaterielTableModel();
 		medicamentTableModel = new MedicamentTableModel();
@@ -99,22 +101,23 @@ public class Stock {
 		btnSupprimerStockContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.removeElement(tableContenu
-							.getSelectedRow());
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.removeElement(tableContenu
-							.getSelectedRow());
+				if (!(tableContenu.getSelectedRow() == -1)) {
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.removeElement(tableContenu
+								.getSelectedRow());
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.removeElement(tableContenu
+								.getSelectedRow());
+					}
 				}
-
 			}
 
 		});
 
 		btnAjouterStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableStockButton(true);
 
+				disableStockButton(true);
 				if (comboSelectContenu.getSelectedItem() == "Materiels") {
 					materielTableModel.addElement();
 
@@ -131,31 +134,37 @@ public class Stock {
 
 		btnEditerStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableStockButton(true);
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.updateElement(tableContenu
-							.getSelectedRow());
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.updateElement(tableContenu
-							.getSelectedRow());
-				}
+				if (!(tableContenu.getSelectedRow() == -1)) {
+					disableStockButton(true);
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.updateElement(tableContenu
+								.getSelectedRow());
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.updateElement(tableContenu
+								.getSelectedRow());
+					}
 
+				}
 			}
 
 		});
 
 		btnValiderStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (tableContenu.isEditing()) {
-					tableContenu.getCellEditor().stopCellEditing();
-				}
-				disableStockButton(false);
-				if (comboSelectContenu.getSelectedItem() == "Materiels") {
-					materielTableModel.persistData(
-							tableContenu.getSelectedRow(), true);
-				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
-					medicamentTableModel.persistData(
-							tableContenu.getSelectedRow(), true);
+				try {
+					if (tableContenu.isEditing()) {
+						tableContenu.getCellEditor().stopCellEditing();
+					}
+					disableStockButton(false);
+					if (comboSelectContenu.getSelectedItem() == "Materiels") {
+						materielTableModel.persistData(
+								tableContenu.getSelectedRow(), true);
+					} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+						medicamentTableModel.persistData(
+								tableContenu.getSelectedRow(), true);
+					}
+				} catch (Exception e) {
+					disableStockButton(true);
 				}
 
 			}
@@ -228,6 +237,24 @@ public class Stock {
 
 		btnValiderStockColis = new JButton("Valider");
 		btnValiderStockColis.setBounds(446, 590, 89, 23);
+		
+		btnRemplirStockColis = new JButton("Remplir le Colis Sélectionné");
+		btnRemplirStockColis.setBounds(646, 590, 210, 23);
+		btnRemplirStockColis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!(tableColis.getSelectedRow() == -1))
+					Remplissage
+							.CréationJpanelRemplissageColis(
+									gestionairePage,
+									colisTableModel,
+									tableColis
+											.getSelectedRow());
+
+			}
+
+		});
+
+
 
 		btnValiderStockColis.setEnabled(false);
 		btnAnnulerStockColis.setEnabled(false);
@@ -235,7 +262,9 @@ public class Stock {
 		btnSupprimerStockColis.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				colisTableModel.removeElement(tableColis.getSelectedRow());
+				if (!(tableColis.getSelectedRow() == -1)) {
+					colisTableModel.removeElement(tableColis.getSelectedRow());
+				}
 
 			}
 
@@ -258,8 +287,12 @@ public class Stock {
 
 		btnEditerStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				disableColisButton(true);
-				colisTableModel.updateElement(tableColis.getSelectedRow());
+				if (!(tableColis.getSelectedRow() == -1)) {
+					ComboBoxBuilder.setUpTypeColisColumn(tableColis,
+							tableColis.getColumn("Type Colis"));
+					disableColisButton(true);
+					colisTableModel.updateElement(tableColis.getSelectedRow());
+				}
 
 			}
 
@@ -267,11 +300,16 @@ public class Stock {
 
 		btnValiderStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (tableColis.isEditing()) {
-					tableColis.getCellEditor().stopCellEditing();
+				try {
+					if (tableColis.isEditing()) {
+						tableColis.getCellEditor().stopCellEditing();
+					}
+					disableColisButton(false);
+					colisTableModel.persistData(tableColis.getSelectedRow(),
+							true);
+				} catch (Exception e) {
+					disableColisButton(true);
 				}
-				disableColisButton(false);
-				colisTableModel.persistData(tableColis.getSelectedRow(), true);
 
 			}
 
@@ -286,6 +324,10 @@ public class Stock {
 			}
 
 		});
+
+
+		
+		
 
 		scrollPaneColis = new JScrollPane();
 		scrollPaneColis.setBounds(12, 56, 900, 486);
@@ -306,7 +348,7 @@ public class Stock {
 		StockContenu.add(btnSupprimerStockContenu);
 		StockContenu.add(btnValiderStockContenu);
 		StockContenu.add(scrollPaneContenu);
-
+		
 		conteneurStock = new JPanel();
 		conteneurStock.setMinimumSize(new Dimension(20, 20));
 		conteneurStock.setLayout(null);
@@ -315,6 +357,7 @@ public class Stock {
 		conteneurStock.add(btnEditerStockColis);
 		conteneurStock.add(btnLocaliserStockColis);
 		conteneurStock.add(btnValiderStockColis);
+		conteneurStock.add(btnRemplirStockColis);
 		conteneurStock.add(btnSupprimerStockColis);
 		conteneurStock.add(btnAjouterStockColis);
 

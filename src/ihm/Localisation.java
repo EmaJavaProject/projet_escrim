@@ -13,9 +13,9 @@ import javax.swing.JTextField;
 
 public class Localisation {
 
-	private JTable tableLocalContenuTop;
-	private JTable tableLocalContenuBot;
-	private JTable tableLocalConteneurTop;
+	private  JTable tableLocalContenuTop;
+	private  JTable tableLocalContenuBot;
+	private  JTable tableLocalConteneurTop;
 	private JTable tableLocalConteneurBot;
 	private JTextField filtreRecherche;
 	private JTabbedPane onglet;
