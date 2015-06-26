@@ -40,7 +40,8 @@ public class MaterielDao {
 	public static List<Materiel> loadAll() {
 
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel", Materiel.class);
+				"SELECT * FROM Materiel where DTYPE = 'Materiel'",
+				Materiel.class);
 		List<Materiel> listeMateriel = query.getResultList();
 		return listeMateriel;
 	}

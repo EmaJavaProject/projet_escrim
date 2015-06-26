@@ -1,6 +1,5 @@
 package escrim.model.table;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +15,7 @@ public class MedicamentTableModel extends EscrimTableModel {
 	private String[] MedicamentColumnName = { "", "Dénomination",
 			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
 			"Classe Thérapeutique", "Dotation U7", "uid" };
-	DateFormat formatter = new SimpleDateFormat("dd/mm/yy");
+	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 
 	public MedicamentTableModel() {
 		listeMedicament = MedicamentManager.loadAllMedicament();
@@ -54,7 +53,11 @@ public class MedicamentTableModel extends EscrimTableModel {
 		case 3:
 			return Medicament.getDosage();
 		case 4:
-			return Medicament.getDlu();
+			try {
+				return formatter.format(Medicament.getDlu());
+			} catch (Exception e) {
+				return Medicament.getDlu();
+			}
 		case 5:
 			return Medicament.getQuantite();
 		case 6:
@@ -142,6 +145,12 @@ public class MedicamentTableModel extends EscrimTableModel {
 		case 5:
 			return String.class;
 		case 6:
+			return String.class;
+		case 7:
+			return String.class;
+		case 8:
+			return String.class;
+		case 9:
 			return Integer.class;
 
 		}

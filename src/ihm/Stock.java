@@ -5,6 +5,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,7 +21,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import escrim.manager.MedicamentManager;
+import escrim.metiers.Medicament;
 import escrim.model.table.MaterielTableModel;
+import escrim.model.table.MedicamentTableModel;
 
 public class Stock {
 
@@ -44,6 +52,7 @@ public class Stock {
 	private static JButton btnEditerStockConteneur;
 	private static JButton btnLocaliserStockConteneur;
 	private static MaterielTableModel materielTableModel;
+	private static MedicamentTableModel medicamentTableModel;
 
 	public Stock(JTabbedPane tabPrincipal) {
 		this.initPage(tabPrincipal);
@@ -52,9 +61,9 @@ public class Stock {
 	private void initPage(JTabbedPane tabPrincipal) {
 
 		materielTableModel = new MaterielTableModel();
+		medicamentTableModel = new MedicamentTableModel();
 		tableContenu = new JTable(materielTableModel);
 		tableContenu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableContenu.setCellSelectionEnabled(false);
 		tableContenu.setRowSelectionAllowed(true);
 
 		btnAjouterStockContenu = new JButton("+");
@@ -87,10 +96,16 @@ public class Stock {
 
 		// Event sur les boutons
 
-		btnSupprimerStockContenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				materielTableModel.removeElement(tableContenu.getSelectedRow());
-
+		btnSupprimerStockContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					materielTableModel.removeElement(tableContenu
+							.getSelectedRow());
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					medicamentTableModel.removeElement(tableContenu
+							.getSelectedRow());
+				}
 			}
 
 		});
@@ -98,7 +113,13 @@ public class Stock {
 		btnAjouterStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				disableStockButton(true);
-				materielTableModel.addElement();
+
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					materielTableModel.addElement();
+
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					medicamentTableModel.addElement();
+				}
 				tableContenu.setRowSelectionInterval(
 						tableContenu.getRowCount() - 1,
 						tableContenu.getRowCount() - 1);
@@ -109,8 +130,15 @@ public class Stock {
 
 		btnEditerStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				disableStockButton(true);
 				materielTableModel.updateElement(tableContenu.getSelectedRow());
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					materielTableModel.updateElement(tableContenu
+							.getSelectedRow());
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					medicamentTableModel.updateElement(tableContenu
+							.getSelectedRow());
+				}
 
 			}
 
@@ -122,8 +150,13 @@ public class Stock {
 					tableContenu.getCellEditor().stopCellEditing();
 				}
 				disableStockButton(false);
-				materielTableModel.persistData(tableContenu.getSelectedRow(),
-						true);
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					materielTableModel.persistData(
+							tableContenu.getSelectedRow(), true);
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					medicamentTableModel.persistData(
+							tableContenu.getSelectedRow(), true);
+				}
 
 			}
 
@@ -132,8 +165,14 @@ public class Stock {
 		btnAnnulerStockContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				disableStockButton(false);
-				materielTableModel.persistData(tableContenu.getSelectedRow(),
-						false);
+
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					materielTableModel.persistData(
+							tableContenu.getSelectedRow(), false);
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					medicamentTableModel.persistData(
+							tableContenu.getSelectedRow(), false);
+				}
 
 			}
 
@@ -141,7 +180,7 @@ public class Stock {
 
 		comboSelectContenu = new JComboBox<String>();
 		comboSelectContenu.setBounds(12, 13, 141, 25);
-		comboSelectContenu.addItem("Materiel");
+		comboSelectContenu.addItem("Materiels");
 		comboSelectContenu.addItem("Médicaments");
 
 		comboSelectConteneur = new JComboBox<String>();
@@ -211,10 +250,18 @@ public class Stock {
 		ongletStock.addTab("Conteneur", null, conteneurStock, null);
 
 		tabPrincipal.addTab("Stock", null, ongletStock, null);
-
-		comboSelectContenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// if(comboSelectContenu.getSelectedItem())
+		List<Medicament> list = MedicamentManager.loadAllMedicament();
+		comboSelectContenu.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if (comboSelectContenu.getSelectedItem() == "Materiels") {
+					medicamentTableModel.setRowCount(0);
+					tableContenu.setModel(materielTableModel);
+					tableContenu.repaint();
+				} else if (comboSelectContenu.getSelectedItem() == "Médicaments") {
+					materielTableModel.setRowCount(0);
+					tableContenu.setModel(medicamentTableModel);
+					tableContenu.repaint();
+				}
 
 			}
 		});

@@ -40,7 +40,8 @@ public class MedicamentDao {
 	public static List<Medicament> loadAll() {
 
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel", Medicament.class);
+				"SELECT * FROM Materiel where DTYPE = 'Medicament'",
+				Medicament.class);
 		List<Medicament> listeMedicament = query.getResultList();
 		return listeMedicament;
 	}

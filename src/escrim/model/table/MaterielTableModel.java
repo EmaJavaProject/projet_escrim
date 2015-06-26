@@ -107,13 +107,17 @@ public class MaterielTableModel extends EscrimTableModel {
 		super.setRemove(false);
 		listeMateriel.add(getRowCount(), MaterielManager.createTempMateriel());
 		fireTableRowsInserted(0, getRowCount());
+
 	}
 
 	public void removeElement(int rowIndex) {
-		super.setRemove(true);
-		super.setAddition(false);
-		super.setEdition(false);
-		persistData(rowIndex, true);
+		if (rowIndex != -1) {
+			super.setRemove(true);
+			super.setAddition(false);
+			super.setEdition(false);
+			persistData(rowIndex, true);
+		}
+
 	}
 
 	public void persistData(int rowIndex, boolean validate) {
@@ -135,6 +139,7 @@ public class MaterielTableModel extends EscrimTableModel {
 		}
 
 		refreshModel();
+		System.out.println(getRowCount());
 
 	}
 
