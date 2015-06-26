@@ -116,7 +116,7 @@ public class Main_gui {
 		menuGestion.add(sousMenuGestionTransport);
 		
 		sousMenuHopitalColis = new JMenuItem("Gestion configuration hopital / Création de colis");
-		sousMenuHopitalColis.addActionListener(CreationDeColis
+		sousMenuHopitalColis.addActionListener(CreationHopitalColis
 				.CréationJpanelColis(gestionairePage));
 		menuGestion.add(sousMenuHopitalColis);
 

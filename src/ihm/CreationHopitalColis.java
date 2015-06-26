@@ -18,10 +18,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import escrim.model.table.ColisTableModel;
+import escrim.model.table.ConfigurationHopitalTableModel;
 import escrim.model.table.EscrimTableModel;
 
-public class CreationDeColis {
-	
+public class CreationHopitalColis {
+
 	private static JPanel jpanelColis;
 	private static JTable tableColis;
 	private static JScrollPane scrollPanelColis;
@@ -36,7 +37,7 @@ public class CreationDeColis {
 	private static JTabbedPane tabPrincipal;
 	private static JPanel jpanelConfigurationHopital;
 	private static JTextField txtConfigurationHopital;
-	private static EscrimTableModel ConfigurationHopitalTableModel;
+	private static ConfigurationHopitalTableModel configurationHopitalTableModel;
 	private static JTable tableConfigurationHopital;
 	private static JButton boutonAjouterConfigurationHopital;
 	private static JButton boutonQuitterConfigurationHopital;
@@ -45,7 +46,7 @@ public class CreationDeColis {
 	private static JButton boutonValiderConfigurationHopital;
 	private static JButton boutonAnnulerConfigurationHopital;
 	private static JScrollPane scrollPanelConfigurationHopital;
-	
+
 	public static ActionListener CréationJpanelColis(
 			JLayeredPane pPanelPrincipal) {
 
@@ -67,11 +68,15 @@ public class CreationDeColis {
 						}
 					}
 				}
-				
-				//------------------------------------ Jpanel conf hopital---------------------------//
-				
-				tableConfigurationHopital = new JTable();
-				tableConfigurationHopital.setName("Table ConfigurationHopitals");
+
+				// ------------------------------------ Jpanel conf
+				// hopital---------------------------//
+
+				configurationHopitalTableModel = new ConfigurationHopitalTableModel();
+				tableConfigurationHopital = new JTable(
+						configurationHopitalTableModel);
+				tableConfigurationHopital
+						.setName("Table ConfigurationHopitals");
 				tableConfigurationHopital.setBounds(12, 72, 899, 800);
 				tableConfigurationHopital
 						.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -80,18 +85,20 @@ public class CreationDeColis {
 
 				boutonQuitterConfigurationHopital = new JButton("Quitter");
 				boutonQuitterConfigurationHopital.setBounds(800, 13, 97, 25);
-				boutonQuitterConfigurationHopital.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						for (Component composant : pPanelPrincipal
-								.getComponents()) {
-							if (composant.getName().equals("Création de colis"))
-								pPanelPrincipal.remove(composant);
-						}
-						pPanelPrincipal.repaint();
+				boutonQuitterConfigurationHopital
+						.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								for (Component composant : pPanelPrincipal
+										.getComponents()) {
+									if (composant.getName().equals(
+											"Création de colis"))
+										pPanelPrincipal.remove(composant);
+								}
+								pPanelPrincipal.repaint();
 
-					}
-				});
+							}
+						});
 
 				boutonAjouterConfigurationHopital = new JButton("+");
 				boutonAjouterConfigurationHopital.setBounds(12, 589, 97, 25);
@@ -111,26 +118,96 @@ public class CreationDeColis {
 				boutonValiderConfigurationHopital.setEnabled(false);
 				boutonAnnulerConfigurationHopital.setEnabled(false);
 
-				
+				boutonSupprimerConfigurationHopital
+						.addActionListener(new ActionListener() {
+							@SuppressWarnings("deprecation")
+							public void actionPerformed(ActionEvent arg0) {
+								if (!(tableConfigurationHopital
+										.getSelectedRow() == -1)) {
+									configurationHopitalTableModel
+											.removeElement(tableConfigurationHopital
+													.getSelectedRow());
+								}
+							}
+
+						});
+
+				boutonAjouterConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								disableConfigurationHopitalButton(true);
+								configurationHopitalTableModel.addElement();
+								tableConfigurationHopital
+										.setRowSelectionInterval(
+												tableConfigurationHopital
+														.getRowCount() - 1,
+												tableConfigurationHopital
+														.getRowCount() - 1);
+
+							}
+
+						});
+
+				boutonModifierConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+
+								disableConfigurationHopitalButton(true);
+								configurationHopitalTableModel
+										.updateElement(tableConfigurationHopital
+												.getSelectedRow());
+
+							}
+
+						});
+
+				boutonValiderConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								if (tableConfigurationHopital.isEditing()) {
+									tableConfigurationHopital.getCellEditor()
+											.stopCellEditing();
+								}
+								disableConfigurationHopitalButton(false);
+								configurationHopitalTableModel.persistData(
+										tableConfigurationHopital
+												.getSelectedRow(), true);
+							}
+
+						});
+
+				boutonAnnulerConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								disableConfigurationHopitalButton(false);
+								configurationHopitalTableModel.persistData(
+										tableConfigurationHopital
+												.getSelectedRow(), false);
+
+							}
+
+						});
+
 				txtConfigurationHopital = new JTextField();
-				txtConfigurationHopital.setHorizontalAlignment(SwingConstants.CENTER);
+				txtConfigurationHopital
+						.setHorizontalAlignment(SwingConstants.CENTER);
 				txtConfigurationHopital.setEnabled(false);
 				txtConfigurationHopital.setPreferredSize(new Dimension(20, 20));
-				txtConfigurationHopital.setText("Gestion configuration d'hopitals");
+				txtConfigurationHopital
+						.setText("Gestion configuration d'hopitals");
 				txtConfigurationHopital.setColumns(10);
 				txtConfigurationHopital.setBounds(44, 11, 260, 25);
-				
+
 				scrollPanelConfigurationHopital = new JScrollPane();
-				scrollPanelConfigurationHopital.setName("Scroll ConfigurationHopitals");
-				scrollPanelConfigurationHopital.setViewportView(tableConfigurationHopital);
+				scrollPanelConfigurationHopital
+						.setName("Scroll ConfigurationHopitals");
+				scrollPanelConfigurationHopital
+						.setViewportView(tableConfigurationHopital);
 				scrollPanelConfigurationHopital.setBounds(12, 56, 800, 486);
-				
-				
-				
-				//------------------------------------ Jpanel Colis---------------------------//
-				
-				
-				
+
+				// ------------------------------------ Jpanel
+				// Colis---------------------------//
+
 				tblModelColis = new ColisTableModel();
 				tableColis = new JTable(tblModelColis);
 				tableColis.setName("Table Colis");
@@ -149,7 +226,7 @@ public class CreationDeColis {
 
 					}
 				});
-					
+
 				boutonAjouterColis = new JButton("+");
 				boutonAjouterColis.setBounds(12, 589, 97, 25);
 
@@ -167,12 +244,12 @@ public class CreationDeColis {
 
 				boutonValiderColis.setEnabled(false);
 				boutonAnnulerColis.setEnabled(false);
-				
+
 				scrollPanelColis = new JScrollPane();
 				scrollPanelColis.setName("Scroll Colis");
 				scrollPanelColis.setViewportView(tableColis);
 				scrollPanelColis.setBounds(12, 56, 950, 486);
-				
+
 				txtColis = new JTextField();
 				txtColis.setHorizontalAlignment(SwingConstants.CENTER);
 				txtColis.setEnabled(false);
@@ -180,29 +257,31 @@ public class CreationDeColis {
 				txtColis.setText("Gestion Colis");
 				txtColis.setColumns(10);
 				txtColis.setBounds(44, 11, 260, 25);
-					
-					
-				
+
 				// ---------------------------------------------création et
 				// ajout des Jpanel dans le
 				// Tabprincipal---------------------------------------------------//
-				
-				
-				
+
 				jpanelConfigurationHopital = new JPanel();
 				jpanelConfigurationHopital.setBounds(0, 0, 1017, 706);
 				jpanelConfigurationHopital.add(scrollPanelConfigurationHopital);
-				jpanelConfigurationHopital.setName("Gestion configuration d'hopital");
+				jpanelConfigurationHopital
+						.setName("Gestion configuration d'hopital");
 				jpanelConfigurationHopital.setLayout(null);
 				jpanelConfigurationHopital.add(txtConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonModifierConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonSupprimerConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonAjouterConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonQuitterConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonValiderConfigurationHopital);
-				jpanelConfigurationHopital.add(boutonAnnulerConfigurationHopital);
-				
-				
+				jpanelConfigurationHopital
+						.add(boutonModifierConfigurationHopital);
+				jpanelConfigurationHopital
+						.add(boutonSupprimerConfigurationHopital);
+				jpanelConfigurationHopital
+						.add(boutonAjouterConfigurationHopital);
+				jpanelConfigurationHopital
+						.add(boutonQuitterConfigurationHopital);
+				jpanelConfigurationHopital
+						.add(boutonValiderConfigurationHopital);
+				jpanelConfigurationHopital
+						.add(boutonAnnulerConfigurationHopital);
+
 				jpanelColis = new JPanel();
 				jpanelColis.add(boutonModifierColis);
 				jpanelColis.setBounds(0, 0, 1017, 706);
@@ -216,28 +295,37 @@ public class CreationDeColis {
 				jpanelColis.add(boutonAjouterColis);
 				jpanelColis.add(boutonValiderColis);
 				jpanelColis.add(boutonAnnulerColis);
-				
+
 				tabPrincipal = new JTabbedPane();
 				tabPrincipal.setName("Création de colis");
 				tabPrincipal.setBounds(0, 0, 1017, 706);
 				tabPrincipal.add(jpanelConfigurationHopital);
 				tabPrincipal.add(jpanelColis);
 
-
-
-				pPanelPrincipal.add(tabPrincipal, new Integer(2));
+				pPanelPrincipal.add(tabPrincipal, new Integer(3));
 				pPanelPrincipal.revalidate();
-				
-				
-		
-			}
 
+			}
 		};
 
 		return action;
 
 	}
-			
 
-				
-}
+	private static void disableConfigurationHopitalButton(boolean disable) {
+		if (disable) {
+			boutonAjouterConfigurationHopital.setEnabled(false);
+			boutonSupprimerConfigurationHopital.setEnabled(false);
+			boutonModifierConfigurationHopital.setEnabled(false);
+			boutonValiderConfigurationHopital.setEnabled(true);
+			boutonAnnulerConfigurationHopital.setEnabled(true);
+		} else {
+			boutonAjouterConfigurationHopital.setEnabled(true);
+			boutonSupprimerConfigurationHopital.setEnabled(true);
+			boutonModifierConfigurationHopital.setEnabled(true);
+			boutonValiderConfigurationHopital.setEnabled(false);
+			boutonAnnulerConfigurationHopital.setEnabled(false);
+		}
+	}
+
+};
