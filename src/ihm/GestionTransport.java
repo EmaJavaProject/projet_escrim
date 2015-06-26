@@ -126,10 +126,11 @@ public class GestionTransport {
 
 				boutonSupprimerTransport
 						.addActionListener(new ActionListener() {
+							@SuppressWarnings("deprecation")
 							public void actionPerformed(ActionEvent arg0) {
+								if(!(tableTransport.getSelectedRow()==-1)){
 								tblModelTransport.removeElement(tableTransport
-										.getSelectedRow());
-
+										.getSelectedRow());}
 							}
 
 						});
@@ -244,10 +245,9 @@ public class GestionTransport {
 				boutonSupprimerCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-								compartimentTableModel
-										.removeElement(tableCompartiment
-												.getSelectedRow());
-
+							if(!(tableCompartiment.getSelectedRow()==-1)){
+								compartimentTableModel.removeElement(tableCompartiment
+										.getSelectedRow());}
 							}
 
 						});

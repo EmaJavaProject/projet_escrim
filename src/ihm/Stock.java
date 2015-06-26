@@ -106,6 +106,7 @@ public class Stock {
 					medicamentTableModel.removeElement(tableContenu
 							.getSelectedRow());
 				}
+
 			}
 
 		});
