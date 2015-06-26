@@ -19,10 +19,11 @@ public class Main_gui {
 	private Avion avionPage;
 	private JPanel panelPrincipal;
 	private JMenuItem mntmImporter;
-	private JMenu menuGestionTransport;
+	private JMenu menuGestion;
 	private JMenuItem mntmExporter;
 	private JMenu mnFichier;
-	private JMenuItem sousMenuGestionAvion;
+	private JMenuItem sousMenuGestionTransport;
+	private JMenuItem sousMenuHopitalColis;
 	private JMenuBar menu;
 	private JLayeredPane gestionairePage;
 	private JTabbedPane tabPrincipal;
@@ -92,7 +93,7 @@ public class Main_gui {
 		gestionairePage.revalidate();
 
 		mntmImporter = new JMenuItem("Importer...");
-		menuGestionTransport = new JMenu("Gestion Transport");
+		menuGestion = new JMenu("Gestion");
 		mntmExporter = new JMenuItem("Exporter...");
 
 		mnFichier = new JMenu("Fichier");
@@ -101,17 +102,23 @@ public class Main_gui {
 
 		menu = new JMenuBar();
 		menu.add(mnFichier);
-		menu.add(menuGestionTransport);
+		menu.add(menuGestion);
+		
 
 		tabPrincipal = new JTabbedPane(JTabbedPane.LEFT);
 		tabPrincipal.setName("");
 		tabPrincipal.setBounds(0, 0, 1017, 706);
 		panelPrincipal.add(tabPrincipal);
 
-		sousMenuGestionAvion = new JMenuItem("Gestion Avion");
-		sousMenuGestionAvion.addActionListener(GestionTransport
+		sousMenuGestionTransport = new JMenuItem("Gestion Transport");
+		sousMenuGestionTransport.addActionListener(GestionTransport
 				.CréationJpanelTransport(gestionairePage));
-		menuGestionTransport.add(sousMenuGestionAvion);
+		menuGestion.add(sousMenuGestionTransport);
+		
+		sousMenuHopitalColis = new JMenuItem("Gestion configuration hopital / Création de colis");
+		sousMenuHopitalColis.addActionListener(CreationDeColis
+				.CréationJpanelColis(gestionairePage));
+		menuGestion.add(sousMenuHopitalColis);
 
 		stockPage = new Stock(tabPrincipal);
 		localisationPage = new Localisation(tabPrincipal);
