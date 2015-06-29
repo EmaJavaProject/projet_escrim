@@ -41,6 +41,7 @@ public class Remplissage {
 	private static RemplissageTransportTableModel outsideTransportTableModel;
 	private static RemplissageTransportTableModel insideTransportTableModel;
 
+
 	// ------------------------------------------COLIS--------------------------------------------------//
 
 	public static void CréationJpanelRemplissageColis(
@@ -54,12 +55,16 @@ public class Remplissage {
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
-		tableContenuTop = new JTable(new RemplissageColisTableModel(true,
-				uidColis));
+		outsideColisTableModel = new RemplissageColisTableModel(true,
+				uidColis);
+
+		tableContenuTop = new JTable(outsideColisTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
-		tableContenuBot = new JTable(new RemplissageColisTableModel(false,
-				uidColis));
+		insideColisTableModel = new RemplissageColisTableModel(false,
+				uidColis);
+
+		tableContenuBot = new JTable(insideColisTableModel);
 		tableContenuBot.setBounds(52, 400, 706, 223);
 
 		tableContenuTop.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -90,12 +95,8 @@ public class Remplissage {
 					MaterielManager.fillColis(uidColis, (int) tableContenuTop
 							.getValueAt(tableContenuTop.getSelectedRow(),
 									tableContenuTop.getColumnCount() - 1));
-					((RemplissageColisTableModel) tableContenuTop.getModel())
-							.refreshModel(true);
-					((RemplissageColisTableModel) tableContenuBot.getModel())
-							.refreshModel(false);
-					tableContenuTop.repaint();
-					tableContenuBot.repaint();
+					outsideColisTableModel.refreshModel(true);
+					insideColisTableModel.refreshModel(false);
 				}
 			}
 		});
@@ -200,8 +201,7 @@ public class Remplissage {
 		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuTop.getSelectedRow() == 1)) {
-					System.out.println(tableContenuTop.getColumnCount());
+				if (!(tableContenuTop.getSelectedRow() == -1)) {
 					CompartimentManager.fillTransport(uidTransport,
 							(int) tableContenuTop.getValueAt(
 									tableContenuTop.getSelectedRow(),
@@ -214,7 +214,7 @@ public class Remplissage {
 		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuBot.getSelectedRow() == 1)) {
+				if (!(tableContenuBot.getSelectedRow() == -1)) {
 					CompartimentManager.fillOutTransport(uidTransport,
 							(int) tableContenuBot.getValueAt(
 									tableContenuBot.getSelectedRow(),

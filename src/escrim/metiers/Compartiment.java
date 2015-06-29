@@ -25,6 +25,15 @@ public class Compartiment {
 	private float poids;
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Transport transport;
+
+	public Transport getTransport() {
+		return transport;
+	}
+
+	public void setTransport(Transport transport) {
+		this.transport = transport;
+	}
+
 	@OneToMany
 	private List<Colis> listeColisDansCompartiment;
 

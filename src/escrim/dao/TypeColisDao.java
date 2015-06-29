@@ -12,7 +12,6 @@ public class TypeColisDao {
 	static EscrimDatabase escrimDatabase = EscrimDatabase.getInstance();
 
 	public static void create(TypeColis typeColis) {
-		// TODO Auto-generated method stub
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().persist(typeColis);
 		escrimDatabase.getEm().getTransaction().commit();

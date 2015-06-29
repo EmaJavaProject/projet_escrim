@@ -1,11 +1,6 @@
 package escrim.model.table;
 
-import java.util.List;
-
-import javax.persistence.ManyToMany;
 import javax.swing.table.DefaultTableModel;
-
-import escrim.metiers.Colis;
 
 /**
  * Classe de gestion du modèle de table

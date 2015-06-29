@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Query;
 
 import escrim.metiers.Compartiment;
-import escrim.metiers.Materiel;
 import escrim.utils.EscrimDatabase;
 
 public class CompartimentDao {
@@ -48,7 +47,7 @@ public class CompartimentDao {
 	
 	public static List<Compartiment> findCompartimentIntoTransport(int uidTransport) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM transport_compartiment where TRANSPORT_UID = " + uidTransport + "",
+				"SELECT * FROM Compartiment where TRANSPORT_UID = " + uidTransport + "",
 				Compartiment.class);
 		List<Compartiment> listeCompartiments = query.getResultList();
 		return listeCompartiments;
@@ -57,7 +56,7 @@ public class CompartimentDao {
 
 	public static List<Compartiment> findCompartimentOutsideTransport(int uidTransport) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Compartiment", Compartiment.class);
+				"SELECT * FROM Compartiment where TRANSPORT_UID is NULL", Compartiment.class);
 		List<Compartiment> listeAllCompartiments = query.getResultList();
 		return listeAllCompartiments;
 	}

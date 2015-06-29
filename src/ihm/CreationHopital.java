@@ -18,7 +18,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import escrim.model.table.ConfigurationHopitalTableModel;
-import escrim.model.table.TypeColisTableModel;
 
 public class CreationHopital {
 
