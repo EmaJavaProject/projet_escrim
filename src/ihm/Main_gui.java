@@ -23,10 +23,11 @@ public class Main_gui {
 	private JMenuItem mntmExporter;
 	private JMenu mnFichier;
 	private JMenuItem sousMenuGestionTransport;
-	private JMenuItem sousMenuHopitalColis;
 	private JMenuBar menu;
 	private JLayeredPane gestionairePage;
 	private JTabbedPane tabPrincipal;
+	private JMenuItem sousMenuColis;
+	private JMenuItem sousMenuHopital;
 
 	/**
 	 * Launch the application.
@@ -114,11 +115,17 @@ public class Main_gui {
 				.CréationJpanelTransport(gestionairePage));
 		menuGestion.add(sousMenuGestionTransport);
 
-		sousMenuHopitalColis = new JMenuItem(
-				"Gestion configuration hopital / Création de Type colis");
-		sousMenuHopitalColis.addActionListener(CreationHopitalTypeColis
+		sousMenuHopital = new JMenuItem(
+				"Gestion configuration hopital");
+		sousMenuHopital.addActionListener(CreationHopital
+				.CréationJpanelHopital(gestionairePage));
+		menuGestion.add(sousMenuHopital);
+		
+		sousMenuColis = new JMenuItem(
+				"Gestion type colis");
+		sousMenuColis.addActionListener(CreationTypeColis
 				.CréationJpanelTypeColis(gestionairePage));
-		menuGestion.add(sousMenuHopitalColis);
+		menuGestion.add(sousMenuColis);
 
 		stockPage = new Stock(tabPrincipal,gestionairePage);
 		localisationPage = new Localisation(tabPrincipal);
