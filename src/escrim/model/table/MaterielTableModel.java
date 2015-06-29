@@ -139,7 +139,6 @@ public class MaterielTableModel extends EscrimTableModel {
 		}
 
 		refreshModel();
-		System.out.println(getRowCount());
 
 	}
 

@@ -39,6 +39,7 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 
 	}
 
+	@Override
 	public int getRowCount() {
 		if (listeMateriel != null) {
 			return listeMateriel.size();

@@ -2,6 +2,8 @@ package ihm;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import escrim.manager.MaterielManager;
@@ -30,8 +33,6 @@ public class Remplissage {
 	private static JButton btnSauvegarderEtQuitter;
 	private static JButton boutonAjouterContenu;
 	private static JButton boutonSupprimerContenu;
-	private static RemplissageColisTableModel outsideColisTableModel;
-	private static RemplissageColisTableModel insideColisTableModel;
 
 	// ------------------------------------------COLIS--------------------------------------------------//
 
@@ -46,25 +47,27 @@ public class Remplissage {
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
-		outsideColisTableModel = new RemplissageColisTableModel(true, uidColis);
-
-		tableContenuTop = new JTable(outsideColisTableModel);
+		tableContenuTop = new JTable(new RemplissageColisTableModel(true,
+				uidColis));
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
-		insideColisTableModel = new RemplissageColisTableModel(false, uidColis);
-
-		tableContenuBot = new JTable(insideColisTableModel);
+		tableContenuBot = new JTable(new RemplissageColisTableModel(false,
+				uidColis));
 		tableContenuBot.setBounds(52, 400, 706, 223);
+
+		tableContenuTop.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableContenuTop.setRowSelectionAllowed(true);
+
+		tableContenuBot.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableContenuBot.setRowSelectionAllowed(true);
 
 		scrollPaneContenuTop = new JScrollPane();
 		scrollPaneContenuTop.setBounds(52, 75, 706, 223);
 		scrollPaneContenuTop.add(tableContenuTop);
-		scrollPaneContenuTop.setViewportView(tableContenuTop);
 
 		scrollPaneContenuBot = new JScrollPane();
 		scrollPaneContenuBot.setBounds(52, 425, 706, 223);
 		scrollPaneContenuBot.add(tableContenuBot);
-		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
 		boutonAjouterContenu = new JButton(
 				new ImageIcon("images/flecheBas.png"));
@@ -74,33 +77,35 @@ public class Remplissage {
 				"images/flechehaut.png"));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
 
-		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuTop.getSelectedRow() == 1)) {
+		boutonAjouterContenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!(tableContenuTop.getSelectedRow() == -1)) {
 					MaterielManager.fillColis(uidColis, (int) tableContenuTop
 							.getValueAt(tableContenuTop.getSelectedRow(),
 									tableContenuTop.getColumnCount() - 1));
-					outsideColisTableModel.refreshModel(true);
-					insideColisTableModel.refreshModel(false);
-					// tableContenuTop.repaint();
-					// tableContenuBot.repaint();
+					((RemplissageColisTableModel) tableContenuTop.getModel())
+							.refreshModel(true);
+					((RemplissageColisTableModel) tableContenuBot.getModel())
+							.refreshModel(false);
+					tableContenuTop.repaint();
+					tableContenuBot.repaint();
 				}
 			}
 		});
 
-		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuBot.getSelectedRow() == 1)) {
+		boutonSupprimerContenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedRow = tableContenuBot.getSelectedRow();
+				if (!(selectedRow == -1)) {
 					MaterielManager.fillOutColis(uidColis,
-							(int) tableContenuBot.getValueAt(
-									tableContenuBot.getSelectedRow(),
+							(int) tableContenuBot.getValueAt(selectedRow,
 									tableContenuBot.getColumnCount() - 1));
-					outsideColisTableModel.refreshModel(true);
-					insideColisTableModel.refreshModel(false);
-					// tableContenuTop.repaint();
-					// tableContenuBot.repaint();
+					((RemplissageColisTableModel) tableContenuTop.getModel())
+							.refreshModel(true);
+					((RemplissageColisTableModel) tableContenuBot.getModel())
+							.refreshModel(false);
+					tableContenuTop.repaint();
+					tableContenuBot.repaint();
 				}
 			}
 		});
@@ -129,6 +134,9 @@ public class Remplissage {
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
+
+		scrollPaneContenuTop.setViewportView(tableContenuTop);
+		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
 		gestionairePage.add(contenueRemplissage, new Integer(2));
 		gestionairePage.revalidate();

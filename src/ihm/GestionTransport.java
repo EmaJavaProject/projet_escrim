@@ -82,8 +82,8 @@ public class GestionTransport {
 											.equals("Gestion Transport")
 									|| composantsPanelPrincipal
 											.getName()
-											.equals("Création de type de colis")||composantsPanelPrincipal
-											.getName()
+											.equals("Création de type de colis")
+									|| composantsPanelPrincipal.getName()
 											.equals("Remplissage")) {
 								return;
 							}
@@ -145,7 +145,7 @@ public class GestionTransport {
 							}
 
 						});
-				
+
 				boutonValiderTransport.setEnabled(false);
 				boutonAnnulerTransport.setEnabled(false);
 
@@ -284,13 +284,11 @@ public class GestionTransport {
 				boutonAjouterCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-								if (!(tableCompartiment.getSelectedRow() == -1)) {
-									disableCompartimentButton(true);
-									compartimentTableModel.addElement();
-									tableCompartiment.setRowSelectionInterval(
-											tableCompartiment.getRowCount() - 1,
-											tableCompartiment.getRowCount() - 1);
-								}
+								disableCompartimentButton(true);
+								compartimentTableModel.addElement();
+								tableCompartiment.setRowSelectionInterval(
+										tableCompartiment.getRowCount() - 1,
+										tableCompartiment.getRowCount() - 1);
 							}
 
 						});
@@ -298,10 +296,12 @@ public class GestionTransport {
 				boutonModifierCompartiment
 						.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
-
-								compartimentTableModel
-										.updateElement(tableCompartiment
-												.getSelectedRow());
+								if (!(tableCompartiment.getSelectedRow() == -1)) {
+									disableCompartimentButton(true);
+									compartimentTableModel
+											.updateElement(tableCompartiment
+													.getSelectedRow());
+								}
 
 							}
 

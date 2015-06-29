@@ -58,8 +58,8 @@ public class MaterielDao {
 
 	public static List<Materiel> findMaterielOustideColis(int uidColis) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel where COLIS_UID != " + uidColis
-						+ " or COLIS_UID is NULL", Materiel.class);
+				"SELECT * FROM Materiel where COLIS_UID is NULL",
+				Materiel.class);
 		List<Materiel> listeAllMateriel = query.getResultList();
 		return listeAllMateriel;
 	}
