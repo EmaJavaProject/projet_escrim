@@ -22,10 +22,14 @@ public class ColisManager {
 	}
 
 	public static void updateColis(Colis colis, int uid) {
-		TypeColis typeColis = new TypeColis();
-		typeColis = TypeColisManager.findTypeColisByName(colis.getTypeColis()
-				.getDesignation());
-		colis.setTypeColis(typeColis);
+
+		if (loadColis(uid).getTypeColis().getDesignation() != colis
+				.getTypeColis().getDesignation()) {
+			TypeColis typeColis = new TypeColis();
+			typeColis = TypeColisManager.findTypeColisByName(colis
+					.getTypeColis().getDesignation());
+			colis.setTypeColis(typeColis);
+		}
 		ColisDao.update(colis, uid);
 
 	}

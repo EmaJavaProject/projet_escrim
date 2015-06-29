@@ -21,7 +21,9 @@ public class MaterielDao {
 	public static void update(Materiel materielUpdated, int uid) {
 		Materiel materiel = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		materiel = materielUpdated;
+		if (materiel != materielUpdated) {
+			materiel = materielUpdated;
+		}
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -38,11 +40,27 @@ public class MaterielDao {
 	}
 
 	public static List<Materiel> loadAll() {
-
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Materiel where DTYPE = 'Materiel'",
 				Materiel.class);
 		List<Materiel> listeMateriel = query.getResultList();
 		return listeMateriel;
+	}
+
+	public static List<Materiel> findMaterielIntoColis(int uidColis) {
+		Query query = escrimDatabase.getEm().createNativeQuery(
+				"SELECT * FROM Materiel where COLIS_UID = " + uidColis + "",
+				Materiel.class);
+		List<Materiel> listeMateriel = query.getResultList();
+		return listeMateriel;
+
+	}
+
+	public static List<Materiel> findMaterielOustideColis(int uidColis) {
+		Query query = escrimDatabase.getEm().createNativeQuery(
+				"SELECT * FROM Materiel where COLIS_UID != " + uidColis
+						+ " or COLIS_UID is NULL", Materiel.class);
+		List<Materiel> listeAllMateriel = query.getResultList();
+		return listeAllMateriel;
 	}
 }

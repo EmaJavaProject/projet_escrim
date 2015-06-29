@@ -1,5 +1,6 @@
 package escrim.metiers;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class Materiel {
 	@ManyToOne
 	private Colis colis;
 	private String observations;
+	@Column(name = "Dtype")
+	private String type;
 	private int quantite;
 
 	public Materiel() {
@@ -74,6 +77,14 @@ public class Materiel {
 
 	public void setObservations(String observations) {
 		this.observations = observations;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public int getQuantite() {

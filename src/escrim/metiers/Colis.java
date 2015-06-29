@@ -7,13 +7,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  * @author Martin
@@ -32,8 +30,6 @@ public class Colis {
 	private TypeColis typeColis = new TypeColis();
 	private int numeroColis;
 	private String designation;
-	@OneToMany(mappedBy = "colis", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-	private List<Materiel> listeMateriel;
 	private float valeur;
 	private String iata;
 	private float projection;
@@ -87,14 +83,6 @@ public class Colis {
 
 	public void setNumeroColis(int numeroColis) {
 		this.numeroColis = numeroColis;
-	}
-
-	public List<Materiel> getListeMateriel() {
-		return listeMateriel;
-	}
-
-	public void setListeMateriel(List<Materiel> listeMateriel) {
-		this.listeMateriel = listeMateriel;
 	}
 
 	public float getValeur() {

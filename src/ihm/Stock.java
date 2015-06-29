@@ -57,7 +57,7 @@ public class Stock {
 	private static ColisTableModel colisTableModel;
 
 	public Stock(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
-		this.initPage(tabPrincipal,gestionairePage);
+		this.initPage(tabPrincipal, gestionairePage);
 	}
 
 	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
@@ -237,24 +237,21 @@ public class Stock {
 
 		btnValiderStockColis = new JButton("Valider");
 		btnValiderStockColis.setBounds(446, 590, 89, 23);
-		
+
 		btnRemplirStockColis = new JButton("Remplir le Colis Sélectionné");
 		btnRemplirStockColis.setBounds(646, 590, 210, 23);
 		btnRemplirStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tableColis.getSelectedRow() == -1))
-					Remplissage
-							.CréationJpanelRemplissageColis(
-									gestionairePage,
-									colisTableModel,
-									tableColis
-											.getSelectedRow());
+					Remplissage.CréationJpanelRemplissageColis(
+							gestionairePage,
+							(int) colisTableModel.getValueAt(
+									tableColis.getSelectedRow(),
+									tableColis.getColumnCount()));
 
 			}
 
 		});
-
-
 
 		btnValiderStockColis.setEnabled(false);
 		btnAnnulerStockColis.setEnabled(false);
@@ -325,10 +322,6 @@ public class Stock {
 
 		});
 
-
-		
-		
-
 		scrollPaneColis = new JScrollPane();
 		scrollPaneColis.setBounds(12, 56, 900, 486);
 		scrollPaneColis.setViewportView(tableColis);
@@ -348,7 +341,7 @@ public class Stock {
 		StockContenu.add(btnSupprimerStockContenu);
 		StockContenu.add(btnValiderStockContenu);
 		StockContenu.add(scrollPaneContenu);
-		
+
 		conteneurStock = new JPanel();
 		conteneurStock.setMinimumSize(new Dimension(20, 20));
 		conteneurStock.setLayout(null);
