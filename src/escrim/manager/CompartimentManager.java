@@ -4,7 +4,6 @@ import java.util.List;
 
 import escrim.dao.CompartimentDao;
 import escrim.metiers.Compartiment;
-import escrim.metiers.Transport;
 
 public class CompartimentManager {
 
@@ -50,24 +49,26 @@ public class CompartimentManager {
 	public static void fillTransport(int uidTransport, int uidCompartiment) {
 		Compartiment compartiment = loadCompartiment(uidCompartiment);
 
-		if (!TransportManager.loadTransport(uidTransport).getListCompartiment()
-				.contains(compartiment)) {
-			Transport transport = new Transport();
-			transport = TransportManager.loadTransport(uidTransport);
-			transport.addCompartiment(compartiment);
-		}
+		/*
+		 * if
+		 * (!TransportManager.loadTransport(uidTransport).getListCompartiment()
+		 * .contains(compartiment)) { Transport transport = new Transport();
+		 * transport = TransportManager.loadTransport(uidTransport);
+		 * transport.addCompartiment(compartiment); }
+		 */
 
 		updateCompartiment(compartiment, compartiment.getUid());
 	}
 
 	public static void fillOutTransport(int uidTransport, int uidCompartiment) {
 		Compartiment compartiment = loadCompartiment(uidCompartiment);
-		if (TransportManager.loadTransport(uidTransport).getListCompartiment()
-				.contains(compartiment)) {
-			Transport transport = new Transport();
-			transport = TransportManager.loadTransport(uidTransport);
-			transport.removeCompartiment(compartiment);
-		}
+		/*
+		 * if
+		 * (TransportManager.loadTransport(uidTransport).getListCompartiment()
+		 * .contains(compartiment)) { Transport transport = new Transport();
+		 * transport = TransportManager.loadTransport(uidTransport);
+		 * transport.removeCompartiment(compartiment); }
+		 */
 		updateCompartiment(compartiment, compartiment.getUid());
 	}
 

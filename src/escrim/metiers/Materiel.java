@@ -1,8 +1,10 @@
 package escrim.metiers;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public class Materiel {
 	// uid pour unique ID :)
 	private int uid;
 	private String denomination;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Colis colis;
 	private String observations;
 	@Column(name = "Dtype")

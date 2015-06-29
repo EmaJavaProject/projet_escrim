@@ -79,10 +79,12 @@ public class GestionTransport {
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
 									&& composantsPanelPrincipal
-									.getName()
-									.equals("Création de type de colis")|| composantsPanelPrincipal
 											.getName()
-											.equals("Gestion configuration d'hopital")|| composantsPanelPrincipal
+											.equals("Création de type de colis")
+									|| composantsPanelPrincipal
+											.getName()
+											.equals("Gestion configuration d'hopital")
+									|| composantsPanelPrincipal
 											.getName()
 											.equals("Création de type de colis")
 									|| composantsPanelPrincipal.getName()
@@ -141,8 +143,11 @@ public class GestionTransport {
 											.CréationJpanelRemplissageTransport(
 													pPanelPrincipal,
 													tblModelTransport,
-													tableTransport
-															.getSelectedRow());
+													(int) tblModelTransport.getValueAt(
+															tableTransport
+																	.getSelectedRow(),
+															tableTransport
+																	.getColumnCount()));
 
 							}
 

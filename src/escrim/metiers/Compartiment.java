@@ -2,10 +2,13 @@ package escrim.metiers;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,6 +23,8 @@ public class Compartiment {
 	private float longueur;
 	private float volume;
 	private float poids;
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	private Transport transport;
 	@OneToMany
 	private List<Colis> listeColisDansCompartiment;
 

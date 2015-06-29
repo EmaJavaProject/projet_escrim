@@ -41,7 +41,6 @@ public class Remplissage {
 	private static RemplissageTransportTableModel outsideTransportTableModel;
 	private static RemplissageTransportTableModel insideTransportTableModel;
 
-
 	// ------------------------------------------COLIS--------------------------------------------------//
 
 	public static void CréationJpanelRemplissageColis(
@@ -202,6 +201,7 @@ public class Remplissage {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (!(tableContenuTop.getSelectedRow() == 1)) {
+					System.out.println(tableContenuTop.getColumnCount());
 					CompartimentManager.fillTransport(uidTransport,
 							(int) tableContenuTop.getValueAt(
 									tableContenuTop.getSelectedRow(),
