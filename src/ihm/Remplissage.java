@@ -17,9 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import escrim.manager.CompartimentManager;
 import escrim.manager.MaterielManager;
 import escrim.model.table.ConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageColisTableModel;
+import escrim.model.table.RemplissageTransportTableModel;
 import escrim.model.table.TransportTableModel;
 
 public class Remplissage {
@@ -33,6 +35,12 @@ public class Remplissage {
 	private static JButton btnSauvegarderEtQuitter;
 	private static JButton boutonAjouterContenu;
 	private static JButton boutonSupprimerContenu;
+
+	private static RemplissageColisTableModel outsideColisTableModel;
+	private static RemplissageColisTableModel insideColisTableModel;
+	private static RemplissageTransportTableModel outsideTransportTableModel;
+	private static RemplissageTransportTableModel insideTransportTableModel;
+
 
 	// ------------------------------------------COLIS--------------------------------------------------//
 
@@ -148,20 +156,28 @@ public class Remplissage {
 
 	public static void CréationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, TransportTableModel pModelTable,
-			int index) {
+			int uidTransport) {
 
 		txtConteneur = new JTextField();
 		txtConteneur.setHorizontalAlignment(SwingConstants.CENTER);
 		txtConteneur.setEnabled(false);
 		txtConteneur.setPreferredSize(new Dimension(20, 20));
-		txtConteneur.setText("Composition Du transport");
+		txtConteneur.setText("Composition du transport");
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
-		tableContenuTop = new JTable();
+		outsideTransportTableModel = new RemplissageTransportTableModel(true,
+				uidTransport);
+
+		tableContenuTop = new JTable(outsideTransportTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
-		tableContenuBot = new JTable();
+		insideTransportTableModel = new RemplissageTransportTableModel(false,
+				uidTransport);
+
+		tableContenuBot = new JTable(insideTransportTableModel);
+		tableContenuBot.setBounds(52, 400, 706, 223);
+
 		tableContenuBot.setName("Caisse");
 		tableContenuBot.setBounds(52, 400, 706, 223);
 
@@ -178,10 +194,37 @@ public class Remplissage {
 		boutonAjouterContenu = new JButton(
 				new ImageIcon("images/flecheBas.png"));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
-
 		boutonSupprimerContenu = new JButton(new ImageIcon(
 				"images/flechehaut.png"));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
+
+		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (!(tableContenuTop.getSelectedRow() == 1)) {
+					CompartimentManager.fillTransport(uidTransport,
+							(int) tableContenuTop.getValueAt(
+									tableContenuTop.getSelectedRow(),
+									tableContenuTop.getColumnCount() - 1));
+					outsideTransportTableModel.refreshModel(true);
+					insideTransportTableModel.refreshModel(false);
+				}
+			}
+		});
+		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (!(tableContenuBot.getSelectedRow() == 1)) {
+					CompartimentManager.fillOutTransport(uidTransport,
+							(int) tableContenuBot.getValueAt(
+									tableContenuBot.getSelectedRow(),
+									tableContenuBot.getColumnCount() - 1));
+					outsideTransportTableModel.refreshModel(true);
+					insideTransportTableModel.refreshModel(false);
+
+				}
+			}
+		});
 
 		btnSauvegarderEtQuitter = new JButton("Sauvegarder et quitter");
 		btnSauvegarderEtQuitter.setBounds(800, 612, 180, 25);
@@ -225,7 +268,7 @@ public class Remplissage {
 		txtConteneur.setHorizontalAlignment(SwingConstants.CENTER);
 		txtConteneur.setEnabled(false);
 		txtConteneur.setPreferredSize(new Dimension(20, 20));
-		txtConteneur.setText("Contenue de la configuration d'hopital");
+		txtConteneur.setText("Contenu de la configuration d'hopital");
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 

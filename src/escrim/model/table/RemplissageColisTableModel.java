@@ -10,7 +10,7 @@ import escrim.metiers.Medicament;
 
 @SuppressWarnings("serial")
 public class RemplissageColisTableModel extends EscrimTableModel {
-	private List<Materiel> listeMateriel = new ArrayList();
+	private List<Materiel> listeMateriel = new ArrayList<Materiel>();
 	private String[] MaterielColumnName = { "Type", "Denomination",
 			"Observations", "Quantite", "uid" };
 	private int uidColisToManage;

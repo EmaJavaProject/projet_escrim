@@ -1,5 +1,6 @@
 package escrim.metiers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ public class Transport {
 	private String denomination;
 	private float poidsMax;
 	@OneToMany
-	private List<Compartiment> listeCompartiments;
+	private List<Compartiment> listeCompartiments = new ArrayList<Compartiment>();
 
 	public int getUid() {
 		return uid;
@@ -41,5 +42,17 @@ public class Transport {
 
 	public void setPoidsMax(float poidsMax) {
 		this.poidsMax = poidsMax;
+	}
+
+	public List<Compartiment> getListCompartiment() {
+			return listeCompartiments;
+	}
+
+	public void addCompartiment(Compartiment compartiment) {
+		listeCompartiments.add(compartiment);
+	}
+
+	public void removeCompartiment(Compartiment compartiment) {
+		listeCompartiments.remove(compartiment);
 	}
 }
