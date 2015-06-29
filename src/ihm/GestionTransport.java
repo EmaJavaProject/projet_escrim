@@ -78,9 +78,11 @@ public class GestionTransport {
 
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
-									&& composantsPanelPrincipal.getName()
-											.equals("Gestion Transport")
-									|| composantsPanelPrincipal
+									&& composantsPanelPrincipal
+									.getName()
+									.equals("Création de type de colis")|| composantsPanelPrincipal
+											.getName()
+											.equals("Gestion configuration d'hopital")|| composantsPanelPrincipal
 											.getName()
 											.equals("Création de type de colis")
 									|| composantsPanelPrincipal.getName()
