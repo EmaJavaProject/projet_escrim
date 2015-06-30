@@ -23,14 +23,11 @@ import javax.persistence.NamedQuery;
  *
  * @author Martin
  */
-@Entity
 
 @NamedQueries({
-	@NamedQuery(name="Colis.loadAll",
-			query="SELECT c FROM Colis c"),
-	@NamedQuery(name="Colis.findColisOutsideConfigHopital",
-				query="SELECT c FROM Colis c"),
-})
+		@NamedQuery(name = "Colis.loadAll", query = "SELECT c FROM Colis c"),
+		@NamedQuery(name = "Colis.findColisOutsideConfigHopital", query = "SELECT c FROM Colis c"), })
+@Entity
 public class Colis {
 
 	/** The uid. */
@@ -303,4 +300,11 @@ public class Colis {
 		this.designation = designation;
 	}
 
+	public void addConfiguration(ConfigurationHopital config) {
+		configurations.add(config);
+	}
+
+	public void removeConfiguration(ConfigurationHopital config) {
+		configurations.remove(config);
+	}
 }

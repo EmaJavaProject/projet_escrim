@@ -4,6 +4,7 @@ import java.util.List;
 
 import escrim.dao.ColisDao;
 import escrim.metiers.Colis;
+import escrim.metiers.ConfigurationHopital;
 import escrim.metiers.TypeColis;
 
 /**
@@ -99,21 +100,27 @@ public class ColisManager {
 
 	public static void fillConfig(int uidConfig, int uidColis) {
 		Colis colis = loadColis(uidColis);
-		// /TODO
-		// if (colis.get != TransportManager.loadTransport(uidConfig)) {
-		// Transport transport = new Transport();
-		// transport = TransportManager.loadTransport(uidConfig);
-		// colis.setTransport(transport);
-		// }
+		ConfigurationHopital conf = ConfigurationHopitalManager
+				.loadConfigurationHopital(uidConfig);
+
+		conf.addColis(colis);
+		colis.addConfiguration(conf);
+
 		updateColis(colis, colis.getUid());
+		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
 	}
 
 	public static void fillOutConfig(int uidConfig, int uidColis) {
 		Colis colis = loadColis(uidColis);
-		// TODO
-		// colis.setTransport(null);
+		ConfigurationHopital conf = ConfigurationHopitalManager
+				.loadConfigurationHopital(uidConfig);
+
+		conf.removeColis(colis);
+		colis.removeConfiguration(conf);
 
 		updateColis(colis, colis.getUid());
+		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
+
 	}
 
 }

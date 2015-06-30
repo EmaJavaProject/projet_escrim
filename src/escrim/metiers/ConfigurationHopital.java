@@ -13,8 +13,7 @@ import javax.persistence.NamedQuery;
  * The Class ConfigurationHopital.
  */
 @Entity
-@NamedQuery(name="ConfigurationHopital.loadAll",
-			query="SELECT c FROM ConfigurationHopital c")
+@NamedQuery(name = "ConfigurationHopital.loadAll", query = "SELECT c FROM ConfigurationHopital c")
 public class ConfigurationHopital {
 
 	/** The uid. */
@@ -86,4 +85,11 @@ public class ConfigurationHopital {
 		this.colis = listeColis;
 	}
 
+	public void addColis(Colis pColis) {
+		colis.add(pColis);
+	}
+
+	public void removeColis(Colis pColis) {
+		colis.remove(pColis);
+	}
 }

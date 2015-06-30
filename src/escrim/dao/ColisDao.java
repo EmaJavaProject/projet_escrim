@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Query;
 
 import escrim.metiers.Colis;
-import escrim.metiers.Compartiment;
 import escrim.utils.EscrimDatabase;
 
 /**
@@ -76,8 +75,8 @@ public class ColisDao {
 	 */
 	public static List<Colis> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNamedQuery(
-				"Colis.loadAll", Colis.class);
+		Query query = escrimDatabase.getEm().createNamedQuery("Colis.loadAll",
+				Colis.class);
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 	}
@@ -87,7 +86,7 @@ public class ColisDao {
 				.getEm()
 				.createNativeQuery(
 						"SELECT * FROM colis inner join colis_config on Colis.UID = colis_config.Colis_UID where colis_config.Config_ID = "
-								+ uidConfig + "", Compartiment.class);
+								+ uidConfig + "", Colis.class);
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 
@@ -95,7 +94,7 @@ public class ColisDao {
 
 	public static List<Colis> findColisOutsideConfigHopital(int uidConfig) {
 		Query query = escrimDatabase.getEm().createNamedQuery(
-				"Colis.findColisOutsideConfigHopital", Compartiment.class);
+				"Colis.findColisOutsideConfigHopital", Colis.class);
 		List<Colis> listeAllColis = query.getResultList();
 		return listeAllColis;
 	}
