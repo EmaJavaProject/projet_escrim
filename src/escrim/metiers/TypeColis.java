@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +19,12 @@ import javax.persistence.Table;
 
 @Table
 @Entity
+@NamedQueries({
+	@NamedQuery(name="TypeColis.loadAll",
+				query="SELECT t FROM TypeColis t"),
+	@NamedQuery(name="TypeColis.findByName",
+				query="SELECT t FROM TypeColis t where t.designation= \':type\'")
+})
 public class TypeColis {
 
 	/** The uid. */

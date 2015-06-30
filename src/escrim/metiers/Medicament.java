@@ -6,6 +6,7 @@ package escrim.metiers;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,6 +16,8 @@ import javax.persistence.TemporalType;
  * @author Martin
  */
 @Entity
+@NamedQuery(name="Medicament.loadAll",
+query="SELECT m FROM Medicament m where m.type = :type")
 public class Medicament extends Materiel {
 
 	/** The principe actif. */

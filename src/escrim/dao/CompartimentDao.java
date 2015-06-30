@@ -74,8 +74,8 @@ public class CompartimentDao {
 	 */
 	public static List<Compartiment> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM compartiment", Compartiment.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Compartiment.loadAll", Compartiment.class);
 		List<Compartiment> listeCompartiment = query.getResultList();
 		return listeCompartiment;
 	}
@@ -89,9 +89,9 @@ public class CompartimentDao {
 	 */
 	public static List<Compartiment> findCompartimentIntoTransport(
 			int uidTransport) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Compartiment where TRANSPORT_UID = "
-						+ uidTransport + "", Compartiment.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Compartiment.findCompartimentIntoTransport", Compartiment.class);
+		query.setParameter("uid", uidTransport);
 		List<Compartiment> listeCompartiments = query.getResultList();
 		return listeCompartiments;
 
@@ -106,8 +106,8 @@ public class CompartimentDao {
 	 */
 	public static List<Compartiment> findCompartimentOutsideTransport(
 			int uidTransport) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Compartiment where TRANSPORT_UID is NULL",
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Compartiment.findCompartimentOutsideTransport",
 				Compartiment.class);
 		List<Compartiment> listeAllCompartiments = query.getResultList();
 		return listeAllCompartiments;

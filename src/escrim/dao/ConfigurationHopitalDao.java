@@ -69,8 +69,8 @@ public class ConfigurationHopitalDao {
 	 */
 	public static List<ConfigurationHopital> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM ConfigurationHopital", ConfigurationHopital.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"ConfigurationHopital.loadAll", ConfigurationHopital.class);
 		List<ConfigurationHopital> listeConfigurationHopital = query.getResultList();
 		return listeConfigurationHopital;
 	}

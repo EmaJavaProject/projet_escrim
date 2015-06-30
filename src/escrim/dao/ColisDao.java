@@ -76,8 +76,8 @@ public class ColisDao {
 	 */
 	public static List<Colis> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Colis", Colis.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Colis.loadAll", Colis.class);
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 	}

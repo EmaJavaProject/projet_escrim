@@ -71,9 +71,10 @@ public class MaterielDao {
 	 * @return the list
 	 */
 	public static List<Materiel> loadAll() {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel where DTYPE = 'Materiel'",
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Materiel.loadAll",
 				Materiel.class);
+		query.setParameter("type", "Materiel");
 		List<Materiel> listeMateriel = query.getResultList();
 		return listeMateriel;
 	}
@@ -85,9 +86,10 @@ public class MaterielDao {
 	 * @return the list
 	 */
 	public static List<Materiel> findMaterielIntoColis(int uidColis) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel where COLIS_UID = " + uidColis + "",
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Materiel.findMaterielIntoColis",
 				Materiel.class);
+		query.setParameter("uid", uidColis);
 		List<Materiel> listeMateriel = query.getResultList();
 		return listeMateriel;
 
@@ -100,8 +102,8 @@ public class MaterielDao {
 	 * @return the list
 	 */
 	public static List<Materiel> findMaterielOustideColis(int uidColis) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Materiel where COLIS_UID is NULL",
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Materiel.findMaterielOustideColis",
 				Materiel.class);
 		List<Materiel> listeAllMateriel = query.getResultList();
 		return listeAllMateriel;

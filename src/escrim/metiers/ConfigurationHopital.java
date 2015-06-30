@@ -7,11 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 /**
  * The Class ConfigurationHopital.
  */
 @Entity
+@NamedQuery(name="ConfigurationHopital.loadAll",
+			query="SELECT c FROM ConfigurationHopital c")
 public class ConfigurationHopital {
 
 	/** The uid. */

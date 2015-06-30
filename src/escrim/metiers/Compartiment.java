@@ -9,12 +9,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
  * The Class Compartiment.
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Compartiment.loadAll",
+				query="SELECT c FROM Compartiment c"),
+	@NamedQuery(name="Compartiment.findCompartimentIntoTransport",
+				query="SELECT c FROM Compartiment c where c.transport.uid = :uid"),
+	@NamedQuery(name="Compartiment.findCompartimentOutsideTransport",
+				query="SELECT c FROM Compartiment c where c.transport is NULL"),
+})
 public class Compartiment {
 
 	/** The uid. */

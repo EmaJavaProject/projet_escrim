@@ -70,8 +70,8 @@ public class TypeColisDao {
 	 */
 	public static TypeColis findByName(String typeColisName) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM TypeColis where Designation= \'" + typeColisName
-						+ "\'", TypeColis.class);
+				"TypeColis.findByName", TypeColis.class);
+		query.setParameter("type", typeColisName);
 		TypeColis typeColis = (TypeColis) query.getResultList().get(0);
 		return typeColis;
 	}

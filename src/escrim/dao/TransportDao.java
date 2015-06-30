@@ -70,8 +70,8 @@ public class TransportDao {
 	 */
 	public static List<Transport> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM Transport", Transport.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Transport.loadAll", Transport.class);
 		List<Transport> listeTransport = query.getResultList();
 		return listeTransport;
 	}

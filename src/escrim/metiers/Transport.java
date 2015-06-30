@@ -4,11 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The Class Transport.
  */
 @Entity
+@NamedQuery(name="Transport.loadAll",
+query="SELECT t FROM Transport t")
 public class Transport {
 
 	/** The uid. */

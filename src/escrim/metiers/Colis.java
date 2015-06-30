@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  * The Class Colis.
@@ -22,6 +23,8 @@ import javax.persistence.ManyToOne;
  * @author Martin
  */
 @Entity
+@NamedQuery(name="Colis.loadAll",
+query="SELECT c FROM Colis c")
 public class Colis {
 
 	/** The uid. */

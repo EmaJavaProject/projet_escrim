@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * The Class Materiel.
@@ -22,6 +25,14 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
+@NamedQueries({
+	@NamedQuery(name="Materiel.loadAll",
+				query="SELECT m FROM Materiel m where m.type = :type"),
+	@NamedQuery(name="Materiel.findMaterielIntoColis",
+				query="SELECT m FROM Materiel m where m.colis.uid = :uid"),
+	@NamedQuery(name="Materiel.findMaterielOustideColis",
+				query="SELECT m FROM Materiel m where m.colis is NULL"),
+})
 public class Materiel {
 
 	/** The uid. */
@@ -34,7 +45,8 @@ public class Materiel {
 	private String denomination;
 	
 	/** The colis. */
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "COLIS_UID", nullable = true)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private Colis colis;
 	
 	/** The observations. */
