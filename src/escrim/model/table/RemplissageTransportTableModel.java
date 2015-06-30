@@ -6,28 +6,13 @@ import java.util.List;
 import escrim.manager.CompartimentManager;
 import escrim.metiers.Compartiment;
 
-/**
- * The Class RemplissageTransportTableModel.
- */
 @SuppressWarnings("serial")
 public class RemplissageTransportTableModel extends EscrimTableModel {
-	
-	/** The liste compartiments. */
 	private List<Compartiment> listeCompartiments = new ArrayList<Compartiment>();
-	
-	/** The Compartiment column name. */
 	private String[] CompartimentColumnName = { "Nom", "Hauteur", "Largeur",
 			"Longueur", "Volume", "Poids", "uid" };
-	
-	/** The uid transport to manage. */
 	private int uidTransportToManage;
 
-	/**
-	 * Instantiates a new remplissage transport table model.
-	 *
-	 * @param allCompartiments the all compartiments
-	 * @param uidTransport the uid transport
-	 */
 	public RemplissageTransportTableModel(boolean allCompartiments,
 			int uidTransport) {
 		uidTransportToManage = uidTransport;
@@ -40,18 +25,10 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
-	 */
 	public int getColumnCount() {
 		return 7;
 	}
 
-	/**
-	 * Refresh model.
-	 *
-	 * @param allCompartiment the all compartiment
-	 */
 	public void refreshModel(boolean allCompartiment) {
 		if (allCompartiment) {
 			listeCompartiments = CompartimentManager
@@ -65,9 +42,6 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getRowCount()
-	 */
 	public int getRowCount() {
 		if (listeCompartiments != null) {
 			return listeCompartiments.size();
@@ -76,17 +50,11 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
-	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return CompartimentColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
-	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -109,9 +77,6 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
-	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Compartiment compartiment = listeCompartiments.get(rowIndex);
@@ -134,9 +99,6 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
-	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
@@ -175,9 +137,6 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see escrim.model.table.EscrimTableModel#isCellEditable(int, int)
-	 */
 	@Override
 	public boolean isCellEditable(int row, int column) {
 		return false;

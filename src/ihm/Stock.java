@@ -26,105 +26,40 @@ import escrim.model.table.MaterielTableModel;
 import escrim.model.table.MedicamentTableModel;
 import escrim.utils.ComboBoxBuilder;
 
-/**
- * The Class Stock.
- */
 public class Stock {
 
-	/** The table colis. */
 	private JTable tableColis;
-	
-	/** The table contenu. */
 	private JTable tableContenu;
-	
-	/** The onglet stock. */
 	private JTabbedPane ongletStock;
-	
-	/** The Stock contenu. */
 	private JPanel StockContenu;
-	
-	/** The scroll pane contenu. */
 	private JScrollPane scrollPaneContenu;
 
-	/** The btn ajouter stock contenu. */
 	private static JButton btnAjouterStockContenu;
-	
-	/** The lbl message derreur. */
 	private static JLabel lblMessageDerreur;
-	
-	/** The btn valider stock contenu. */
 	private static JButton btnValiderStockContenu;
-	
-	/** The btn annuler stock contenu. */
 	private static JButton btnAnnulerStockContenu;
-	
-	/** The btn supprimer stock contenu. */
 	private static JButton btnSupprimerStockContenu;
-	
-	/** The btn editer stock contenu. */
 	private static JButton btnEditerStockContenu;
-	
-	/** The btn localiser stock contenu. */
 	private static JButton btnLocaliserStockContenu;
-	
-	/** The combo select contenu. */
 	private static JComboBox<String> comboSelectContenu;
-	
-	/** The conteneur stock. */
 	private static JPanel conteneurStock;
-	
-	/** The combo select colis. */
 	private static JComboBox<?> comboSelectColis;
-	
-	/** The scroll pane colis. */
 	private static JScrollPane scrollPaneColis;
-	
-	/** The btn ajouter stock colis. */
 	private static JButton btnAjouterStockColis;
-	
-	/** The btn supprimer stock colis. */
 	private static JButton btnSupprimerStockColis;
-	
-	/** The btn valider stock colis. */
 	private static JButton btnValiderStockColis;
-	
-	/** The btn remplir stock colis. */
 	private static JButton btnRemplirStockColis;
-	
-	/** The btn annuler stock colis. */
 	private static JButton btnAnnulerStockColis;
-	
-	/** The btn editer stock colis. */
 	private static JButton btnEditerStockColis;
-	
-	/** The btn localiser stock colis. */
 	private static JButton btnLocaliserStockColis;
-	
-	/** The materiel table model. */
 	private static MaterielTableModel materielTableModel;
-	
-	/** The medicament table model. */
 	private static MedicamentTableModel medicamentTableModel;
-	
-	/** The colis table model. */
 	private static ColisTableModel colisTableModel;
 
-	/**
-	 * Instantiates a new stock.
-	 *
-	 * @param tabPrincipal the tab principal
-	 * @param gestionairePage the gestionaire page
-	 */
 	public Stock(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 		this.initPage(tabPrincipal, gestionairePage);
 	}
 
-	/**
-	 * Inits the page.
-	 *
-	 * @param tabPrincipal the tab principal
-	 * @param gestionairePage the gestionaire page
-	 */
 	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
 		materielTableModel = new MaterielTableModel();
@@ -429,11 +364,6 @@ public class Stock {
 
 	}
 
-	/**
-	 * Disable stock button.
-	 *
-	 * @param disable the disable
-	 */
 	private static void disableStockButton(boolean disable) {
 		if (disable) {
 			btnAjouterStockContenu.setEnabled(false);
@@ -452,11 +382,6 @@ public class Stock {
 		}
 	}
 
-	/**
-	 * Disable colis button.
-	 *
-	 * @param disable the disable
-	 */
 	private static void disableColisButton(boolean disable) {
 		if (disable) {
 			btnAjouterStockColis.setEnabled(false);

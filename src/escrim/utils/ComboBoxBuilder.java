@@ -9,17 +9,8 @@ import javax.swing.table.TableColumn;
 import escrim.manager.TypeColisManager;
 import escrim.metiers.TypeColis;
 
-/**
- * The Class ComboBoxBuilder.
- */
 public class ComboBoxBuilder {
 
-	/**
-	 * Sets the up type colis column.
-	 *
-	 * @param table the table
-	 * @param sportColumn the sport column
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void setUpTypeColisColumn(JTable table,
 			TableColumn sportColumn) {

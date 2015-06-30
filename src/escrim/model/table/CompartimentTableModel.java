@@ -5,38 +5,22 @@ import java.util.List;
 import escrim.manager.CompartimentManager;
 import escrim.metiers.Compartiment;
 
-/**
- * The Class CompartimentTableModel.
- */
 @SuppressWarnings("serial")
 public class CompartimentTableModel extends EscrimTableModel {
-	
-	/** The liste compartiment. */
 	private List<Compartiment> listeCompartiment = CompartimentManager
 			.loadAllCompartiment();
-	
-	/** The Compartiment column name. */
 	private String[] CompartimentColumnName = { "", "Nom", "Hauteur",
 			"Longueur", "Largeur", "Poids", "uid" };
 
-	/**
-	 * Instantiates a new compartiment table model.
-	 */
 	public CompartimentTableModel() {
 		listeCompartiment = CompartimentManager.loadAllCompartiment();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
-	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return CompartimentColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getRowCount()
-	 */
 	@Override
 	public int getRowCount() {
 		if (listeCompartiment != null) {
@@ -46,17 +30,11 @@ public class CompartimentTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
-	 */
 	@Override
 	public int getColumnCount() {
 		return 7;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
-	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Compartiment compartiment = listeCompartiment.get(rowIndex);
@@ -79,9 +57,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
-	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
@@ -116,26 +91,15 @@ public class CompartimentTableModel extends EscrimTableModel {
 		}
 	}
 
-	/**
-	 * Validate persistance.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void validatePersistance(int rowIndex) {
 		CompartimentManager.createCompartiment(listeCompartiment.get(rowIndex));
 	}
 
-	/**
-	 * Refresh model.
-	 */
 	public void refreshModel() {
 		listeCompartiment = CompartimentManager.loadAllCompartiment();
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
-	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -158,9 +122,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/**
-	 * Adds the element.
-	 */
 	public void addElement() {
 		// Adds the element in the last position in the list
 		super.setAddition(true);
@@ -171,11 +132,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 		fireTableRowsInserted(0, getRowCount());
 	}
 
-	/**
-	 * Removes the element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);
@@ -183,12 +139,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 		persistData(rowIndex, true);
 	}
 
-	/**
-	 * Persist data.
-	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
-	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
 			if (super.isAddition() && !super.isEdition() && !super.isRemove()) {
@@ -213,11 +163,6 @@ public class CompartimentTableModel extends EscrimTableModel {
 
 	}
 
-	/**
-	 * Update element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void updateElement(int rowIndex) {
 		super.setEditedRow(rowIndex);
 		super.setEdition(true);

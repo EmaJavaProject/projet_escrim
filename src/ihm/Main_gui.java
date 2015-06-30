@@ -11,60 +11,28 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-/**
- * The Class Main_gui.
- */
 public class Main_gui {
-	
-	/** The frm escrim. */
+	// private boolean clicked = true;
 	private JFrame frmEscrim;
-	
-	/** The stock page. */
 	private Stock stockPage;
-	
-	/** The localisation page. */
 	private Localisation localisationPage;
-	
-	/** The avion page. */
 	private Avion avionPage;
-	
-	/** The panel principal. */
 	private JPanel panelPrincipal;
-	
-	/** The mntm importer. */
 	private JMenuItem mntmImporter;
-	
-	/** The menu gestion. */
 	private JMenu menuGestion;
-	
-	/** The mntm exporter. */
 	private JMenuItem mntmExporter;
-	
-	/** The mn fichier. */
 	private JMenu mnFichier;
-	
-	/** The sous menu gestion transport. */
 	private JMenuItem sousMenuGestionTransport;
-	
-	/** The menu. */
 	private JMenuBar menu;
-	
-	/** The gestionaire page. */
 	private JLayeredPane gestionairePage;
-	
-	/** The tab principal. */
 	private JTabbedPane tabPrincipal;
-	
-	/** The sous menu colis. */
 	private JMenuItem sousMenuColis;
-	
-	/** The sous menu hopital. */
 	private JMenuItem sousMenuHopital;
 
 	/**
 	 * Launch the application.
-	 *
-	 * @param args the arguments
+	 * 
+	 * 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

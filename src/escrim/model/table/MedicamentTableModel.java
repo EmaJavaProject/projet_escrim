@@ -8,42 +8,24 @@ import java.util.List;
 import escrim.manager.MedicamentManager;
 import escrim.metiers.Medicament;
 
-/**
- * The Class MedicamentTableModel.
- */
 @SuppressWarnings("serial")
 public class MedicamentTableModel extends EscrimTableModel {
-	
-	/** The liste medicament. */
 	private List<Medicament> listeMedicament = MedicamentManager
 			.loadAllMedicament();
-	
-	/** The Medicament column name. */
 	private String[] MedicamentColumnName = { "", "Dénomination",
 			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
 			"Classe Thérapeutique", "Dotation U7", "uid" };
-	
-	/** The formatter. */
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 
-	/**
-	 * Instantiates a new medicament table model.
-	 */
 	public MedicamentTableModel() {
 		listeMedicament = MedicamentManager.loadAllMedicament();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
-	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return MedicamentColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getRowCount()
-	 */
 	@Override
 	public int getRowCount() {
 		if (listeMedicament != null) {
@@ -53,17 +35,11 @@ public class MedicamentTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
-	 */
 	@Override
 	public int getColumnCount() {
 		return 10;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
-	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Medicament Medicament = listeMedicament.get(rowIndex);
@@ -96,9 +72,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
-	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
@@ -147,26 +120,15 @@ public class MedicamentTableModel extends EscrimTableModel {
 		}
 	}
 
-	/**
-	 * Validate persistance.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void validatePersistance(int rowIndex) {
 		MedicamentManager.createMedicament(listeMedicament.get(rowIndex));
 	}
 
-	/**
-	 * Refresh model.
-	 */
 	public void refreshModel() {
 		listeMedicament = MedicamentManager.loadAllMedicament();
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
-	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -195,9 +157,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/**
-	 * Adds the element.
-	 */
 	public void addElement() {
 		super.setAddition(true);
 		super.setEdition(false);
@@ -207,11 +166,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 		fireTableRowsInserted(0, getRowCount());
 	}
 
-	/**
-	 * Removes the element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);
@@ -219,12 +173,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 		persistData(rowIndex, true);
 	}
 
-	/**
-	 * Persist data.
-	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
-	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
 			if (super.isAddition() && !super.isEdition() && !super.isRemove()) {
@@ -249,11 +197,6 @@ public class MedicamentTableModel extends EscrimTableModel {
 
 	}
 
-	/**
-	 * Update element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void updateElement(int rowIndex) {
 		super.setEditedRow(rowIndex);
 		super.setEdition(true);

@@ -19,57 +19,23 @@ import javax.swing.SwingConstants;
 
 import escrim.model.table.ConfigurationHopitalTableModel;
 
-/**
- * The Class CreationHopital.
- */
 public class CreationHopital {
 
 
-	/** The tab principal. */
 	private static JTabbedPane tabPrincipal;
-	
-	/** The jpanel configuration hopital. */
 	private static JPanel jpanelConfigurationHopital;
-	
-	/** The txt configuration hopital. */
 	private static JTextField txtConfigurationHopital;
-	
-	/** The configuration hopital table model. */
 	private static ConfigurationHopitalTableModel configurationHopitalTableModel;
-	
-	/** The table configuration hopital. */
 	private static JTable tableConfigurationHopital;
-	
-	/** The bouton ajouter configuration hopital. */
 	private static JButton boutonAjouterConfigurationHopital;
-	
-	/** The bouton quitter configuration hopital. */
 	private static JButton boutonQuitterConfigurationHopital;
-	
-	/** The bouton supprimer configuration hopital. */
 	private static JButton boutonSupprimerConfigurationHopital;
-	
-	/** The bouton remplissage configuration hopital. */
 	private static JButton boutonRemplissageConfigurationHopital;
-	
-	/** The bouton modifier configuration hopital. */
 	private static JButton boutonModifierConfigurationHopital;
-	
-	/** The bouton valider configuration hopital. */
 	private static JButton boutonValiderConfigurationHopital;
-	
-	/** The bouton annuler configuration hopital. */
 	private static JButton boutonAnnulerConfigurationHopital;
-	
-	/** The scroll panel configuration hopital. */
 	private static JScrollPane scrollPanelConfigurationHopital;
 
-	/**
-	 * Création jpanel hopital.
-	 *
-	 * @param pPanelPrincipal the panel principal
-	 * @return the action listener
-	 */
 	public static ActionListener CréationJpanelHopital(
 			JLayeredPane pPanelPrincipal) {
 
@@ -288,11 +254,6 @@ public class CreationHopital {
 
 	}
 
-	/**
-	 * Disable configuration hopital button.
-	 *
-	 * @param disable the disable
-	 */
 	private static void disableConfigurationHopitalButton(boolean disable) {
 		if (disable) {
 			boutonAjouterConfigurationHopital.setEnabled(false);

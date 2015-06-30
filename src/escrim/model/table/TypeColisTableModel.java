@@ -5,38 +5,22 @@ import java.util.List;
 import escrim.manager.TypeColisManager;
 import escrim.metiers.TypeColis;
 
-/**
- * The Class TypeColisTableModel.
- */
 @SuppressWarnings("serial")
 public class TypeColisTableModel extends EscrimTableModel {
-	
-	/** The liste type colis. */
 	private List<TypeColis> listeTypeColis = TypeColisManager
 			.loadAllTypeColis();
-	
-	/** The type colis column name. */
 	private String[] typeColisColumnName = { "", "Nom", "Hauteur", "Longueur",
 			"Largeur", "Poids", "uid" };
 
-	/**
-	 * Instantiates a new type colis table model.
-	 */
 	public TypeColisTableModel() {
 		listeTypeColis = TypeColisManager.loadAllTypeColis();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
-	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return typeColisColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getRowCount()
-	 */
 	@Override
 	public int getRowCount() {
 		if (listeTypeColis != null) {
@@ -46,17 +30,11 @@ public class TypeColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
-	 */
 	@Override
 	public int getColumnCount() {
 		return 7;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
-	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		TypeColis typeColis = listeTypeColis.get(rowIndex);
@@ -79,9 +57,6 @@ public class TypeColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
-	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
@@ -116,26 +91,15 @@ public class TypeColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/**
-	 * Validate persistance.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void validatePersistance(int rowIndex) {
 		TypeColisManager.createTypeColis(listeTypeColis.get(rowIndex));
 	}
 
-	/**
-	 * Refresh model.
-	 */
 	public void refreshModel() {
 		listeTypeColis = TypeColisManager.loadAllTypeColis();
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
-	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -158,9 +122,6 @@ public class TypeColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/**
-	 * Adds the element.
-	 */
 	public void addElement() {
 		super.setAddition(true);
 		super.setEdition(false);
@@ -170,11 +131,6 @@ public class TypeColisTableModel extends EscrimTableModel {
 		fireTableRowsInserted(0, getRowCount());
 	}
 
-	/**
-	 * Removes the element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);
@@ -182,12 +138,6 @@ public class TypeColisTableModel extends EscrimTableModel {
 		persistData(rowIndex, true);
 	}
 
-	/**
-	 * Persist data.
-	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
-	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
 			if (super.isAddition() && !super.isEdition() && !super.isRemove()) {
@@ -210,11 +160,6 @@ public class TypeColisTableModel extends EscrimTableModel {
 
 	}
 
-	/**
-	 * Update element.
-	 *
-	 * @param rowIndex the row index
-	 */
 	public void updateElement(int rowIndex) {
 		super.setEditedRow(rowIndex);
 		super.setEdition(true);

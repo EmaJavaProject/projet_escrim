@@ -6,16 +6,8 @@ import escrim.dao.ColisDao;
 import escrim.metiers.Colis;
 import escrim.metiers.TypeColis;
 
-/**
- * The Class ColisManager.
- */
 public class ColisManager {
 
-	/**
-	 * Creates the colis.
-	 *
-	 * @param colis the colis
-	 */
 	public static void createColis(Colis colis) {
 		TypeColis typeColis = new TypeColis();
 		typeColis = TypeColisManager.findTypeColisByName(colis.getTypeColis()
@@ -25,21 +17,10 @@ public class ColisManager {
 
 	}
 
-	/**
-	 * Creates the temp colis.
-	 *
-	 * @return the colis
-	 */
 	public static Colis createTempColis() {
 		return new Colis();
 	}
 
-	/**
-	 * Update colis.
-	 *
-	 * @param colis the colis
-	 * @param uid the uid
-	 */
 	public static void updateColis(Colis colis, int uid) {
 
 		if (loadColis(uid).getTypeColis().getDesignation() != colis
@@ -53,33 +34,17 @@ public class ColisManager {
 
 	}
 
-	/**
-	 * Removes the colis.
-	 *
-	 * @param uid the uid
-	 */
 	public static void removeColis(int uid) {
 		Colis colisRemoved = loadColis(uid);
 		ColisDao.remove(colisRemoved);
 
 	}
 
-	/**
-	 * Load colis.
-	 *
-	 * @param uid the uid
-	 * @return the colis
-	 */
 	public static Colis loadColis(int uid) {
 		return ColisDao.load(uid);
 
 	}
 
-	/**
-	 * Load all colis.
-	 *
-	 * @return the list
-	 */
 	public static List<Colis> loadAllColis() {
 		return ColisDao.loadAll();
 	}

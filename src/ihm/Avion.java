@@ -15,97 +15,37 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-/**
- * The Class Avion.
- */
 public class Avion {
 	
-	/** The onglet avion. */
 	private JPanel ongletAvion;
-	
-	/** The donnee avion. */
 	private JPanel donneeAvion;
-	
-	/** The lbl donnee1. */
 	private JLabel lblDonnee1;
-	
-	/** The lbl valeur1. */
 	private JLabel lblValeur1;
-	
-	/** The lbl donnee2. */
 	private JLabel lblDonnee2;
-	
-	/** The lbl valeur2. */
 	private JLabel lblValeur2;
-	
-	/** The lbl transport. */
 	private JLabel lblTransport;
-	
-	/** The combo box transport. */
 	private JComboBox comboBoxTransport;
-	
-	/** The lbl configuration. */
 	private JLabel lblConfiguration;
-	
-	/** The combo box configuration. */
 	private JComboBox comboBoxConfiguration;
-	
-	/** The btn validation chargement. */
 	private JButton btnValidationChargement;
-	
-	/** The liste caisse. */
 	private JPanel listeCaisse;
-	
-	/** The caisse obligatoire. */
 	private JPanel caisseObligatoire;
-	
-	/** The scroll pane edit chargement. */
 	private JScrollPane scrollPaneEditChargement;
-	
-	/** The table caisse obligatoire. */
 	private JTable tableCaisseObligatoire;
-	
-	/** The caisse optionnel. */
 	private JPanel caisseOptionnel;
-	
-	/** The table caisse optionnelle. */
 	private JTable tableCaisseOptionnelle;
-	
-	/** The validation. */
 	private JPanel validation;
-	
-	/** The btn validation caisse. */
 	private JButton btnValidationCaisse;
-	
-	/** The label valid modif. */
 	private JLabel labelValidModif;
-	
-	/** The lbl new label_1. */
 	private JLabel lblNewLabel_1;
-	
-	/** The lbl en compte. */
 	private JLabel lblEnCompte;
-	
-	/** The btn exporter. */
 	private JButton btnExporter;
-	
-	/** The panel plan chargement. */
 	private JPanel panelPlanChargement;
 	
-	/**
-	 * Instantiates a new avion.
-	 *
-	 * @param tabPrincipal the tab principal
-	 */
 	public Avion(JTabbedPane tabPrincipal) {
 		this.InitPage(tabPrincipal);
 	}
 	
-	/**
-	 * Inits the page.
-	 *
-	 * @param tabPrincipal the tab principal
-	 */
 	private void InitPage(JTabbedPane tabPrincipal){
 	
 				lblDonnee1 = new JLabel("Donn\u00E9e 1 :");
