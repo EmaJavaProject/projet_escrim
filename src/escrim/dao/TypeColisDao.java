@@ -69,7 +69,7 @@ public class TypeColisDao {
 	 * @return the type colis
 	 */
 	public static TypeColis findByName(String typeColisName) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
+		Query query = escrimDatabase.getEm().createNamedQuery(
 				"TypeColis.findByName", TypeColis.class);
 		query.setParameter("type", typeColisName);
 		TypeColis typeColis = (TypeColis) query.getResultList().get(0);
@@ -83,8 +83,8 @@ public class TypeColisDao {
 	 */
 	public static List<TypeColis> loadAll() {
 
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM TypeColis", TypeColis.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"TypeColis.loadAll", TypeColis.class);
 		List<TypeColis> listeTypeColis = query.getResultList();
 		return listeTypeColis;
 	}

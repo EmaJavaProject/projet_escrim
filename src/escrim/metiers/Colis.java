@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -23,8 +24,13 @@ import javax.persistence.NamedQuery;
  * @author Martin
  */
 @Entity
-@NamedQuery(name="Colis.loadAll",
-query="SELECT c FROM Colis c")
+
+@NamedQueries({
+	@NamedQuery(name="Colis.loadAll",
+			query="SELECT c FROM Colis c"),
+	@NamedQuery(name="Colis.findColisOutsideConfigHopital",
+				query="SELECT c FROM Colis c"),
+})
 public class Colis {
 
 	/** The uid. */

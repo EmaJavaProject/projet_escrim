@@ -23,7 +23,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="TypeColis.loadAll",
 				query="SELECT t FROM TypeColis t"),
 	@NamedQuery(name="TypeColis.findByName",
-				query="SELECT t FROM TypeColis t where t.designation= \':type\'")
+				query="SELECT t FROM TypeColis t where t.designation=:type")
 })
 public class TypeColis {
 

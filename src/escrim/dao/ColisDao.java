@@ -94,8 +94,8 @@ public class ColisDao {
 	}
 
 	public static List<Colis> findColisOutsideConfigHopital(int uidConfig) {
-		Query query = escrimDatabase.getEm().createNativeQuery(
-				"SELECT * FROM colis", Compartiment.class);
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Colis.findColisOutsideConfigHopital", Compartiment.class);
 		List<Colis> listeAllColis = query.getResultList();
 		return listeAllColis;
 	}
