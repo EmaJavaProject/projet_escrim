@@ -6,17 +6,22 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import escrim.utils.ConnexionEscrim;
+
 import java.awt.Color;
+
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
 
@@ -33,6 +38,9 @@ public class DialogTestConnexion extends JDialog {
 		setModal(true);
 		setTitle("Connexion \u00E0 la base de donn\u00E9es");
 		setBounds(100, 100, 556, 256);
+		
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		
 		getContentPane().setLayout(new BorderLayout());
 		panelConnexion.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panelConnexion, BorderLayout.CENTER);
@@ -73,6 +81,8 @@ public class DialogTestConnexion extends JDialog {
 					  
 					  ConnexionEscrim connexion = ConnexionEscrim.getInstance();
 					  url = textUrl.getText();
+					  labelEnregistrement.setVisible(false);
+					  labelErreurUrl.setVisible(false);
 					  if(!(url.isEmpty()))
 					  {
 						  result = connexion.setInformationConnexion(url);
