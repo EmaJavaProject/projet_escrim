@@ -17,7 +17,7 @@ public class ConfigurationHopitalTableModel extends EscrimTableModel {
 	private List<ConfigurationHopital> listeConfigurationHopital = ConfigurationHopitalManager.loadAllConfigurationHopital();
 	
 	/** The Configuration hopital column name. */
-	private String[] ConfigurationHopitalColumnName = { "","listeColis","denomination","uid"};
+	private String[] ConfigurationHopitalColumnName = { "","Dénomination","uid"};
 
 	/**
 	 * Instantiates a new configuration hopital table model.
@@ -51,7 +51,7 @@ public class ConfigurationHopitalTableModel extends EscrimTableModel {
 	 */
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 3;
 	}
 
 	/* (non-Javadoc)
@@ -64,10 +64,8 @@ public class ConfigurationHopitalTableModel extends EscrimTableModel {
 		case 0:
 			return null;
 		case 1:
-			return ConfigurationHopital.getListeColis();
-		case 2:
 			return ConfigurationHopital.getDenomination();
-		case 3:
+		case 2:
 			return ConfigurationHopital.getUid();
 		}
 		return null;
@@ -81,10 +79,6 @@ public class ConfigurationHopitalTableModel extends EscrimTableModel {
 		switch (columnIndex) {
 
 		case 1:
-			listeConfigurationHopital.get(rowIndex).setListeColis(new ArrayList<Colis>());
-			break;
-			
-		case 2:
 			listeConfigurationHopital.get(rowIndex).setDenomination(
 					aValue == null ? null : aValue.toString());
 			break;
@@ -122,8 +116,6 @@ public class ConfigurationHopitalTableModel extends EscrimTableModel {
 		case 1:
 			return String.class;
 		case 2:
-			return String.class;
-		case 3:
 			return Integer.class;
 		}
 		return null;
