@@ -7,10 +7,19 @@ import javax.persistence.Query;
 import escrim.metiers.Materiel;
 import escrim.utils.EscrimDatabase;
 
+/**
+ * The Class MaterielDao.
+ */
 public class MaterielDao {
 
+	/** The escrim database. */
 	static EscrimDatabase escrimDatabase = EscrimDatabase.getInstance();
 
+	/**
+	 * Creates the.
+	 *
+	 * @param materiel the materiel
+	 */
 	public static void create(Materiel materiel) {
 		// TODO Auto-generated method stub
 		escrimDatabase.getEm().getTransaction().begin();
@@ -18,6 +27,12 @@ public class MaterielDao {
 		escrimDatabase.getEm().getTransaction().commit();
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param materielUpdated the materiel updated
+	 * @param uid the uid
+	 */
 	public static void update(Materiel materielUpdated, int uid) {
 		Materiel materiel = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
@@ -28,17 +43,33 @@ public class MaterielDao {
 
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param uid the uid
+	 * @return the materiel
+	 */
 	public static Materiel load(int uid) {
 
 		return escrimDatabase.getEm().find(Materiel.class, uid);
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param materielRemoved the materiel removed
+	 */
 	public static void remove(Materiel materielRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().remove(materielRemoved);
 		escrimDatabase.getEm().getTransaction().commit();
 	}
 
+	/**
+	 * Load all.
+	 *
+	 * @return the list
+	 */
 	public static List<Materiel> loadAll() {
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Materiel where DTYPE = 'Materiel'",
@@ -47,6 +78,12 @@ public class MaterielDao {
 		return listeMateriel;
 	}
 
+	/**
+	 * Find materiel into colis.
+	 *
+	 * @param uidColis the uid colis
+	 * @return the list
+	 */
 	public static List<Materiel> findMaterielIntoColis(int uidColis) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Materiel where COLIS_UID = " + uidColis + "",
@@ -56,6 +93,12 @@ public class MaterielDao {
 
 	}
 
+	/**
+	 * Find materiel oustide colis.
+	 *
+	 * @param uidColis the uid colis
+	 * @return the list
+	 */
 	public static List<Materiel> findMaterielOustideColis(int uidColis) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Materiel where COLIS_UID is NULL",

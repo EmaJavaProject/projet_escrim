@@ -24,26 +24,59 @@ import escrim.model.table.RemplissageColisTableModel;
 import escrim.model.table.RemplissageTransportTableModel;
 import escrim.model.table.TransportTableModel;
 
+/**
+ * The Class Remplissage.
+ */
 public class Remplissage {
 
+	/** The table contenu top. */
 	private static JTable tableContenuTop;
+	
+	/** The table contenu bot. */
 	private static JTable tableContenuBot;
+	
+	/** The txt conteneur. */
 	private static JTextField txtConteneur;
+	
+	/** The contenue remplissage. */
 	private static JPanel contenueRemplissage;
+	
+	/** The scroll pane contenu bot. */
 	private static JScrollPane scrollPaneContenuBot;
+	
+	/** The scroll pane contenu top. */
 	private static JScrollPane scrollPaneContenuTop;
+	
+	/** The btn sauvegarder et quitter. */
 	private static JButton btnSauvegarderEtQuitter;
+	
+	/** The bouton ajouter contenu. */
 	private static JButton boutonAjouterContenu;
+	
+	/** The bouton supprimer contenu. */
 	private static JButton boutonSupprimerContenu;
 
+	/** The outside colis table model. */
 	private static RemplissageColisTableModel outsideColisTableModel;
+	
+	/** The inside colis table model. */
 	private static RemplissageColisTableModel insideColisTableModel;
+	
+	/** The outside transport table model. */
 	private static RemplissageTransportTableModel outsideTransportTableModel;
+	
+	/** The inside transport table model. */
 	private static RemplissageTransportTableModel insideTransportTableModel;
 
 
 	// ------------------------------------------COLIS--------------------------------------------------//
 
+	/**
+	 * Création jpanel remplissage colis.
+	 *
+	 * @param gestionairePage the gestionaire page
+	 * @param uidColis the uid colis
+	 */
 	public static void CréationJpanelRemplissageColis(
 			JLayeredPane gestionairePage, int uidColis) {
 
@@ -154,6 +187,13 @@ public class Remplissage {
 
 	// ---------------------------------------TRANSPORT-----------------------------------------------------//
 
+	/**
+	 * Création jpanel remplissage transport.
+	 *
+	 * @param gestionairePage the gestionaire page
+	 * @param pModelTable the model table
+	 * @param uidTransport the uid transport
+	 */
 	public static void CréationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, TransportTableModel pModelTable,
 			int uidTransport) {
@@ -260,6 +300,13 @@ public class Remplissage {
 	// -----------------------------------CONFIGURATION
 	// HOPITAL----------------------------------------//
 
+	/**
+	 * Création jpanel remplissage config hopital.
+	 *
+	 * @param gestionairePage the gestionaire page
+	 * @param pModelTable the model table
+	 * @param index the index
+	 */
 	public static void CréationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage,
 			ConfigurationHopitalTableModel pModelTable, int index) {

@@ -7,10 +7,19 @@ import javax.persistence.Query;
 import escrim.metiers.Compartiment;
 import escrim.utils.EscrimDatabase;
 
+/**
+ * The Class CompartimentDao.
+ */
 public class CompartimentDao {
 
+	/** The escrim database. */
 	static EscrimDatabase escrimDatabase = EscrimDatabase.getInstance();
 
+	/**
+	 * Creates the.
+	 *
+	 * @param compartiment the compartiment
+	 */
 	public static void create(Compartiment compartiment) {
 		// TODO Auto-generated method stub
 		escrimDatabase.getEm().getTransaction().begin();
@@ -18,6 +27,12 @@ public class CompartimentDao {
 		escrimDatabase.getEm().getTransaction().commit();
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param compartimentUpdated the compartiment updated
+	 * @param uid the uid
+	 */
 	public static void update(Compartiment compartimentUpdated, int uid) {
 		Compartiment compartiment = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
@@ -26,17 +41,33 @@ public class CompartimentDao {
 
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param uid the uid
+	 * @return the compartiment
+	 */
 	public static Compartiment load(int uid) {
 
 		return escrimDatabase.getEm().find(Compartiment.class, uid);
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param compartimentRemoved the compartiment removed
+	 */
 	public static void remove(Compartiment compartimentRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().remove(compartimentRemoved);
 		escrimDatabase.getEm().getTransaction().commit();
 	}
 
+	/**
+	 * Load all.
+	 *
+	 * @return the list
+	 */
 	public static List<Compartiment> loadAll() {
 
 		Query query = escrimDatabase.getEm().createNativeQuery(
@@ -45,6 +76,12 @@ public class CompartimentDao {
 		return listeCompartiment;
 	}
 	
+	/**
+	 * Find compartiment into transport.
+	 *
+	 * @param uidTransport the uid transport
+	 * @return the list
+	 */
 	public static List<Compartiment> findCompartimentIntoTransport(int uidTransport) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Compartiment where TRANSPORT_UID = " + uidTransport + "",
@@ -54,6 +91,12 @@ public class CompartimentDao {
 
 	}
 
+	/**
+	 * Find compartiment outside transport.
+	 *
+	 * @param uidTransport the uid transport
+	 * @return the list
+	 */
 	public static List<Compartiment> findCompartimentOutsideTransport(int uidTransport) {
 		Query query = escrimDatabase.getEm().createNativeQuery(
 				"SELECT * FROM Compartiment where TRANSPORT_UID is NULL", Compartiment.class);

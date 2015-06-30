@@ -8,13 +8,28 @@ import escrim.manager.MedicamentManager;
 import escrim.metiers.Materiel;
 import escrim.metiers.Medicament;
 
+/**
+ * The Class RemplissageColisTableModel.
+ */
 @SuppressWarnings("serial")
 public class RemplissageColisTableModel extends EscrimTableModel {
+	
+	/** The liste materiel. */
 	private List<Materiel> listeMateriel = new ArrayList<Materiel>();
+	
+	/** The Materiel column name. */
 	private String[] MaterielColumnName = { "Type", "Denomination",
 			"Observations", "Quantite", "uid" };
+	
+	/** The uid colis to manage. */
 	private int uidColisToManage;
 
+	/**
+	 * Instantiates a new remplissage colis table model.
+	 *
+	 * @param allMateriel the all materiel
+	 * @param uidColis the uid colis
+	 */
 	public RemplissageColisTableModel(boolean allMateriel, int uidColis) {
 		uidColisToManage = uidColis;
 		if (allMateriel) {
@@ -24,10 +39,18 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
+	 */
 	public int getColumnCount() {
 		return 5;
 	}
 
+	/**
+	 * Refresh model.
+	 *
+	 * @param allMateriel the all materiel
+	 */
 	public void refreshModel(boolean allMateriel) {
 		if (allMateriel) {
 			listeMateriel = MaterielManager.loadOutsideColis(uidColisToManage);
@@ -39,6 +62,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#getRowCount()
+	 */
 	@Override
 	public int getRowCount() {
 		if (listeMateriel != null) {
@@ -48,11 +74,17 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
+	 */
 	@Override
 	public String getColumnName(int columnIndex) {
 		return MaterielColumnName[columnIndex];
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -70,6 +102,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Materiel materiel = listeMateriel.get(rowIndex);
@@ -97,6 +132,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
@@ -129,6 +167,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see escrim.model.table.EscrimTableModel#isCellEditable(int, int)
+	 */
 	@Override
 	public boolean isCellEditable(int row, int column) {
 		return false;
