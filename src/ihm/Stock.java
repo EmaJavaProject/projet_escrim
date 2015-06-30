@@ -308,7 +308,7 @@ public class Stock {
 		btnRemplirStockColis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tableColis.getSelectedRow() == -1))
-					Remplissage.CréationJpanelRemplissageColis(
+					Remplissage.CreationJpanelRemplissageColis(
 							gestionairePage,
 							(int) colisTableModel.getValueAt(
 									tableColis.getSelectedRow(),

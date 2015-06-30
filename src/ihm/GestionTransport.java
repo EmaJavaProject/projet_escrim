@@ -194,7 +194,7 @@ public class GestionTransport {
 							public void actionPerformed(ActionEvent arg0) {
 								if (!(tableTransport.getSelectedRow() == -1))
 									Remplissage
-											.CréationJpanelRemplissageTransport(
+											.CreationJpanelRemplissageTransport(
 													pPanelPrincipal,
 													tblModelTransport,
 													(int) tblModelTransport.getValueAt(

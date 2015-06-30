@@ -77,7 +77,7 @@ public class Remplissage {
 	 * @param gestionairePage the gestionaire page
 	 * @param uidColis the uid colis
 	 */
-	public static void CréationJpanelRemplissageColis(
+	public static void CreationJpanelRemplissageColis(
 			JLayeredPane gestionairePage, int uidColis) {
 
 		txtConteneur = new JTextField();
@@ -194,7 +194,7 @@ public class Remplissage {
 	 * @param pModelTable the model table
 	 * @param uidTransport the uid transport
 	 */
-	public static void CréationJpanelRemplissageTransport(
+	public static void CreationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, TransportTableModel pModelTable,
 			int uidTransport) {
 
@@ -307,7 +307,7 @@ public class Remplissage {
 	 * @param pModelTable the model table
 	 * @param index the index
 	 */
-	public static void CréationJpanelRemplissageConfigHopital(
+	public static void CreationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage,
 			ConfigurationHopitalTableModel pModelTable, int index) {
 

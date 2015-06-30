@@ -150,7 +150,7 @@ public class CreationHopital {
 					public void actionPerformed(ActionEvent arg0) {
 						if (!(tableConfigurationHopital.getSelectedRow() == -1))
 							Remplissage
-									.CréationJpanelRemplissageConfigHopital(
+									.CreationJpanelRemplissageConfigHopital(
 											pPanelPrincipal,
 											configurationHopitalTableModel,
 											tableConfigurationHopital
