@@ -156,7 +156,6 @@ public class CreationHopital {
 									Remplissage
 											.CreationJpanelRemplissageConfigHopital(
 													pPanelPrincipal,
-													configurationHopitalTableModel,
 													tableConfigurationHopital
 															.getSelectedRow());
 							}
@@ -174,7 +173,6 @@ public class CreationHopital {
 									Remplissage
 											.CreationJpanelRemplissageConfigHopital(
 													pPanelPrincipal,
-													configurationHopitalTableModel,
 													(int) configurationHopitalTableModel.getValueAt(
 															tableConfigurationHopital
 																	.getSelectedRow(),

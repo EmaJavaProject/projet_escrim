@@ -203,7 +203,7 @@ public class Remplissage {
 	 *            the uid transport
 	 */
 	public static void CreationJpanelRemplissageTransport(
-			JLayeredPane gestionairePage, TransportTableModel pModelTable,
+			JLayeredPane gestionairePage,
 			int uidTransport) {
 
 		txtConteneur = new JTextField();
@@ -320,7 +320,6 @@ public class Remplissage {
 	 */
 	public static void CreationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage,
-			ConfigurationHopitalTableModel pModelTable,
 			int uidConfigurationHopital) {
 
 		outsideConfigHopitalTableModel = new RemplissageConfigurationHopitalTableModel(

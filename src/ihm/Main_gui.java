@@ -161,7 +161,7 @@ public class Main_gui {
 		menuGestion.add(sousMenuColis);
 
 		stockPage = new Stock(tabPrincipal,gestionairePage);
-		localisationPage = new Localisation(tabPrincipal);
+		localisationPage = new Localisation(tabPrincipal, gestionairePage);
 		avionPage = new Avion(tabPrincipal);
 
 		frmEscrim.setJMenuBar(menu);

@@ -196,7 +196,6 @@ public class GestionTransport {
 									Remplissage
 											.CreationJpanelRemplissageTransport(
 													pPanelPrincipal,
-													tblModelTransport,
 													(int) tblModelTransport.getValueAt(
 															tableTransport
 																	.getSelectedRow(),
