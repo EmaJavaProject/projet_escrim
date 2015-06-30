@@ -26,7 +26,8 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
 		@NamedQuery(name = "Colis.loadAll", query = "SELECT c FROM Colis c"),
-		@NamedQuery(name = "Colis.findColisOutsideConfigHopital", query = "SELECT c FROM Colis c"), })
+		@NamedQuery(name = "Colis.findColisOutsideConfigHopital", query = "Select c FROM Colis c where c.uid not in (Select c from Colis c inner join ConfigurationHopital conf on c.uid=conf.uid where conf.uid = :uidConf)"),
+		@NamedQuery(name = "Colis.findColisInsideConfigHopital", query = "Select c from Colis c inner join ConfigurationHopital conf on c.uid=conf.uid where conf.uid = :uidConf") })
 @Entity
 public class Colis {
 

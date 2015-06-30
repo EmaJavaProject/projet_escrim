@@ -82,11 +82,9 @@ public class ColisDao {
 	}
 
 	public static List<Colis> findColisIntoConfigHopital(int uidConfig) {
-		Query query = escrimDatabase
-				.getEm()
-				.createNativeQuery(
-						"SELECT * FROM colis inner join colis_config on Colis.UID = colis_config.Colis_UID where colis_config.Config_ID = "
-								+ uidConfig + "", Colis.class);
+		Query query = escrimDatabase.getEm().createNativeQuery(
+				"Colis.findColisInsideConfigHopital", Colis.class);
+		query.setParameter("uidConf", uidConfig);
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 
@@ -95,6 +93,7 @@ public class ColisDao {
 	public static List<Colis> findColisOutsideConfigHopital(int uidConfig) {
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Colis.findColisOutsideConfigHopital", Colis.class);
+		query.setParameter("uidConf", uidConfig);
 		List<Colis> listeAllColis = query.getResultList();
 		return listeAllColis;
 	}
