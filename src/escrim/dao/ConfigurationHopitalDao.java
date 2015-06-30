@@ -21,7 +21,6 @@ public class ConfigurationHopitalDao {
 	 * @param ConfigurationHopital the configuration hopital
 	 */
 	public static void create(ConfigurationHopital ConfigurationHopital) {
-		// TODO Auto-generated method stub
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().persist(ConfigurationHopital);
 		escrimDatabase.getEm().getTransaction().commit();

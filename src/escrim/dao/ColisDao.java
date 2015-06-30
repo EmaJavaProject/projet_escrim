@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import escrim.metiers.Colis;
+import escrim.metiers.Compartiment;
 import escrim.utils.EscrimDatabase;
 
 /**
@@ -18,10 +19,11 @@ public class ColisDao {
 	/**
 	 * Creates the.
 	 *
-	 * @param Colis the colis
+	 * @param Colis
+	 *            the colis
 	 */
 	public static void create(Colis Colis) {
-		
+
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().persist(Colis);
 		escrimDatabase.getEm().getTransaction().commit();
@@ -30,8 +32,10 @@ public class ColisDao {
 	/**
 	 * Update.
 	 *
-	 * @param ColisUpdated the colis updated
-	 * @param uid the uid
+	 * @param ColisUpdated
+	 *            the colis updated
+	 * @param uid
+	 *            the uid
 	 */
 	public static void update(Colis ColisUpdated, int uid) {
 		Colis Colis = load(uid);
@@ -44,7 +48,8 @@ public class ColisDao {
 	/**
 	 * Load.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the colis
 	 */
 	public static Colis load(int uid) {
@@ -55,7 +60,8 @@ public class ColisDao {
 	/**
 	 * Removes the.
 	 *
-	 * @param ColisRemoved the colis removed
+	 * @param ColisRemoved
+	 *            the colis removed
 	 */
 	public static void remove(Colis ColisRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -74,5 +80,23 @@ public class ColisDao {
 				"SELECT * FROM Colis", Colis.class);
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
+	}
+
+	public static List<Colis> findColisIntoConfigHopital(int uidConfig) {
+		Query query = escrimDatabase
+				.getEm()
+				.createNativeQuery(
+						"SELECT * FROM colis inner join colis_config on Colis.UID = colis_config.Colis_UID where colis_config.Config_ID = "
+								+ uidConfig + "", Compartiment.class);
+		List<Colis> listeColis = query.getResultList();
+		return listeColis;
+
+	}
+
+	public static List<Colis> findColisOutsideConfigHopital(int uidConfig) {
+		Query query = escrimDatabase.getEm().createNativeQuery(
+				"SELECT * FROM colis", Compartiment.class);
+		List<Colis> listeAllColis = query.getResultList();
+		return listeAllColis;
 	}
 }

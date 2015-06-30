@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import escrim.model.table.ConfigurationHopitalTableModel;
@@ -24,50 +23,50 @@ import escrim.model.table.ConfigurationHopitalTableModel;
  */
 public class CreationHopital {
 
-
 	/** The tab principal. */
 	private static JTabbedPane tabPrincipal;
-	
+
 	/** The jpanel configuration hopital. */
 	private static JPanel jpanelConfigurationHopital;
-	
+
 	/** The txt configuration hopital. */
 	private static JTextField txtConfigurationHopital;
-	
+
 	/** The configuration hopital table model. */
 	private static ConfigurationHopitalTableModel configurationHopitalTableModel;
-	
+
 	/** The table configuration hopital. */
 	private static JTable tableConfigurationHopital;
-	
+
 	/** The bouton ajouter configuration hopital. */
 	private static JButton boutonAjouterConfigurationHopital;
-	
+
 	/** The bouton quitter configuration hopital. */
 	private static JButton boutonQuitterConfigurationHopital;
-	
+
 	/** The bouton supprimer configuration hopital. */
 	private static JButton boutonSupprimerConfigurationHopital;
-	
+
 	/** The bouton remplissage configuration hopital. */
 	private static JButton boutonRemplissageConfigurationHopital;
-	
+
 	/** The bouton modifier configuration hopital. */
 	private static JButton boutonModifierConfigurationHopital;
-	
+
 	/** The bouton valider configuration hopital. */
 	private static JButton boutonValiderConfigurationHopital;
-	
+
 	/** The bouton annuler configuration hopital. */
 	private static JButton boutonAnnulerConfigurationHopital;
-	
+
 	/** The scroll panel configuration hopital. */
 	private static JScrollPane scrollPanelConfigurationHopital;
 
 	/**
 	 * Création jpanel hopital.
 	 *
-	 * @param pPanelPrincipal the panel principal
+	 * @param pPanelPrincipal
+	 *            the panel principal
 	 * @return the action listener
 	 */
 	public static ActionListener CreationJpanelHopital(
@@ -77,8 +76,8 @@ public class CreationHopital {
 			public void actionPerformed(ActionEvent e) {
 				if (pPanelPrincipal != null) {
 
-					
-					//-------------------------pour éviter de créer plusieur Jpanel-----------//////////
+					// -------------------------pour éviter de créer plusieur
+					// Jpanel-----------//////////
 					for (Component composantPanelPrincipal : pPanelPrincipal
 							.getComponents()) {
 						for (Component composantsPanelPrincipal : composantPanelPrincipal
@@ -87,12 +86,14 @@ public class CreationHopital {
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
 									&& composantsPanelPrincipal
-									.getName()
-									.equals("Création de type de colis")|| composantsPanelPrincipal
 											.getName()
-											.equals("Gestion configuration d'hopital")|| composantsPanelPrincipal.getName()
-											.equals("Gestion Transport")||composantsPanelPrincipal
+											.equals("Création de type de colis")
+									|| composantsPanelPrincipal
 											.getName()
+											.equals("Gestion configuration d'hopital")
+									|| composantsPanelPrincipal.getName()
+											.equals("Gestion Transport")
+									|| composantsPanelPrincipal.getName()
 											.equals("Remplissage")) {
 								return;
 							}
@@ -100,17 +101,16 @@ public class CreationHopital {
 					}
 				}
 
-
 				configurationHopitalTableModel = new ConfigurationHopitalTableModel();
 				tableConfigurationHopital = new JTable(
 						configurationHopitalTableModel);
 				tableConfigurationHopital
-						.setName("Table ConfigurationHopitals");
+						.setName("Table Configuration Hopitals");
 				tableConfigurationHopital.setBounds(12, 72, 899, 800);
-				tableConfigurationHopital
-						.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				tableConfigurationHopital.setCellSelectionEnabled(false);
-				tableConfigurationHopital.setRowSelectionAllowed(true);
+				// tableConfigurationHopital
+				// .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				// tableConfigurationHopital.setCellSelectionEnabled(false);
+				// tableConfigurationHopital.setRowSelectionAllowed(true);
 
 				boutonQuitterConfigurationHopital = new JButton("Quitter");
 				boutonQuitterConfigurationHopital.setBounds(800, 13, 97, 25);
@@ -143,23 +143,47 @@ public class CreationHopital {
 
 				boutonAnnulerConfigurationHopital = new JButton("Annuler");
 				boutonAnnulerConfigurationHopital.setBounds(450, 589, 97, 25);
-				
-				boutonRemplissageConfigurationHopital = new JButton("Éditer La configuration d'hôpital sélectionné");
-				boutonRemplissageConfigurationHopital.setBounds(560, 589, 283, 25);
-				boutonRemplissageConfigurationHopital.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						if (!(tableConfigurationHopital.getSelectedRow() == -1))
-							Remplissage
-									.CreationJpanelRemplissageConfigHopital(
-											pPanelPrincipal,
-											configurationHopitalTableModel,
-											tableConfigurationHopital
-													.getSelectedRow());
 
-					}
+				boutonRemplissageConfigurationHopital = new JButton(
+						"Éditer La configuration d'hôpital sélectionné");
+				boutonRemplissageConfigurationHopital.setBounds(560, 589, 283,
+						25);
+				boutonRemplissageConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								if (!(tableConfigurationHopital
+										.getSelectedRow() == -1))
+									Remplissage
+											.CreationJpanelRemplissageConfigHopital(
+													pPanelPrincipal,
+													configurationHopitalTableModel,
+													tableConfigurationHopital
+															.getSelectedRow());
+							}
+						});
 
-				});
+				boutonRemplissageConfigurationHopital = new JButton(
+						"Éditer la configuration d'hôpital sélectionnée");
+				boutonRemplissageConfigurationHopital.setBounds(560, 589, 283,
+						25);
+				boutonRemplissageConfigurationHopital
+						.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								if (!(tableConfigurationHopital
+										.getSelectedRow() == -1))
+									Remplissage
+											.CreationJpanelRemplissageConfigHopital(
+													pPanelPrincipal,
+													configurationHopitalTableModel,
+													(int) configurationHopitalTableModel.getValueAt(
+															tableConfigurationHopital
+																	.getSelectedRow(),
+															tableConfigurationHopital
+																	.getColumnCount()));
 
+							}
+
+						});
 
 				boutonValiderConfigurationHopital.setEnabled(false);
 				boutonAnnulerConfigurationHopital.setEnabled(false);
@@ -251,7 +275,6 @@ public class CreationHopital {
 						.setViewportView(tableConfigurationHopital);
 				scrollPanelConfigurationHopital.setBounds(12, 56, 800, 486);
 
-
 				// ---------------------------------------------création et
 				// ajout des Jpanel dans le
 				// Tabprincipal---------------------------------------------------//
@@ -276,11 +299,15 @@ public class CreationHopital {
 				jpanelConfigurationHopital
 						.add(boutonAnnulerConfigurationHopital);
 				jpanelConfigurationHopital
-				.add(boutonRemplissageConfigurationHopital);
+						.add(boutonRemplissageConfigurationHopital);
 
 				pPanelPrincipal.add(jpanelConfigurationHopital, new Integer(4));
 				pPanelPrincipal.revalidate();
 
+				// Suppression de la colonne UID
+				tableConfigurationHopital
+						.removeColumn(tableConfigurationHopital
+								.getColumn("uid"));
 			}
 		};
 
@@ -291,7 +318,8 @@ public class CreationHopital {
 	/**
 	 * Disable configuration hopital button.
 	 *
-	 * @param disable the disable
+	 * @param disable
+	 *            the disable
 	 */
 	private static void disableConfigurationHopitalButton(boolean disable) {
 		if (disable) {
@@ -308,7 +336,5 @@ public class CreationHopital {
 			boutonAnnulerConfigurationHopital.setEnabled(false);
 		}
 	}
-
-
 
 };

@@ -14,7 +14,8 @@ public class ColisManager {
 	/**
 	 * Creates the colis.
 	 *
-	 * @param colis the colis
+	 * @param colis
+	 *            the colis
 	 */
 	public static void createColis(Colis colis) {
 		TypeColis typeColis = new TypeColis();
@@ -37,8 +38,10 @@ public class ColisManager {
 	/**
 	 * Update colis.
 	 *
-	 * @param colis the colis
-	 * @param uid the uid
+	 * @param colis
+	 *            the colis
+	 * @param uid
+	 *            the uid
 	 */
 	public static void updateColis(Colis colis, int uid) {
 
@@ -56,7 +59,8 @@ public class ColisManager {
 	/**
 	 * Removes the colis.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 */
 	public static void removeColis(int uid) {
 		Colis colisRemoved = loadColis(uid);
@@ -67,7 +71,8 @@ public class ColisManager {
 	/**
 	 * Load colis.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the colis
 	 */
 	public static Colis loadColis(int uid) {
@@ -82,6 +87,33 @@ public class ColisManager {
 	 */
 	public static List<Colis> loadAllColis() {
 		return ColisDao.loadAll();
+	}
+
+	public static List<Colis> loadOutsideConfigHopital(int uidConfig) {
+		return ColisDao.findColisOutsideConfigHopital(uidConfig);
+	}
+
+	public static List<Colis> loadByConfigHopital(int uidConfig) {
+		return ColisDao.findColisIntoConfigHopital(uidConfig);
+	}
+
+	public static void fillConfig(int uidConfig, int uidColis) {
+		Colis colis = loadColis(uidColis);
+		// /TODO
+		// if (colis.get != TransportManager.loadTransport(uidConfig)) {
+		// Transport transport = new Transport();
+		// transport = TransportManager.loadTransport(uidConfig);
+		// colis.setTransport(transport);
+		// }
+		updateColis(colis, colis.getUid());
+	}
+
+	public static void fillOutConfig(int uidConfig, int uidColis) {
+		Colis colis = loadColis(uidColis);
+		// TODO
+		// colis.setTransport(null);
+
+		updateColis(colis, colis.getUid());
 	}
 
 }

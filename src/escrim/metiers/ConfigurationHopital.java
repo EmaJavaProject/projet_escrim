@@ -18,13 +18,13 @@ public class ConfigurationHopital {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
-	
+
 	/** The denomination. */
 	private String denomination;
-	
+
 	/** The liste colis. */
-	@ManyToMany
-	private List<Colis> listeColis;
+	@ManyToMany(mappedBy = "configurations")
+	private List<Colis> colis;
 
 	/**
 	 * Gets the uid.
@@ -38,7 +38,8 @@ public class ConfigurationHopital {
 	/**
 	 * Sets the uid.
 	 *
-	 * @param uid the new uid
+	 * @param uid
+	 *            the new uid
 	 */
 	public void setUid(int uid) {
 		this.uid = uid;
@@ -56,7 +57,8 @@ public class ConfigurationHopital {
 	/**
 	 * Sets the denomination.
 	 *
-	 * @param denomination the new denomination
+	 * @param denomination
+	 *            the new denomination
 	 */
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
@@ -68,16 +70,17 @@ public class ConfigurationHopital {
 	 * @return the liste colis
 	 */
 	public List<Colis> getListeColis() {
-		return listeColis;
+		return colis;
 	}
 
 	/**
 	 * Sets the liste colis.
 	 *
-	 * @param listeColis the new liste colis
+	 * @param listeColis
+	 *            the new liste colis
 	 */
 	public void setListeColis(List<Colis> listeColis) {
-		this.listeColis = listeColis;
+		this.colis = listeColis;
 	}
 
 }

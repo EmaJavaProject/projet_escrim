@@ -17,10 +17,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import escrim.manager.ColisManager;
 import escrim.manager.CompartimentManager;
 import escrim.manager.MaterielManager;
 import escrim.model.table.ConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageColisTableModel;
+import escrim.model.table.RemplissageConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageTransportTableModel;
 import escrim.model.table.TransportTableModel;
 
@@ -31,51 +33,56 @@ public class Remplissage {
 
 	/** The table contenu top. */
 	private static JTable tableContenuTop;
-	
+
 	/** The table contenu bot. */
 	private static JTable tableContenuBot;
-	
+
 	/** The txt conteneur. */
 	private static JTextField txtConteneur;
-	
+
 	/** The contenue remplissage. */
 	private static JPanel contenueRemplissage;
-	
+
 	/** The scroll pane contenu bot. */
 	private static JScrollPane scrollPaneContenuBot;
-	
+
 	/** The scroll pane contenu top. */
 	private static JScrollPane scrollPaneContenuTop;
-	
+
 	/** The btn sauvegarder et quitter. */
 	private static JButton btnSauvegarderEtQuitter;
-	
+
 	/** The bouton ajouter contenu. */
 	private static JButton boutonAjouterContenu;
-	
+
 	/** The bouton supprimer contenu. */
 	private static JButton boutonSupprimerContenu;
 
 	/** The outside colis table model. */
 	private static RemplissageColisTableModel outsideColisTableModel;
-	
+
 	/** The inside colis table model. */
 	private static RemplissageColisTableModel insideColisTableModel;
-	
+
 	/** The outside transport table model. */
 	private static RemplissageTransportTableModel outsideTransportTableModel;
-	
+
 	/** The inside transport table model. */
 	private static RemplissageTransportTableModel insideTransportTableModel;
 
+	private static RemplissageConfigurationHopitalTableModel outsideConfigHopitalTableModel;
+
+	private static RemplissageConfigurationHopitalTableModel insideConfigHopitalTableModel;
 
 	// ------------------------------------------COLIS--------------------------------------------------//
 
 	/**
 	 * Création jpanel remplissage colis.
 	 *
-	 * @param gestionairePage the gestionaire page
-	 * @param uidColis the uid colis
+	 * @param gestionairePage
+	 *            the gestionaire page
+	 * @param uidColis
+	 *            the uid colis
 	 */
 	public static void CreationJpanelRemplissageColis(
 			JLayeredPane gestionairePage, int uidColis) {
@@ -88,14 +95,12 @@ public class Remplissage {
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
-		outsideColisTableModel = new RemplissageColisTableModel(true,
-				uidColis);
+		outsideColisTableModel = new RemplissageColisTableModel(true, uidColis);
 
 		tableContenuTop = new JTable(outsideColisTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
-		insideColisTableModel = new RemplissageColisTableModel(false,
-				uidColis);
+		insideColisTableModel = new RemplissageColisTableModel(false, uidColis);
 
 		tableContenuBot = new JTable(insideColisTableModel);
 		tableContenuBot.setBounds(52, 400, 706, 223);
@@ -190,9 +195,12 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage transport.
 	 *
-	 * @param gestionairePage the gestionaire page
-	 * @param pModelTable the model table
-	 * @param uidTransport the uid transport
+	 * @param gestionairePage
+	 *            the gestionaire page
+	 * @param pModelTable
+	 *            the model table
+	 * @param uidTransport
+	 *            the uid transport
 	 */
 	public static void CreationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, TransportTableModel pModelTable,
@@ -303,13 +311,29 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage config hopital.
 	 *
-	 * @param gestionairePage the gestionaire page
-	 * @param pModelTable the model table
-	 * @param index the index
+	 * @param gestionairePage
+	 *            the gestionaire page
+	 * @param pModelTable
+	 *            the model table
+	 * @param index
+	 *            the index
 	 */
 	public static void CreationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage,
-			ConfigurationHopitalTableModel pModelTable, int index) {
+			ConfigurationHopitalTableModel pModelTable,
+			int uidConfigurationHopital) {
+
+		outsideConfigHopitalTableModel = new RemplissageConfigurationHopitalTableModel(
+				true, uidConfigurationHopital);
+
+		tableContenuTop = new JTable(outsideConfigHopitalTableModel);
+		tableContenuTop.setBounds(62, 100, 706, 223);
+
+		insideConfigHopitalTableModel = new RemplissageConfigurationHopitalTableModel(
+				false, uidConfigurationHopital);
+
+		tableContenuBot = new JTable(insideConfigHopitalTableModel);
+		tableContenuBot.setBounds(52, 400, 706, 223);
 
 		txtConteneur = new JTextField();
 		txtConteneur.setHorizontalAlignment(SwingConstants.CENTER);
@@ -319,11 +343,6 @@ public class Remplissage {
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
-		tableContenuTop = new JTable();
-		tableContenuTop.setBounds(62, 100, 706, 223);
-
-		tableContenuBot = new JTable();
-		tableContenuBot.setName("Caisse");
 		tableContenuBot.setBounds(52, 400, 706, 223);
 
 		scrollPaneContenuTop = new JScrollPane();
@@ -343,6 +362,34 @@ public class Remplissage {
 		boutonSupprimerContenu = new JButton(new ImageIcon(
 				"images/flechehaut.png"));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
+
+		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (!(tableContenuTop.getSelectedRow() == -1)) {
+					ColisManager.fillConfig(uidConfigurationHopital,
+							(int) tableContenuTop.getValueAt(
+									tableContenuTop.getSelectedRow(),
+									tableContenuTop.getColumnCount() - 1));
+					outsideConfigHopitalTableModel.refreshModel(true);
+					insideConfigHopitalTableModel.refreshModel(false);
+				}
+			}
+		});
+		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (!(tableContenuBot.getSelectedRow() == -1)) {
+					ColisManager.fillOutConfig(uidConfigurationHopital,
+							(int) tableContenuBot.getValueAt(
+									tableContenuBot.getSelectedRow(),
+									tableContenuBot.getColumnCount() - 1));
+					outsideConfigHopitalTableModel.refreshModel(true);
+					insideConfigHopitalTableModel.refreshModel(false);
+
+				}
+			}
+		});
 
 		btnSauvegarderEtQuitter = new JButton("Sauvegarder et quitter");
 		btnSauvegarderEtQuitter.setBounds(800, 612, 180, 25);

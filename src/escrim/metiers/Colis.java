@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -26,41 +28,42 @@ public class Colis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
-	
+
 	/** The affectation. */
 	private String affectation;
-	
+
 	/** The optionnel. */
 	private boolean optionnel;
-	
+
 	/** The secteur. */
 	private int secteur;
-	
+
 	/** The type colis. */
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private TypeColis typeColis = new TypeColis();
-	
+
 	/** The numero colis. */
 	private int numeroColis;
-	
+
 	/** The designation. */
 	private String designation;
-	
+
 	/** The valeur. */
 	private float valeur;
-	
+
 	/** The iata. */
 	private String iata;
-	
+
 	/** The projection. */
 	private float projection;
-	
+
 	/** The observation. */
 	private String observation;
-	
+
 	/** The liste config du colis. */
 	@ManyToMany
-	private List<ConfigurationHopital> listeConfigDuColis;
+	@JoinTable(name = "COLIS_CONFIG", joinColumns = { @JoinColumn(name = "Colis_UID", referencedColumnName = "UID") }, inverseJoinColumns = { @JoinColumn(name = "Config_ID", referencedColumnName = "UID") })
+	private List<ConfigurationHopital> configurations;
 
 	/**
 	 * Gets the uid.
@@ -74,7 +77,8 @@ public class Colis {
 	/**
 	 * Sets the uid.
 	 *
-	 * @param uid the new uid
+	 * @param uid
+	 *            the new uid
 	 */
 	public void setUid(int uid) {
 		this.uid = uid;
@@ -92,7 +96,8 @@ public class Colis {
 	/**
 	 * Sets the affectation.
 	 *
-	 * @param affectation the new affectation
+	 * @param affectation
+	 *            the new affectation
 	 */
 	public void setAffectation(String affectation) {
 		this.affectation = affectation;
@@ -110,7 +115,8 @@ public class Colis {
 	/**
 	 * Sets the optionnel.
 	 *
-	 * @param optionnel the new optionnel
+	 * @param optionnel
+	 *            the new optionnel
 	 */
 	public void setOptionnel(boolean optionnel) {
 		this.optionnel = optionnel;
@@ -128,7 +134,8 @@ public class Colis {
 	/**
 	 * Sets the secteur.
 	 *
-	 * @param secteur the new secteur
+	 * @param secteur
+	 *            the new secteur
 	 */
 	public void setSecteur(int secteur) {
 		this.secteur = secteur;
@@ -146,7 +153,8 @@ public class Colis {
 	/**
 	 * Sets the type colis.
 	 *
-	 * @param typeColis the new type colis
+	 * @param typeColis
+	 *            the new type colis
 	 */
 	public void setTypeColis(TypeColis typeColis) {
 		this.typeColis = typeColis;
@@ -164,7 +172,8 @@ public class Colis {
 	/**
 	 * Sets the numero colis.
 	 *
-	 * @param numeroColis the new numero colis
+	 * @param numeroColis
+	 *            the new numero colis
 	 */
 	public void setNumeroColis(int numeroColis) {
 		this.numeroColis = numeroColis;
@@ -182,7 +191,8 @@ public class Colis {
 	/**
 	 * Sets the valeur.
 	 *
-	 * @param valeur the new valeur
+	 * @param valeur
+	 *            the new valeur
 	 */
 	public void setValeur(float valeur) {
 		this.valeur = valeur;
@@ -200,7 +210,8 @@ public class Colis {
 	/**
 	 * Sets the iata.
 	 *
-	 * @param iata the new iata
+	 * @param iata
+	 *            the new iata
 	 */
 	public void setIata(String iata) {
 		this.iata = iata;
@@ -218,7 +229,8 @@ public class Colis {
 	/**
 	 * Sets the projection.
 	 *
-	 * @param projection the new projection
+	 * @param projection
+	 *            the new projection
 	 */
 	public void setProjection(float projection) {
 		this.projection = projection;
@@ -236,7 +248,8 @@ public class Colis {
 	/**
 	 * Sets the observation.
 	 *
-	 * @param observation the new observation
+	 * @param observation
+	 *            the new observation
 	 */
 	public void setObservation(String observation) {
 		this.observation = observation;
@@ -248,17 +261,18 @@ public class Colis {
 	 * @return the liste config du colis
 	 */
 	public List<ConfigurationHopital> getListeConfigDuColis() {
-		return listeConfigDuColis;
+		return configurations;
 	}
 
 	/**
 	 * Sets the liste config du colis.
 	 *
-	 * @param listeConfigDuColis the new liste config du colis
+	 * @param listeConfigDuColis
+	 *            the new liste config du colis
 	 */
 	public void setListeConfigDuColis(
 			List<ConfigurationHopital> listeConfigDuColis) {
-		this.listeConfigDuColis = listeConfigDuColis;
+		this.configurations = listeConfigDuColis;
 	}
 
 	/**
@@ -273,7 +287,8 @@ public class Colis {
 	/**
 	 * Sets the designation.
 	 *
-	 * @param designation the new designation
+	 * @param designation
+	 *            the new designation
 	 */
 	public void setDesignation(String designation) {
 		this.designation = designation;
