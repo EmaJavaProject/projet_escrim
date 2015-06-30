@@ -20,35 +20,89 @@ import javax.swing.SwingConstants;
 import escrim.model.table.CompartimentTableModel;
 import escrim.model.table.TransportTableModel;
 
+/**
+ * The Class GestionTransport.
+ */
 public class GestionTransport {
 
+	/** The jpanel transport. */
 	private static JPanel jpanelTransport;
+	
+	/** The txt gestion transport. */
 	private static JTextField txtGestionTransport;
+	
+	/** The tbl model transport. */
 	private static TransportTableModel tblModelTransport;
+	
+	/** The table transport. */
 	private static JTable tableTransport;
+	
+	/** The bouton ajouter transport. */
 	private static JButton boutonAjouterTransport;
+	
+	/** The bouton quitter. */
 	private static JButton boutonQuitter;
+	
+	/** The bouton remplissagecompartiment transport. */
 	private static JButton boutonRemplissagecompartimentTransport;
+	
+	/** The bouton supprimer transport. */
 	private static JButton boutonSupprimerTransport;
+	
+	/** The bouton modifier transport. */
 	private static JButton boutonModifierTransport;
+	
+	/** The bouton valider transport. */
 	private static JButton boutonValiderTransport;
+	
+	/** The bouton annuler transport. */
 	private static JButton boutonAnnulerTransport;
+	
+	/** The scroll panel transport. */
 	private static JScrollPane scrollPanelTransport;
+	
+	/** The jpanel compartiment. */
 	private static JPanel jpanelCompartiment;
+	
+	/** The txt compartiment. */
 	private static JTextField txtCompartiment;
+	
+	/** The compartiment table model. */
 	private static CompartimentTableModel compartimentTableModel;
+	
+	/** The table compartiment. */
 	private static JTable tableCompartiment;
+	
+	/** The bouton ajouter compartiment. */
 	private static JButton boutonAjouterCompartiment;
+	
+	/** The bouton quitter compartiment. */
 	private static JButton boutonQuitterCompartiment;
+	
+	/** The bouton supprimer compartiment. */
 	private static JButton boutonSupprimerCompartiment;
+	
+	/** The bouton modifier compartiment. */
 	private static JButton boutonModifierCompartiment;
+	
+	/** The bouton valider compartiment. */
 	private static JButton boutonValiderCompartiment;
+	
+	/** The bouton annuler compartiment. */
 	private static JButton boutonAnnulerCompartiment;
+	
+	/** The scroll panel compartiment. */
 	private static JScrollPane scrollPanelCompartiment;
+	
+	/** The tab principal. */
 	private static JTabbedPane tabPrincipal;
 
 	/**
-	 * @wbp.parser.entryPoint
+	 * Création jpanel transport.
+	 *
+	 * @param pPanelPrincipal the panel principal
+	 * @return the action listener
+	 * @wbp.parser.entryPoint 
 	 */
 	public static ActionListener CréationJpanelTransport(
 			JLayeredPane pPanelPrincipal) {
@@ -410,9 +464,9 @@ public class GestionTransport {
 	}
 
 	/**
-	 * Fonction de gestion des boutons de la vue compartiment
-	 * 
-	 * @param disable
+	 * Fonction de gestion des boutons de la vue compartiment.
+	 *
+	 * @param disable the disable
 	 */
 
 	private static void disableCompartimentButton(boolean disable) {
@@ -432,9 +486,9 @@ public class GestionTransport {
 	}
 
 	/**
-	 * Fonction de gestion des boutons de la vue Transport
-	 * 
-	 * @param disable
+	 * Fonction de gestion des boutons de la vue Transport.
+	 *
+	 * @param disable the disable
 	 */
 
 	private static void disableTransportButton(boolean disable) {

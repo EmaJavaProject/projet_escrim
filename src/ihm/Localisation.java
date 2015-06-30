@@ -11,33 +11,81 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+/**
+ * The Class Localisation.
+ */
 public class Localisation {
 
+	/** The table local contenu top. */
 	private  JTable tableLocalContenuTop;
+	
+	/** The table local contenu bot. */
 	private  JTable tableLocalContenuBot;
+	
+	/** The table local conteneur top. */
 	private  JTable tableLocalConteneurTop;
+	
+	/** The table local conteneur bot. */
 	private JTable tableLocalConteneurBot;
+	
+	/** The filtre recherche. */
 	private JTextField filtreRecherche;
+	
+	/** The onglet. */
 	private JTabbedPane onglet;
+	
+	/** The scroll pane contenu. */
 	private JScrollPane scrollPaneContenu;
+	
+	/** The contenu localisation. */
 	private JPanel contenuLocalisation;
+	
+	/** The scroll pane contenu local bot. */
 	private JScrollPane scrollPaneContenuLocalBot;
+	
+	/** The combo select contenu local. */
 	private JComboBox<String> comboSelectContenuLocal;
+	
+	/** The btn modifier contenu. */
 	private JButton btnModifierContenu;
+	
+	/** The conteneur localisation. */
 	private JPanel conteneurLocalisation;
+	
+	/** The bouton editer localisation. */
 	private JButton boutonEditerLocalisation;
+	
+	/** The scroll pane conteneur. */
 	private JScrollPane scrollPaneConteneur;
+	
+	/** The secteur. */
 	private JComboBox<?> secteur;
+	
+	/** The scroll pane local conteneur top. */
 	private JScrollPane scrollPaneLocalConteneurTop;
+	
+	/** The scroll pane local conteneur bot. */
 	private JScrollPane scrollPaneLocalConteneurBot;
+	
+	/** The lbl secteur. */
 	private JLabel lblSecteur;
 
+	/**
+	 * Instantiates a new localisation.
+	 *
+	 * @param tabPrincipal the tab principal
+	 */
 	public Localisation(JTabbedPane tabPrincipal) {
 
 		this.initPage(tabPrincipal);
 
 	}
 
+	/**
+	 * Inits the page.
+	 *
+	 * @param tabPrincipal the tab principal
+	 */
 	private void initPage(JTabbedPane tabPrincipal) {
 
 		scrollPaneContenu = new JScrollPane();

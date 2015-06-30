@@ -18,21 +18,53 @@ import javax.swing.SwingConstants;
 
 import escrim.model.table.TypeColisTableModel;
 
+/**
+ * The Class CreationTypeColis.
+ */
 public class CreationTypeColis {
 
+	/** The jpanel type colis. */
 	private static JPanel jpanelTypeColis;
+	
+	/** The table type colis. */
 	private static JTable tableTypeColis;
+	
+	/** The scroll panel type colis. */
 	private static JScrollPane scrollPanelTypeColis;
+	
+	/** The txt type colis. */
 	private static JTextField txtTypeColis;
+	
+	/** The type colis table model. */
 	private static TypeColisTableModel typeColisTableModel;
+	
+	/** The bouton ajouter type colis. */
 	private static JButton boutonAjouterTypeColis;
+	
+	/** The bouton quitter. */
 	private static JButton boutonQuitter;
+	
+	/** The bouton supprimer type colis. */
 	private static JButton boutonSupprimerTypeColis;
+	
+	/** The bouton modifier type colis. */
 	private static JButton boutonModifierTypeColis;
+	
+	/** The bouton valider type colis. */
 	private static JButton boutonValiderTypeColis;
+	
+	/** The bouton annuler type colis. */
 	private static JButton boutonAnnulerTypeColis;
+	
+	/** The tab principal. */
 	private static JTabbedPane tabPrincipal;
 
+	/**
+	 * Création jpanel type colis.
+	 *
+	 * @param pPanelPrincipal the panel principal
+	 * @return the action listener
+	 */
 	public static ActionListener CréationJpanelTypeColis(
 			JLayeredPane pPanelPrincipal) {
 
@@ -201,6 +233,11 @@ public class CreationTypeColis {
 
 	}
 
+	/**
+	 * Disable type colis button.
+	 *
+	 * @param disable the disable
+	 */
 	private static void disableTypeColisButton(boolean disable) {
 		if (disable) {
 			boutonAjouterTypeColis.setEnabled(false);

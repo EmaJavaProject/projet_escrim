@@ -8,36 +8,74 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+/**
+ * The Class ConfigurationHopital.
+ */
 @Entity
 public class ConfigurationHopital {
 
+	/** The uid. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
+	
+	/** The denomination. */
 	private String denomination;
+	
+	/** The liste colis. */
 	@ManyToMany
 	private List<Colis> listeColis;
 
+	/**
+	 * Gets the uid.
+	 *
+	 * @return the uid
+	 */
 	public int getUid() {
 		return uid;
 	}
 
+	/**
+	 * Sets the uid.
+	 *
+	 * @param uid the new uid
+	 */
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
 
+	/**
+	 * Gets the denomination.
+	 *
+	 * @return the denomination
+	 */
 	public String getDenomination() {
 		return denomination;
 	}
 
+	/**
+	 * Sets the denomination.
+	 *
+	 * @param denomination the new denomination
+	 */
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
 	}
 
+	/**
+	 * Gets the liste colis.
+	 *
+	 * @return the liste colis
+	 */
 	public List<Colis> getListeColis() {
 		return listeColis;
 	}
 
+	/**
+	 * Sets the liste colis.
+	 *
+	 * @param listeColis the new liste colis
+	 */
 	public void setListeColis(List<Colis> listeColis) {
 		this.listeColis = listeColis;
 	}
