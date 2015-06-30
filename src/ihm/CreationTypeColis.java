@@ -65,7 +65,7 @@ public class CreationTypeColis {
 	 * @param pPanelPrincipal the panel principal
 	 * @return the action listener
 	 */
-	public static ActionListener CréationJpanelTypeColis(
+	public static ActionListener CreationJpanelTypeColis(
 			JLayeredPane pPanelPrincipal) {
 
 		ActionListener action = new ActionListener() {

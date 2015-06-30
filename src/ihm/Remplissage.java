@@ -179,7 +179,7 @@ public class Remplissage {
 		scrollPaneContenuTop.setViewportView(tableContenuTop);
 		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
-		gestionairePage.add(contenueRemplissage, new Integer(2));
+		gestionairePage.add(contenueRemplissage, new Integer(5));
 		gestionairePage.revalidate();
 		gestionairePage.repaint();
 
@@ -291,7 +291,7 @@ public class Remplissage {
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
-		gestionairePage.add(contenueRemplissage, new Integer(4));
+		gestionairePage.add(contenueRemplissage, new Integer(5));
 		gestionairePage.revalidate();
 		gestionairePage.repaint();
 
@@ -369,7 +369,7 @@ public class Remplissage {
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
-		gestionairePage.add(contenueRemplissage, new Integer(4));
+		gestionairePage.add(contenueRemplissage, new Integer(5));
 		gestionairePage.revalidate();
 		gestionairePage.repaint();
 

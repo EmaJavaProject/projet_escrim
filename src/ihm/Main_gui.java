@@ -145,19 +145,19 @@ public class Main_gui {
 
 		sousMenuGestionTransport = new JMenuItem("Gestion Transport");
 		sousMenuGestionTransport.addActionListener(GestionTransport
-				.CréationJpanelTransport(gestionairePage));
+				.CreationJpanelTransport(gestionairePage));
 		menuGestion.add(sousMenuGestionTransport);
 
 		sousMenuHopital = new JMenuItem(
 				"Gestion configuration hopital");
 		sousMenuHopital.addActionListener(CreationHopital
-				.CréationJpanelHopital(gestionairePage));
+				.CreationJpanelHopital(gestionairePage));
 		menuGestion.add(sousMenuHopital);
 		
 		sousMenuColis = new JMenuItem(
 				"Gestion type colis");
 		sousMenuColis.addActionListener(CreationTypeColis
-				.CréationJpanelTypeColis(gestionairePage));
+				.CreationJpanelTypeColis(gestionairePage));
 		menuGestion.add(sousMenuColis);
 
 		stockPage = new Stock(tabPrincipal,gestionairePage);

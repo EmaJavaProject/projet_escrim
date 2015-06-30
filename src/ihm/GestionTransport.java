@@ -104,7 +104,7 @@ public class GestionTransport {
 	 * @return the action listener
 	 * @wbp.parser.entryPoint 
 	 */
-	public static ActionListener CréationJpanelTransport(
+	public static ActionListener CreationJpanelTransport(
 			JLayeredPane pPanelPrincipal) {
 
 		ActionListener action = new ActionListener() {

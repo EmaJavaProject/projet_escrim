@@ -70,7 +70,7 @@ public class CreationHopital {
 	 * @param pPanelPrincipal the panel principal
 	 * @return the action listener
 	 */
-	public static ActionListener CréationJpanelHopital(
+	public static ActionListener CreationJpanelHopital(
 			JLayeredPane pPanelPrincipal) {
 
 		ActionListener action = new ActionListener() {
