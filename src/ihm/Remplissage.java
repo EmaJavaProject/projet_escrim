@@ -17,14 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import escrim.manager.ColisManager;
-import escrim.manager.CompartimentManager;
-import escrim.manager.MaterielManager;
-import escrim.model.table.ConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageColisTableModel;
 import escrim.model.table.RemplissageConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageTransportTableModel;
-import escrim.model.table.TransportTableModel;
 
 /**
  * The Class Remplissage.
@@ -129,12 +124,19 @@ public class Remplissage {
 
 		boutonAjouterContenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!(tableContenuTop.getSelectedRow() == -1)) {
-					MaterielManager.fillColis(uidColis, (int) tableContenuTop
-							.getValueAt(tableContenuTop.getSelectedRow(),
-									tableContenuTop.getColumnCount() - 1));
-					outsideColisTableModel.refreshModel(true);
-					insideColisTableModel.refreshModel(false);
+				int selectedRow = tableContenuTop.getSelectedRow();
+				if (!(selectedRow == -1)) {
+					((RemplissageColisTableModel) tableContenuTop.getModel())
+							.fillColis(uidColis, (int) (tableContenuTop
+									.getModel()).getValueAt(selectedRow,
+									(tableContenuTop.getModel())
+											.getColumnCount()));
+					((RemplissageColisTableModel) tableContenuTop.getModel())
+							.refreshModel(true, uidColis);
+					((RemplissageColisTableModel) tableContenuBot.getModel())
+							.refreshModel(false, uidColis);
+					tableContenuTop.repaint();
+					tableContenuBot.repaint();
 				}
 			}
 		});
@@ -143,13 +145,19 @@ public class Remplissage {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedRow = tableContenuBot.getSelectedRow();
 				if (!(selectedRow == -1)) {
-					MaterielManager.fillOutColis(uidColis,
-							(int) tableContenuBot.getValueAt(selectedRow,
-									tableContenuBot.getColumnCount() - 1));
-					((RemplissageColisTableModel) tableContenuTop.getModel())
-							.refreshModel(true);
 					((RemplissageColisTableModel) tableContenuBot.getModel())
-							.refreshModel(false);
+							.fillOutColis(uidColis, (int) (tableContenuBot
+									.getModel()).getValueAt(selectedRow,
+									(tableContenuBot.getModel())
+											.getColumnCount()));
+					((RemplissageColisTableModel) tableContenuTop.getModel())
+							.refreshModel(true, (tableContenuBot.getModel())
+									.getColumnCount());
+					((RemplissageColisTableModel) tableContenuBot.getModel())
+							.refreshModel(
+									false,
+									((RemplissageColisTableModel) tableContenuBot
+											.getModel()).getColumnCount());
 					tableContenuTop.repaint();
 					tableContenuBot.repaint();
 				}
@@ -203,8 +211,7 @@ public class Remplissage {
 	 *            the uid transport
 	 */
 	public static void CreationJpanelRemplissageTransport(
-			JLayeredPane gestionairePage,
-			int uidTransport) {
+			JLayeredPane gestionairePage, int uidTransport) {
 
 		txtConteneur = new JTextField();
 		txtConteneur.setHorizontalAlignment(SwingConstants.CENTER);
@@ -249,27 +256,35 @@ public class Remplissage {
 		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuTop.getSelectedRow() == -1)) {
-					CompartimentManager.fillTransport(uidTransport,
-							(int) tableContenuTop.getValueAt(
-									tableContenuTop.getSelectedRow(),
-									tableContenuTop.getColumnCount() - 1));
-					outsideTransportTableModel.refreshModel(true);
-					insideTransportTableModel.refreshModel(false);
+				int selectedRow = tableContenuTop.getSelectedRow();
+				if (!(selectedRow == -1)) {
+					((RemplissageTransportTableModel) tableContenuTop
+							.getModel()).fillTransport(uidTransport,
+							(int) (tableContenuTop.getModel()).getValueAt(
+									selectedRow, (tableContenuTop.getModel())
+											.getColumnCount()));
+					((RemplissageTransportTableModel) tableContenuTop
+							.getModel()).refreshModel(true, uidTransport);
+					((RemplissageTransportTableModel) tableContenuBot
+							.getModel()).refreshModel(false, uidTransport);
+
 				}
 			}
 		});
 		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuBot.getSelectedRow() == -1)) {
-					CompartimentManager.fillOutTransport(uidTransport,
-							(int) tableContenuBot.getValueAt(
-									tableContenuBot.getSelectedRow(),
-									tableContenuBot.getColumnCount() - 1));
-					outsideTransportTableModel.refreshModel(true);
-					insideTransportTableModel.refreshModel(false);
-
+				int selectedRow = tableContenuBot.getSelectedRow();
+				if (!(selectedRow == -1)) {
+					((RemplissageTransportTableModel) tableContenuBot
+							.getModel()).fillOutTransport(uidTransport,
+							(int) (tableContenuBot.getModel()).getValueAt(
+									selectedRow, (tableContenuBot.getModel())
+											.getColumnCount()));
+					((RemplissageTransportTableModel) tableContenuTop
+							.getModel()).refreshModel(true, uidTransport);
+					((RemplissageTransportTableModel) tableContenuBot
+							.getModel()).refreshModel(false, uidTransport);
 				}
 			}
 		});
@@ -319,8 +334,7 @@ public class Remplissage {
 	 *            the index
 	 */
 	public static void CreationJpanelRemplissageConfigHopital(
-			JLayeredPane gestionairePage,
-			int uidConfigurationHopital) {
+			JLayeredPane gestionairePage, int uidConfigurationHopital) {
 
 		outsideConfigHopitalTableModel = new RemplissageConfigurationHopitalTableModel(
 				true, uidConfigurationHopital);
@@ -365,27 +379,39 @@ public class Remplissage {
 		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuTop.getSelectedRow() == -1)) {
-					ColisManager.fillConfig(uidConfigurationHopital,
-							(int) tableContenuTop.getValueAt(
-									tableContenuTop.getSelectedRow(),
-									tableContenuTop.getColumnCount() - 1));
-					outsideConfigHopitalTableModel.refreshModel(true);
-					insideConfigHopitalTableModel.refreshModel(false);
+				int selectedRow = tableContenuTop.getSelectedRow();
+				if (!(selectedRow == -1)) {
+					((RemplissageConfigurationHopitalTableModel) tableContenuTop
+							.getModel()).fillConfig(uidConfigurationHopital,
+							(int) (tableContenuTop.getModel()).getValueAt(
+									selectedRow, (tableContenuTop.getModel())
+											.getColumnCount()));
+					((RemplissageConfigurationHopitalTableModel) tableContenuTop
+							.getModel()).refreshModel(true,
+							uidConfigurationHopital);
+					((RemplissageConfigurationHopitalTableModel) tableContenuBot
+							.getModel()).refreshModel(false,
+							uidConfigurationHopital);
+
 				}
 			}
 		});
 		boutonSupprimerContenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (!(tableContenuBot.getSelectedRow() == -1)) {
-					ColisManager.fillOutConfig(uidConfigurationHopital,
-							(int) tableContenuBot.getValueAt(
-									tableContenuBot.getSelectedRow(),
-									tableContenuBot.getColumnCount() - 1));
-					outsideConfigHopitalTableModel.refreshModel(true);
-					insideConfigHopitalTableModel.refreshModel(false);
-
+				int selectedRow = tableContenuBot.getSelectedRow();
+				if (!(selectedRow == -1)) {
+					((RemplissageConfigurationHopitalTableModel) tableContenuBot
+							.getModel()).fillOutConfig(uidConfigurationHopital,
+							(int) (tableContenuBot.getModel()).getValueAt(
+									selectedRow, (tableContenuBot.getModel())
+											.getColumnCount()));
+					((RemplissageConfigurationHopitalTableModel) tableContenuTop
+							.getModel()).refreshModel(true,
+							uidConfigurationHopital);
+					((RemplissageConfigurationHopitalTableModel) tableContenuBot
+							.getModel()).refreshModel(false,
+							uidConfigurationHopital);
 				}
 			}
 		});

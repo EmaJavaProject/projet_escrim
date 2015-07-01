@@ -13,16 +13,16 @@ import escrim.metiers.Medicament;
  */
 @SuppressWarnings("serial")
 public class MedicamentTableModel extends EscrimTableModel {
-	
+
 	/** The liste medicament. */
 	private List<Medicament> listeMedicament = MedicamentManager
 			.loadAllMedicament();
-	
+
 	/** The Medicament column name. */
 	private String[] MedicamentColumnName = { "", "Dénomination",
 			"Principe Actif", "Dosage", "DLU", "Quantité", "Lot",
-			"Classe Thérapeutique", "Dotation U7", "uid" };
-	
+			"Classe Thérapeutique", "Dotation U7" };
+
 	/** The formatter. */
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
 
@@ -33,7 +33,9 @@ public class MedicamentTableModel extends EscrimTableModel {
 		listeMedicament = MedicamentManager.loadAllMedicament();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -41,7 +43,9 @@ public class MedicamentTableModel extends EscrimTableModel {
 		return MedicamentColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	@Override
@@ -53,15 +57,19 @@ public class MedicamentTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
-		return 10;
+		return 9;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -96,8 +104,11 @@ public class MedicamentTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -150,7 +161,8 @@ public class MedicamentTableModel extends EscrimTableModel {
 	/**
 	 * Validate persistance.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void validatePersistance(int rowIndex) {
 		MedicamentManager.createMedicament(listeMedicament.get(rowIndex));
@@ -164,7 +176,9 @@ public class MedicamentTableModel extends EscrimTableModel {
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -210,7 +224,8 @@ public class MedicamentTableModel extends EscrimTableModel {
 	/**
 	 * Removes the element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
@@ -222,8 +237,10 @@ public class MedicamentTableModel extends EscrimTableModel {
 	/**
 	 * Persist data.
 	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
+	 * @param rowIndex
+	 *            the row index
+	 * @param validate
+	 *            the validate
 	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
@@ -235,12 +252,12 @@ public class MedicamentTableModel extends EscrimTableModel {
 					&& !super.isRemove()) {
 				MedicamentManager.updateMedicament(
 						listeMedicament.get(rowIndex),
-						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
+						(Integer) getValueAt(rowIndex, getColumnCount()));
 				super.setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {
 				MedicamentManager.removeMedicament((Integer) getValueAt(
-						rowIndex, getColumnCount() - 1));
+						rowIndex, getColumnCount()));
 				super.setRemove(false);
 			}
 		}
@@ -252,7 +269,8 @@ public class MedicamentTableModel extends EscrimTableModel {
 	/**
 	 * Update element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void updateElement(int rowIndex) {
 		super.setEditedRow(rowIndex);

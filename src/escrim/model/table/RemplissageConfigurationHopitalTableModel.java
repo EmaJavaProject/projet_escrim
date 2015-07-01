@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import escrim.manager.ColisManager;
+import escrim.manager.ConfigurationHopitalManager;
 import escrim.manager.TypeColisManager;
 import escrim.metiers.Colis;
+import escrim.metiers.ConfigurationHopital;
 
 @SuppressWarnings("serial")
 public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel {
@@ -13,7 +15,7 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 	private List<Colis> listeColis = new ArrayList<Colis>();
 
 	private String[] ColisColumnName = { "N° Colis", "Nom", "Affectataire",
-			"Optionnel", "Secteur", "Type Colis", "Observation", "uid" };
+			"Optionnel", "Secteur", "Type Colis", "Observation" };
 
 	private int uidConfigHopitalToManage;
 
@@ -30,10 +32,11 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 	}
 
 	public int getColumnCount() {
-		return 8;
+		return 7;
 	}
 
-	public void refreshModel(boolean allColis) {
+	public void refreshModel(boolean allColis, int uidConfigHopitalToManage) {
+		this.uidConfigHopitalToManage = uidConfigHopitalToManage;
 		if (allColis) {
 			listeColis = ColisManager
 					.loadOutsideConfigHopital(uidConfigHopitalToManage);
@@ -89,7 +92,7 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		case 4:
 			return Integer.class;
 		case 5:
-			return Integer.class;
+			return String.class;
 		case 6:
 			return String.class;
 		case 7:
@@ -119,7 +122,7 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		case 4:
 			return colis.getSecteur();
 		case 5:
-			return colis.getTypeColis();
+			return colis.getTypeColis().getDesignation();
 		case 6:
 			return colis.getObservation();
 		case 7:
@@ -170,6 +173,31 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 					aValue == null ? null : aValue.toString());
 			break;
 		}
+	}
+
+	public void fillConfig(int uidConfig, int uidColis) {
+		Colis colis = ColisManager.loadColis(uidColis);
+		ConfigurationHopital conf = ConfigurationHopitalManager
+				.loadConfigurationHopital(uidConfig);
+
+		conf.addColis(colis);
+		colis.addConfiguration(conf);
+
+		ColisManager.updateColis(colis, colis.getUid());
+		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
+	}
+
+	public void fillOutConfig(int uidConfig, int uidColis) {
+		Colis colis = ColisManager.loadColis(uidColis);
+		ConfigurationHopital conf = ConfigurationHopitalManager
+				.loadConfigurationHopital(uidConfig);
+
+		conf.removeColis(colis);
+		colis.removeConfiguration(conf);
+
+		ColisManager.updateColis(colis, colis.getUid());
+		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
+
 	}
 
 	/*

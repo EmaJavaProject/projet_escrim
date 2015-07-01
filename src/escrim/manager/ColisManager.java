@@ -4,7 +4,6 @@ import java.util.List;
 
 import escrim.dao.ColisDao;
 import escrim.metiers.Colis;
-import escrim.metiers.ConfigurationHopital;
 import escrim.metiers.TypeColis;
 
 /**
@@ -90,6 +89,10 @@ public class ColisManager {
 		return ColisDao.loadAll();
 	}
 
+	public static List<Integer> loadDistinctSecteurColis() {
+		return ColisDao.loadDistinctSecteur();
+	}
+
 	public static List<Colis> loadOutsideConfigHopital(int uidConfig) {
 		return ColisDao.findColisOutsideConfigHopital(uidConfig);
 	}
@@ -98,29 +101,15 @@ public class ColisManager {
 		return ColisDao.findColisIntoConfigHopital(uidConfig);
 	}
 
-	public static void fillConfig(int uidConfig, int uidColis) {
-		Colis colis = loadColis(uidColis);
-		ConfigurationHopital conf = ConfigurationHopitalManager
-				.loadConfigurationHopital(uidConfig);
-
-		conf.addColis(colis);
-		colis.addConfiguration(conf);
-
-		updateColis(colis, colis.getUid());
-		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
-	}
-
-	public static void fillOutConfig(int uidConfig, int uidColis) {
-		Colis colis = loadColis(uidColis);
-		ConfigurationHopital conf = ConfigurationHopitalManager
-				.loadConfigurationHopital(uidConfig);
-
-		conf.removeColis(colis);
-		colis.removeConfiguration(conf);
-
-		updateColis(colis, colis.getUid());
-		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
-
+	public static List<Colis> loadAllColisByFilter(String filter,
+			int filterValue) {
+		if (filter == "secteur") {
+			return ColisDao.loadAllColisBySecteur(filterValue);
+		} else if (filter == "configs") {
+			return ColisDao.findColisIntoConfigHopital(filterValue);
+		} else {
+			return null;
+		}
 	}
 
 }

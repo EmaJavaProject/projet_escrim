@@ -4,29 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import escrim.manager.CompartimentManager;
+import escrim.manager.TransportManager;
 import escrim.metiers.Compartiment;
+import escrim.metiers.Transport;
 
 /**
  * The Class RemplissageTransportTableModel.
  */
 @SuppressWarnings("serial")
 public class RemplissageTransportTableModel extends EscrimTableModel {
-	
+
 	/** The liste compartiments. */
 	private List<Compartiment> listeCompartiments = new ArrayList<Compartiment>();
-	
+
 	/** The Compartiment column name. */
 	private String[] CompartimentColumnName = { "Nom", "Hauteur", "Largeur",
-			"Longueur", "Volume", "Poids", "uid" };
-	
+			"Longueur", "Volume", "Poids" };
+
 	/** The uid transport to manage. */
 	private int uidTransportToManage;
 
 	/**
 	 * Instantiates a new remplissage transport table model.
 	 *
-	 * @param allCompartiments the all compartiments
-	 * @param uidTransport the uid transport
+	 * @param allCompartiments
+	 *            the all compartiments
+	 * @param uidTransport
+	 *            the uid transport
 	 */
 	public RemplissageTransportTableModel(boolean allCompartiments,
 			int uidTransport) {
@@ -40,19 +44,23 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	public int getColumnCount() {
-		return 7;
+		return 6;
 	}
 
 	/**
 	 * Refresh model.
 	 *
-	 * @param allCompartiment the all compartiment
+	 * @param allCompartiment
+	 *            the all compartiment
 	 */
-	public void refreshModel(boolean allCompartiment) {
+	public void refreshModel(boolean allCompartiment, int uidTransportToManage) {
+		this.uidTransportToManage = uidTransportToManage;
 		if (allCompartiment) {
 			listeCompartiments = CompartimentManager
 					.loadOutsideTransport(uidTransportToManage);
@@ -65,7 +73,9 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	public int getRowCount() {
@@ -76,7 +86,9 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -84,7 +96,9 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		return CompartimentColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -109,7 +123,9 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -134,8 +150,11 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -175,7 +194,49 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Fill transport.
+	 *
+	 * @param uidTransport
+	 *            the uid transport
+	 * @param uidCompartiment
+	 *            the uid compartiment
+	 */
+	public void fillTransport(int uidTransport, int uidCompartiment) {
+		Compartiment compartiment = CompartimentManager
+				.loadCompartiment(uidCompartiment);
+
+		if (compartiment.getTransport() != TransportManager
+				.loadTransport(uidTransport)) {
+			Transport transport = new Transport();
+			transport = TransportManager.loadTransport(uidTransport);
+			compartiment.setTransport(transport);
+		}
+		CompartimentManager.updateCompartiment(compartiment,
+				compartiment.getUid());
+	}
+
+	/**
+	 * Fill out transport.
+	 *
+	 * @param uidTransport
+	 *            the uid transport
+	 * @param uidCompartiment
+	 *            the uid compartiment
+	 */
+	public void fillOutTransport(int uidTransport, int uidCompartiment) {
+		Compartiment compartiment = CompartimentManager
+				.loadCompartiment(uidCompartiment);
+
+		compartiment.setTransport(null);
+
+		CompartimentManager.updateCompartiment(compartiment,
+				compartiment.getUid());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see escrim.model.table.EscrimTableModel#isCellEditable(int, int)
 	 */
 	@Override

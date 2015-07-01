@@ -10,13 +10,13 @@ import escrim.metiers.Materiel;
  */
 @SuppressWarnings("serial")
 public class MaterielTableModel extends EscrimTableModel {
-	
+
 	/** The liste materiel. */
 	private List<Materiel> listeMateriel = MaterielManager.loadAllMateriel();
-	
+
 	/** The Materiel column name. */
 	private String[] MaterielColumnName = { "", "Denomination", "Observations",
-			"Quantite", "uid" };
+			"Quantite" };
 
 	/**
 	 * Instantiates a new materiel table model.
@@ -25,7 +25,9 @@ public class MaterielTableModel extends EscrimTableModel {
 		listeMateriel = MaterielManager.loadAllMateriel();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -33,7 +35,9 @@ public class MaterielTableModel extends EscrimTableModel {
 		return MaterielColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	@Override
@@ -45,15 +49,19 @@ public class MaterielTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
-		return 5;
+		return 4;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -74,8 +82,11 @@ public class MaterielTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -102,7 +113,8 @@ public class MaterielTableModel extends EscrimTableModel {
 	/**
 	 * Validate persistance.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void validatePersistance(int rowIndex) {
 		MaterielManager.createMateriel(listeMateriel.get(rowIndex));
@@ -116,7 +128,9 @@ public class MaterielTableModel extends EscrimTableModel {
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -152,7 +166,8 @@ public class MaterielTableModel extends EscrimTableModel {
 	/**
 	 * Removes the element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void removeElement(int rowIndex) {
 		if (rowIndex != -1) {
@@ -167,8 +182,10 @@ public class MaterielTableModel extends EscrimTableModel {
 	/**
 	 * Persist data.
 	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
+	 * @param rowIndex
+	 *            the row index
+	 * @param validate
+	 *            the validate
 	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
@@ -178,12 +195,12 @@ public class MaterielTableModel extends EscrimTableModel {
 			} else if (!super.isAddition() && super.isEdition()
 					&& !super.isRemove()) {
 				MaterielManager.updateMateriel(listeMateriel.get(rowIndex),
-						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
+						(Integer) getValueAt(rowIndex, getColumnCount()));
 				setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {
 				MaterielManager.removeMateriel((Integer) getValueAt(rowIndex,
-						getColumnCount() - 1));
+						getColumnCount()));
 				setRemove(false);
 			}
 		}
@@ -195,7 +212,8 @@ public class MaterielTableModel extends EscrimTableModel {
 	/**
 	 * Update element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void updateElement(int rowIndex) {
 		setEditedRow(rowIndex);

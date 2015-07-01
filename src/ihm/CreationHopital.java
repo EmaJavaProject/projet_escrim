@@ -302,10 +302,6 @@ public class CreationHopital {
 				pPanelPrincipal.add(jpanelConfigurationHopital, new Integer(4));
 				pPanelPrincipal.revalidate();
 
-				// Suppression de la colonne UID
-				tableConfigurationHopital
-						.removeColumn(tableConfigurationHopital
-								.getColumn("uid"));
 			}
 		};
 

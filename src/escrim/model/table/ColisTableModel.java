@@ -11,23 +11,32 @@ import escrim.metiers.Colis;
  */
 @SuppressWarnings("serial")
 public class ColisTableModel extends EscrimTableModel {
-	
+
 	/** The liste colis. */
 	private List<Colis> listeColis = ColisManager.loadAllColis();
-	
+
 	/** The Colis column name. */
 	private String[] ColisColumnName = { "", "N° Colis", "Nom", "Affectataire",
 			"Optionnel", "Secteur", "Type Colis", "Dimension", "Volume",
-			"Poids Max", "Valeur", "Iata", "Projection", "Observation", "uid" };
+			"Poids Max", "Valeur", "Iata", "Projection", "Observation", };
+
+	private Object[] distinctSecteur;
 
 	/**
 	 * Instantiates a new colis table model.
 	 */
+	public ColisTableModel(String filter, int filterValue) {
+
+		listeColis = ColisManager.loadAllColisByFilter(filter, filterValue);
+	}
+
 	public ColisTableModel() {
 		listeColis = ColisManager.loadAllColis();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -35,7 +44,9 @@ public class ColisTableModel extends EscrimTableModel {
 		return ColisColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	@Override
@@ -47,15 +58,19 @@ public class ColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
-		return 15;
+		return 14;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -100,8 +115,11 @@ public class ColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -130,7 +148,7 @@ public class ColisTableModel extends EscrimTableModel {
 			break;
 		case 6:
 			listeColis.get(rowIndex).setTypeColis(
-					TypeColisManager.createTempTypeColis());
+					TypeColisManager.findTypeColisByName(aValue.toString()));
 			listeColis.get(rowIndex).getTypeColis()
 					.setDesignation(aValue == null ? null : aValue.toString());
 			break;
@@ -161,7 +179,8 @@ public class ColisTableModel extends EscrimTableModel {
 	/**
 	 * Validate persistance.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void validatePersistance(int rowIndex) {
 		ColisManager.createColis(listeColis.get(rowIndex));
@@ -175,7 +194,9 @@ public class ColisTableModel extends EscrimTableModel {
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -231,8 +252,19 @@ public class ColisTableModel extends EscrimTableModel {
 	/**
 	 * Removes the element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
+
+	public Object[] getDisctinctSecteur() {
+		if (distinctSecteur != ColisManager.loadDistinctSecteurColis()
+				.toArray()) {
+			distinctSecteur = (Object[]) ColisManager
+					.loadDistinctSecteurColis().toArray();
+		}
+		return distinctSecteur;
+	}
+
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);
@@ -243,8 +275,10 @@ public class ColisTableModel extends EscrimTableModel {
 	/**
 	 * Persist data.
 	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
+	 * @param rowIndex
+	 *            the row index
+	 * @param validate
+	 *            the validate
 	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
@@ -254,12 +288,12 @@ public class ColisTableModel extends EscrimTableModel {
 			} else if (!super.isAddition() && super.isEdition()
 					&& !super.isRemove()) {
 				ColisManager.updateColis(listeColis.get(rowIndex),
-						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
+						(Integer) getValueAt(rowIndex, getColumnCount()));
 				super.setEdition(false);
 			} else if (!super.isAddition() && !super.isEdition()
 					&& super.isRemove()) {
 				ColisManager.removeColis((Integer) getValueAt(rowIndex,
-						getColumnCount() - 1));
+						getColumnCount()));
 				super.setRemove(false);
 			}
 		}
@@ -271,7 +305,8 @@ public class ColisTableModel extends EscrimTableModel {
 	/**
 	 * Update element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void updateElement(int rowIndex) {
 		super.setEditedRow(rowIndex);
@@ -280,7 +315,9 @@ public class ColisTableModel extends EscrimTableModel {
 		super.setRemove(false);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see escrim.model.table.EscrimTableModel#isCellEditable(int, int)
 	 */
 	@Override
@@ -296,5 +333,9 @@ public class ColisTableModel extends EscrimTableModel {
 			return false;
 
 		}
+	}
+
+	public int getDisctinctCount() {
+		return ColisManager.loadDistinctSecteurColis().size();
 	}
 }

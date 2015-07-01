@@ -104,4 +104,19 @@ public class ColisDao {
 
 		return listeAllColis;
 	}
+
+	public static List<Integer> loadDistinctSecteur() {
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Colis.loadDistinctSecteur", Integer.class);
+		List<Integer> listeSecteur = query.getResultList();
+		return listeSecteur;
+	}
+
+	public static List<Colis> loadAllColisBySecteur(int secteur) {
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"Colis.loadAllBySecteur", Colis.class);
+		query.setParameter("secteur", secteur);
+		List<Colis> listeColis = query.getResultList();
+		return listeColis;
+	}
 }

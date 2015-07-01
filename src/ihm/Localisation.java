@@ -3,9 +3,12 @@ package ihm;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,12 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
-import escrim.manager.ColisManager;
-import escrim.metiers.Colis;
 import escrim.model.table.ColisTableModel;
-import escrim.model.table.ConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageColisTableModel;
 
 /**
@@ -28,167 +27,159 @@ import escrim.model.table.RemplissageColisTableModel;
 public class Localisation {
 
 	/** The table local configHopital top. */
-	private  JTable tableLocalconfigHopitalTop;
-	
+	private JTable tableLocalconfigHopitalTop;
+
 	/** The table local configHopital bot. */
-	private  JTable tableLocalconfigHopitalBot;
-	
+	private JTable tableLocalconfigHopitalBot;
+
 	/** The table local Colis top. */
-	private  JTable tableLocalColisTop;
-	
+	private JTable tableLocalColisTop;
+
 	/** The table local Colis bot. */
 	private JTable tableLocalColisBot;
-	
+
 	/** The onglet. */
 	private JTabbedPane onglet;
-	
+
 	/** The scroll pane configHopital. */
 	private JScrollPane scrollPaneconfigHopitalTop;
-	
+
 	/** The configHopital localisation. */
 	private JPanel configHopitalLocalisation;
-	
+
 	/** The scroll pane configHopital local bot. */
 	private JScrollPane scrollPaneconfigHopitalLocalBot;
-	
+
 	/** The combo select configHopital local. */
 	private JComboBox<String> comboSelectconfigHopitalLocal;
-	
+
 	/** The btn modifier configHopital. */
 	private JButton btnModifierconfigHopital;
-	
+
 	/** The Colis localisation. */
-	private JPanel ColisLocalisation;
-	
+	private JPanel ColisLocalisationPanel;
+
 	/** The bouton editer localisation. */
 	private JButton boutonEditerLocalisation;
-	
+
 	/** The scroll pane Colis. */
 	private JScrollPane scrollPaneColis;
-	
+
 	/** The secteur. */
-	private JComboBox<?> secteur;
-	
+	private JComboBox<Object> comboBoxsecteur;
+
 	/** The scroll pane local Colis top. */
 	private JScrollPane scrollPaneLocalColisTop;
-	
+
 	/** The scroll pane local Colis bot. */
 	private JScrollPane scrollPaneLocalColisBot;
-	
+
 	/** The lbl secteur. */
 	private JLabel lblSecteur;
-	
+
 	private ColisTableModel hopitalTableModel;
-	
-	private ColisTableModel colisModelTable; 
-	
+
+	private ColisTableModel colisModelTable;
+
 	private RemplissageColisTableModel remplissageColisTableModel;
 
 	/**
 	 * Instantiates a new localisation.
 	 *
-	 * @param tabPrincipal the tab principal
-	 * @param gestionairePage 
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
 	 */
 	public Localisation(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
-		this.initPage(tabPrincipal,gestionairePage);
+		this.initPage(tabPrincipal, gestionairePage);
 
 	}
 
 	/**
 	 * Inits the page.
 	 *
-	 * @param tabPrincipal the tab principal
-	 * @param gestionairePage 
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
 	 */
 	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
-		
 		hopitalTableModel = new ColisTableModel();
-		
-
-		
 
 		tableLocalconfigHopitalTop = new JTable(hopitalTableModel);
 		tableLocalconfigHopitalTop.setBounds(50, 357, 750, 223);
-		tableLocalconfigHopitalTop.removeColumn(tableLocalconfigHopitalTop.getColumn("uid"));
 
 		scrollPaneconfigHopitalTop = new JScrollPane();
 		scrollPaneconfigHopitalTop.setBounds(50, 73, 750, 223);
 		scrollPaneconfigHopitalTop.add(tableLocalconfigHopitalTop);
 		scrollPaneconfigHopitalTop.setViewportView(tableLocalconfigHopitalTop);
 
-
 		tableLocalconfigHopitalBot = new JTable();
 		tableLocalconfigHopitalBot.setName("Colis");
 		tableLocalconfigHopitalBot.setBounds(50, 72, 750, 223);
-		
+
 		scrollPaneconfigHopitalLocalBot = new JScrollPane();
 		scrollPaneconfigHopitalLocalBot.setBounds(50, 357, 750, 223);
 		scrollPaneconfigHopitalLocalBot.add(tableLocalconfigHopitalBot);
-		scrollPaneconfigHopitalLocalBot.setViewportView(tableLocalconfigHopitalBot);
+		scrollPaneconfigHopitalLocalBot
+				.setViewportView(tableLocalconfigHopitalBot);
 
-		comboSelectconfigHopitalLocal = new JComboBox<String>();
+		comboSelectconfigHopitalLocal = new JComboBox<>();
 		comboSelectconfigHopitalLocal.setBounds(121, 13, 136, 22);
 
-		btnModifierconfigHopital = new JButton("Modifier la configuration hopital");
+		btnModifierconfigHopital = new JButton(
+				"Modifier la configuration hopital");
 		btnModifierconfigHopital.setBounds(340, 310, 240, 25);
 		btnModifierconfigHopital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tableLocalconfigHopitalTop.getSelectedRow() == -1))
-					Remplissage
-							.CreationJpanelRemplissageConfigHopital(
-									gestionairePage,
-									(int) hopitalTableModel.getValueAt(
-											tableLocalconfigHopitalTop.getSelectedRow(),
-											tableLocalconfigHopitalTop.getColumnCount()));
+					Remplissage.CreationJpanelRemplissageConfigHopital(
+							gestionairePage, (int) hopitalTableModel
+									.getValueAt(tableLocalconfigHopitalTop
+											.getSelectedRow(),
+											tableLocalconfigHopitalTop
+													.getColumnCount()));
 
 			}
 
 		});
 
-
-		secteur = new JComboBox<Object>();
-		secteur.setName("");
-		secteur.setBounds(75, 29, 160, 22);
-		
+		comboBoxsecteur = new JComboBox<Object>();
+		comboBoxsecteur.setName("Secteur");
+		comboBoxsecteur.setBounds(75, 29, 160, 22);
 		colisModelTable = new ColisTableModel();
-		
 		tableLocalColisTop = new JTable(colisModelTable);
-		tableLocalColisTop.removeColumn(tableLocalColisTop.getColumn("uid"));
-		
-		tableLocalColisBot = new JTable();
-		
+
+		remplissageColisTableModel = new RemplissageColisTableModel();
+		tableLocalColisBot = new JTable(remplissageColisTableModel);
+
 		boutonEditerLocalisation = new JButton("Modifier le contenue du colis");
 		boutonEditerLocalisation.setBounds(340, 310, 240, 25);
 		boutonEditerLocalisation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tableLocalColisTop.getSelectedRow() == -1))
-					Remplissage
-							.CreationJpanelRemplissageConfigHopital(
-									gestionairePage,
-									(int) colisModelTable.getValueAt(
-											tableLocalColisTop.getSelectedRow(),
-											tableLocalColisTop.getColumnCount()));
+					Remplissage.CreationJpanelRemplissageConfigHopital(
+							gestionairePage, (int) colisModelTable.getValueAt(
+									tableLocalColisTop.getSelectedRow(),
+									tableLocalColisTop.getColumnCount()));
 
 			}
 
 		});
-		
+
 		scrollPaneLocalColisTop = new JScrollPane();
 		scrollPaneLocalColisTop.setBounds(50, 73, 750, 223);
 		scrollPaneLocalColisTop.add(tableLocalColisTop);
 		scrollPaneLocalColisTop.setViewportView(tableLocalColisTop);
-		
+
 		scrollPaneLocalColisBot = new JScrollPane();
 		scrollPaneLocalColisBot.setBounds(50, 357, 750, 223);
 		scrollPaneLocalColisBot.add(tableLocalColisBot);
 		scrollPaneLocalColisBot.setViewportView(tableLocalColisBot);
-		
+
 		lblSecteur = new JLabel("Secteur :");
 		lblSecteur.setBounds(12, 32, 56, 16);
-
 
 		configHopitalLocalisation = new JPanel();
 		configHopitalLocalisation.setLayout(null);
@@ -197,22 +188,84 @@ public class Localisation {
 		configHopitalLocalisation.add(scrollPaneconfigHopitalLocalBot);
 		configHopitalLocalisation.add(scrollPaneconfigHopitalTop);
 
-		ColisLocalisation = new JPanel();
-		ColisLocalisation.setLayout(null);
-		ColisLocalisation.add(boutonEditerLocalisation);
-		ColisLocalisation.add(scrollPaneLocalColisBot);
-		ColisLocalisation.add(lblSecteur);
-		ColisLocalisation.add(scrollPaneLocalColisTop);
-		ColisLocalisation.add(secteur);
+		ColisLocalisationPanel = new JPanel();
+		ColisLocalisationPanel.setLayout(null);
+		ColisLocalisationPanel.add(boutonEditerLocalisation);
+		ColisLocalisationPanel.add(scrollPaneLocalColisBot);
+		ColisLocalisationPanel.add(lblSecteur);
+		ColisLocalisationPanel.add(scrollPaneLocalColisTop);
+		ColisLocalisationPanel.add(comboBoxsecteur);
 
 		onglet = new JTabbedPane(JTabbedPane.TOP);
-		onglet.addTab("Colis", null, ColisLocalisation, null);
-		onglet.addTab("Configuration hopital", null, configHopitalLocalisation, null);
+		onglet.addTab("Colis", null, ColisLocalisationPanel, null);
+		onglet.addTab("Configuration hopital", null, configHopitalLocalisation,
+				null);
 		onglet.setBorder(null);
 		onglet.setAlignmentY(Component.TOP_ALIGNMENT);
 		onglet.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		comboBoxsecteur.setModel(new DefaultComboBoxModel<Object>(
+				((ColisTableModel) tableLocalColisTop.getModel())
+						.getDisctinctSecteur()));
+
+		comboBoxsecteur.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				int indexSelected = 0;
+				if (comboBoxsecteur.getSelectedItem() != null) {
+					indexSelected = comboBoxsecteur.getSelectedIndex();
+				}
+
+				comboBoxsecteur.setModel(new DefaultComboBoxModel<Object>(
+						((ColisTableModel) tableLocalColisTop.getModel())
+								.getDisctinctSecteur()));
+				comboBoxsecteur.repaint();
+				tableLocalColisTop.setModel(new ColisTableModel("secteur",
+						(int) comboBoxsecteur.getSelectedItem()));
+				comboBoxsecteur.setSelectedIndex(indexSelected);
+
+			}
+		});
+
+		/**
+		 * Mise à jour du modèle de table Colis lors de la mise a jour de la
+		 * comboBox
+		 */
+		comboBoxsecteur.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				tableLocalColisTop.setModel(new ColisTableModel("secteur",
+						(int) comboBoxsecteur.getSelectedItem()));
+				tableLocalColisTop.getSelectionModel().clearSelection();
+				colisModelTable.refreshModel();
+				remplissageColisTableModel
+						.refreshModel(
+								false,
+								(int) tableLocalColisTop.getModel().getValueAt(
+										0,
+										tableLocalColisTop.getModel()
+												.getColumnCount()));
+			}
+		});
+
+		tableLocalColisTop.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				remplissageColisTableModel
+						.refreshModel(
+								false,
+								(int) tableLocalColisTop.getModel().getValueAt(
+										tableLocalColisTop.getSelectedRow(),
+										tableLocalColisTop.getModel()
+												.getColumnCount()));
+
+			}
+		});
+
 		tabPrincipal.addTab("Localisation", null, onglet, null);
 
 	}
 }
-	

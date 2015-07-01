@@ -10,14 +10,13 @@ import escrim.metiers.Transport;
  */
 @SuppressWarnings("serial")
 public class TransportTableModel extends EscrimTableModel {
-	
+
 	/** The liste transport. */
 	private List<Transport> listeTransport = TransportManager
 			.loadAllTransport();
-	
+
 	/** The Transport column name. */
-	private String[] TransportColumnName = { "", "Dénomination", "Poids Max",
-			"uid" };
+	private String[] TransportColumnName = { "", "Dénomination", "Poids Max" };
 
 	/**
 	 * Instantiates a new transport table model.
@@ -26,7 +25,9 @@ public class TransportTableModel extends EscrimTableModel {
 		listeTransport = TransportManager.loadAllTransport();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -34,7 +35,9 @@ public class TransportTableModel extends EscrimTableModel {
 		return TransportColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	@Override
@@ -46,15 +49,19 @@ public class TransportTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 3;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -73,8 +80,11 @@ public class TransportTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -98,7 +108,8 @@ public class TransportTableModel extends EscrimTableModel {
 	/**
 	 * Validate persistance.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void validatePersistance(int rowIndex) {
 		TransportManager.createTransport(listeTransport.get(rowIndex));
@@ -112,7 +123,9 @@ public class TransportTableModel extends EscrimTableModel {
 		fireTableDataChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -147,7 +160,8 @@ public class TransportTableModel extends EscrimTableModel {
 	/**
 	 * Removes the element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void removeElement(int rowIndex) {
 		setRemove(true);
@@ -159,8 +173,10 @@ public class TransportTableModel extends EscrimTableModel {
 	/**
 	 * Persist data.
 	 *
-	 * @param rowIndex the row index
-	 * @param validate the validate
+	 * @param rowIndex
+	 *            the row index
+	 * @param validate
+	 *            the validate
 	 */
 	public void persistData(int rowIndex, boolean validate) {
 		if (validate) {
@@ -169,11 +185,11 @@ public class TransportTableModel extends EscrimTableModel {
 				setAddition(false);
 			} else if (!isAddition() && isEdition() && !isRemove()) {
 				TransportManager.updateTransport(listeTransport.get(rowIndex),
-						(Integer) getValueAt(rowIndex, getColumnCount() - 1));
+						(Integer) getValueAt(rowIndex, getColumnCount()));
 				setEdition(false);
 			} else if (!isAddition() && !isEdition() && isRemove()) {
 				TransportManager.removeTransport((Integer) getValueAt(rowIndex,
-						getColumnCount() - 1));
+						getColumnCount()));
 				setRemove(false);
 			}
 		}
@@ -185,7 +201,8 @@ public class TransportTableModel extends EscrimTableModel {
 	/**
 	 * Update element.
 	 *
-	 * @param rowIndex the row index
+	 * @param rowIndex
+	 *            the row index
 	 */
 	public void updateElement(int rowIndex) {
 		setEditedRow(rowIndex);

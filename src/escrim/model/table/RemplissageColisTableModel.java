@@ -3,8 +3,10 @@ package escrim.model.table;
 import java.util.ArrayList;
 import java.util.List;
 
+import escrim.manager.ColisManager;
 import escrim.manager.MaterielManager;
 import escrim.manager.MedicamentManager;
+import escrim.metiers.Colis;
 import escrim.metiers.Materiel;
 import escrim.metiers.Medicament;
 
@@ -13,22 +15,26 @@ import escrim.metiers.Medicament;
  */
 @SuppressWarnings("serial")
 public class RemplissageColisTableModel extends EscrimTableModel {
-	
+
 	/** The liste materiel. */
 	private List<Materiel> listeMateriel = new ArrayList<Materiel>();
-	
+
 	/** The Materiel column name. */
 	private String[] MaterielColumnName = { "Type", "Denomination",
-			"Observations", "Quantite", "uid" };
-	
+			"Observations", "Quantite", };
+
 	/** The uid colis to manage. */
 	private int uidColisToManage;
+
+	private boolean filterColis;
 
 	/**
 	 * Instantiates a new remplissage colis table model.
 	 *
-	 * @param allMateriel the all materiel
-	 * @param uidColis the uid colis
+	 * @param allMateriel
+	 *            the all materiel
+	 * @param uidColis
+	 *            the uid colis
 	 */
 	public RemplissageColisTableModel(boolean allMateriel, int uidColis) {
 		uidColisToManage = uidColis;
@@ -39,30 +45,41 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	public RemplissageColisTableModel() {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
 	 */
 	public int getColumnCount() {
-		return 5;
+		return 4;
 	}
 
 	/**
 	 * Refresh model.
 	 *
-	 * @param allMateriel the all materiel
+	 * @param filter
+	 *            the all materiel
 	 */
-	public void refreshModel(boolean allMateriel) {
-		if (allMateriel) {
-			listeMateriel = MaterielManager.loadOutsideColis(uidColisToManage);
+	public void refreshModel(boolean filterColis, int uidColisToManage) {
+		this.uidColisToManage = uidColisToManage;
+		this.filterColis = filterColis;
+		if (filterColis) {
+			listeMateriel = MaterielManager
+					.loadOutsideColis(this.uidColisToManage);
 
 		} else {
-			listeMateriel = MaterielManager.loadByColis(uidColisToManage);
+			listeMateriel = MaterielManager.loadByColis(this.uidColisToManage);
 		}
 		fireTableDataChanged();
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getRowCount()
 	 */
 	@Override
@@ -74,7 +91,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getColumnName(int)
 	 */
 	@Override
@@ -82,7 +101,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return MaterielColumnName[columnIndex];
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
 	 */
 	@Override
@@ -102,7 +123,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.table.DefaultTableModel#getValueAt(int, int)
 	 */
 	@Override
@@ -132,8 +155,11 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object, int, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
+	 * int, int)
 	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -167,7 +193,43 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Fill colis.
+	 *
+	 * @param uidColis
+	 *            the uid colis
+	 * @param uidMateriel
+	 *            the uid materiel
+	 */
+
+	public void fillColis(int uidColis, int uidMateriel) {
+		Materiel materiel = MaterielManager.loadMateriel(uidMateriel);
+		if (materiel.getColis() != ColisManager.loadColis(uidColis)) {
+			Colis colis = new Colis();
+			colis = ColisManager.loadColis(uidColis);
+			materiel.setColis(colis);
+		}
+
+		MaterielManager.updateMateriel(materiel, materiel.getUid());
+	}
+
+	/**
+	 * Fill out colis.
+	 *
+	 * @param uidColis
+	 *            the uid colis
+	 * @param uidMateriel
+	 *            the uid materiel
+	 */
+	public void fillOutColis(int uidColis, int uidMateriel) {
+		Materiel materiel = MaterielManager.loadMateriel(uidMateriel);
+		materiel.setColis(null);
+		MaterielManager.updateMateriel(materiel, materiel.getUid());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see escrim.model.table.EscrimTableModel#isCellEditable(int, int)
 	 */
 	@Override

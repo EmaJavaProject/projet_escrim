@@ -5,7 +5,6 @@ package escrim.metiers;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,10 @@ import javax.persistence.NamedQuery;
  * @author Martin
  */
 
-@NamedQueries({ @NamedQuery(name = "Colis.loadAll", query = "SELECT c FROM Colis c"), })
+@NamedQueries({
+		@NamedQuery(name = "Colis.loadAll", query = "SELECT c FROM Colis c"),
+		@NamedQuery(name = "Colis.loadDistinctSecteur", query = "SELECT DISTINCT c.secteur FROM Colis c") })
+@NamedQuery(name = "Colis.loadAllBySecteur", query = "SELECT c FROM Colis c WHERE c.secteur = :secteur")
 @Entity
 public class Colis {
 
@@ -43,7 +45,8 @@ public class Colis {
 	private int secteur;
 
 	/** The type colis. */
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TYPECOLIS_UID")
 	private TypeColis typeColis = new TypeColis();
 
 	/** The numero colis. */
