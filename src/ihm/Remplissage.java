@@ -116,12 +116,12 @@ public class Remplissage {
 		scrollPaneContenuBot.setBounds(52, 425, 706, 223);
 		scrollPaneContenuBot.add(tableContenuBot);
 
-		boutonAjouterContenu = new JButton(
-				new ImageIcon("images/flecheBas.png"));
+		boutonAjouterContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechebas.png")));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
 
-		boutonSupprimerContenu = new JButton(new ImageIcon(
-				"images/flechehaut.png"));
+		boutonSupprimerContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechehaut.png")));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
 
 		boutonAjouterContenu.addActionListener(new ActionListener() {
@@ -199,8 +199,10 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage transport.
 	 *
-	 * @param gestionairePage            the gestionaire page
-	 * @param uidTransport            the uid transport
+	 * @param gestionairePage
+	 *            the gestionaire page
+	 * @param uidTransport
+	 *            the uid transport
 	 */
 	public static void CreationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, int uidTransport) {
@@ -238,11 +240,11 @@ public class Remplissage {
 		scrollPaneContenuBot.add(tableContenuBot);
 		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
-		boutonAjouterContenu = new JButton(
-				new ImageIcon("images/flecheBas.png"));
+		boutonAjouterContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechebas.png")));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
-		boutonSupprimerContenu = new JButton(new ImageIcon(
-				"images/flechehaut.png"));
+		boutonSupprimerContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechehaut.png")));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
 
 		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
@@ -318,8 +320,10 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage config hopital.
 	 *
-	 * @param gestionairePage            the gestionaire page
-	 * @param uidConfigurationHopital the uid configuration hopital
+	 * @param gestionairePage
+	 *            the gestionaire page
+	 * @param uidConfigurationHopital
+	 *            the uid configuration hopital
 	 */
 	public static void CreationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage, int uidConfigurationHopital) {
@@ -356,12 +360,12 @@ public class Remplissage {
 		scrollPaneContenuBot.add(tableContenuBot);
 		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
-		boutonAjouterContenu = new JButton(
-				new ImageIcon("images/flecheBas.png"));
+		boutonAjouterContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechebas.png")));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
 
-		boutonSupprimerContenu = new JButton(new ImageIcon(
-				"images/flechehaut.png"));
+		boutonSupprimerContenu = new JButton(new ImageIcon(ClassLoader.class
+				.getClass().getResource("/images/flechehaut.png")));
 		boutonSupprimerContenu.setBounds(550, 324, 70, 70);
 
 		boutonAjouterContenu.addMouseListener(new MouseAdapter() {
