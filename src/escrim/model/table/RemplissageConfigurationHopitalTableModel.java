@@ -243,6 +243,13 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		return false;
 
 	}
+	
+	/**
+	 * Load name.
+	 *
+	 * @param uid the uid
+	 * @return the string
+	 */
 	public String loadName(int uid)
 	{
 		if (ConfigurationHopitalManager.loadConfigurationHopital(uid)!=null&&ConfigurationHopitalManager.loadConfigurationHopital(uid).getDenomination()!=null){

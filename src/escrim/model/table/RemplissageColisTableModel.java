@@ -243,6 +243,12 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 
 	}
 	
+	/**
+	 * Load name.
+	 *
+	 * @param uid the uid
+	 * @return the string
+	 */
 	public String loadName(int uid)
 	{
 		return (ColisManager.loadColis(uid).getDesignation());

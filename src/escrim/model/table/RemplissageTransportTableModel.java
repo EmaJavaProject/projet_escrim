@@ -246,6 +246,12 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 
 	}
 	
+	/**
+	 * Load name.
+	 *
+	 * @param uid the uid
+	 * @return the string
+	 */
 	public String loadName(int uid)
 	{
 		return (TransportManager.loadTransport(uid).getDenomination());
