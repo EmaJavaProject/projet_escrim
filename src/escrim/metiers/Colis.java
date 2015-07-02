@@ -25,8 +25,8 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
 		@NamedQuery(name = "Colis.loadAll", query = "SELECT c FROM Colis c"),
-		@NamedQuery(name = "Colis.loadDistinctSecteur", query = "SELECT DISTINCT c.secteur FROM Colis c") })
-@NamedQuery(name = "Colis.loadAllBySecteur", query = "SELECT c FROM Colis c WHERE c.secteur = :secteur")
+		@NamedQuery(name = "Colis.loadDistinctSecteur", query = "SELECT DISTINCT c.secteur FROM Colis c"),
+		@NamedQuery(name = "Colis.loadAllBySecteur", query = "SELECT c FROM Colis c WHERE c.secteur = :secteur") })
 @Entity
 public class Colis {
 

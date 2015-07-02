@@ -3,6 +3,7 @@ package escrim.model.table;
 import java.util.List;
 
 import escrim.manager.ColisManager;
+import escrim.manager.ConfigurationHopitalManager;
 import escrim.manager.TypeColisManager;
 import escrim.metiers.Colis;
 
@@ -21,6 +22,7 @@ public class ColisTableModel extends EscrimTableModel {
 			"Poids Max", "Valeur", "Iata", "Projection", "Observation", };
 
 	private Object[] distinctSecteur;
+	private Object[] distinctConfig;
 
 	/**
 	 * Instantiates a new colis table model.
@@ -265,6 +267,15 @@ public class ColisTableModel extends EscrimTableModel {
 		return distinctSecteur;
 	}
 
+	public Object[] getDisctinctConfig() {
+		if (distinctConfig != ConfigurationHopitalManager.loadDistinctConfig()
+				.toArray()) {
+			distinctConfig = (Object[]) ConfigurationHopitalManager
+					.loadDistinctConfig().toArray();
+		}
+		return distinctConfig;
+	}
+
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);
@@ -335,7 +346,4 @@ public class ColisTableModel extends EscrimTableModel {
 		}
 	}
 
-	public int getDisctinctCount() {
-		return ColisManager.loadDistinctSecteurColis().size();
-	}
 }

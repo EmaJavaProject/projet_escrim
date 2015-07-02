@@ -13,9 +13,11 @@ public class ConfigurationHopitalManager {
 	/**
 	 * Creates the configuration hopital.
 	 *
-	 * @param ConfigurationHopital the configuration hopital
+	 * @param ConfigurationHopital
+	 *            the configuration hopital
 	 */
-	public static void createConfigurationHopital(ConfigurationHopital ConfigurationHopital) {
+	public static void createConfigurationHopital(
+			ConfigurationHopital ConfigurationHopital) {
 		ConfigurationHopitalDao.create(ConfigurationHopital);
 
 	}
@@ -32,10 +34,13 @@ public class ConfigurationHopitalManager {
 	/**
 	 * Update configuration hopital.
 	 *
-	 * @param ConfigurationHopital the configuration hopital
-	 * @param uid the uid
+	 * @param ConfigurationHopital
+	 *            the configuration hopital
+	 * @param uid
+	 *            the uid
 	 */
-	public static void updateConfigurationHopital(ConfigurationHopital ConfigurationHopital, int uid) {
+	public static void updateConfigurationHopital(
+			ConfigurationHopital ConfigurationHopital, int uid) {
 		ConfigurationHopitalDao.update(ConfigurationHopital, uid);
 
 	}
@@ -43,7 +48,8 @@ public class ConfigurationHopitalManager {
 	/**
 	 * Removes the configuration hopital.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 */
 	public static void removeConfigurationHopital(int uid) {
 		ConfigurationHopital ConfigurationHopitalRemoved = loadConfigurationHopital(uid);
@@ -54,7 +60,8 @@ public class ConfigurationHopitalManager {
 	/**
 	 * Load configuration hopital.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the configuration hopital
 	 */
 	public static ConfigurationHopital loadConfigurationHopital(int uid) {
@@ -69,6 +76,10 @@ public class ConfigurationHopitalManager {
 	 */
 	public static List<ConfigurationHopital> loadAllConfigurationHopital() {
 		return ConfigurationHopitalDao.loadAll();
+	}
+
+	public static List<String> loadDistinctConfig() {
+		return ConfigurationHopitalDao.loadDistinctConfig();
 	}
 
 }

@@ -135,8 +135,6 @@ public class Remplissage {
 							.refreshModel(true, uidColis);
 					((RemplissageColisTableModel) tableContenuBot.getModel())
 							.refreshModel(false, uidColis);
-					tableContenuTop.repaint();
-					tableContenuBot.repaint();
 				}
 			}
 		});
@@ -151,13 +149,9 @@ public class Remplissage {
 									(tableContenuBot.getModel())
 											.getColumnCount()));
 					((RemplissageColisTableModel) tableContenuTop.getModel())
-							.refreshModel(true, (tableContenuBot.getModel())
-									.getColumnCount());
+							.refreshModel(true, uidColis);
 					((RemplissageColisTableModel) tableContenuBot.getModel())
-							.refreshModel(
-									false,
-									((RemplissageColisTableModel) tableContenuBot
-											.getModel()).getColumnCount());
+							.refreshModel(false, uidColis);
 					tableContenuTop.repaint();
 					tableContenuBot.repaint();
 				}

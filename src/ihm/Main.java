@@ -14,64 +14,68 @@ import javax.swing.JTabbedPane;
 /**
  * The Class Main_gui.
  */
-public class Main_gui {
-	
+public class Main {
+
 	/** The frm escrim. */
 	// private boolean clicked = true;
 	private JFrame frmEscrim;
-	
+
 	/** The stock page. */
+	@SuppressWarnings("unused")
 	private Stock stockPage;
-	
+
 	/** The localisation page. */
+	@SuppressWarnings("unused")
 	private Localisation localisationPage;
-	
+
 	/** The avion page. */
+	@SuppressWarnings("unused")
 	private Avion avionPage;
-	
+
 	/** The panel principal. */
 	private JPanel panelPrincipal;
-	
+
 	/** The mntm importer. */
 	private JMenuItem mntmImporter;
-	
+
 	/** The menu gestion. */
 	private JMenu menuGestion;
-	
+
 	/** The mntm exporter. */
 	private JMenuItem mntmExporter;
-	
+
 	/** The mn fichier. */
 	private JMenu mnFichier;
-	
+
 	/** The sous menu gestion transport. */
 	private JMenuItem sousMenuGestionTransport;
-	
+
 	/** The menu. */
 	private JMenuBar menu;
-	
+
 	/** The gestionaire page. */
 	private JLayeredPane gestionairePage;
-	
+
 	/** The tab principal. */
 	private JTabbedPane tabPrincipal;
-	
+
 	/** The sous menu colis. */
 	private JMenuItem sousMenuColis;
-	
+
 	/** The sous menu hopital. */
 	private JMenuItem sousMenuHopital;
 
 	/**
 	 * Launch the application.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main_gui window = new Main_gui();
+					Main window = new Main();
 					window.frmEscrim.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,7 +87,7 @@ public class Main_gui {
 	/**
 	 * Create the application.
 	 */
-	public Main_gui() {
+	public Main() {
 		initialize();
 	}
 
@@ -94,6 +98,8 @@ public class Main_gui {
 	 * 
 	 */
 	private void initialize() {
+		DialogTestConnexion diag = new DialogTestConnexion();
+		diag.setVisible(true);
 		frmEscrim = new JFrame();
 		frmEscrim.setTitle("ESCRIM");
 		frmEscrim.setResizable(false);
@@ -148,19 +154,17 @@ public class Main_gui {
 				.CreationJpanelTransport(gestionairePage));
 		menuGestion.add(sousMenuGestionTransport);
 
-		sousMenuHopital = new JMenuItem(
-				"Gestion configuration hopital");
+		sousMenuHopital = new JMenuItem("Gestion configuration hopital");
 		sousMenuHopital.addActionListener(CreationHopital
 				.CreationJpanelHopital(gestionairePage));
 		menuGestion.add(sousMenuHopital);
-		
-		sousMenuColis = new JMenuItem(
-				"Gestion type colis");
+
+		sousMenuColis = new JMenuItem("Gestion type colis");
 		sousMenuColis.addActionListener(CreationTypeColis
 				.CreationJpanelTypeColis(gestionairePage));
 		menuGestion.add(sousMenuColis);
 
-		stockPage = new Stock(tabPrincipal,gestionairePage);
+		stockPage = new Stock(tabPrincipal, gestionairePage);
 		localisationPage = new Localisation(tabPrincipal, gestionairePage);
 		avionPage = new Avion(tabPrincipal);
 

@@ -18,7 +18,8 @@ public class ConfigurationHopitalDao {
 	/**
 	 * Creates the.
 	 *
-	 * @param ConfigurationHopital the configuration hopital
+	 * @param ConfigurationHopital
+	 *            the configuration hopital
 	 */
 	public static void create(ConfigurationHopital ConfigurationHopital) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -29,10 +30,13 @@ public class ConfigurationHopitalDao {
 	/**
 	 * Update.
 	 *
-	 * @param ConfigurationHopitalUpdated the configuration hopital updated
-	 * @param uid the uid
+	 * @param ConfigurationHopitalUpdated
+	 *            the configuration hopital updated
+	 * @param uid
+	 *            the uid
 	 */
-	public static void update(ConfigurationHopital ConfigurationHopitalUpdated, int uid) {
+	public static void update(ConfigurationHopital ConfigurationHopitalUpdated,
+			int uid) {
 		ConfigurationHopital ConfigurationHopital = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
 		ConfigurationHopital = ConfigurationHopitalUpdated;
@@ -43,7 +47,8 @@ public class ConfigurationHopitalDao {
 	/**
 	 * Load.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the configuration hopital
 	 */
 	public static ConfigurationHopital load(int uid) {
@@ -54,7 +59,8 @@ public class ConfigurationHopitalDao {
 	/**
 	 * Removes the.
 	 *
-	 * @param ConfigurationHopitalRemoved the configuration hopital removed
+	 * @param ConfigurationHopitalRemoved
+	 *            the configuration hopital removed
 	 */
 	public static void remove(ConfigurationHopital ConfigurationHopitalRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -71,7 +77,15 @@ public class ConfigurationHopitalDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"ConfigurationHopital.loadAll", ConfigurationHopital.class);
-		List<ConfigurationHopital> listeConfigurationHopital = query.getResultList();
+		List<ConfigurationHopital> listeConfigurationHopital = query
+				.getResultList();
 		return listeConfigurationHopital;
+	}
+
+	public static List<String> loadDistinctConfig() {
+		Query query = escrimDatabase.getEm().createNamedQuery(
+				"ConfigurationHopital.loadDistinctConfig", String.class);
+		List<String> listeDistinctConfigs = query.getResultList();
+		return listeDistinctConfigs;
 	}
 }
