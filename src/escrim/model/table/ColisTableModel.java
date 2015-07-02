@@ -21,17 +21,26 @@ public class ColisTableModel extends EscrimTableModel {
 			"Optionnel", "Secteur", "Type Colis", "Dimension", "Volume",
 			"Poids Max", "Valeur", "Iata", "Projection", "Observation", };
 
+	/** The distinct secteur. */
 	private Object[] distinctSecteur;
+	
+	/** The distinct config. */
 	private Object[] distinctConfig;
 
 	/**
 	 * Instantiates a new colis table model.
+	 *
+	 * @param filter the filter
+	 * @param filterValue the filter value
 	 */
 	public ColisTableModel(String filter, int filterValue) {
 
 		listeColis = ColisManager.loadAllColisByFilter(filter, filterValue);
 	}
 
+	/**
+	 * Instantiates a new colis table model.
+	 */
 	public ColisTableModel() {
 		listeColis = ColisManager.loadAllColis();
 	}
@@ -254,8 +263,7 @@ public class ColisTableModel extends EscrimTableModel {
 	/**
 	 * Removes the element.
 	 *
-	 * @param rowIndex
-	 *            the row index
+	 * @return the disctinct secteur
 	 */
 
 	public Object[] getDisctinctSecteur() {
@@ -267,6 +275,11 @@ public class ColisTableModel extends EscrimTableModel {
 		return distinctSecteur;
 	}
 
+	/**
+	 * Gets the disctinct config.
+	 *
+	 * @return the disctinct config
+	 */
 	public Object[] getDisctinctConfig() {
 		if (distinctConfig != ConfigurationHopitalManager.loadDistinctConfig()
 				.toArray()) {
@@ -276,6 +289,11 @@ public class ColisTableModel extends EscrimTableModel {
 		return distinctConfig;
 	}
 
+	/**
+	 * Removes the element.
+	 *
+	 * @param rowIndex the row index
+	 */
 	public void removeElement(int rowIndex) {
 		super.setRemove(true);
 		super.setAddition(false);

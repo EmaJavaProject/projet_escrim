@@ -65,8 +65,10 @@ public class Remplissage {
 	/** The inside transport table model. */
 	private static RemplissageTransportTableModel insideTransportTableModel;
 
+	/** The outside config hopital table model. */
 	private static RemplissageConfigurationHopitalTableModel outsideConfigHopitalTableModel;
 
+	/** The inside config hopital table model. */
 	private static RemplissageConfigurationHopitalTableModel insideConfigHopitalTableModel;
 
 	// ------------------------------------------COLIS--------------------------------------------------//
@@ -197,12 +199,8 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage transport.
 	 *
-	 * @param gestionairePage
-	 *            the gestionaire page
-	 * @param pModelTable
-	 *            the model table
-	 * @param uidTransport
-	 *            the uid transport
+	 * @param gestionairePage            the gestionaire page
+	 * @param uidTransport            the uid transport
 	 */
 	public static void CreationJpanelRemplissageTransport(
 			JLayeredPane gestionairePage, int uidTransport) {
@@ -320,12 +318,8 @@ public class Remplissage {
 	/**
 	 * Création jpanel remplissage config hopital.
 	 *
-	 * @param gestionairePage
-	 *            the gestionaire page
-	 * @param pModelTable
-	 *            the model table
-	 * @param index
-	 *            the index
+	 * @param gestionairePage            the gestionaire page
+	 * @param uidConfigurationHopital the uid configuration hopital
 	 */
 	public static void CreationJpanelRemplissageConfigHopital(
 			JLayeredPane gestionairePage, int uidConfigurationHopital) {

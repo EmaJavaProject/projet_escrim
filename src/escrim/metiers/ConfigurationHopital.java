@@ -88,10 +88,20 @@ public class ConfigurationHopital {
 		this.colis = listeColis;
 	}
 
+	/**
+	 * Adds the colis.
+	 *
+	 * @param pColis the colis
+	 */
 	public void addColis(Colis pColis) {
 		colis.add(pColis);
 	}
 
+	/**
+	 * Removes the colis.
+	 *
+	 * @param pColis the colis
+	 */
 	public void removeColis(Colis pColis) {
 		colis.remove(pColis);
 	}

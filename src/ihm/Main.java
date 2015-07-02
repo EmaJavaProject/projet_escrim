@@ -17,7 +17,6 @@ import javax.swing.JTabbedPane;
 public class Main {
 
 	/** The frm escrim. */
-	// private boolean clicked = true;
 	private JFrame frmEscrim;
 
 	/** The stock page. */

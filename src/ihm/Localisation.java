@@ -62,9 +62,6 @@ public class Localisation {
 	/** The bouton editer localisation. */
 	private JButton boutonEditerLocalisation;
 
-	/** The scroll pane Colis. */
-	private JScrollPane scrollPaneColis;
-
 	/** The secteur. */
 	private JComboBox<Object> comboBoxsecteur;
 
@@ -77,19 +74,23 @@ public class Localisation {
 	/** The lbl secteur. */
 	private JLabel lblSecteur;
 
+	/** The hopital table model. */
 	private ColisTableModel hopitalTableModel;
 
+	/** The colis model table. */
 	private ColisTableModel colisModelTable;
 
+	/** The remplissage colis table model. */
 	private RemplissageColisTableModel remplissageColisTableModel;
+	
+	/** The remplissage hopital table model. */
 	private RemplissageColisTableModel remplissageHopitalTableModel;
 
 	/**
 	 * Instantiates a new localisation.
 	 *
-	 * @param tabPrincipal
-	 *            the tab principal
-	 * @param gestionairePage
+	 * @param tabPrincipal            the tab principal
+	 * @param gestionairePage the gestionaire page
 	 */
 	public Localisation(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
@@ -100,9 +101,8 @@ public class Localisation {
 	/**
 	 * Inits the page.
 	 *
-	 * @param tabPrincipal
-	 *            the tab principal
-	 * @param gestionairePage
+	 * @param tabPrincipal            the tab principal
+	 * @param gestionairePage the gestionaire page
 	 */
 	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 

@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -22,9 +21,6 @@ import escrim.model.table.ConfigurationHopitalTableModel;
  * The Class CreationHopital.
  */
 public class CreationHopital {
-
-	/** The tab principal. */
-	private static JTabbedPane tabPrincipal;
 
 	/** The jpanel configuration hopital. */
 	private static JPanel jpanelConfigurationHopital;
@@ -188,7 +184,6 @@ public class CreationHopital {
 
 				boutonSupprimerConfigurationHopital
 						.addActionListener(new ActionListener() {
-							@SuppressWarnings("deprecation")
 							public void actionPerformed(ActionEvent arg0) {
 								if (!(tableConfigurationHopital
 										.getSelectedRow() == -1)) {

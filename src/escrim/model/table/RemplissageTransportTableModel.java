@@ -56,8 +56,8 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 	/**
 	 * Refresh model.
 	 *
-	 * @param allCompartiment
-	 *            the all compartiment
+	 * @param allCompartiment            the all compartiment
+	 * @param uidTransportToManage the uid transport to manage
 	 */
 	public void refreshModel(boolean allCompartiment, int uidTransportToManage) {
 		this.uidTransportToManage = uidTransportToManage;

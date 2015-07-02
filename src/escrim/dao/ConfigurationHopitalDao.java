@@ -37,9 +37,8 @@ public class ConfigurationHopitalDao {
 	 */
 	public static void update(ConfigurationHopital ConfigurationHopitalUpdated,
 			int uid) {
-		ConfigurationHopital ConfigurationHopital = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		ConfigurationHopital = ConfigurationHopitalUpdated;
+		ConfigurationHopitalUpdated = load(uid);
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -78,14 +77,21 @@ public class ConfigurationHopitalDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"ConfigurationHopital.loadAll", ConfigurationHopital.class);
+		@SuppressWarnings("unchecked")
 		List<ConfigurationHopital> listeConfigurationHopital = query
 				.getResultList();
 		return listeConfigurationHopital;
 	}
 
+	/**
+	 * Load distinct config.
+	 *
+	 * @return the list
+	 */
 	public static List<String> loadDistinctConfig() {
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"ConfigurationHopital.loadDistinctConfig", String.class);
+		@SuppressWarnings("unchecked")
 		List<String> listeDistinctConfigs = query.getResultList();
 		return listeDistinctConfigs;
 	}

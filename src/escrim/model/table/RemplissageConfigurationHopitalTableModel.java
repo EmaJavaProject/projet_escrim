@@ -9,16 +9,28 @@ import escrim.manager.TypeColisManager;
 import escrim.metiers.Colis;
 import escrim.metiers.ConfigurationHopital;
 
+/**
+ * The Class RemplissageConfigurationHopitalTableModel.
+ */
 @SuppressWarnings("serial")
 public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel {
 
+	/** The liste colis. */
 	private List<Colis> listeColis = new ArrayList<Colis>();
 
+	/** The Colis column name. */
 	private String[] ColisColumnName = { "N° Colis", "Nom", "Affectataire",
 			"Optionnel", "Secteur", "Type Colis", "Observation" };
 
+	/** The uid config hopital to manage. */
 	private int uidConfigHopitalToManage;
 
+	/**
+	 * Instantiates a new remplissage configuration hopital table model.
+	 *
+	 * @param allColis the all colis
+	 * @param uidConfig the uid config
+	 */
 	public RemplissageConfigurationHopitalTableModel(boolean allColis,
 			int uidConfig) {
 		uidConfigHopitalToManage = uidConfig;
@@ -31,10 +43,19 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.table.DefaultTableModel#getColumnCount()
+	 */
 	public int getColumnCount() {
 		return 7;
 	}
 
+	/**
+	 * Refresh model.
+	 *
+	 * @param allColis the all colis
+	 * @param uidConfigHopitalToManage the uid config hopital to manage
+	 */
 	public void refreshModel(boolean allColis, int uidConfigHopitalToManage) {
 		this.uidConfigHopitalToManage = uidConfigHopitalToManage;
 		if (allColis) {
@@ -175,6 +196,12 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		}
 	}
 
+	/**
+	 * Fill config.
+	 *
+	 * @param uidConfig the uid config
+	 * @param uidColis the uid colis
+	 */
 	public void fillConfig(int uidConfig, int uidColis) {
 		Colis colis = ColisManager.loadColis(uidColis);
 		ConfigurationHopital conf = ConfigurationHopitalManager
@@ -187,6 +214,12 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		ConfigurationHopitalManager.updateConfigurationHopital(conf, uidConfig);
 	}
 
+	/**
+	 * Fill out config.
+	 *
+	 * @param uidConfig the uid config
+	 * @param uidColis the uid colis
+	 */
 	public void fillOutConfig(int uidConfig, int uidColis) {
 		Colis colis = ColisManager.loadColis(uidColis);
 		ConfigurationHopital conf = ConfigurationHopitalManager

@@ -10,6 +10,9 @@ import javax.swing.table.DefaultTableModel;
 
 public abstract class EscrimTableModel extends DefaultTableModel {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -5298410385299488210L;
+
 	/** The edition. */
 	protected boolean edition = false;
 

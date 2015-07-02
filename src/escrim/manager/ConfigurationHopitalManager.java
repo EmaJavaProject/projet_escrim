@@ -78,6 +78,11 @@ public class ConfigurationHopitalManager {
 		return ConfigurationHopitalDao.loadAll();
 	}
 
+	/**
+	 * Load distinct config.
+	 *
+	 * @return the list
+	 */
 	public static List<String> loadDistinctConfig() {
 		return ConfigurationHopitalDao.loadDistinctConfig();
 	}

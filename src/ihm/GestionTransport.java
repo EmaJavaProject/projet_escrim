@@ -212,7 +212,6 @@ public class GestionTransport {
 
 				boutonSupprimerTransport
 						.addActionListener(new ActionListener() {
-							@SuppressWarnings("deprecation")
 							public void actionPerformed(ActionEvent arg0) {
 								if (!(tableTransport.getSelectedRow() == -1)) {
 									tblModelTransport

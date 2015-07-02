@@ -26,36 +26,31 @@ import javax.persistence.NamedQuery;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
 @NamedQueries({
-	@NamedQuery(name="Materiel.loadAll",
-				query="SELECT m FROM Materiel m where m.type = :type"),
-	@NamedQuery(name="Materiel.findMaterielIntoColis",
-				query="SELECT m FROM Materiel m where m.colis.uid = :uid"),
-	@NamedQuery(name="Materiel.findMaterielOustideColis",
-				query="SELECT m FROM Materiel m where m.colis is NULL"),
-})
+		@NamedQuery(name = "Materiel.loadAll", query = "SELECT m FROM Materiel m where m.type = :type"),
+		@NamedQuery(name = "Materiel.findMaterielIntoColis", query = "SELECT m FROM Materiel m where m.colis.uid = :uid"),
+		@NamedQuery(name = "Materiel.findMaterielOustideColis", query = "SELECT m FROM Materiel m where m.colis is NULL"), })
 public class Materiel {
 
 	/** The uid. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	// uid pour unique ID :)
 	private int uid;
-	
+
 	/** The denomination. */
 	private String denomination;
-	
+
 	/** The colis. */
 	@JoinColumn(name = "COLIS_UID", nullable = true)
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private Colis colis;
-	
+
 	/** The observations. */
 	private String observations;
-	
+
 	/** The type. */
 	@Column(name = "Dtype")
 	private String type;
-	
+
 	/** The quantite. */
 	private int quantite;
 
@@ -69,11 +64,16 @@ public class Materiel {
 	/**
 	 * Instantiates a new materiel.
 	 *
-	 * @param id the id
-	 * @param denomation the denomation
-	 * @param colis the colis
-	 * @param observations the observations
-	 * @param quantite the quantite
+	 * @param id
+	 *            the id
+	 * @param denomation
+	 *            the denomation
+	 * @param colis
+	 *            the colis
+	 * @param observations
+	 *            the observations
+	 * @param quantite
+	 *            the quantite
 	 */
 	Materiel(int id, String denomation, Colis colis, String observations,
 			int quantite) {
@@ -97,7 +97,8 @@ public class Materiel {
 	/**
 	 * Sets the colis.
 	 *
-	 * @param colis the new colis
+	 * @param colis
+	 *            the new colis
 	 */
 	public void setColis(Colis colis) {
 		this.colis = colis;
@@ -115,7 +116,8 @@ public class Materiel {
 	/**
 	 * Sets the uid.
 	 *
-	 * @param uid the new uid
+	 * @param uid
+	 *            the new uid
 	 */
 	public void setUid(int uid) {
 		this.uid = uid;
@@ -133,7 +135,8 @@ public class Materiel {
 	/**
 	 * Sets the denomination.
 	 *
-	 * @param denomination the new denomination
+	 * @param denomination
+	 *            the new denomination
 	 */
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
@@ -151,7 +154,8 @@ public class Materiel {
 	/**
 	 * Sets the observations.
 	 *
-	 * @param observations the new observations
+	 * @param observations
+	 *            the new observations
 	 */
 	public void setObservations(String observations) {
 		this.observations = observations;
@@ -169,7 +173,8 @@ public class Materiel {
 	/**
 	 * Sets the type.
 	 *
-	 * @param type the new type
+	 * @param type
+	 *            the new type
 	 */
 	public void setType(String type) {
 		this.type = type;
@@ -187,7 +192,8 @@ public class Materiel {
 	/**
 	 * Sets the quantite.
 	 *
-	 * @param quantite the new quantite
+	 * @param quantite
+	 *            the new quantite
 	 */
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;

@@ -18,7 +18,8 @@ public class TypeColisDao {
 	/**
 	 * Creates the.
 	 *
-	 * @param typeColis the type colis
+	 * @param typeColis
+	 *            the type colis
 	 */
 	public static void create(TypeColis typeColis) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -29,13 +30,14 @@ public class TypeColisDao {
 	/**
 	 * Update.
 	 *
-	 * @param typeColisUpdated the type colis updated
-	 * @param uid the uid
+	 * @param typeColisUpdated
+	 *            the type colis updated
+	 * @param uid
+	 *            the uid
 	 */
 	public static void update(TypeColis typeColisUpdated, int uid) {
-		TypeColis typeColis = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		typeColis = typeColisUpdated;
+		typeColisUpdated = load(uid);
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -43,7 +45,8 @@ public class TypeColisDao {
 	/**
 	 * Load.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the type colis
 	 */
 	public static TypeColis load(int uid) {
@@ -54,7 +57,8 @@ public class TypeColisDao {
 	/**
 	 * Removes the.
 	 *
-	 * @param typeColisRemoved the type colis removed
+	 * @param typeColisRemoved
+	 *            the type colis removed
 	 */
 	public static void remove(TypeColis typeColisRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -65,7 +69,8 @@ public class TypeColisDao {
 	/**
 	 * Find by name.
 	 *
-	 * @param typeColisName the type colis name
+	 * @param typeColisName
+	 *            the type colis name
 	 * @return the type colis
 	 */
 	public static TypeColis findByName(String typeColisName) {
@@ -85,6 +90,7 @@ public class TypeColisDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"TypeColis.loadAll", TypeColis.class);
+		@SuppressWarnings("unchecked")
 		List<TypeColis> listeTypeColis = query.getResultList();
 		return listeTypeColis;
 	}

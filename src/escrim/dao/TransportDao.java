@@ -18,10 +18,10 @@ public class TransportDao {
 	/**
 	 * Creates the.
 	 *
-	 * @param Transport the transport
+	 * @param Transport
+	 *            the transport
 	 */
 	public static void create(Transport Transport) {
-		// TODO Auto-generated method stub
 		escrimDatabase.getEm().getTransaction().begin();
 		escrimDatabase.getEm().persist(Transport);
 		escrimDatabase.getEm().getTransaction().commit();
@@ -30,13 +30,14 @@ public class TransportDao {
 	/**
 	 * Update.
 	 *
-	 * @param TransportUpdated the transport updated
-	 * @param uid the uid
+	 * @param TransportUpdated
+	 *            the transport updated
+	 * @param uid
+	 *            the uid
 	 */
 	public static void update(Transport TransportUpdated, int uid) {
-		Transport Transport = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		Transport = TransportUpdated;
+		TransportUpdated = load(uid);
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -44,7 +45,8 @@ public class TransportDao {
 	/**
 	 * Load.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the transport
 	 */
 	public static Transport load(int uid) {
@@ -55,7 +57,8 @@ public class TransportDao {
 	/**
 	 * Removes the.
 	 *
-	 * @param TransportRemoved the transport removed
+	 * @param TransportRemoved
+	 *            the transport removed
 	 */
 	public static void remove(Transport TransportRemoved) {
 		escrimDatabase.getEm().getTransaction().begin();
@@ -72,6 +75,7 @@ public class TransportDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Transport.loadAll", Transport.class);
+		@SuppressWarnings("unchecked")
 		List<Transport> listeTransport = query.getResultList();
 		return listeTransport;
 	}

@@ -89,18 +89,42 @@ public class ColisManager {
 		return ColisDao.loadAll();
 	}
 
+	/**
+	 * Load distinct secteur colis.
+	 *
+	 * @return the list
+	 */
 	public static List<Integer> loadDistinctSecteurColis() {
 		return ColisDao.loadDistinctSecteur();
 	}
 
+	/**
+	 * Load outside config hopital.
+	 *
+	 * @param uidConfig the uid config
+	 * @return the list
+	 */
 	public static List<Colis> loadOutsideConfigHopital(int uidConfig) {
 		return ColisDao.findColisOutsideConfigHopital(uidConfig);
 	}
 
+	/**
+	 * Load by config hopital.
+	 *
+	 * @param uidConfig the uid config
+	 * @return the list
+	 */
 	public static List<Colis> loadByConfigHopital(int uidConfig) {
 		return ColisDao.findColisIntoConfigHopital(uidConfig);
 	}
 
+	/**
+	 * Load all colis by filter.
+	 *
+	 * @param filter the filter
+	 * @param filterValue the filter value
+	 * @return the list
+	 */
 	public static List<Colis> loadAllColisByFilter(String filter,
 			int filterValue) {
 		if (filter == "secteur") {

@@ -1,4 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE xml>
 <database-platform>
    <name>HSQL</name>
    <runtime-platform-class>org.eclipse.persistence.platform.database.HSQLPlatform</runtime-platform-class>

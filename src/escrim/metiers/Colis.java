@@ -301,10 +301,20 @@ public class Colis {
 		this.designation = designation;
 	}
 
+	/**
+	 * Adds the configuration.
+	 *
+	 * @param config the config
+	 */
 	public void addConfiguration(ConfigurationHopital config) {
 		configurations.add(config);
 	}
 
+	/**
+	 * Removes the configuration.
+	 *
+	 * @param config the config
+	 */
 	public void removeConfiguration(ConfigurationHopital config) {
 		configurations.remove(config);
 	}

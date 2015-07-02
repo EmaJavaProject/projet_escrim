@@ -37,9 +37,8 @@ public class ColisDao {
 	 *            the uid
 	 */
 	public static void update(Colis ColisUpdated, int uid) {
-		Colis Colis = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		Colis = ColisUpdated;
+		ColisUpdated = load(uid);
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -77,10 +76,17 @@ public class ColisDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery("Colis.loadAll",
 				Colis.class);
+		@SuppressWarnings("unchecked")
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 	}
 
+	/**
+	 * Find colis into config hopital.
+	 *
+	 * @param uidConfig the uid config
+	 * @return the list
+	 */
 	public static List<Colis> findColisIntoConfigHopital(int uidConfig) {
 		Query query = escrimDatabase
 				.getEm()
@@ -88,11 +94,18 @@ public class ColisDao {
 						"SELECT * FROM Colis inner join colis_config on Colis.UID = colis_config.Colis_UID where colis_config.Config_ID = "
 								+ uidConfig + "", Colis.class);
 
+		@SuppressWarnings("unchecked")
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 
 	}
 
+	/**
+	 * Find colis outside config hopital.
+	 *
+	 * @param uidConfig the uid config
+	 * @return the list
+	 */
 	public static List<Colis> findColisOutsideConfigHopital(int uidConfig) {
 		Query query = escrimDatabase
 				.getEm()
@@ -100,22 +113,36 @@ public class ColisDao {
 						"SELECT * FROM COLIS WHERE COLIS.UID NOT IN (SELECT COLIS.UID FROM COLIS INNER JOIN COLIS_CONFIG ON COLIS.UID = COLIS_CONFIG.COLIS_UID WHERE COLIS_CONFIG.CONFIG_ID = "
 								+ uidConfig + ")", Colis.class);
 
+		@SuppressWarnings("unchecked")
 		List<Colis> listeAllColis = query.getResultList();
 
 		return listeAllColis;
 	}
 
+	/**
+	 * Load distinct secteur.
+	 *
+	 * @return the list
+	 */
 	public static List<Integer> loadDistinctSecteur() {
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Colis.loadDistinctSecteur", Integer.class);
+		@SuppressWarnings("unchecked")
 		List<Integer> listeSecteur = query.getResultList();
 		return listeSecteur;
 	}
 
+	/**
+	 * Load all colis by secteur.
+	 *
+	 * @param secteur the secteur
+	 * @return the list
+	 */
 	public static List<Colis> loadAllColisBySecteur(int secteur) {
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Colis.loadAllBySecteur", Colis.class);
 		query.setParameter("secteur", secteur);
+		@SuppressWarnings("unchecked")
 		List<Colis> listeColis = query.getResultList();
 		return listeColis;
 	}

@@ -26,6 +26,8 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 	/** The uid colis to manage. */
 	private int uidColisToManage;
 
+	/** The filter colis. */
+	@SuppressWarnings("unused")
 	private boolean filterColis;
 
 	/**
@@ -45,6 +47,9 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		}
 	}
 
+	/**
+	 * Instantiates a new remplissage colis table model.
+	 */
 	public RemplissageColisTableModel() {
 	}
 
@@ -60,8 +65,8 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 	/**
 	 * Refresh model.
 	 *
-	 * @param filter
-	 *            the all materiel
+	 * @param filterColis the filter colis
+	 * @param uidColisToManage the uid colis to manage
 	 */
 	public void refreshModel(boolean filterColis, int uidColisToManage) {
 		this.uidColisToManage = uidColisToManage;

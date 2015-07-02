@@ -36,9 +36,8 @@ public class CompartimentDao {
 	 *            the uid
 	 */
 	public static void update(Compartiment compartimentUpdated, int uid) {
-		Compartiment compartiment = load(uid);
 		escrimDatabase.getEm().getTransaction().begin();
-		compartiment = compartimentUpdated;
+		compartimentUpdated = load(uid);
 		escrimDatabase.getEm().getTransaction().commit();
 
 	}
@@ -76,6 +75,7 @@ public class CompartimentDao {
 
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Compartiment.loadAll", Compartiment.class);
+		@SuppressWarnings("unchecked")
 		List<Compartiment> listeCompartiment = query.getResultList();
 		return listeCompartiment;
 	}
@@ -90,8 +90,10 @@ public class CompartimentDao {
 	public static List<Compartiment> findCompartimentIntoTransport(
 			int uidTransport) {
 		Query query = escrimDatabase.getEm().createNamedQuery(
-				"Compartiment.findCompartimentIntoTransport", Compartiment.class);
+				"Compartiment.findCompartimentIntoTransport",
+				Compartiment.class);
 		query.setParameter("uid", uidTransport);
+		@SuppressWarnings("unchecked")
 		List<Compartiment> listeCompartiments = query.getResultList();
 		return listeCompartiments;
 
@@ -109,6 +111,7 @@ public class CompartimentDao {
 		Query query = escrimDatabase.getEm().createNamedQuery(
 				"Compartiment.findCompartimentOutsideTransport",
 				Compartiment.class);
+		@SuppressWarnings("unchecked")
 		List<Compartiment> listeAllCompartiments = query.getResultList();
 		return listeAllCompartiments;
 	}

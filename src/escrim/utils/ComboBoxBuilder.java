@@ -42,12 +42,24 @@ public class ComboBoxBuilder {
 		sportColumn.setCellRenderer(renderer);
 	}
 
+	/**
+	 * Sets the secteur model.
+	 *
+	 * @param table the table
+	 * @return the combo box model
+	 */
 	public static ComboBoxModel<Object> setSecteurModel(JTable table) {
 		return new DefaultComboBoxModel<Object>(
 				((ColisTableModel) table.getModel()).getDisctinctSecteur());
 
 	}
 
+	/**
+	 * Sets the config model.
+	 *
+	 * @param table the table
+	 * @return the combo box model
+	 */
 	public static ComboBoxModel<Object> setConfigModel(JTable table) {
 		return new DefaultComboBoxModel<Object>(
 				((ColisTableModel) table.getModel()).getDisctinctConfig());

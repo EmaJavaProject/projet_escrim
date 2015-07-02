@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -25,44 +24,42 @@ public class CreationTypeColis {
 
 	/** The jpanel type colis. */
 	private static JPanel jpanelTypeColis;
-	
+
 	/** The table type colis. */
 	private static JTable tableTypeColis;
-	
+
 	/** The scroll panel type colis. */
 	private static JScrollPane scrollPanelTypeColis;
-	
+
 	/** The txt type colis. */
 	private static JTextField txtTypeColis;
-	
+
 	/** The type colis table model. */
 	private static TypeColisTableModel typeColisTableModel;
-	
+
 	/** The bouton ajouter type colis. */
 	private static JButton boutonAjouterTypeColis;
-	
+
 	/** The bouton quitter. */
 	private static JButton boutonQuitter;
-	
+
 	/** The bouton supprimer type colis. */
 	private static JButton boutonSupprimerTypeColis;
-	
+
 	/** The bouton modifier type colis. */
 	private static JButton boutonModifierTypeColis;
-	
+
 	/** The bouton valider type colis. */
 	private static JButton boutonValiderTypeColis;
-	
+
 	/** The bouton annuler type colis. */
 	private static JButton boutonAnnulerTypeColis;
-	
-	/** The tab principal. */
-	private static JTabbedPane tabPrincipal;
 
 	/**
 	 * Création jpanel type colis.
 	 *
-	 * @param pPanelPrincipal the panel principal
+	 * @param pPanelPrincipal
+	 *            the panel principal
 	 * @return the action listener
 	 */
 	public static ActionListener CreationJpanelTypeColis(
@@ -82,10 +79,12 @@ public class CreationTypeColis {
 							if (composantsPanelPrincipal != null
 									&& composantsPanelPrincipal.getName() != null
 									&& composantsPanelPrincipal
-									.getName()
-									.equals("Création de type de colis")|| composantsPanelPrincipal
 											.getName()
-											.equals("Gestion configuration d'hopital")|| composantsPanelPrincipal.getName()
+											.equals("Création de type de colis")
+									|| composantsPanelPrincipal
+											.getName()
+											.equals("Gestion configuration d'hopital")
+									|| composantsPanelPrincipal.getName()
 											.equals("Gestion Transport")
 									|| composantsPanelPrincipal.getName()
 											.equals("Remplissage")) {
@@ -134,7 +133,6 @@ public class CreationTypeColis {
 
 				boutonSupprimerTypeColis
 						.addActionListener(new ActionListener() {
-							@SuppressWarnings("deprecation")
 							public void actionPerformed(ActionEvent arg0) {
 								if (!(tableTypeColis.getSelectedRow() == -1)) {
 									typeColisTableModel
@@ -207,7 +205,6 @@ public class CreationTypeColis {
 				// ajout des Jpanel dans le
 				// Tabprincipal---------------------------------------------------//
 
-
 				jpanelTypeColis = new JPanel();
 				jpanelTypeColis.add(boutonModifierTypeColis);
 				jpanelTypeColis.setBounds(0, 0, 1017, 706);
@@ -222,7 +219,6 @@ public class CreationTypeColis {
 				jpanelTypeColis.add(boutonValiderTypeColis);
 				jpanelTypeColis.add(boutonAnnulerTypeColis);
 
-
 				pPanelPrincipal.add(jpanelTypeColis, new Integer(3));
 				pPanelPrincipal.revalidate();
 
@@ -236,7 +232,8 @@ public class CreationTypeColis {
 	/**
 	 * Disable type colis button.
 	 *
-	 * @param disable the disable
+	 * @param disable
+	 *            the disable
 	 */
 	private static void disableTypeColisButton(boolean disable) {
 		if (disable) {
