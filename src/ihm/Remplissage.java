@@ -117,7 +117,7 @@ public class Remplissage {
 		scrollPaneContenuBot.add(tableContenuBot);
 
 		boutonAjouterContenu = new JButton(new ImageIcon(ClassLoader.class
-				.getClass().getResource("/images/flecheBas.png")));
+				.getClass().getResource("/images/flechebas.png")));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
 
 		boutonSupprimerContenu = new JButton(new ImageIcon(ClassLoader.class
@@ -241,7 +241,7 @@ public class Remplissage {
 		scrollPaneContenuBot.setViewportView(tableContenuBot);
 
 		boutonAjouterContenu = new JButton(new ImageIcon(ClassLoader.class
-				.getClass().getResource("/images/flecheBas.png")));
+				.getClass().getResource("/images/flechebas.png")));
 		boutonAjouterContenu.setBounds(155, 324, 70, 70);
 		boutonSupprimerContenu = new JButton(new ImageIcon(ClassLoader.class
 				.getClass().getResource("/images/flechehaut.png")));
