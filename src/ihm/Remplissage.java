@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import escrim.manager.ColisManager;
 import escrim.model.table.RemplissageColisTableModel;
 import escrim.model.table.RemplissageConfigurationHopitalTableModel;
 import escrim.model.table.RemplissageTransportTableModel;
@@ -34,6 +35,8 @@ public class Remplissage {
 
 	/** The txt conteneur. */
 	private static JTextField txtConteneur;
+	/** The txt conteneur. */
+	private static JTextField txtConteneurName;
 
 	/** The contenue remplissage. */
 	private static JPanel contenueRemplissage;
@@ -91,12 +94,20 @@ public class Remplissage {
 		txtConteneur.setText("Contenue du colis");
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
-
+		
 		outsideColisTableModel = new RemplissageColisTableModel(true, uidColis);
 
 		tableContenuTop = new JTable(outsideColisTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
+		txtConteneurName = new JTextField();
+		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtConteneurName.setEnabled(false);
+		txtConteneurName.setPreferredSize(new Dimension(20, 20));
+		txtConteneurName.setText(outsideColisTableModel.loadName(uidColis));
+		txtConteneurName.setColumns(10);
+		txtConteneurName.setBounds(400, 20, 260, 25);
+		
 		insideColisTableModel = new RemplissageColisTableModel(false, uidColis);
 
 		tableContenuBot = new JTable(insideColisTableModel);
@@ -183,6 +194,7 @@ public class Remplissage {
 		contenueRemplissage.add(boutonSupprimerContenu);
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
+		contenueRemplissage.add(txtConteneurName);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		scrollPaneContenuTop.setViewportView(tableContenuTop);
@@ -218,6 +230,14 @@ public class Remplissage {
 		outsideTransportTableModel = new RemplissageTransportTableModel(true,
 				uidTransport);
 
+		txtConteneurName = new JTextField();
+		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtConteneurName.setEnabled(false);
+		txtConteneurName.setPreferredSize(new Dimension(20, 20));
+		txtConteneurName.setText(outsideTransportTableModel.loadName(uidTransport));
+		txtConteneurName.setColumns(10);
+		txtConteneurName.setBounds(400, 20, 260, 25);
+		
 		tableContenuTop = new JTable(outsideTransportTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
@@ -306,6 +326,7 @@ public class Remplissage {
 		contenueRemplissage.add(boutonSupprimerContenu);
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
+		contenueRemplissage.add(txtConteneurName);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		gestionairePage.add(contenueRemplissage, new Integer(5));
@@ -348,6 +369,14 @@ public class Remplissage {
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
 
+		txtConteneurName = new JTextField();
+		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtConteneurName.setEnabled(false);
+		txtConteneurName.setPreferredSize(new Dimension(20, 20));
+		txtConteneurName.setText(insideConfigHopitalTableModel.loadName(uidConfigurationHopital));
+		txtConteneurName.setColumns(10);
+		txtConteneurName.setBounds(400, 20, 260, 25);
+		
 		tableContenuBot.setBounds(52, 400, 706, 223);
 
 		scrollPaneContenuTop = new JScrollPane();
@@ -431,6 +460,7 @@ public class Remplissage {
 		contenueRemplissage.add(boutonSupprimerContenu);
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
+		contenueRemplissage.add(txtConteneurName);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		gestionairePage.add(contenueRemplissage, new Integer(5));

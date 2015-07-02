@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import escrim.manager.CompartimentManager;
+import escrim.manager.ConfigurationHopitalManager;
 import escrim.manager.TransportManager;
 import escrim.metiers.Compartiment;
 import escrim.metiers.Transport;
@@ -243,5 +244,11 @@ public class RemplissageTransportTableModel extends EscrimTableModel {
 	public boolean isCellEditable(int row, int column) {
 		return false;
 
+	}
+	
+	public String loadName(int uid)
+	{
+		return (TransportManager.loadTransport(uid).getDenomination());
+		
 	}
 }

@@ -362,6 +362,9 @@ public class ColisTableModel extends EscrimTableModel {
 			return false;
 
 		}
+		
+		
 	}
+
 
 }

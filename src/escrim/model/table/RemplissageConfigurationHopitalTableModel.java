@@ -243,4 +243,12 @@ public class RemplissageConfigurationHopitalTableModel extends EscrimTableModel 
 		return false;
 
 	}
+	public String loadName(int uid)
+	{
+		if (ConfigurationHopitalManager.loadConfigurationHopital(uid)!=null&&ConfigurationHopitalManager.loadConfigurationHopital(uid).getDenomination()!=null){
+		return (ConfigurationHopitalManager.loadConfigurationHopital(uid).getDenomination());
+		}
+		return "";
+	}
+
 }

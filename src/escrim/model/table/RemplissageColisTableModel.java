@@ -242,5 +242,11 @@ public class RemplissageColisTableModel extends EscrimTableModel {
 		return false;
 
 	}
+	
+	public String loadName(int uid)
+	{
+		return (ColisManager.loadColis(uid).getDesignation());
+		
+	}
 
 }
