@@ -103,10 +103,6 @@ public class CreationHopital {
 				tableConfigurationHopital
 						.setName("Table Configuration Hopitals");
 				tableConfigurationHopital.setBounds(12, 72, 899, 800);
-				// tableConfigurationHopital
-				// .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				// tableConfigurationHopital.setCellSelectionEnabled(false);
-				// tableConfigurationHopital.setRowSelectionAllowed(true);
 
 				boutonQuitterConfigurationHopital = new JButton("Quitter");
 				boutonQuitterConfigurationHopital.setBounds(800, 13, 97, 25);
