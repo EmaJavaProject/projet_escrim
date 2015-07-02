@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="escrim" transaction-type="RESOURCE_LOCAL">
-		<class>escrim.metiers.Materiel</class>
-		<class>escrim.metiers.Medicament</class>
-		<class>escrim.metiers.Colis</class>
-		<class>escrim.metiers.TypeColis</class>
 		<class>escrim.metiers.Compartiment</class>
 		<class>escrim.metiers.ConfigurationHopital</class>
-		<class>escrim.metiers.Localisation</class>
+		<class>escrim.metiers.Materiel</class>
+		<class>escrim.metiers.Medicament</class>
 		<class>escrim.metiers.Transport</class>
+		<class>escrim.metiers.TypeColis</class>
+		<class>escrim.metiers.Colis</class>
 		<properties>
 
       <!-- EclipseLink should create the database schema automatically -->
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
       <property name="eclipselink.ddl-generation.output-mode"
         value="database" />
       <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
@@ -20,6 +18,7 @@
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.password" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
 	</persistence-unit>
 </persistence>

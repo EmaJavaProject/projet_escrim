@@ -1,183 +1,334 @@
 package ihm;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
+import escrim.model.table.ColisTableModel;
+import escrim.model.table.RemplissageColisTableModel;
+import escrim.utils.ComboBoxBuilder;
+
+/**
+ * The Class Localisation.
+ */
 public class Localisation {
 
-	private JTable tableLocalContenuTop;
-	private JTable tableLocalContenuBot;
-	private JTable tableLocalConteneurTop;
-	private JTable tableLocalConteneurBot;
-	private JTextField filtreRecherche;
+	/** The table local configHopital top. */
+	private JTable tableLocalconfigHopitalTop;
+
+	/** The table local configHopital bot. */
+	private JTable tableLocalconfigHopitalBot;
+
+	/** The table local Colis top. */
+	private JTable tableLocalColisTop;
+
+	/** The table local Colis bot. */
+	private JTable tableLocalColisBot;
+
+	/** The onglet. */
 	private JTabbedPane onglet;
-	private JScrollPane scrollPaneContenu;
-	private JPanel contenuLocalisation;
-	private EscrimModelTable modelTableContenu;
-	private JScrollPane scrollPaneContenuLocalBot;
-	private EscrimModelTable modelTableContenuLocalBot;
-	private JComboBox<String> comboSelectContenuLocal;
-	private JButton btnModifierContenu;
-	private JPanel conteneurLocalisation;
+
+	/** The scroll pane configHopital. */
+	private JScrollPane scrollPaneconfigHopitalTop;
+
+	/** The configHopital localisation. */
+	private JPanel configHopitalLocalisation;
+
+	/** The scroll pane configHopital local bot. */
+	private JScrollPane scrollPaneconfigHopitalLocalBot;
+
+	/** The combo select configHopital local. */
+	private JComboBox<Object> comboSelectconfigHopitalLocal;
+
+	/** The btn modifier configHopital. */
+	private JButton btnModifierconfigHopital;
+
+	/** The Colis localisation. */
+	private JPanel ColisLocalisationPanel;
+
+	/** The bouton editer localisation. */
 	private JButton boutonEditerLocalisation;
-	private JScrollPane scrollPaneConteneur;
-	private JComboBox<?> secteur;
-	private JScrollPane scrollPaneLocalConteneurTop;
-	private EscrimModelTable modelLocalConteneurTop;
-	private JScrollPane scrollPaneLocalConteneurBot;
+
+	/** The scroll pane Colis. */
+	private JScrollPane scrollPaneColis;
+
+	/** The secteur. */
+	private JComboBox<Object> comboBoxsecteur;
+
+	/** The scroll pane local Colis top. */
+	private JScrollPane scrollPaneLocalColisTop;
+
+	/** The scroll pane local Colis bot. */
+	private JScrollPane scrollPaneLocalColisBot;
+
+	/** The lbl secteur. */
 	private JLabel lblSecteur;
-	private EscrimModelTable modelLocalConteneurBot;
 
-	public Localisation(JTabbedPane tabPrincipal) {
+	private ColisTableModel hopitalTableModel;
 
-		this.initPage(tabPrincipal);
+	private ColisTableModel colisModelTable;
+
+	private RemplissageColisTableModel remplissageColisTableModel;
+	private RemplissageColisTableModel remplissageHopitalTableModel;
+
+	/**
+	 * Instantiates a new localisation.
+	 *
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
+	 */
+	public Localisation(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
+
+		this.initPage(tabPrincipal, gestionairePage);
 
 	}
 
-	private void initPage(JTabbedPane tabPrincipal) {
+	/**
+	 * Inits the page.
+	 *
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
+	 */
+	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
+		hopitalTableModel = new ColisTableModel();
 
+		tableLocalconfigHopitalTop = new JTable(hopitalTableModel);
+		tableLocalconfigHopitalTop.setBounds(50, 357, 750, 223);
 
-		
+		scrollPaneconfigHopitalTop = new JScrollPane();
+		scrollPaneconfigHopitalTop.setBounds(50, 73, 750, 223);
+		scrollPaneconfigHopitalTop.add(tableLocalconfigHopitalTop);
+		scrollPaneconfigHopitalTop.setViewportView(tableLocalconfigHopitalTop);
 
-		scrollPaneContenu = new JScrollPane();
-		scrollPaneContenu.setBounds(52, 73, 706, 212);
+		tableLocalconfigHopitalBot = new JTable(remplissageHopitalTableModel);
+		tableLocalconfigHopitalBot.setName("Colis");
+		tableLocalconfigHopitalBot.setBounds(50, 72, 750, 223);
 
-		modelTableContenu = new EscrimModelTable();
-	
+		scrollPaneconfigHopitalLocalBot = new JScrollPane();
+		scrollPaneconfigHopitalLocalBot.setBounds(50, 357, 750, 223);
+		scrollPaneconfigHopitalLocalBot.add(tableLocalconfigHopitalBot);
+		scrollPaneconfigHopitalLocalBot
+				.setViewportView(tableLocalconfigHopitalBot);
 
-		tableLocalContenuTop = new JTable(modelTableContenu);
-		tableLocalContenuTop.setBounds(62, 287, 706, 223);
+		comboSelectconfigHopitalLocal = new JComboBox<Object>();
+		comboSelectconfigHopitalLocal.setBounds(121, 13, 136, 22);
 
-		filtreRecherche = new JTextField();
-		filtreRecherche.setBounds(504, 13, 177, 22);
-		
-		filtreRecherche.setColumns(10);
+		btnModifierconfigHopital = new JButton(
+				"Modifier la configuration hopital");
+		btnModifierconfigHopital.setBounds(340, 310, 240, 25);
+		btnModifierconfigHopital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!(tableLocalconfigHopitalTop.getSelectedRow() == -1))
+					Remplissage.CreationJpanelRemplissageConfigHopital(
+							gestionairePage, (int) hopitalTableModel
+									.getValueAt(tableLocalconfigHopitalTop
+											.getSelectedRow(),
+											tableLocalconfigHopitalTop
+													.getColumnCount()));
 
-		modelTableContenuLocalBot = new EscrimModelTable();
-		tableLocalContenuBot = new JTable(modelTableContenuLocalBot);
-		tableLocalContenuBot.setName("Caisse");
-		tableLocalContenuBot.setModel(EscrimModelTable.BuildTableColumn(
-				modelTableContenuLocalBot, tableLocalContenuBot.getName()));
-		tableLocalContenuBot.getColumn(tableLocalContenuBot.getColumnName(0))
-				.setMaxWidth(20);
-		tableLocalContenuBot.setBounds(52, 324, 706, 223); // todo
-		scrollPaneContenuLocalBot = new JScrollPane();
-		scrollPaneContenuLocalBot.setBounds(52, 324, 706, 223);
-		scrollPaneContenuLocalBot.add(tableLocalContenuBot);
-		scrollPaneContenuLocalBot.setViewportView(tableLocalContenuBot);
-
-
-		comboSelectContenuLocal = new JComboBox<String>();
-
-		// Mise a jour de la JTable en fonction de la combobox
-		comboSelectContenuLocal.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (modelTableContenu.getColumnCount() != 0) {
-					modelTableContenu.setColumnCount(0);
-				}
-
-				tableLocalContenuTop.setModel(EscrimModelTable
-						.BuildTableColumn(modelTableContenu,
-								comboSelectContenuLocal.getSelectedItem()
-										.toString()));
-				tableLocalContenuTop.getColumn(
-						tableLocalContenuTop.getColumnName(0)).setMaxWidth(20);
-				;
 			}
 
 		});
-		
-		comboSelectContenuLocal.addItem("Materiel");
-		comboSelectContenuLocal.addItem("Médicaments");
-		comboSelectContenuLocal.setBounds(121, 13, 136, 22);
-		
-		filtreRecherche = new JTextField();
-		filtreRecherche.setBounds(504, 13, 177, 22);
-		filtreRecherche.setColumns(10);
 
-		btnModifierContenu = new JButton("Modifier contenu");
-		btnModifierContenu.setBounds(121, 612, 136, 25);
+		comboBoxsecteur = new JComboBox<Object>();
+		comboBoxsecteur.setName("Secteur");
+		comboBoxsecteur.setBounds(75, 29, 160, 22);
+		colisModelTable = new ColisTableModel();
+		tableLocalColisTop = new JTable(colisModelTable);
 
-		boutonEditerLocalisation = new JButton("Editer localisation");
-		boutonEditerLocalisation.setBounds(340, 279, 149, 25);
-		
-		// LOCAL CONTENEUR
+		remplissageHopitalTableModel = new RemplissageColisTableModel();
+		remplissageColisTableModel = new RemplissageColisTableModel();
+		tableLocalconfigHopitalTop = new JTable(hopitalTableModel);
+		tableLocalColisBot = new JTable(remplissageColisTableModel);
 
-		boutonEditerLocalisation = new JButton("Editer localisation");
-		boutonEditerLocalisation.setBounds(340, 279, 149, 25);
-		
-		scrollPaneContenu.add(tableLocalContenuTop);
-		scrollPaneContenu.setViewportView(tableLocalContenuTop);
+		boutonEditerLocalisation = new JButton("Modifier le contenu du colis");
+		boutonEditerLocalisation.setBounds(340, 310, 240, 25);
+		boutonEditerLocalisation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!(tableLocalColisTop.getSelectedRow() == -1))
+					Remplissage.CreationJpanelRemplissageColis(gestionairePage,
+							(int) colisModelTable.getValueAt(
+									tableLocalColisTop.getSelectedRow(),
+									colisModelTable.getColumnCount()));
 
-		secteur = new JComboBox<Object>();
-		secteur.setName("");
-		secteur.setBounds(75, 29, 160, 22);
+			}
 
-		scrollPaneLocalConteneurTop = new JScrollPane();
-		scrollPaneLocalConteneurTop.setBounds(12, 72, 899, 194);
-		
+		});
 
-		modelLocalConteneurTop = new EscrimModelTable();
-		tableLocalConteneurTop = new JTable(modelLocalConteneurTop);
-		tableLocalConteneurTop.setRowSelectionAllowed(true);
-		tableLocalConteneurTop
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLocalConteneurTop.setCellSelectionEnabled(false);
-		
-		
-		scrollPaneLocalConteneurBot = new JScrollPane();
-		scrollPaneLocalConteneurBot.setBounds(12, 357, 899, 194);
-		
+		scrollPaneLocalColisTop = new JScrollPane();
+		scrollPaneLocalColisTop.setBounds(50, 73, 750, 223);
+		scrollPaneLocalColisTop.add(tableLocalColisTop);
+		scrollPaneLocalColisTop.setViewportView(tableLocalColisTop);
+
+		scrollPaneLocalColisBot = new JScrollPane();
+		scrollPaneLocalColisBot.setBounds(50, 357, 750, 223);
+		scrollPaneLocalColisBot.add(tableLocalColisBot);
+		scrollPaneLocalColisBot.setViewportView(tableLocalColisBot);
+
 		lblSecteur = new JLabel("Secteur :");
 		lblSecteur.setBounds(12, 32, 56, 16);
-		
-		modelLocalConteneurBot = new EscrimModelTable();
-		tableLocalConteneurBot = new JTable(modelLocalConteneurBot);
-		tableLocalConteneurBot.setRowSelectionAllowed(true);
-		tableLocalConteneurBot
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLocalConteneurBot.setCellSelectionEnabled(false);
-		
 
-		scrollPaneConteneur = new JScrollPane();
-		scrollPaneConteneur.setBounds(12, 56, 800, 486);
-		scrollPaneConteneur.setViewportView(tableLocalConteneurTop);
-		scrollPaneConteneur.setViewportView(tableLocalConteneurBot);
-		
-		contenuLocalisation = new JPanel();
-		contenuLocalisation.setLayout(null);
-		contenuLocalisation.add(filtreRecherche);
-		contenuLocalisation.add(comboSelectContenuLocal);
-		contenuLocalisation.add(scrollPaneContenuLocalBot);
-		contenuLocalisation.add(scrollPaneContenu);
-		
-		conteneurLocalisation = new JPanel();
-		conteneurLocalisation.setLayout(null);
-		conteneurLocalisation.add(boutonEditerLocalisation);
-		conteneurLocalisation.add(scrollPaneLocalConteneurBot);
-		conteneurLocalisation.add(lblSecteur);
-		conteneurLocalisation.add(scrollPaneLocalConteneurTop);
-		conteneurLocalisation.add(secteur);
+		configHopitalLocalisation = new JPanel();
+		configHopitalLocalisation.setLayout(null);
+		configHopitalLocalisation.add(comboSelectconfigHopitalLocal);
+		configHopitalLocalisation.add(btnModifierconfigHopital);
+		configHopitalLocalisation.add(scrollPaneconfigHopitalLocalBot);
+		configHopitalLocalisation.add(scrollPaneconfigHopitalTop);
 
-		
+		ColisLocalisationPanel = new JPanel();
+		ColisLocalisationPanel.setLayout(null);
+		ColisLocalisationPanel.add(boutonEditerLocalisation);
+		ColisLocalisationPanel.add(scrollPaneLocalColisBot);
+		ColisLocalisationPanel.add(lblSecteur);
+		ColisLocalisationPanel.add(scrollPaneLocalColisTop);
+		ColisLocalisationPanel.add(comboBoxsecteur);
+
 		onglet = new JTabbedPane(JTabbedPane.TOP);
-		onglet.addTab("Contenu", null, contenuLocalisation, null);
-		onglet.addTab("Conteneur", null, conteneurLocalisation, null);
+		onglet.addTab("Colis", null, ColisLocalisationPanel, null);
+		onglet.addTab("Configuration hopital", null, configHopitalLocalisation,
+				null);
 		onglet.setBorder(null);
 		onglet.setAlignmentY(Component.TOP_ALIGNMENT);
 		onglet.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		comboBoxsecteur.setModel(ComboBoxBuilder
+				.setSecteurModel(tableLocalColisTop));
+		comboSelectconfigHopitalLocal.setModel(ComboBoxBuilder
+				.setConfigModel(tableLocalconfigHopitalTop));
+
+		onglet.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				int indexSelected = 0;
+				int rowIndexSelected = 0;
+				// On stock l'item selectionné dans la combo box
+				if (comboBoxsecteur.getSelectedItem() != null) {
+					indexSelected = comboBoxsecteur.getSelectedIndex();
+				}
+
+				// On stock la row selectionné dans la JTable
+				if (tableLocalColisTop.getSelectedRow() != -1) {
+					rowIndexSelected = tableLocalColisTop.getSelectedRow();
+				}
+
+				// Mise a jour des comboBox
+				comboBoxsecteur.setModel(ComboBoxBuilder
+						.setSecteurModel(tableLocalColisTop));
+				comboBoxsecteur.repaint();
+
+				// Mise a jour de la JTable du Haut
+				if (comboBoxsecteur.getItemCount() != 0) {
+					tableLocalColisTop.setModel(new ColisTableModel("secteur",
+							(int) comboBoxsecteur.getSelectedItem()));
+					comboBoxsecteur.setSelectedIndex(indexSelected);
+				}
+
+				tableLocalColisTop.getSelectionModel().setSelectionInterval(
+						rowIndexSelected, rowIndexSelected);
+			}
+		});
+
+		tableLocalColisTop.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				remplissageColisTableModel
+						.refreshModel(
+								false,
+								(int) tableLocalColisTop.getModel().getValueAt(
+										tableLocalColisTop.getSelectedRow(),
+										tableLocalColisTop.getModel()
+												.getColumnCount()));
+
+			}
+		});
+
+		/**
+		 * Mise à jour du modèle de table Colis lors de la mise a jour de la
+		 * comboBox
+		 */
+		comboBoxsecteur.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				tableLocalColisTop.setModel(new ColisTableModel("secteur",
+						(int) comboBoxsecteur.getSelectedItem()));
+				tableLocalColisTop.getSelectionModel().clearSelection();
+				colisModelTable.refreshModel();
+				remplissageColisTableModel
+						.refreshModel(
+								false,
+								(int) tableLocalColisTop.getModel().getValueAt(
+										0,
+										tableLocalColisTop.getModel()
+												.getColumnCount()));
+			}
+		});
+
+		/*
+		 * Work In Progress ! configHopitalLocalisation.addMouseListener(new
+		 * MouseAdapter() {
+		 * 
+		 * @Override public void mouseClicked(MouseEvent e) { int indexSelected
+		 * = 0; int rowIndexSelected = 0;
+		 * 
+		 * if (comboSelectconfigHopitalLocal.getSelectedItem() != null) {
+		 * indexSelected = (int) comboSelectconfigHopitalLocal
+		 * .getSelectedIndex(); }
+		 * 
+		 * comboSelectconfigHopitalLocal.setModel(ComboBoxBuilder
+		 * .setConfigModel(tableLocalconfigHopitalTop));
+		 * comboSelectconfigHopitalLocal.repaint();
+		 * 
+		 * if (comboSelectconfigHopitalLocal.getItemCount() != 0) {
+		 * tableLocalconfigHopitalTop.setModel(new ColisTableModel( "configs",
+		 * (int) comboSelectconfigHopitalLocal .getSelectedItem()));
+		 * comboSelectconfigHopitalLocal .setSelectedIndex(indexSelected); }
+		 * 
+		 * tableLocalconfigHopitalTop.getSelectionModel()
+		 * .setSelectionInterval(rowIndexSelected, rowIndexSelected); }
+		 * 
+		 * });
+		 * 
+		 * comboSelectconfigHopitalLocal.addItemListener(new ItemListener() {
+		 * 
+		 * @Override public void itemStateChanged(ItemEvent e) {
+		 * tableLocalconfigHopitalTop.setModel(new ColisTableModel( "configs",
+		 * (String) comboSelectconfigHopitalLocal .getSelectedItem()));
+		 * tableLocalconfigHopitalTop.getSelectionModel().clearSelection();
+		 * hopitalTableModel.refreshModel();
+		 * remplissageHopitalTableModel.refreshModel( false, (int)
+		 * tableLocalconfigHopitalTop.getModel().getValueAt( 0,
+		 * tableLocalconfigHopitalTop.getModel() .getColumnCount())); } });
+		 * 
+		 * tableLocalconfigHopitalTop.addMouseListener(new MouseAdapter() {
+		 * 
+		 * @Override public void mouseClicked(MouseEvent e) {
+		 * remplissageHopitalTableModel.refreshModel( false, (int)
+		 * tableLocalconfigHopitalTop.getModel().getValueAt(
+		 * tableLocalconfigHopitalTop.getSelectedRow(),
+		 * tableLocalconfigHopitalTop.getModel() .getColumnCount()));
+		 * 
+		 * } });
+		 */
+
 		tabPrincipal.addTab("Localisation", null, onglet, null);
 
 	}

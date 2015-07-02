@@ -5,31 +5,81 @@ import java.util.List;
 import escrim.dao.ConfigurationHopitalDao;
 import escrim.metiers.ConfigurationHopital;
 
-
+/**
+ * The Class ConfigurationHopitalManager.
+ */
 public class ConfigurationHopitalManager {
 
-	public void createConfigurationHopital(String denomination) {
-		ConfigurationHopital configHopital = new ConfigurationHopital();
-		configHopital.setDenomination(denomination);
-		ConfigurationHopitalDao.create(configHopital);
+	/**
+	 * Creates the configuration hopital.
+	 *
+	 * @param ConfigurationHopital
+	 *            the configuration hopital
+	 */
+	public static void createConfigurationHopital(
+			ConfigurationHopital ConfigurationHopital) {
+		ConfigurationHopitalDao.create(ConfigurationHopital);
+
 	}
 
-	public void updateConfigurationHopital(int uid, String denomination) {
-		ConfigurationHopital tampon = loadConfigurationHopital(uid);
-		tampon.setDenomination(denomination);
-		ConfigurationHopitalDao.update(tampon, uid);
+	/**
+	 * Creates the temp configuration hopital.
+	 *
+	 * @return the configuration hopital
+	 */
+	public static ConfigurationHopital createTempConfigurationHopital() {
+		return new ConfigurationHopital();
 	}
 
-	public void deleteConfigurationHopital(int uid) {
-		ConfigurationHopital configRemoved = loadConfigurationHopital(uid);
-		ConfigurationHopitalDao.remove(configRemoved);
+	/**
+	 * Update configuration hopital.
+	 *
+	 * @param ConfigurationHopital
+	 *            the configuration hopital
+	 * @param uid
+	 *            the uid
+	 */
+	public static void updateConfigurationHopital(
+			ConfigurationHopital ConfigurationHopital, int uid) {
+		ConfigurationHopitalDao.update(ConfigurationHopital, uid);
+
 	}
 
+	/**
+	 * Removes the configuration hopital.
+	 *
+	 * @param uid
+	 *            the uid
+	 */
+	public static void removeConfigurationHopital(int uid) {
+		ConfigurationHopital ConfigurationHopitalRemoved = loadConfigurationHopital(uid);
+		ConfigurationHopitalDao.remove(ConfigurationHopitalRemoved);
+
+	}
+
+	/**
+	 * Load configuration hopital.
+	 *
+	 * @param uid
+	 *            the uid
+	 * @return the configuration hopital
+	 */
 	public static ConfigurationHopital loadConfigurationHopital(int uid) {
 		return ConfigurationHopitalDao.load(uid);
+
 	}
 
+	/**
+	 * Load all configuration hopital.
+	 *
+	 * @return the list
+	 */
 	public static List<ConfigurationHopital> loadAllConfigurationHopital() {
 		return ConfigurationHopitalDao.loadAll();
 	}
+
+	public static List<String> loadDistinctConfig() {
+		return ConfigurationHopitalDao.loadDistinctConfig();
+	}
+
 }
