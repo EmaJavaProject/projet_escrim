@@ -82,15 +82,17 @@ public class Localisation {
 
 	/** The remplissage colis table model. */
 	private RemplissageColisTableModel remplissageColisTableModel;
-	
+
 	/** The remplissage hopital table model. */
 	private RemplissageColisTableModel remplissageHopitalTableModel;
 
 	/**
 	 * Instantiates a new localisation.
 	 *
-	 * @param tabPrincipal            the tab principal
-	 * @param gestionairePage the gestionaire page
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
+	 *            the gestionaire page
 	 */
 	public Localisation(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
@@ -101,8 +103,10 @@ public class Localisation {
 	/**
 	 * Inits the page.
 	 *
-	 * @param tabPrincipal            the tab principal
-	 * @param gestionairePage the gestionaire page
+	 * @param tabPrincipal
+	 *            the tab principal
+	 * @param gestionairePage
+	 *            the gestionaire page
 	 */
 	private void initPage(JTabbedPane tabPrincipal, JLayeredPane gestionairePage) {
 
@@ -116,6 +120,7 @@ public class Localisation {
 		scrollPaneconfigHopitalTop.add(tableLocalconfigHopitalTop);
 		scrollPaneconfigHopitalTop.setViewportView(tableLocalconfigHopitalTop);
 
+		remplissageHopitalTableModel = new RemplissageColisTableModel();
 		tableLocalconfigHopitalBot = new JTable(remplissageHopitalTableModel);
 		tableLocalconfigHopitalBot.setName("Colis");
 		tableLocalconfigHopitalBot.setBounds(50, 72, 750, 223);
@@ -136,9 +141,11 @@ public class Localisation {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tableLocalconfigHopitalTop.getSelectedRow() == -1))
 					Remplissage.CreationJpanelRemplissageConfigHopital(
-							gestionairePage, (int) hopitalTableModel
-									.getValueAt(tableLocalconfigHopitalTop
-											.getSelectedRow(),
+							gestionairePage,
+							(int) tableLocalconfigHopitalTop.getModel()
+									.getValueAt(
+											tableLocalconfigHopitalTop
+													.getSelectedRow(),
 											tableLocalconfigHopitalTop
 													.getColumnCount()));
 
@@ -152,20 +159,24 @@ public class Localisation {
 		colisModelTable = new ColisTableModel();
 		tableLocalColisTop = new JTable(colisModelTable);
 
-		remplissageHopitalTableModel = new RemplissageColisTableModel();
 		remplissageColisTableModel = new RemplissageColisTableModel();
-		tableLocalconfigHopitalTop = new JTable(hopitalTableModel);
 		tableLocalColisBot = new JTable(remplissageColisTableModel);
 
 		boutonEditerLocalisation = new JButton("Modifier le contenu du colis");
 		boutonEditerLocalisation.setBounds(340, 310, 240, 25);
 		boutonEditerLocalisation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int indexRow = tableLocalColisTop.getSelectedRow();
 				if (!(tableLocalColisTop.getSelectedRow() == -1))
-					Remplissage.CreationJpanelRemplissageColis(gestionairePage,
-							(int) colisModelTable.getValueAt(
-									tableLocalColisTop.getSelectedRow(),
-									colisModelTable.getColumnCount()));
+					tableLocalColisTop.setModel(new ColisTableModel("secteur",
+							(int) comboBoxsecteur.getSelectedItem()));
+				Remplissage
+						.CreationJpanelRemplissageColis(
+								gestionairePage,
+								(int) tableLocalColisTop.getModel().getValueAt(
+										indexRow,
+										tableLocalColisTop.getModel()
+												.getColumnCount()));
 
 			}
 
@@ -249,13 +260,21 @@ public class Localisation {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int indexRowSelected = 0;
+				if (tableLocalColisTop.getSelectedRow() != -1) {
+					indexRowSelected = tableLocalColisTop.getSelectedRow();
+				}
+				tableLocalColisTop.setModel(new ColisTableModel("secteur",
+						(int) comboBoxsecteur.getSelectedItem()));
 				remplissageColisTableModel
 						.refreshModel(
 								false,
 								(int) tableLocalColisTop.getModel().getValueAt(
-										tableLocalColisTop.getSelectedRow(),
+										indexRowSelected,
 										tableLocalColisTop.getModel()
 												.getColumnCount()));
+				tableLocalColisTop.getSelectionModel().setSelectionInterval(
+						indexRowSelected, indexRowSelected);
 
 			}
 		});
@@ -268,15 +287,18 @@ public class Localisation {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
+				int indexRowSelected = 0;
+				if (tableLocalColisTop.getSelectedRow() != -1) {
+					indexRowSelected = tableLocalColisTop.getSelectedRow();
+				}
 				tableLocalColisTop.setModel(new ColisTableModel("secteur",
 						(int) comboBoxsecteur.getSelectedItem()));
 				tableLocalColisTop.getSelectionModel().clearSelection();
-				colisModelTable.refreshModel();
 				remplissageColisTableModel
 						.refreshModel(
 								false,
 								(int) tableLocalColisTop.getModel().getValueAt(
-										0,
+										indexRowSelected,
 										tableLocalColisTop.getModel()
 												.getColumnCount()));
 			}
