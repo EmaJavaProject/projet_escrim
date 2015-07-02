@@ -35,9 +35,13 @@ public class Remplissage {
 
 	/** The txt conteneur. */
 	private static JTextField txtConteneur;
-	/** The txt conteneur. */
+	
+	/** The txt ConteneurName. */
 	private static JTextField txtConteneurName;
-
+	
+	/** The txt Contenu. */
+	private static JTextField txtContenu;
+	
 	/** The contenue remplissage. */
 	private static JPanel contenueRemplissage;
 
@@ -100,13 +104,21 @@ public class Remplissage {
 		tableContenuTop = new JTable(outsideColisTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
 
+		txtContenu = new JTextField();
+		txtContenu.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContenu.setEnabled(false);
+		txtContenu.setPreferredSize(new Dimension(20, 20));
+		txtContenu.setText("Matériaux et médicaments disponible(s)");
+		txtContenu.setColumns(10);
+		txtContenu.setBounds(400, 20, 260, 25);
+		
 		txtConteneurName = new JTextField();
 		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtConteneurName.setEnabled(false);
 		txtConteneurName.setPreferredSize(new Dimension(20, 20));
 		txtConteneurName.setText(outsideColisTableModel.loadName(uidColis));
 		txtConteneurName.setColumns(10);
-		txtConteneurName.setBounds(400, 20, 260, 25);
+		txtConteneurName.setBounds(255, 400, 260, 25);
 		
 		insideColisTableModel = new RemplissageColisTableModel(false, uidColis);
 
@@ -195,6 +207,7 @@ public class Remplissage {
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.add(txtConteneurName);
+		contenueRemplissage.add(txtContenu);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		scrollPaneContenuTop.setViewportView(tableContenuTop);
@@ -230,13 +243,21 @@ public class Remplissage {
 		outsideTransportTableModel = new RemplissageTransportTableModel(true,
 				uidTransport);
 
+		txtContenu = new JTextField();
+		txtContenu.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContenu.setEnabled(false);
+		txtContenu.setPreferredSize(new Dimension(20, 20));
+		txtContenu.setText("Compartiments disponible(s)");
+		txtContenu.setColumns(10);
+		txtContenu.setBounds(400, 20, 260, 25);
+		
 		txtConteneurName = new JTextField();
 		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtConteneurName.setEnabled(false);
 		txtConteneurName.setPreferredSize(new Dimension(20, 20));
 		txtConteneurName.setText(outsideTransportTableModel.loadName(uidTransport));
 		txtConteneurName.setColumns(10);
-		txtConteneurName.setBounds(400, 20, 260, 25);
+		txtConteneurName.setBounds(255, 400, 260, 25);
 		
 		tableContenuTop = new JTable(outsideTransportTableModel);
 		tableContenuTop.setBounds(62, 100, 706, 223);
@@ -327,6 +348,7 @@ public class Remplissage {
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.add(txtConteneurName);
+		contenueRemplissage.add(txtContenu);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		gestionairePage.add(contenueRemplissage, new Integer(5));
@@ -368,6 +390,14 @@ public class Remplissage {
 		txtConteneur.setText("Contenu de la configuration d'hopital");
 		txtConteneur.setColumns(10);
 		txtConteneur.setBounds(50, 20, 260, 25);
+		
+		txtContenu = new JTextField();
+		txtContenu.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContenu.setEnabled(false);
+		txtContenu.setPreferredSize(new Dimension(20, 20));
+		txtContenu.setText("Colis disponible(s)");
+		txtContenu.setColumns(10);
+		txtContenu.setBounds(400, 20, 260, 25);
 
 		txtConteneurName = new JTextField();
 		txtConteneurName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -375,7 +405,7 @@ public class Remplissage {
 		txtConteneurName.setPreferredSize(new Dimension(20, 20));
 		txtConteneurName.setText(insideConfigHopitalTableModel.loadName(uidConfigurationHopital));
 		txtConteneurName.setColumns(10);
-		txtConteneurName.setBounds(400, 20, 260, 25);
+		txtConteneurName.setBounds(255, 400, 260, 25);
 		
 		tableContenuBot.setBounds(52, 400, 706, 223);
 
@@ -461,6 +491,7 @@ public class Remplissage {
 		contenueRemplissage.add(scrollPaneContenuTop);
 		contenueRemplissage.add(txtConteneur);
 		contenueRemplissage.add(txtConteneurName);
+		contenueRemplissage.add(txtContenu);
 		contenueRemplissage.setBounds(0, 0, 1017, 706);
 
 		gestionairePage.add(contenueRemplissage, new Integer(5));
