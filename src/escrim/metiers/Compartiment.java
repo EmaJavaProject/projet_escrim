@@ -18,38 +18,34 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Compartiment.loadAll",
-				query="SELECT c FROM Compartiment c"),
-	@NamedQuery(name="Compartiment.findCompartimentIntoTransport",
-				query="SELECT c FROM Compartiment c where c.transport.uid = :uid"),
-	@NamedQuery(name="Compartiment.findCompartimentOutsideTransport",
-				query="SELECT c FROM Compartiment c where c.transport is NULL"),
-})
+		@NamedQuery(name = "Compartiment.loadAll", query = "SELECT c FROM Compartiment c"),
+		@NamedQuery(name = "Compartiment.findCompartimentIntoTransport", query = "SELECT c FROM Compartiment c where c.transport.uid = :uid"),
+		@NamedQuery(name = "Compartiment.findCompartimentOutsideTransport", query = "SELECT c FROM Compartiment c where c.transport is NULL"), })
 public class Compartiment {
 
 	/** The uid. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int uid;
-	
+
 	/** The nom. */
 	private String nom;
-	
+
 	/** The hauteur. */
 	private float hauteur;
-	
+
 	/** The largeur. */
 	private float largeur;
-	
+
 	/** The longueur. */
 	private float longueur;
-	
+
 	/** The volume. */
 	private float volume;
-	
+
 	/** The poids. */
 	private float poids;
-	
+
 	/** The transport. */
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Transport transport;
@@ -66,7 +62,8 @@ public class Compartiment {
 	/**
 	 * Sets the transport.
 	 *
-	 * @param transport the new transport
+	 * @param transport
+	 *            the new transport
 	 */
 	public void setTransport(Transport transport) {
 		this.transport = transport;
@@ -95,7 +92,8 @@ public class Compartiment {
 	/**
 	 * Sets the uid.
 	 *
-	 * @param uid the new uid
+	 * @param uid
+	 *            the new uid
 	 */
 	public void setUid(int uid) {
 		this.uid = uid;
@@ -113,7 +111,8 @@ public class Compartiment {
 	/**
 	 * Sets the nom.
 	 *
-	 * @param nom the new nom
+	 * @param nom
+	 *            the new nom
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -131,7 +130,8 @@ public class Compartiment {
 	/**
 	 * Sets the hauteur.
 	 *
-	 * @param hauteur the new hauteur
+	 * @param hauteur
+	 *            the new hauteur
 	 */
 	public void setHauteur(float hauteur) {
 		this.hauteur = hauteur;
@@ -149,7 +149,8 @@ public class Compartiment {
 	/**
 	 * Sets the largeur.
 	 *
-	 * @param largeur the new largeur
+	 * @param largeur
+	 *            the new largeur
 	 */
 	public void setLargeur(float largeur) {
 		this.largeur = largeur;
@@ -167,7 +168,8 @@ public class Compartiment {
 	/**
 	 * Sets the longueur.
 	 *
-	 * @param longueur the new longueur
+	 * @param longueur
+	 *            the new longueur
 	 */
 	public void setLongueur(float longueur) {
 		this.longueur = longueur;
@@ -202,7 +204,8 @@ public class Compartiment {
 	/**
 	 * Sets the poids.
 	 *
-	 * @param poids the new poids
+	 * @param poids
+	 *            the new poids
 	 */
 	public void setPoids(float poids) {
 		this.poids = poids;
@@ -220,7 +223,8 @@ public class Compartiment {
 	/**
 	 * Sets the liste colis dans compartiment.
 	 *
-	 * @param colisDansCompartiment the new liste colis dans compartiment
+	 * @param colisDansCompartiment
+	 *            the new liste colis dans compartiment
 	 */
 	public void setListeColisDansCompartiment(List<Colis> colisDansCompartiment) {
 		listeColisDansCompartiment = colisDansCompartiment;
